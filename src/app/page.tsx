@@ -1,10 +1,13 @@
 import React from 'react';
 import LogoCarousel from '@/components/sections/LogoCarousel';
 import ProblemSection from '@/components/sections/ProblemSection';
+import MethodSection from '@/components/sections/MethodSection';
+import AuthoritySection from '@/components/sections/AuthoritySection';
+import ProcessSection from '@/components/sections/ProcessSection';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#000000] text-white font-sans overflow-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
+    <main className="min-h-screen bg-[#000000] text-white font-sans overflow-hidden" style={{ fontFamily: "'Montserrat', sans-serif" }}>
       {/* Background Gradient */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
@@ -134,6 +137,15 @@ export default function Home() {
 
       {/* 3. Problem / Comparison Section */}
       <ProblemSection />
+
+      {/* 4. Method Section */}
+      <MethodSection />
+
+      {/* 5. Authority Section */}
+      <AuthoritySection />
+
+      {/* 6. Process Section */}
+      <ProcessSection />
 
       {/* Inline styles for custom animations */}
       <style dangerouslySetInnerHTML={{
