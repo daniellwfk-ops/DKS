@@ -64,11 +64,7 @@ export default function Home() {
           SECTION 2: LOGO CAROUSEL (SOCIAL PROOF) 
           ========================================= */}
       <section className="relative w-full py-[60px] md:py-[80px] bg-[#000000] border-y border-[#333333] overflow-hidden">
-        <div className="max-w-[1200px] mx-auto px-6 mb-[40px] text-center">
-          <h2 className="text-[20px] md:text-[28px] lg:text-[34px] font-[500] leading-[1.2] text-white tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
-            As marcas que <span className="text-[#FFC000] font-[700]">mais crescem no Brasil</span> escolhem a DKS.
-          </h2>
-        </div>
+        {/* Text removed per request */}
 
         {/* Seamless Marquee Wrapper */}
         <div className="relative flex overflow-hidden w-full group">
