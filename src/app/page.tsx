@@ -61,7 +61,7 @@ export default function Home() {
               {/* Main Image Container */}
               <div className="relative w-full sm:w-[110%] lg:w-[140%] xl:w-[150%] z-10 flex items-end justify-center lg:justify-end -mr-0 lg:-mr-10 xl:-mr-20">
                 <img
-                  src="/images/dks-hero-person-new.png"
+                  src="/images/dks-hero-person-new-2.jpg"
                   alt="DKS Marketing"
                   className="w-full h-full object-contain object-bottom relative z-0"
                   style={{ filter: 'contrast(1.05)' }}
