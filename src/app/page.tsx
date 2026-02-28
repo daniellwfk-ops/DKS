@@ -1,5 +1,6 @@
 import HeroSection from '@/components/sections/HeroSection';
 import PainPointsSection from '@/components/sections/PainPointsSection';
+import AuthoritySection from '@/components/sections/AuthoritySection';
 
 export default function Home() {
   return (
@@ -12,6 +13,9 @@ export default function Home() {
 
       {/* 2. Pain Points Section */}
       <PainPointsSection />
+
+      {/* 3. Authority Section */}
+      <AuthoritySection />
 
     </main>
   );

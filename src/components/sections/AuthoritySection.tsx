@@ -1,99 +1,58 @@
 import React from 'react';
 
-const METRICS = [
-    {
-        number: "+100",
-        label: "Negócios Impactados",
-        description: "Restaurantes e deliveries escalados em todo o Brasil."
-    },
-    {
-        number: "R$ 50M+",
-        label: "Faturamento Gerado",
-        description: "Em vendas documentadas e mensuradas para nossos clientes."
-    },
-    {
-        number: "100%",
-        label: "Especialização Food",
-        description: "Não atendemos outros nichos. Somos obcecados por gastronomia."
-    }
-];
-
 export default function AuthoritySection() {
     return (
-        <section className="w-full bg-[#000000] py-[120px] relative z-10">
-            <div className="max-w-[1200px] mx-auto px-6">
+        <section className="w-full bg-[#0B0B0B] py-[100px] overflow-hidden relative z-10 font-sans">
 
-                {/* Header content and Map Visual Split */}
-                <div className="flex flex-col lg:flex-row items-center gap-[80px]">
+            <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-[64px] items-center">
 
-                    {/* Left Text & Metrics */}
-                    <div className="lg:w-1/2 flex flex-col items-start text-left">
-                        <div className="bg-[#22C55E]/10 text-[#22C55E] px-[16px] py-[8px] rounded-full text-[14px] font-[600] mb-[32px] inline-flex items-center tracking-[0.5px] border border-[#22C55E]/20">
-                            Presença Nacional
-                        </div>
+                {/* Left Column: Image with Red Circle Background */}
+                <div className="relative min-h-[500px] lg:h-[700px] w-full flex items-center justify-center">
 
-                        <h2 className="text-[36px] md:text-[52px] font-[700] leading-[1.1] text-white tracking-[-1px] mb-[32px]">
-                            O Brasil inteiro já provou do nosso sucesso
-                        </h2>
-
-                        <p className="text-[#CFCFCF] text-[18px] mb-[64px] leading-[1.6] max-w-[500px]">
-                            Temos um histórico real de restaurantes que saíram do anonimato para se tornarem os líderes de vendas em suas regiões através do Método ROMA.
-                        </p>
-
-                        {/* Metrics List */}
-                        <div className="flex flex-col gap-[40px] w-full">
-                            {METRICS.map((metric, index) => (
-                                <div key={index} className="flex gap-[24px] items-start">
-                                    <div className="text-[48px] font-[800] text-[#F2B705] leading-none shrink-0 w-[160px]">
-                                        {metric.number}
-                                    </div>
-                                    <div>
-                                        <h4 className="text-[20px] font-[700] text-white mb-[8px]">{metric.label}</h4>
-                                        <p className="text-[#CFCFCF] text-[16px] leading-[1.5] max-w-[280px]">{metric.description}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                    {/* Huge Solid Red Circle Graphic */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] lg:w-[500px] h-[350px] lg:h-[500px] bg-[#E50914] rounded-full z-0 flex items-center justify-center overflow-hidden">
+                        {/* Subtle internal abstract geometric pattern (optional, based on ref 3) */}
+                        <div className="text-black/20 font-[900] text-[400px] leading-none select-none italic absolute right-[-50px] top-[0px]">DKS</div>
                     </div>
 
-                    {/* Right Visual (Abstract Map / Network) */}
-                    <div className="lg:w-1/2 w-full relative h-[600px] rounded-[32px] bg-[#0A0A0C] border border-white/5 overflow-hidden flex items-center justify-center">
+                    <img
+                        src="/daniel-soares-1.png"
+                        alt="Daniel Soares - Fundador DKS Marketing"
+                        className="relative z-10 w-full max-w-[450px] h-auto object-contain drop-shadow-2xl translate-y-[20px]"
+                    />
 
-                        {/* Background Map Placeholder / Abstract Grid */}
-                        <div className="absolute inset-0 z-0 opacity-20" style={{
-                            backgroundSize: '30px 30px',
-                            backgroundImage: 'radial-gradient(circle at center, #F2B705 1px, transparent 1px)'
-                        }}></div>
+                    {/* Bottom Fade to blend with section background */}
+                    <div className="absolute bottom-[-10%] left-0 w-full h-[150px] bg-gradient-to-t from-[#0B0B0B] to-transparent z-20"></div>
+                </div>
 
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#22C55E]/20 blur-[100px] rounded-full z-0"></div>
+                {/* Right Column: Copy */}
+                <div className="flex flex-col items-start z-30">
 
-                        {/* Glowing Pins (simulating map points) */}
-                        <div className="absolute top-[30%] left-[25%] animate-pulse">
-                            <div className="w-4 h-4 rounded-full bg-[#22C55E] shadow-[0_0_20px_#22C55E]"></div>
-                        </div>
-                        <div className="absolute top-[45%] left-[60%] animate-pulse" style={{ animationDelay: '0.5s' }}>
-                            <div className="w-5 h-5 rounded-full bg-[#F2B705] shadow-[0_0_30px_#F2B705]"></div>
-                        </div>
-                        <div className="absolute top-[70%] left-[40%] animate-pulse" style={{ animationDelay: '1s' }}>
-                            <div className="w-3 h-3 rounded-full bg-[#22C55E] shadow-[0_0_15px_#22C55E]"></div>
-                        </div>
-                        <div className="absolute top-[20%] left-[70%] animate-pulse" style={{ animationDelay: '1.5s' }}>
-                            <div className="w-4 h-4 rounded-full bg-[#F2B705] shadow-[0_0_20px_#F2B705]"></div>
-                        </div>
-                        <div className="absolute top-[60%] left-[80%] animate-pulse" style={{ animationDelay: '2s' }}>
-                            <div className="w-4 h-4 rounded-full bg-[#22C55E] shadow-[0_0_20px_#22C55E]"></div>
-                        </div>
+                    <h2 className="text-[32px] md:text-[48px] font-[800] text-white leading-[1.2] tracking-[-1px] mb-[32px]">
+                        A metodologia validada que já transformou centenas de restaurantes em referências digitais e multiplicou seu faturamento
+                    </h2>
 
-                        <div className="relative z-10 text-center px-6">
-                            <h3 className="text-white text-[28px] font-[800] leading-[1.2]">
-                                De dezenas de marcas<br />
-                                <span className="text-[#F2B705]">Até centenas de filiais</span>
-                            </h3>
-                        </div>
+                    <div className="space-y-[24px] text-[#A1A1AA] text-[18px] leading-[1.7]">
+                        <p>
+                            Chega de gastar dinheiro com marketing que não traz retorno. Nossa assessoria é 100% especializada no setor gastronômico, com um time que vive e respira restaurantes.
+                        </p>
+                        <p>
+                            Entendemos suas dores, conhecemos seu público e sabemos exatamente o que funciona para fazer seu negócio crescer de forma previsível e escalável.
+                        </p>
                     </div>
 
                 </div>
+
             </div>
+
+            {/* Bottom Transition Header linking to the next section */}
+            <div className="w-full text-center mt-[120px] mb-[-40px] px-6">
+                <h3 className="text-[28px] md:text-[36px] font-[800] text-white leading-[1.3] tracking-[-0.5px]">
+                    Com uma metodologia validada e um time especializado <br className="hidden md:block" />
+                    em marketing gastronômico, ajudamos você a:
+                </h3>
+            </div>
+
         </section>
     );
 }
