@@ -5,40 +5,40 @@ export default function Home() {
     <main className="min-h-screen bg-[#000000] text-white font-sans overflow-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
       {/* Background Gradient removed as requested */}
 
-      <section className="relative z-10 w-full min-h-[90vh] flex items-center py-[120px]">
+      <section className="relative z-10 w-full pt-[80px] md:pt-[120px] min-h-[90vh] overflow-hidden">
         {/* Container */}
-        <div className="max-w-[1200px] mx-auto px-6 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="max-w-[1200px] mx-auto px-6 w-full relative">
+          <div className="flex flex-col lg:flex-row items-start justify-between">
 
-            {/* Left Column (60%) */}
-            <div className="lg:col-span-7 flex flex-col items-start text-left w-full z-10">
+            {/* Left Column (Text) */}
+            <div className="w-full lg:w-[55%] flex flex-col items-start text-left z-20 pt-4 lg:pt-10">
 
               {/* Badge */}
-              <div className="bg-[#D4AF37]/12 text-[#D4AF37] px-[16px] py-[8px] rounded-full text-[14px] font-medium mb-[32px] inline-flex items-center tracking-[0.5px]">
+              <div className="bg-[#D4AF37]/12 text-[#D4AF37] px-[16px] py-[8px] rounded-full text-[12px] md:text-[14px] font-medium mb-[24px] inline-flex items-center tracking-[0.5px]">
                 Especialistas em crescimento para restaurantes
               </div>
 
               {/* H1 Headline */}
-              <h1 className="text-[40px] md:text-[52px] lg:text-[72px] leading-[1.05] tracking-[1px] text-white uppercase" style={{ fontFamily: 'var(--font-anton)' }}>
+              <h1 className="text-[36px] md:text-[48px] lg:text-[60px] xl:text-[68px] leading-[1.05] tracking-[1px] text-white uppercase" style={{ fontFamily: 'var(--font-anton)' }}>
                 Assessoria que faz <span className="text-[#D4AF37]">Restaurantes e Deliveries</span> baterem recordes de faturamento todos os meses.
               </h1>
 
               {/* H2 Subheadline */}
-              <h2 className="text-[18px] md:text-[20px] lg:text-[24px] font-[400] leading-[1.5] text-[#E0E0E0] mt-[32px] max-w-[700px]">
+              <h2 className="text-[16px] md:text-[18px] lg:text-[20px] font-[400] leading-[1.5] text-[#E0E0E0] mt-[24px] max-w-[500px]">
                 Usando a nossa metodologia já ajudamos <span className="text-[#D4AF37]">mais de 100 negócios gastronômicos</span> a saírem do vermelho e virarem referência em suas cidades.
               </h2>
 
               {/* CTA Button */}
-              <div className="mt-[56px] flex w-full justify-center relative">
+              <div className="mt-[40px] flex w-full relative max-w-[340px]">
                 {/* Orange Glow Behind Button */}
-                <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[280px] h-[90px] bg-[#FF9900]/60 blur-[50px] rounded-full -z-10 animate-pulse"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[240px] h-[70px] bg-[#FF9900]/60 blur-[40px] rounded-full -z-10 animate-pulse"></div>
 
                 <a
                   href="#"
-                  className="group relative bg-[#00FF00] text-black px-[40px] py-[22px] rounded-[16px] font-[700] text-[18px] sm:text-[20px] flex items-center justify-center gap-3 transition-all duration-300 hover:scale-105 hover:bg-[#10E810] shadow-[0_0_30px_rgba(0,255,0,0.3)] overflow-hidden"
+                  className="group relative bg-[#00FF00] text-black px-[30px] py-[18px] rounded-[16px] font-[800] text-[16px] sm:text-[18px] flex items-center justify-center gap-3 transition-all duration-300 hover:scale-105 hover:bg-[#10E810] shadow-[0_0_30px_rgba(0,255,0,0.3)] overflow-hidden w-full"
                 >
                   <span className="relative z-10">Quero aumentar meu faturamento</span>
-                  <i className="ph-bold ph-arrow-up-right text-2xl relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                  <i className="ph-bold ph-arrow-up-right text-xl relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
 
                   {/* Sweep light effect on hover */}
                   <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:animate-[sweep_0.8s_ease-in-out]"></div>
@@ -46,23 +46,16 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column (40%) - Visual Image and Integrations */}
-            <div className="lg:col-span-5 relative mt-16 lg:mt-0 w-full max-w-md mx-auto lg:max-w-none flex justify-center lg:justify-end items-end h-[calc(100vh-120px)] lg:h-[90vh]">
-
-              {/* Decorative Glow removed to keep pure black background */}
-
-              {/* Main Image Container */}
-              <div className="relative w-full sm:w-[130%] lg:w-[170%] xl:w-[190%] z-10 flex items-end justify-center lg:justify-end -mr-0 lg:-mr-32 xl:-mr-52">
-                <img
-                  src="/images/dks-hero-person-new-2.jpg"
-                  alt="DKS Marketing"
-                  className="w-full h-full object-contain object-bottom relative z-0"
-                  style={{ filter: 'contrast(1.05)' }}
-                />
-                {/* Overlay subtle gradient to fade out bottom */}
-                <div className="absolute inset-x-0 bottom-0 h-[15%] bg-gradient-to-t from-black to-transparent pointer-events-none z-10"></div>
-              </div>
-
+            {/* Right Column (Image) - Absolutely positioned for top alignment and massive scale */}
+            <div className="w-full lg:absolute lg:top-0 lg:right-[-5%] xl:right-[-10%] lg:w-[60%] xl:w-[65%] pointer-events-none mt-16 lg:mt-0 z-10">
+              <img
+                src="/images/dks-hero-person-new-2.jpg"
+                alt="DKS Marketing"
+                className="w-[120%] lg:w-full h-auto object-contain object-top origin-top-right mix-blend-lighten relative z-0"
+                style={{ filter: 'contrast(1.05)' }}
+              />
+              {/* Overlay subtle gradient to fade out bottom */}
+              <div className="absolute inset-x-0 bottom-0 h-[25%] bg-gradient-to-t from-black via-black/80 to-transparent z-10 hidden lg:block pointer-events-none"></div>
             </div>
 
           </div>
