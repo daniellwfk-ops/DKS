@@ -1,4 +1,5 @@
 import React from 'react';
+import ServicesCarousel from '@/components/ui/ServicesCarousel';
 
 export default function Home() {
   return (
@@ -225,6 +226,24 @@ export default function Home() {
           </div>
 
         </div>
+      </section>
+
+      {/* =========================================
+          SECTION 4: DELIVERABLES CAROUSEL
+          ========================================= */}
+      <section className="relative w-full py-[100px] bg-[#040814] overflow-hidden border-t border-white/5">
+        <div className="max-w-[1200px] mx-auto px-6 w-full text-center mb-16">
+          <h2 className="text-[32px] md:text-[48px] font-[800] leading-[1.2] text-white tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
+            Como a <span className="text-[#D4AF37]">DKS</span> pode aumentar<br className="hidden md:block" />
+            <span className="text-[#00AEEF]">seu faturamento</span>
+          </h2>
+          <p className="text-[#CFCFCF] mt-6 text-[16px] md:text-[20px] font-medium">
+            Conheça todos os serviços que oferecemos para que seu<br className="hidden md:block" />
+            <span className="text-white italic">restaurante venda mais.</span>
+          </p>
+        </div>
+
+        <ServicesCarousel />
       </section>
 
       {/* Inline styles for custom animations */}
