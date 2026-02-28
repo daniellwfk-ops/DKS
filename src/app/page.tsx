@@ -1,13 +1,15 @@
 import React from 'react';
+import LogoCarousel from '@/components/sections/LogoCarousel';
+import ProblemSection from '@/components/sections/ProblemSection';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0C0C0F] text-white font-sans overflow-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
+    <main className="min-h-screen bg-[#000000] text-white font-sans overflow-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
       {/* Background Gradient */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
-          background: 'radial-gradient(circle at 30% 20%, rgba(212,175,55,0.15), transparent 45%)'
+          background: 'radial-gradient(circle at 30% 20%, rgba(242,183,5,0.08), transparent 45%)'
         }}
       />
 
@@ -20,35 +22,42 @@ export default function Home() {
             <div className="lg:col-span-7 flex flex-col items-start text-left w-full z-10">
 
               {/* Badge */}
-              <div className="bg-[#D4AF37]/12 text-[#D4AF37] px-[16px] py-[8px] rounded-full text-[14px] font-medium mb-[32px] inline-flex items-center tracking-[0.5px]">
+              <div className="bg-[#F2B705]/10 text-[#F2B705] px-[16px] py-[8px] rounded-full text-[14px] font-medium mb-[32px] inline-flex items-center tracking-[0.5px] border border-[#F2B705]/20">
                 Especialistas em crescimento para restaurantes
               </div>
 
               {/* H1 Headline */}
-              <h1 className="text-[40px] md:text-[52px] lg:text-[72px] font-[800] leading-[1.05] tracking-[-2px] text-white">
-                Assessoria que faz <span className="text-[#D4AF37]">Restaurantes e Deliveries</span> baterem recordes de faturamento todos os meses.
+              <h1 className="text-[40px] md:text-[52px] lg:text-[72px] font-[700] leading-[1.05] tracking-[-1.5px] text-white">
+                Aplicamos o <span className="text-[#F2B705]">Método ROMA</span> para fazer restaurantes baterem recordes de faturamento
               </h1>
 
               {/* H2 Subheadline */}
-              <h2 className="text-[18px] md:text-[20px] lg:text-[24px] font-[400] leading-[1.5] text-[#E0E0E0] mt-[32px] max-w-[700px]">
-                Usando a nossa metodologia já ajudamos <span className="text-[#D4AF37]">mais de 100 negócios gastronômicos</span> a saírem do vermelho e virarem referência em suas cidades.
+              <h2 className="text-[18px] md:text-[20px] lg:text-[24px] font-[400] leading-[1.7] text-[#CFCFCF] mt-[32px] max-w-[700px]">
+                Nossa assessoria organiza aquisição, retenção e engenharia de canais para gerar crescimento previsível e escalar sua margem de lucro.
               </h2>
 
-              {/* CTA Button */}
-              <div className="mt-[56px] flex w-full justify-center relative">
-                {/* Orange Glow Behind Button */}
-                <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[280px] h-[90px] bg-[#FF9900]/60 blur-[50px] rounded-full -z-10 animate-pulse"></div>
+              {/* CTA Buttons */}
+              <div className="mt-[56px] flex flex-col sm:flex-row w-full justify-start gap-4">
 
+                {/* Primary Button */}
                 <a
                   href="#"
-                  className="group relative bg-[#00FF00] text-black px-[40px] py-[22px] rounded-[16px] font-[700] text-[18px] sm:text-[20px] flex items-center justify-center gap-3 transition-all duration-300 hover:scale-105 hover:bg-[#10E810] shadow-[0_0_30px_rgba(0,255,0,0.3)] overflow-hidden"
+                  className="group relative bg-[#F2B705] text-[#000000] px-[40px] py-[22px] rounded-[16px] font-[700] text-[18px] flex items-center justify-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:bg-[#D9A404] shadow-[0_10px_30px_rgba(242,183,5,0.2)] overflow-hidden"
                 >
-                  <span className="relative z-10">Quero aumentar meu faturamento</span>
+                  <span className="relative z-10">Quero aplicar o Método ROMA</span>
                   <i className="ph-bold ph-arrow-up-right text-2xl relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-
                   {/* Sweep light effect on hover */}
-                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:animate-[sweep_0.8s_ease-in-out]"></div>
+                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-[sweep_0.8s_ease-in-out]"></div>
                 </a>
+
+                {/* Secondary Button */}
+                <a
+                  href="#"
+                  className="group relative bg-transparent text-white px-[40px] py-[22px] rounded-[16px] font-[600] text-[18px] flex items-center justify-center gap-3 transition-all duration-300 border border-[#F2B705]/50 hover:border-[#F2B705] hover:bg-[#F2B705]/5"
+                >
+                  Entender como funciona
+                </a>
+
               </div>
             </div>
 
@@ -56,18 +65,18 @@ export default function Home() {
             <div className="lg:col-span-5 relative mt-16 lg:mt-0 w-full max-w-md mx-auto lg:max-w-none flex justify-center lg:justify-end">
 
               {/* Decorative Glow */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-[#D4AF37]/15 to-transparent rounded-full blur-[80px] -z-10"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-[#F2B705]/10 to-transparent rounded-full blur-[80px] -z-10"></div>
 
               {/* Main Image Container (Static) */}
-              <div className="relative w-full sm:w-[90%] lg:w-full rounded-[24px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-[#ffffff15] bg-[#0C0C0F] z-10 transition-transform duration-700 hover:scale-[1.02]">
+              <div className="relative w-full sm:w-[90%] lg:w-full rounded-[24px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-[#ffffff10] bg-[#000000] z-10 transition-transform duration-700 hover:scale-[1.02]">
                 <img
                   src="/images/dks-hero-person.png"
                   alt="DKS Marketing"
                   className="w-full h-auto object-cover relative z-0"
-                  style={{ filter: 'contrast(1.1) brightness(0.95)' }}
+                  style={{ filter: 'contrast(1.1) brightness(0.9)' }}
                 />
                 {/* Overlay subtle gradient to fade out bottom */}
-                <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-[#0C0C0F] via-[#0C0C0F]/80 to-transparent pointer-events-none z-10"></div>
+                <div className="absolute inset-x-0 bottom-0 h-[50%] bg-gradient-to-t from-[#000000] via-[#000000]/80 to-transparent pointer-events-none z-10"></div>
               </div>
 
               {/* Floating App Integrations */}
@@ -119,6 +128,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 2. Logo Carousel Section */}
+      <LogoCarousel />
+
+      {/* 3. Problem / Comparison Section */}
+      <ProblemSection />
 
       {/* Inline styles for custom animations */}
       <style dangerouslySetInnerHTML={{
