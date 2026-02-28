@@ -63,38 +63,24 @@ export default function Home() {
       {/* =========================================
           SECTION 2: LOGO CAROUSEL (SOCIAL PROOF) 
           ========================================= */}
-      <section className="relative w-full py-[60px] bg-[#0A0A0C] border-y border-white/5 overflow-hidden">
-        <div className="max-w-[1200px] mx-auto px-6 mb-[40px] text-center md:text-left">
-          <h2 className="text-[24px] md:text-[32px] font-[800] leading-[1.2] text-white tracking-tight">
-            <span className="text-[#D4AF37]">Agência 100% nichada em gastronomia.</span><br className="hidden md:block" />
-            Estratégias validadas. Resultados comprovados.
+      <section className="relative w-full py-[60px] md:py-[80px] bg-[#000000] border-y border-[#333333] overflow-hidden">
+        <div className="max-w-[1200px] mx-auto px-6 mb-[40px] text-center">
+          <h2 className="text-[20px] md:text-[28px] lg:text-[34px] font-[500] leading-[1.2] text-white tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
+            Faça parte das mais de <span className="text-[#00AEEF] font-[700]">270 marcas</span> que confiam na gente.
           </h2>
         </div>
 
-        {/* Marquee Wrapper */}
-        <div className="relative flex w-[200%] overflow-hidden">
-          {/* Gradient Masks for fading edges */}
-          <div className="absolute inset-y-0 left-0 w-[100px] sm:w-[200px] bg-gradient-to-r from-[#0A0A0C] to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-[100px] sm:w-[200px] bg-gradient-to-l from-[#0A0A0C] to-transparent z-10 pointer-events-none"></div>
-
-          {/* Scrolling Content - Repeated twice for seamless loop */}
-          <div className="flex animate-[marquee_40s_linear_infinite] whitespace-nowrap items-center hover:[animation-play-state:paused]">
-            {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex gap-[40px] px-[20px] items-center">
-                {/* Client Logos (Mockups) */}
-                {[
-                  "The Crush Burger", "Fuego Restaurante", "The Family's",
-                  "Kempero Brasileiro", "Japa Haus", "Pão e Ponto",
-                  "Fratelli's", "Princeso", "My Burger", "Marie",
-                  "My Beer", "Steak Grill Burger"
-                ].map((name, idx) => (
-                  <div key={idx} className="flex-shrink-0 w-[160px] h-[80px] bg-white/[0.03] border border-white/10 rounded-xl flex items-center justify-center grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:bg-white/[0.08] transition-all duration-300">
-                    <span className="text-[#CFCFCF] font-bold text-sm text-center px-4 leading-tight">{name}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
+        {/* Seamless Marquee Wrapper */}
+        <div className="relative flex overflow-hidden w-full group">
+          {/* We use two identical images side-by-side that translate infinitely to the left */}
+          <div className="flex animate-[marquee_40s_linear_infinite] group-hover:[animation-play-state:paused] min-w-[200%] md:min-w-[150%] lg:min-w-[100%]">
+            <img src="/images/dks-hero-logos.png" alt="DKS Clients Logos" className="w-1/2 object-contain px-4 opacity-70 hover:opacity-100 transition-opacity" />
+            <img src="/images/dks-hero-logos.png" alt="DKS Clients Logos" className="w-1/2 object-contain px-4 opacity-70 hover:opacity-100 transition-opacity" />
           </div>
+
+          {/* Gradient Edges for fade-in/fade-out effect */}
+          <div className="absolute inset-y-0 left-0 w-[50px] md:w-[150px] bg-gradient-to-r from-[#000000] to-transparent pointer-events-none z-10"></div>
+          <div className="absolute inset-y-0 right-0 w-[50px] md:w-[150px] bg-gradient-to-l from-[#000000] to-transparent pointer-events-none z-10"></div>
         </div>
       </section>
 
