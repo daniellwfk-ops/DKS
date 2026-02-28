@@ -3,13 +3,7 @@ import React from 'react';
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#000000] text-white font-sans overflow-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
-      {/* Background Gradient */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background: 'radial-gradient(circle at 30% 20%, rgba(212,175,55,0.15), transparent 45%)'
-        }}
-      />
+      {/* Background Gradient removed as requested */}
 
       <section className="relative z-10 w-full min-h-[90vh] flex items-center py-[120px]">
         {/* Container */}
@@ -25,7 +19,7 @@ export default function Home() {
               </div>
 
               {/* H1 Headline */}
-              <h1 className="text-[52px] md:text-[64px] lg:text-[80px] leading-[1.05] tracking-[1px] text-white uppercase" style={{ fontFamily: 'var(--font-anton)' }}>
+              <h1 className="text-[40px] md:text-[52px] lg:text-[72px] leading-[1.05] tracking-[1px] text-white uppercase" style={{ fontFamily: 'var(--font-anton)' }}>
                 Assessoria que faz <span className="text-[#D4AF37]">Restaurantes e Deliveries</span> baterem recordes de faturamento todos os meses.
               </h1>
 
@@ -55,11 +49,10 @@ export default function Home() {
             {/* Right Column (40%) - Visual Image and Integrations */}
             <div className="lg:col-span-5 relative mt-16 lg:mt-0 w-full max-w-md mx-auto lg:max-w-none flex justify-center lg:justify-end items-end h-[calc(100vh-120px)] lg:h-[90vh]">
 
-              {/* Decorative Glow */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-[#D4AF37]/15 to-transparent rounded-full blur-[80px] -z-10"></div>
+              {/* Decorative Glow removed to keep pure black background */}
 
               {/* Main Image Container */}
-              <div className="relative w-full sm:w-[110%] lg:w-[160%] xl:w-[180%] z-10 flex items-end justify-center lg:justify-end -mr-0 lg:-mr-24 xl:-mr-40">
+              <div className="relative w-full sm:w-[130%] lg:w-[170%] xl:w-[190%] z-10 flex items-end justify-center lg:justify-end -mr-0 lg:-mr-32 xl:-mr-52">
                 <img
                   src="/images/dks-hero-person-new-2.jpg"
                   alt="DKS Marketing"
