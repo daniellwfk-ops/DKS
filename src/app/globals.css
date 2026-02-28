@@ -1,26 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 
+@theme {
+    --color-black-main: var(--black-main);
+    --color-black-alt: var(--black-alt);
+    --color-gray-border: var(--gray-border);
+    --color-gold-main: var(--gold-main);
+    --color-gold-hover: var(--gold-hover);
+    --color-text-muted: var(--text-muted);
+
+    --font-heading: var(--font-heading);
+    --font-sub: var(--font-sub);
+    --font-body: var(--font-body);
+    --font-sans: var(--font-sora), sans-serif;
+}
+
+/* ==========================================================================
+   Base & Variables
+   ========================================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    /* Color Palette - DKS Institutional Black & Gold */
+    --black-main: #000000;
+    --black-alt: #0A0A0A;
+    --gray-border: #2B2B2B;
+
+    /* Bright Yellow from reference image */
+    --gold-main: #FFC000;
+    --gold-hover: #E6AC00;
+    --gold-light: rgba(255, 192, 0, 0.1);
+
+    --white: #FFFFFF;
+    --text-muted: #B3B3B3;
+
+    /* Typography - Matching the bold structured look of the reference */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-sub: 'Montserrat', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Spacing & Layout */
+    --section-spacing: 120px;
+    --radius-card: 8px;
+    --radius-btn: 4px;
+
+    /* Shadow & Effects */
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.15);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+    scroll-behavior: smooth;
+    background-color: var(--black-main);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    background-color: var(--black-main);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    margin: 0 0 1rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--white);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ==========================================================================
+   Layout Containers & Utilities
+   ========================================================================== */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+section {
+    padding: var(--section-spacing) 0;
+    position: relative;
+    z-index: 10;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-gold {
+    color: var(--gold-main);
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.bg-black {
+    background-color: var(--black-main);
+}
+
+.bg-black-alt {
+    background-color: var(--black-alt);
+}
+
+.section-header {
+    margin-bottom: 4rem;
+}
+
+.section-header.center {
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
+}
+
+.section-subtitle {
+    font-family: var(--font-sub);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.section-desc {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem 2.5rem;
+    border-radius: var(--radius-btn);
+    font-family: var(--font-sub);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--gold-main);
+    color: var(--black-main);
+    box-shadow: var(--shadow-gold);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    background: var(--gold-hover);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--gold-main);
+    border: 1px solid var(--gold-main);
+}
+
+.btn-outline:hover {
+    background: var(--gold-light);
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   Marquee Animation
+   ========================================================================== */
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee {
+    animation: marquee 35s linear infinite;
+    display: inline-flex;
+    white-space: nowrap;
+}
+
+.animate-marquee:hover {
+    animation-play-state: paused;
+}
+
+/* ==========================================================================
+   Pulse Animations
+   ========================================================================== */
+@keyframes pulse-slow {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
 }
