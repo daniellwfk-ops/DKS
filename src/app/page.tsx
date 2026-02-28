@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0C0C0F] text-white font-sans overflow-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
+    <main className="min-h-screen bg-[#000000] text-white font-sans overflow-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
       {/* Background Gradient */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
@@ -25,7 +25,7 @@ export default function Home() {
               </div>
 
               {/* H1 Headline */}
-              <h1 className="text-[40px] md:text-[52px] lg:text-[72px] font-[800] leading-[1.05] tracking-[-2px] text-white">
+              <h1 className="text-[52px] md:text-[64px] lg:text-[80px] leading-[1.05] tracking-[1px] text-white uppercase" style={{ fontFamily: 'var(--font-anton)' }}>
                 Assessoria que faz <span className="text-[#D4AF37]">Restaurantes e Deliveries</span> baterem recordes de faturamento todos os meses.
               </h1>
 
@@ -59,7 +59,7 @@ export default function Home() {
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-[#D4AF37]/15 to-transparent rounded-full blur-[80px] -z-10"></div>
 
               {/* Main Image Container */}
-              <div className="relative w-full sm:w-[110%] lg:w-[140%] xl:w-[150%] z-10 flex items-end justify-center lg:justify-end -mr-0 lg:-mr-10 xl:-mr-20">
+              <div className="relative w-full sm:w-[110%] lg:w-[160%] xl:w-[180%] z-10 flex items-end justify-center lg:justify-end -mr-0 lg:-mr-24 xl:-mr-40">
                 <img
                   src="/images/dks-hero-person-new-2.jpg"
                   alt="DKS Marketing"
@@ -67,7 +67,7 @@ export default function Home() {
                   style={{ filter: 'contrast(1.05)' }}
                 />
                 {/* Overlay subtle gradient to fade out bottom */}
-                <div className="absolute inset-x-0 bottom-0 h-[15%] bg-gradient-to-t from-[#0C0C0F] to-transparent pointer-events-none z-10"></div>
+                <div className="absolute inset-x-0 bottom-0 h-[15%] bg-gradient-to-t from-black to-transparent pointer-events-none z-10"></div>
               </div>
 
             </div>
