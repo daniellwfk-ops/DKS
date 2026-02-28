@@ -5,6 +5,7 @@ import MethodSection from '@/components/sections/MethodSection';
 import AuthoritySection from '@/components/sections/AuthoritySection';
 import ProcessSection from '@/components/sections/ProcessSection';
 import DifferentialSection from '@/components/sections/DifferentialSection';
+import FinalCTASection from '@/components/sections/FinalCTASection';
 
 export default function Home() {
   return (
@@ -150,6 +151,9 @@ export default function Home() {
 
       {/* 7. Differential Section */}
       <DifferentialSection />
+
+      {/* 8. Final CTA Section */}
+      <FinalCTASection />
 
       {/* Inline styles for custom animations */}
       <style dangerouslySetInnerHTML={{
