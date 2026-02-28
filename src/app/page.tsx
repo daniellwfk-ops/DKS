@@ -32,13 +32,13 @@ export default function Home() {
             </div>
 
             {/* H1 Headline */}
-            <h1 className="text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] font-[800] leading-[1.05] tracking-[-1px] text-white uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
-              Assessoria que faz <span className="text-[#D4AF37]">Restaurantes e Deliveries</span> baterem recordes de faturamento todos os meses.
+            <h1 className="text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] font-[800] leading-[1.1] tracking-[-1px] text-white max-w-[550px]" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              Assessoria que faz <span className="text-[#FFC000]">Restaurantes e Deliveries</span> baterem recordes de faturamento todos os meses.
             </h1>
 
             {/* H2 Subheadline */}
-            <h2 className="text-[14px] md:text-[16px] lg:text-[18px] font-[300] leading-[1.6] text-[#E0E0E0] mt-[24px] max-w-[480px]">
-              Usando a nossa metodologia já ajudamos <span className="text-[#D4AF37]">mais de 100 negócios gastronômicos</span> a saírem do vermelho e virarem referência em suas cidades.
+            <h2 className="text-[14px] md:text-[16px] lg:text-[18px] font-[300] leading-[1.4] text-[#E0E0E0] mt-[20px] max-w-[420px]">
+              Usando a nossa metodologia já ajudamos <span className="text-[#FFC000]">mais de 100 negócios gastronômicos</span> a saírem do vermelho e virarem referência em suas cidades.
             </h2>
 
             {/* CTA Button */}
@@ -48,13 +48,11 @@ export default function Home() {
 
               <a
                 href="#"
-                className="group relative bg-[#00CC00] text-black px-[30px] py-[18px] rounded-[16px] font-[800] text-[14px] sm:text-[16px] flex items-center justify-center gap-3 transition-all duration-300 hover:scale-105 hover:bg-[#00B300] shadow-[0_0_30px_rgba(0,204,0,0.3)] overflow-hidden w-full"
+                className="group relative bg-[#00CC00] text-white px-[30px] py-[20px] rounded-[16px] font-[800] text-[16px] md:text-[18px] flex items-center justify-center transition-all duration-300 hover:scale-105 hover:bg-[#00B300] shadow-[0px_0px_40px_rgba(0,204,0,0.5)] overflow-hidden w-full text-center"
               >
-                <span className="relative z-10">Quero aumentar meu faturamento</span>
-                <i className="ph-bold ph-arrow-up-right text-xl relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-
+                <span className="relative z-10 uppercase tracking-wide">Saiba Mais</span>
                 {/* Sweep light effect on hover */}
-                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:animate-[sweep_0.8s_ease-in-out]"></div>
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-[sweep_0.8s_ease-in-out]"></div>
               </a>
             </div>
 
