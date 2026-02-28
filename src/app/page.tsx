@@ -4,6 +4,7 @@ import ProblemSection from '@/components/sections/ProblemSection';
 import MethodSection from '@/components/sections/MethodSection';
 import AuthoritySection from '@/components/sections/AuthoritySection';
 import ProcessSection from '@/components/sections/ProcessSection';
+import DifferentialSection from '@/components/sections/DifferentialSection';
 
 export default function Home() {
   return (
@@ -146,6 +147,9 @@ export default function Home() {
 
       {/* 6. Process Section */}
       <ProcessSection />
+
+      {/* 7. Differential Section */}
+      <DifferentialSection />
 
       {/* Inline styles for custom animations */}
       <style dangerouslySetInnerHTML={{
