@@ -5,57 +5,57 @@ export default function Home() {
     <main className="min-h-screen bg-[#000000] text-white font-sans overflow-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
       {/* Background Gradient removed as requested */}
 
-      <section className="relative z-10 w-full pt-[80px] md:pt-[120px] min-h-[90vh] overflow-hidden">
+      <section className="relative w-full min-h-[90vh] flex items-center pt-[100px] lg:pt-0 overflow-hidden">
+        {/* Background Image Container */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <img
+            src="/images/dks-hero-fullbg.jpg"
+            alt="DKS Marketing Background"
+            className="w-full h-full object-cover object-center lg:object-[80%_center]"
+            style={{ filter: 'contrast(1.05)' }}
+          />
+          {/* Overlay to ensure text readability on mobile where the image might clash */}
+          <div className="absolute inset-0 bg-black/70 lg:bg-transparent pointer-events-none"></div>
+          {/* Subtle gradient starting from left to make sure the text POPS against the dark left side of the bg */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#000000] via-[#000000]/80 to-transparent w-full lg:w-[65%] pointer-events-none"></div>
+          {/* Gradient to smooth out the bottom edge into the next section */}
+          <div className="absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
+        </div>
+
         {/* Container */}
-        <div className="max-w-[1200px] mx-auto px-6 w-full relative">
-          <div className="flex flex-col lg:flex-row items-start justify-between">
+        <div className="max-w-[1200px] mx-auto px-6 w-full relative z-10">
+          <div className="flex flex-col items-start text-left w-full lg:w-[60%] xl:w-[50%]">
 
-            {/* Left Column (Text) */}
-            <div className="w-full lg:w-[55%] flex flex-col items-start text-left z-20 pt-4 lg:pt-10">
-
-              {/* Badge */}
-              <div className="bg-[#D4AF37]/12 text-[#D4AF37] px-[16px] py-[8px] rounded-full text-[12px] md:text-[14px] font-medium mb-[24px] inline-flex items-center tracking-[0.5px]">
-                Especialistas em crescimento para restaurantes
-              </div>
-
-              {/* H1 Headline */}
-              <h1 className="text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] font-[800] leading-[1.05] tracking-[-1px] text-white uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
-                Assessoria que faz <span className="text-[#D4AF37]">Restaurantes e Deliveries</span> baterem recordes de faturamento todos os meses.
-              </h1>
-
-              {/* H2 Subheadline */}
-              <h2 className="text-[16px] md:text-[18px] lg:text-[20px] font-[400] leading-[1.5] text-[#E0E0E0] mt-[24px] max-w-[500px]">
-                Usando a nossa metodologia já ajudamos <span className="text-[#D4AF37]">mais de 100 negócios gastronômicos</span> a saírem do vermelho e virarem referência em suas cidades.
-              </h2>
-
-              {/* CTA Button */}
-              <div className="mt-[40px] flex w-full relative max-w-[340px]">
-                {/* Orange Glow Behind Button */}
-                <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[240px] h-[70px] bg-[#FF9900]/60 blur-[40px] rounded-full -z-10 animate-pulse"></div>
-
-                <a
-                  href="#"
-                  className="group relative bg-[#00FF00] text-black px-[30px] py-[18px] rounded-[16px] font-[800] text-[16px] sm:text-[18px] flex items-center justify-center gap-3 transition-all duration-300 hover:scale-105 hover:bg-[#10E810] shadow-[0_0_30px_rgba(0,255,0,0.3)] overflow-hidden w-full"
-                >
-                  <span className="relative z-10">Quero aumentar meu faturamento</span>
-                  <i className="ph-bold ph-arrow-up-right text-xl relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-
-                  {/* Sweep light effect on hover */}
-                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:animate-[sweep_0.8s_ease-in-out]"></div>
-                </a>
-              </div>
+            {/* Badge */}
+            <div className="bg-[#D4AF37]/12 text-[#D4AF37] px-[16px] py-[8px] rounded-full text-[12px] md:text-[14px] font-medium mb-[24px] inline-flex items-center tracking-[0.5px]">
+              Especialistas em crescimento para restaurantes
             </div>
 
-            {/* Right Column (Image) - Absolutely positioned for top alignment and massive scale */}
-            <div className="w-full lg:absolute lg:top-0 lg:right-[-5%] xl:right-[-10%] lg:w-[60%] xl:w-[65%] pointer-events-none mt-16 lg:mt-0 z-10">
-              <img
-                src="/images/dks-hero-person-new-2.jpg"
-                alt="DKS Marketing"
-                className="w-[120%] lg:w-full h-auto object-contain object-top origin-top-right mix-blend-lighten relative z-0"
-                style={{ filter: 'contrast(1.05)' }}
-              />
-              {/* Overlay subtle gradient to fade out bottom */}
-              <div className="absolute inset-x-0 bottom-0 h-[25%] bg-gradient-to-t from-black via-black/80 to-transparent z-10 hidden lg:block pointer-events-none"></div>
+            {/* H1 Headline */}
+            <h1 className="text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] font-[800] leading-[1.05] tracking-[-1px] text-white uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              Assessoria que faz <span className="text-[#D4AF37]">Restaurantes e Deliveries</span> baterem recordes de faturamento todos os meses.
+            </h1>
+
+            {/* H2 Subheadline */}
+            <h2 className="text-[16px] md:text-[18px] lg:text-[20px] font-[400] leading-[1.5] text-[#E0E0E0] mt-[24px] max-w-[500px]">
+              Usando a nossa metodologia já ajudamos <span className="text-[#D4AF37]">mais de 100 negócios gastronômicos</span> a saírem do vermelho e virarem referência em suas cidades.
+            </h2>
+
+            {/* CTA Button */}
+            <div className="mt-[40px] flex w-full relative max-w-[340px]">
+              {/* Orange Glow Behind Button */}
+              <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[240px] h-[70px] bg-[#FF9900]/60 blur-[40px] rounded-full -z-10 animate-pulse"></div>
+
+              <a
+                href="#"
+                className="group relative bg-[#00FF00] text-black px-[30px] py-[18px] rounded-[16px] font-[800] text-[16px] sm:text-[18px] flex items-center justify-center gap-3 transition-all duration-300 hover:scale-105 hover:bg-[#10E810] shadow-[0_0_30px_rgba(0,255,0,0.3)] overflow-hidden w-full"
+              >
+                <span className="relative z-10">Quero aumentar meu faturamento</span>
+                <i className="ph-bold ph-arrow-up-right text-xl relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+
+                {/* Sweep light effect on hover */}
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:animate-[sweep_0.8s_ease-in-out]"></div>
+              </a>
             </div>
 
           </div>
