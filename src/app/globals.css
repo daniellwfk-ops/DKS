@@ -2,62 +2,57 @@
 @import "tailwindcss";
 
 @theme {
-    --color-black-main: var(--black-main);
-    --color-black-alt: var(--black-alt);
-    --color-gray-border: var(--gray-border);
-    --color-gold-main: var(--gold-main);
-    --color-gold-hover: var(--gold-hover);
-    --color-text-muted: var(--text-muted);
+    --color-dks-dark: var(--dks-dark);
+    --color-dks-red: var(--dks-red);
+    --color-dks-red-glow: var(--dks-red-glow);
+    --color-dks-green: var(--dks-green);
+    --color-dks-green-glow: var(--dks-green-glow);
 
     --font-heading: var(--font-heading);
     --font-sub: var(--font-sub);
     --font-body: var(--font-body);
-    --font-sans: var(--font-sora), sans-serif;
 }
 
 /* ==========================================================================
    Base & Variables
    ========================================================================== */
 :root {
-    /* Color Palette - DKS Institutional Black & Gold */
-    --black-main: #000000;
-    --black-alt: #0A0A0A;
-    --gray-border: #2B2B2B;
-
-    /* Bright Yellow from reference image */
-    --gold-main: #FFC000;
-    --gold-hover: #E6AC00;
-    --gold-light: rgba(255, 192, 0, 0.1);
+    /* Color Palette - DKS Redesign (Deep Black, Vibrant Red, Glowing Green) */
+    --dks-dark: #0B0B0B;
+    --dks-red: #E50914;
+    --dks-red-glow: rgba(229, 9, 20, 0.5);
+    --dks-green: #32CD32;
+    --dks-green-glow: rgba(50, 205, 50, 0.4);
 
     --white: #FFFFFF;
-    --text-muted: #B3B3B3;
+    --text-muted: #A1A1AA;
 
-    /* Typography - Matching the bold structured look of the reference */
+    /* Typography */
     --font-heading: 'Montserrat', sans-serif;
     --font-sub: 'Montserrat', sans-serif;
     --font-body: 'Inter', sans-serif;
 
     /* Spacing & Layout */
     --section-spacing: 120px;
-    --radius-card: 8px;
-    --radius-btn: 4px;
+    --radius-card: 16px;
+    --radius-btn: 8px;
 
     /* Shadow & Effects */
-    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
-    --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.15);
+    --shadow-red-glow: 0 0 30px rgba(229, 9, 20, 0.4);
+    --shadow-green-glow: 0 0 40px rgba(50, 205, 50, 0.3);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 html {
     scroll-behavior: smooth;
-    background-color: var(--black-main);
+    background-color: var(--dks-dark);
 }
 
 body {
     margin: 0;
     padding: 0;
     font-family: var(--font-body);
-    background-color: var(--black-main);
+    background-color: var(--dks-dark);
     color: var(--white);
     line-height: 1.6;
     overflow-x: hidden;
@@ -96,135 +91,65 @@ img {
 }
 
 /* ==========================================================================
-   Layout Containers & Utilities
-   ========================================================================== */
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 5%;
-}
-
-section {
-    padding: var(--section-spacing) 0;
-    position: relative;
-    z-index: 10;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.text-gold {
-    color: var(--gold-main);
-}
-
-.text-muted {
-    color: var(--text-muted);
-}
-
-.bg-black {
-    background-color: var(--black-main);
-}
-
-.bg-black-alt {
-    background-color: var(--black-alt);
-}
-
-.section-header {
-    margin-bottom: 4rem;
-}
-
-.section-header.center {
-    text-align: center;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.section-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    letter-spacing: -1px;
-    margin-bottom: 1.5rem;
-}
-
-.section-subtitle {
-    font-family: var(--font-sub);
-    font-weight: 600;
-    font-size: 1.125rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.section-desc {
-    font-size: 1.125rem;
-    color: var(--text-muted);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* ==========================================================================
-   Buttons
-   ========================================================================== */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.25rem 2.5rem;
-    border-radius: var(--radius-btn);
-    font-family: var(--font-sub);
-    font-weight: 700;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: var(--transition);
-    text-align: center;
-    border: none;
-}
-
-.btn-primary {
-    background: var(--gold-main);
-    color: var(--black-main);
-    box-shadow: var(--shadow-gold);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
-    background: var(--gold-hover);
-}
-
-.btn-outline {
-    background: transparent;
-    color: var(--gold-main);
-    border: 1px solid var(--gold-main);
-}
-
-.btn-outline:hover {
-    background: var(--gold-light);
-}
-
-/* ==========================================================================
    Animations
    ========================================================================== */
-.fade-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+/* Up & Down Floating for Icons */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
-.fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
+.animate-float {
+    animation: float 6s ease-in-out infinite;
 }
 
-/* ==========================================================================
-   Marquee Animation
-   ========================================================================== */
+.animate-float-delayed {
+    animation: float 6s ease-in-out 3s infinite;
+}
+
+/* Pulsing opacity for glows */
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scale(0.95);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Horizontal Shimmer for Buttons */
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.animate-shimmer {
+    animation: shimmer 2s linear infinite;
+}
+
+/* Infinite Marquee */
 @keyframes marquee {
     0% {
         transform: translateX(0);
@@ -243,23 +168,4 @@ section {
 
 .animate-marquee:hover {
     animation-play-state: paused;
-}
-
-/* ==========================================================================
-   Pulse Animations
-   ========================================================================== */
-@keyframes pulse-slow {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.03);
-    }
-}
-
-.animate-pulse-slow {
-    animation: pulse-slow 3s ease-in-out infinite;
 }
