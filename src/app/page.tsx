@@ -19,7 +19,7 @@ export default function Home() {
               </div>
 
               {/* H1 Headline */}
-              <h1 className="text-[36px] md:text-[48px] lg:text-[60px] xl:text-[68px] font-[800] leading-[1.05] tracking-[-1px] text-white uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              <h1 className="text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] font-[800] leading-[1.05] tracking-[-1px] text-white uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
                 Assessoria que faz <span className="text-[#D4AF37]">Restaurantes e Deliveries</span> baterem recordes de faturamento todos os meses.
               </h1>
 
