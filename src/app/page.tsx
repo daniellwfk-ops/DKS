@@ -24,7 +24,7 @@ export default function Home() {
 
         {/* Container */}
         <div className="max-w-[1200px] mx-auto px-6 w-full relative z-10">
-          <div className="flex flex-col items-start text-left w-full lg:w-[60%] xl:w-[50%]">
+          <div className="flex flex-col items-start text-left w-full lg:w-[50%] xl:w-[45%] lg:pr-8">
 
             {/* Badge */}
             <div className="bg-[#D4AF37]/12 text-[#D4AF37] px-[16px] py-[8px] rounded-full text-[12px] md:text-[14px] font-medium mb-[24px] inline-flex items-center tracking-[0.5px]">
@@ -37,7 +37,7 @@ export default function Home() {
             </h1>
 
             {/* H2 Subheadline */}
-            <h2 className="text-[16px] md:text-[18px] lg:text-[20px] font-[400] leading-[1.5] text-[#E0E0E0] mt-[24px] max-w-[500px]">
+            <h2 className="text-[14px] md:text-[16px] lg:text-[18px] font-[300] leading-[1.6] text-[#E0E0E0] mt-[24px] max-w-[480px]">
               Usando a nossa metodologia já ajudamos <span className="text-[#D4AF37]">mais de 100 negócios gastronômicos</span> a saírem do vermelho e virarem referência em suas cidades.
             </h2>
 
@@ -48,7 +48,7 @@ export default function Home() {
 
               <a
                 href="#"
-                className="group relative bg-[#00FF00] text-black px-[30px] py-[18px] rounded-[16px] font-[800] text-[16px] sm:text-[18px] flex items-center justify-center gap-3 transition-all duration-300 hover:scale-105 hover:bg-[#10E810] shadow-[0_0_30px_rgba(0,255,0,0.3)] overflow-hidden w-full"
+                className="group relative bg-[#00CC00] text-black px-[30px] py-[18px] rounded-[16px] font-[800] text-[14px] sm:text-[16px] flex items-center justify-center gap-3 transition-all duration-300 hover:scale-105 hover:bg-[#00B300] shadow-[0_0_30px_rgba(0,204,0,0.3)] overflow-hidden w-full"
               >
                 <span className="relative z-10">Quero aumentar meu faturamento</span>
                 <i className="ph-bold ph-arrow-up-right text-xl relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
