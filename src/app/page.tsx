@@ -2,6 +2,7 @@ import HeroSection from '@/components/sections/HeroSection';
 import PainPointsSection from '@/components/sections/PainPointsSection';
 import AuthoritySection from '@/components/sections/AuthoritySection';
 import BenefitsSection from '@/components/sections/BenefitsSection';
+import ServicesBentoBox from '@/components/sections/ServicesBentoBox';
 
 export default function Home() {
   return (
@@ -20,6 +21,9 @@ export default function Home() {
 
       {/* 4. Benefits Section (Cards + Transition CTA) */}
       <BenefitsSection />
+
+      {/* 5. Services Bento Box */}
+      <ServicesBentoBox />
 
     </main>
   );
