@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Sora, Anton } from "next/font/google";
+import { Sora, Montserrat } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/ui/Footer";
 
@@ -10,11 +10,10 @@ const sora = Sora({
   display: 'swap',
 });
 
-// Configure Anton font
-const anton = Anton({
-  weight: "400",
+// Configure Montserrat font
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-anton",
+  variable: "--font-montserrat",
   display: 'swap',
 });
 
@@ -29,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${sora.variable} ${anton.variable}`}>
+    <html lang="pt-BR" className={`${sora.variable} ${montserrat.variable}`}>
       <head>
         <script src="https://unpkg.com/@phosphor-icons/web" async></script>
       </head>
