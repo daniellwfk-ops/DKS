@@ -1,516 +1,1103 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apresentação Comercial | DKS Marketing</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--orange:#FF6B00;--bg:#0a0a0a;--card:#141414;--text:#ffffff;--muted:#888;--border:#2a2a2a}
-html,body{width:100%;height:100%;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow:hidden}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DKS Marketing — Apresentação Comercial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
 
-/* SLIDESHOW */
-.deck{position:relative;width:100vw;height:100vh;overflow:hidden}
-.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:48px 60px 80px;opacity:0;pointer-events:none;transition:opacity .35s ease}
-.slide.active{opacity:1;pointer-events:all}
-.slide .inner{max-width:1100px;width:100%}
+    :root {
+      --or: #FF6B00;
+      --or2: #FF9500;
+      --bg: #070707;
+      --s1: #111111;
+      --s2: #181818;
+      --txt: #f0f0f0;
+      --muted: #666;
+      --green: #22c55e;
+      --red: #ef4444;
+      --radius: 14px;
+    }
 
-/* ANIMATIONS */
-.fade-up{opacity:0;transform:translateY(24px);transition:opacity .5s ease, transform .5s ease}
-.slide.active .fade-up{opacity:1;transform:translateY(0)}
-.slide.active .fade-up:nth-child(1){transition-delay:.05s}
-.slide.active .fade-up:nth-child(2){transition-delay:.15s}
-.slide.active .fade-up:nth-child(3){transition-delay:.25s}
-.slide.active .fade-up:nth-child(4){transition-delay:.35s}
-.slide.active .fade-up:nth-child(5){transition-delay:.45s}
-.slide.active .fade-up:nth-child(6){transition-delay:.55s}
-.slide.active .fade-up:nth-child(7){transition-delay:.65s}
-.slide.active .fade-up:nth-child(8){transition-delay:.75s}
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      font-family: 'Sora', sans-serif;
+      color: var(--txt)
+    }
 
-/* COMPONENTS */
-.tag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.25em;color:var(--orange);text-transform:uppercase;margin-bottom:16px}
-.title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2.2rem,5.5vw,4.2rem);font-weight:900;line-height:1.05;color:#fff;text-transform:uppercase;margin-bottom:16px}
-.title .o{color:var(--orange)}
-.subtitle{font-size:clamp(.9rem,1.4vw,1.1rem);color:#aaa;line-height:1.6;max-width:680px;margin-bottom:32px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 28px}
-.card.orange-border{border-color:var(--orange)}
-.card h4{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.check{color:#00cc55;margin-right:8px}
-.cross{color:#ff3b3b;margin-right:8px}
-.list li{display:flex;align-items:flex-start;font-size:.9rem;color:#ccc;margin-bottom:8px;list-style:none}
-.tag-num{font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--orange);margin-bottom:8px}
-.card .label{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#fff;margin-bottom:6px}
-.card p{font-size:.85rem;color:#aaa;line-height:1.5}
-.highlight-box{background:linear-gradient(135deg,rgba(255,107,0,.12),rgba(255,107,0,.05));border:1px solid rgba(255,107,0,.35);border-radius:12px;padding:18px 22px;margin-top:18px}
-.highlight-box p{color:#ffbb88;font-size:.9rem;font-style:italic}
+    /* ── DECK ────────────────────────────────── */
+    #deck {
+      position: relative;
+      width: 100vw;
+      height: 100svh;
+      overflow: hidden
+    }
 
-/* NAV BAR */
-.nav{position:fixed;bottom:0;left:0;right:0;height:52px;background:#050505;border-top:1px solid #1a1a1a;display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:100}
-.nav-counter{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.18em;color:var(--muted)}
-.nav-arrows{display:flex;gap:10px}
-.nav-btn{background:#1c1c1c;border:1px solid #2c2c2c;color:#ccc;border-radius:8px;width:36px;height:36px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.nav-btn:hover{background:var(--orange);border-color:var(--orange);color:#fff}
-.nav-dots{display:flex;gap:6px;align-items:center}
-.dot{width:6px;height:6px;border-radius:50%;background:#333;cursor:pointer;transition:all .2s}
-.dot.active{background:var(--orange);width:20px;border-radius:3px}
+    /* ── SLIDES ──────────────────────────────── */
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 32px 48px 72px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease, transform .4s ease;
+      transform: translateX(60px);
+    }
 
-/* BLINK */
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-.blink{animation:blink 1.4s ease-in-out infinite}
+    .slide.active {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(0)
+    }
 
-/* CTA BTN */
-.cta-btn{display:inline-block;background:var(--orange);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:18px 42px;border-radius:10px;text-decoration:none;cursor:pointer;border:none;transition:all .25s;box-shadow:0 0 30px rgba(255,107,0,.35)}
-.cta-btn:hover{background:#ff8a2e;box-shadow:0 0 50px rgba(255,107,0,.6);transform:translateY(-2px)}
-.cta-btn.outline{background:transparent;border:2px solid var(--orange);color:var(--orange)}
-.cta-btn.outline:hover{background:var(--orange);color:#fff}
+    .slide.exit {
+      opacity: 0;
+      transform: translateX(-60px)
+    }
 
-/* SLIDE 5 OVERLAY */
-.slide-5-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80') center/cover no-repeat;opacity:.18}
-.slide-5-overlay{position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a 40%,rgba(10,10,10,.6))}
+    /* ── INNER ───────────────────────────────── */
+    .w {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto
+    }
 
-/* BADGE */
-.badge{display:inline-block;background:var(--orange);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:8px}
+    .w.scroll {
+      overflow-y: auto;
+      max-height: calc(100svh - 100px);
+      padding-right: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: #222 transparent
+    }
 
-/* TIMELINE */
-.timeline{display:flex;flex-direction:column;gap:16px}
-.timeline-item{display:flex;gap:20px;align-items:flex-start}
-.tl-num{min-width:40px;height:40px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.1rem}
-.tl-content h4{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;text-transform:uppercase;color:#fff;margin-bottom:4px}
-.tl-content p{font-size:.82rem;color:#999}
+    /* ── ANIMATED ELEMENTS ───────────────────── */
+    .a {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .55s ease, transform .55s ease
+    }
 
-/* PRICE CARD */
-.price-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:14px}
-.price-card.featured{border-color:var(--orange);background:linear-gradient(160deg,#1a1000,#141414)}
-.price-card .price{font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--orange)}
-.price-card .price span{font-size:1rem;font-weight:600;color:#888}
-.price-card .plan-name{font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em}
-.price-card .plan-focus{font-size:.78rem;color:#777;margin-top:-10px}
-.price-note{font-size:.72rem;color:#666;border-top:1px solid #222;padding-top:10px;margin-top:4px}
+    .slide.active .a {
+      opacity: 1;
+      transform: translateY(0)
+    }
 
-/* TESTIMONIAL */
-.testimonial{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px 36px;position:relative}
-.testimonial .quote{font-size:clamp(1rem,1.6vw,1.15rem);color:#ddd;line-height:1.7;margin-bottom:20px}
-.testimonial .author{font-weight:700;font-size:.9rem;color:#fff}
-.testimonial .author span{color:var(--orange);margin-left:6px;font-size:.8rem}
-.big-stat{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--orange);margin-top:12px}
+    .slide.active .a:nth-child(1) {
+      transition-delay: .06s
+    }
 
-/* SCROLL IF NEEDED */
-.slide .inner.scroll{max-height:calc(100vh - 120px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:#333 transparent}
+    .slide.active .a:nth-child(2) {
+      transition-delay: .14s
+    }
 
-@media(max-width:768px){
-  .slide{padding:28px 22px 80px}
-  .grid2,.grid3,.grid4{grid-template-columns:1fr}
-  .title{font-size:2rem}
-  .nav-dots{display:none}
-}
-</style>
+    .slide.active .a:nth-child(3) {
+      transition-delay: .22s
+    }
+
+    .slide.active .a:nth-child(4) {
+      transition-delay: .30s
+    }
+
+    .slide.active .a:nth-child(5) {
+      transition-delay: .38s
+    }
+
+    .slide.active .a:nth-child(6) {
+      transition-delay: .46s
+    }
+
+    .slide.active .a:nth-child(7) {
+      transition-delay: .54s
+    }
+
+    .slide.active .a:nth-child(8) {
+      transition-delay: .62s
+    }
+
+    /* ── TYPE ────────────────────────────────── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255, 107, 0, .35);
+      background: rgba(255, 107, 0, .08);
+      color: var(--or);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 22px;
+    }
+
+    .badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--or);
+      flex-shrink: 0
+    }
+
+    h1.hero {
+      font-size: clamp(3.2rem, 8.5vw, 7rem);
+      font-weight: 900;
+      line-height: .98;
+      letter-spacing: -.03em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    h2.sec {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .or {
+      color: var(--or)
+    }
+
+    .sub {
+      font-size: clamp(.85rem, 1.3vw, 1rem);
+      color: #888;
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 28px
+    }
+
+    /* ── GRID ────────────────────────────────── */
+    .g2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px
+    }
+
+    .g3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px
+    }
+
+    .g4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px
+    }
+
+    /* ── CARDS ───────────────────────────────── */
+    .card {
+      background: var(--s1);
+      border: 1px solid #1f1f1f;
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      transition: border-color .2s;
+    }
+
+    .card:hover {
+      border-color: #2e2e2e
+    }
+
+    .card .num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--or);
+      letter-spacing: -.04em;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .card .lbl {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: #ccc;
+      margin-bottom: 6px
+    }
+
+    .card .desc {
+      font-size: .8rem;
+      color: #666;
+      line-height: 1.55
+    }
+
+    /* ── LISTS ───────────────────────────────── */
+    ul.clean {
+      list-style: none
+    }
+
+    ul.clean li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .82rem;
+      color: #aaa;
+      padding: 5px 0;
+      line-height: 1.45
+    }
+
+    ul.clean li .ico {
+      flex-shrink: 0;
+      margin-top: 1px
+    }
+
+    .ico-ok {
+      color: var(--green)
+    }
+
+    .ico-no {
+      color: var(--red)
+    }
+
+    /* ── DIVIDER ─────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #2a2a2a 30%, #2a2a2a 70%, transparent);
+      margin: 20px 0
+    }
+
+    /* ── HIGHLIGHT ───────────────────────────── */
+    .hl {
+      border-left: 3px solid var(--or);
+      padding: 14px 20px;
+      margin-top: 18px;
+      background: rgba(255, 107, 0, .05);
+      border-radius: 0 10px 10px 0;
+    }
+
+    .hl p {
+      font-size: .85rem;
+      color: #f0a060;
+      line-height: 1.55;
+      font-style: italic
+    }
+
+    /* ── BLINK ───────────────────────────────── */
+    @keyframes blink2 {
+
+      0%,
+      100% {
+        opacity: .9
+      }
+
+      50% {
+        opacity: .2
+      }
+    }
+
+    .blink {
+      animation: blink2 1.6s ease-in-out infinite
+    }
+
+    /* ── GLOW ────────────────────────────────── */
+    .bg-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── CTA BTN ─────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--or);
+      color: #fff;
+      font-family: 'Sora', sans-serif;
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 15px 36px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all .25s;
+      box-shadow: 0 0 0 rgba(255, 107, 0, 0);
+    }
+
+    .btn:hover {
+      background: #ff8c2e;
+      box-shadow: 0 8px 40px rgba(255, 107, 0, .4);
+      transform: translateY(-2px)
+    }
+
+    .btn.ghost {
+      background: transparent;
+      border: 1.5px solid #333;
+      color: #bbb
+    }
+
+    .btn.ghost:hover {
+      border-color: var(--or);
+      color: var(--or);
+      box-shadow: none;
+      transform: none
+    }
+
+    .btn.big {
+      font-size: 1rem;
+      padding: 18px 48px;
+      border-radius: 12px
+    }
+
+    /* ── SLIDE-SPECIFIC ──────────────────────── */
+    /* S1 */
+    #s1 {
+      text-align: center
+    }
+
+    #s1 .eyebrow {
+      width: 48px;
+      height: 2px;
+      background: var(--or);
+      margin: 0 auto 28px;
+      border-radius: 2px
+    }
+
+    /* S5 */
+    #s5 .bg-img {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=75') center/cover no-repeat;
+      opacity: .12
+    }
+
+    #s5 .fade-r {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 70% at 70% 50%, transparent 30%, #070707 80%)
+    }
+
+    #s5 .fade-b {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, #070707)
+    }
+
+    /* S7 */
+    .roma-card .letter {
+      font-size: 3.2rem;
+      font-weight: 900;
+      letter-spacing: -.05em;
+      line-height: 1;
+      -webkit-text-stroke: 2px var(--or);
+      color: transparent;
+      margin-bottom: 8px;
+    }
+
+    /* TIMELINE */
+    .tl {
+      display: flex;
+      flex-direction: column;
+      gap: 0
+    }
+
+    .tl-item {
+      display: flex;
+      gap: 20px
+    }
+
+    .tl-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center
+    }
+
+    .tl-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--or);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: .85rem;
+      flex-shrink: 0
+    }
+
+    .tl-seg {
+      width: 2px;
+      flex: 1;
+      background: #1f1f1f;
+      margin: 4px 0
+    }
+
+    .tl-body {
+      flex: 1;
+      padding-bottom: 20px
+    }
+
+    .tl-body h4 {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #fff;
+      margin-bottom: 4px
+    }
+
+    .tl-body p {
+      font-size: .76rem;
+      color: #666;
+      line-height: 1.5
+    }
+
+    /* PRICE */
+    .pc {
+      background: var(--s1);
+      border: 1px solid #1f1f1f;
+      border-radius: 18px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .pc.feat {
+      border-color: rgba(255, 107, 0, .4);
+      background: linear-gradient(160deg, #120c04, var(--s1))
+    }
+
+    .pc .price {
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: var(--or);
+      letter-spacing: -.04em
+    }
+
+    .pc .price s {
+      font-size: 1rem;
+      color: #444
+    }
+
+    .pc .pname {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: #888
+    }
+
+    .pc .pfocus {
+      font-size: .7rem;
+      color: #444;
+      margin-top: -8px
+    }
+
+    .pc-note {
+      font-size: .65rem;
+      color: #444;
+      border-top: 1px solid #1a1a1a;
+      padding-top: 10px
+    }
+
+    .rec-badge {
+      display: inline-block;
+      background: var(--or);
+      color: #fff;
+      font-size: .6rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 100px;
+      margin-bottom: 4px
+    }
+
+    /* TESTIMONIAL */
+    .tcard {
+      background: var(--s1);
+      border: 1px solid #1f1f1f;
+      border-radius: var(--radius);
+      padding: 28px 32px
+    }
+
+    .tcard .q {
+      font-size: clamp(.9rem, 1.4vw, 1.05rem);
+      color: #bbb;
+      line-height: 1.75;
+      margin-bottom: 18px
+    }
+
+    .tcard .author {
+      font-weight: 700;
+      font-size: .8rem;
+      color: #fff
+    }
+
+    .tcard .author em {
+      color: var(--or);
+      font-style: normal;
+      font-size: .72rem
+    }
+
+    .big-num {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 900;
+      color: var(--or);
+      letter-spacing: -.04em;
+      margin-top: 8px
+    }
+
+    /* ── NAV ─────────────────────────────────── */
+    #nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 52px;
+      background: rgba(7, 7, 7, .95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid #161616;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 200;
+    }
+
+    #ctr {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      color: #333;
+      text-transform: uppercase
+    }
+
+    .nav-dots {
+      display: flex;
+      gap: 5px;
+      align-items: center
+    }
+
+    .nd {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #222;
+      cursor: pointer;
+      transition: all .25s
+    }
+
+    .nd.on {
+      background: var(--or);
+      width: 18px;
+      border-radius: 3px
+    }
+
+    .nav-arr {
+      display: flex;
+      gap: 8px
+    }
+
+    .arr {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #111;
+      border: 1px solid #222;
+      color: #555;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+    }
+
+    .arr:hover {
+      background: var(--or);
+      border-color: var(--or);
+      color: #fff
+    }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media(max-width:720px) {
+      .slide {
+        padding: 24px 20px 70px
+      }
+
+      .g2,
+      .g3,
+      .g4 {
+        grid-template-columns: 1fr
+      }
+
+      h1.hero {
+        font-size: 2.8rem
+      }
+
+      h2.sec {
+        font-size: 1.8rem
+      }
+
+      .nav-dots {
+        display: none
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <div id="deck">
 
-<div class="deck" id="deck">
-
-<!-- SLIDE 1 — CAPA -->
-<div class="slide active" id="s1">
-  <div class="inner" style="text-align:center">
-    <div class="tag fade-up">Apresentação Comercial Estratégica</div>
-    <h1 class="title fade-up" style="font-size:clamp(3rem,8vw,6rem);margin-bottom:24px">
-      FATURAMENTO<br>PREVISÍVEL.<br><span class="o">TODO MÊS.</span>
-    </h1>
-    <p class="subtitle fade-up" style="margin:0 auto 48px;font-size:clamp(.95rem,1.5vw,1.2rem)">
-      Descubra como restaurantes estagnados se tornam máquinas de caixa<br>com o <strong style="color:#fff">Método ROMA.</strong>
-    </p>
-    <p class="blink fade-up" style="font-family:'Barlow Condensed',sans-serif;font-size:.85rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase">↓ &nbsp; Pressione Espaço ou Clique para Começar &nbsp; ↓</p>
-  </div>
-</div>
-
-<!-- SLIDE 2 — A DOR -->
-<div class="slide" id="s2">
-  <div class="inner scroll">
-    <div class="tag fade-up">O Cenário Real</div>
-    <h2 class="title fade-up">A dor invisível do<br>seu restaurante.</h2>
-    <div class="grid2 fade-up">
-      <div>
-        <ul class="list" style="margin-top:8px">
-          <li><span style="color:var(--orange);margin-right:10px;font-size:1.1rem">✓</span> Final de semana cheio</li>
-          <li><span class="cross">✗</span> Segunda a quinta: salão vazio</li>
-          <li><span class="cross">✗</span> Delivery parado no iFood</li>
-          <li><span class="cross">✗</span> Clientes que não voltam</li>
-          <li><span class="cross">✗</span> Faturamento que não cresce</li>
-        </ul>
+    <!-- ░░░ S1 — CAPA ░░░ -->
+    <div class="slide active" id="s1">
+      <div class="bg-glow"
+        style="width:600px;height:600px;top:-100px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(255,107,0,.12),transparent 70%)">
       </div>
-      <div>
-        <div class="card orange-border">
-          <h4>O RISCO DE CONTINUAR IGUAL</h4>
-          <p style="color:#bbb;margin-bottom:12px">Você não sabe de onde vem o próximo cliente. Cada dia sem estrutura é receita deixada na mesa e custo fixo corroendo sua margem.</p>
-          <div class="highlight-box">
-            <p>"Um restaurante sem previsibilidade opera no limite todos os meses."</p>
+      <div class="w" style="position:relative;z-index:1">
+        <div class="eyebrow a"></div>
+        <div class="badge a">Apresentação Comercial Estratégica</div>
+        <h1 class="hero a">Faturamento<br>Previsível.<br><span class="or">Todo Mês.</span></h1>
+        <p class="sub a" style="max-width:520px;margin:0 auto 40px">Descubra como restaurantes estagnados se tornam
+          máquinas de caixa com o <strong style="color:#ddd">Método ROMA.</strong></p>
+        <p class="blink a" style="font-size:.65rem;letter-spacing:.22em;color:#333;text-transform:uppercase">↓ &nbsp;
+          Pressione espaço ou clique para avançar &nbsp; ↓</p>
+      </div>
+    </div>
+
+    <!-- ░░░ S2 — A DOR ░░░ -->
+    <div class="slide" id="s2">
+      <div class="w scroll">
+        <div class="badge a">O Cenário Real</div>
+        <h2 class="sec a">A dor invisível do<br><span class="or">seu restaurante.</span></h2>
+        <div class="g2 a" style="margin-top:8px">
+          <div>
+            <ul class="clean" style="margin-bottom:16px">
+              <li><span class="ico" style="color:var(--or);font-size:1.1rem">✓</span> Final de semana cheio</li>
+              <li><span class="ico ico-no">✕</span> Segunda a quinta: salão vazio</li>
+              <li><span class="ico ico-no">✕</span> Delivery parado no iFood</li>
+              <li><span class="ico ico-no">✕</span> Clientes que não voltam</li>
+              <li><span class="ico ico-no">✕</span> Faturamento que não cresce</li>
+            </ul>
+          </div>
+          <div class="card" style="border-color:rgba(255,107,0,.25)">
+            <div class="lbl" style="color:var(--or);margin-bottom:12px">O Risco de Continuar Igual</div>
+            <p style="font-size:.82rem;color:#888;line-height:1.6;margin-bottom:16px">Você não sabe de onde vem o
+              próximo cliente. Cada dia sem estrutura é receita deixada na mesa e custo fixo corroendo sua margem.</p>
+            <div class="hl">
+              <p>"Um restaurante sem previsibilidade opera no limite todos os meses."</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- SLIDE 3 — O ERRO COMUM -->
-<div class="slide" id="s3">
-  <div class="inner scroll">
-    <div class="tag fade-up">O Erro Mais Comum</div>
-    <h2 class="title fade-up">O problema não é seu restaurante.<br><span class="o">É com quem você tentou resolver.</span></h2>
-    <p class="subtitle fade-up">Agências genéricas não entendem de ticket médio, CMV, horário de pico ou comportamento de quem pede delivery.</p>
-    <div class="grid3 fade-up">
-      <div class="card">
-        <div class="tag-num">01</div>
-        <div class="label">Sem Estratégia</div>
-        <p>Post bonito, zero resultado. Ninguém aparece.</p>
-      </div>
-      <div class="card">
-        <div class="tag-num">02</div>
-        <div class="label">Sem Método</div>
-        <p>Tráfego sem funil não converte. É dinheiro queimado.</p>
-      </div>
-      <div class="card">
-        <div class="tag-num">03</div>
-        <div class="label">Sem Resultado</div>
-        <p>Você paga todo mês. O faturamento continua igual.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 4 — AS 3 ALAVANCAS -->
-<div class="slide" id="s4">
-  <div class="inner scroll">
-    <div class="tag fade-up">A Raiz do Crescimento</div>
-    <h2 class="title fade-up">Para vender mais, existem<br>apenas <span class="o">3 alavancas.</span></h2>
-    <p class="subtitle fade-up">Todo restaurante que cresce de forma previsível trabalha as três ao mesmo tempo.</p>
-    <div class="grid3 fade-up">
-      <div class="card">
-        <div class="tag-num">1</div>
-        <div class="label">Aquisição de Clientes</div>
-        <p>Atrair pessoas novas com campanhas estratégicas e presença local dominante.</p>
-      </div>
-      <div class="card">
-        <div class="tag-num">2</div>
-        <div class="label">Recorrência</div>
-        <p>Fazer o cliente voltar toda semana. Reativação, CRM e fidelização ativa.</p>
-      </div>
-      <div class="card">
-        <div class="tag-num">3</div>
-        <div class="label">Ticket Médio</div>
-        <p>Aumentar quanto cada cliente gasta por pedido. Engenharia de cardápio digital, iFood, Keeta e 99Food.</p>
-      </div>
-    </div>
-    <div class="highlight-box fade-up" style="margin-top:24px">
-      <p style="color:var(--orange);font-weight:700;font-style:normal;font-size:.95rem">A maioria dos restaurantes trabalha só a primeira. <strong>Nós trabalhamos as três.</strong></p>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 5 — IMPACTO VISUAL -->
-<div class="slide" id="s5" style="position:relative;overflow:hidden">
-  <div class="slide-5-bg"></div>
-  <div class="slide-5-overlay"></div>
-  <div class="inner" style="position:relative;z-index:1">
-    <div class="tag fade-up">O Novo Padrão</div>
-    <h2 class="title fade-up" style="font-size:clamp(2.8rem,7vw,5.5rem)">
-      SALÃO CHEIO.<br>DELIVERY BOMBANDO.<br><span class="o">META BATIDA</span><br>ANTES DO FIM DO MÊS.
-    </h2>
-  </div>
-</div>
-
-<!-- SLIDE 6 — POR QUE A DKS -->
-<div class="slide" id="s6">
-  <div class="inner scroll">
-    <div class="tag fade-up">Nossa Diferença</div>
-    <div class="grid2 fade-up">
-      <div>
-        <h3 class="title" style="font-size:1.5rem;margin-bottom:16px">O QUE NÃO SOMOS</h3>
-        <p style="color:#aaa;font-size:.85rem;margin-bottom:14px">Agências genéricas não funcionam para restaurantes.</p>
-        <ul class="list">
-          <li><span class="cross">✗</span> Não entendem de CMV nem margem</li>
-          <li><span class="cross">✗</span> Não sabem o que leva alguém a pedir delivery</li>
-          <li><span class="cross">✗</span> Medem sucesso por curtida, não por faturamento</li>
-          <li><span class="cross">✗</span> Postam por postar. Sem método, sem meta.</li>
-        </ul>
-        <div class="card orange-border" style="margin-top:16px">
-          <p style="color:var(--orange);font-weight:700;font-size:.9rem">Agência genérica gera barulho. Não gera caixa.</p>
-        </div>
-      </div>
-      <div>
-        <h3 class="title" style="font-size:1.5rem;margin-bottom:8px;color:var(--orange)">POR QUE A DKS É DIFERENTE</h3>
-        <p style="color:#ccc;font-weight:700;font-size:1.05rem;margin-bottom:10px">100% focados em restaurantes.</p>
-        <p style="color:#aaa;font-size:.85rem;margin-bottom:16px">Entendemos a operação, a margem, o horário de pico e o comportamento de quem pede delivery. Não fazemos marketing genérico. Fazemos marketing com impacto direto no caixa.</p>
-        <ul class="list">
-          <li><span class="check">✓</span> Faturamento previsível</li>
-          <li><span class="check">✓</span> Mesas cheias na semana</li>
-          <li><span class="check">✓</span> Delivery com volume e ranking</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 7 — MÉTODO ROMA -->
-<div class="slide" id="s7">
-  <div class="inner scroll">
-    <div class="tag fade-up">Nossa Metodologia</div>
-    <h2 class="title fade-up">Método <span class="o">ROMA</span></h2>
-    <p class="subtitle fade-up">A estrutura exclusiva que transforma restaurantes estagnados em líderes de faturamento.</p>
-    <div class="grid4 fade-up">
-      <div class="card" style="border-top:3px solid var(--orange)">
-        <div class="tag-num">R</div>
-        <div class="label">Resultado</div>
-        <p>Metas reais de faturamento definidas antes de qualquer ação.</p>
-      </div>
-      <div class="card" style="border-top:3px solid var(--orange)">
-        <div class="tag-num">O</div>
-        <div class="label">Otimização</div>
-        <p>Cardápio, perfis, campanhas e precificação otimizados antes de escalar.</p>
-      </div>
-      <div class="card" style="border-top:3px solid var(--orange)">
-        <div class="tag-num">M</div>
-        <div class="label">Método</div>
-        <p>Processos consistentes com ações semanais definidas e responsáveis.</p>
-      </div>
-      <div class="card" style="border-top:3px solid var(--orange)">
-        <div class="tag-num">A</div>
-        <div class="label">Autoridade</div>
-        <p>Seu restaurante vira referência local. Autoridade reduz o custo de aquisição.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 8 — ENTREGAS -->
-<div class="slide" id="s8">
-  <div class="inner scroll">
-    <div class="tag fade-up">Clareza no Processo</div>
-    <h2 class="title fade-up">O que a DKS entrega</h2>
-    <div class="grid2 fade-up">
-      <div class="card" style="border-color:#1e3a1e">
-        <h4 style="color:#00cc55;margin-bottom:14px">ENTREGAMOS</h4>
-        <ul class="list" style="gap:6px">
-          <li><span class="check">✓</span> Planejamento estratégico de vendas</li>
-          <li><span class="check">✓</span> Estratégia focada em delivery</li>
-          <li><span class="check">✓</span> Estratégias para espaço físico</li>
-          <li><span class="check">✓</span> Diagnóstico das redes sociais</li>
-          <li><span class="check">✓</span> Gestão de tráfego pago Google Ads</li>
-          <li><span class="check">✓</span> Gestão de tráfego pago Meta Ads</li>
-          <li><span class="check">✓</span> CRM — implementação e análise</li>
-          <li><span class="check">✓</span> Google Meu Negócio</li>
-          <li><span class="check">✓</span> TripAdvisor</li>
-          <li><span class="check">✓</span> Engenharia do cardápio digital</li>
-          <li><span class="check">✓</span> Gestão iFood, Keeta e 99Food</li>
-        </ul>
-      </div>
-      <div class="card" style="border-color:#3a1e1e">
-        <h4 style="color:#ff3b3b;margin-bottom:14px">NÃO FAZEMOS</h4>
-        <ul class="list">
-          <li><span class="cross">✗</span> Post recreativo para feed</li>
-          <li><span class="cross">✗</span> Não medimos sucesso por curtida</li>
-          <li><span class="cross">✗</span> Tráfego isolado sem estratégia comercial</li>
-          <li><span class="cross">✗</span> Marketing genérico sem impacto no caixa</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 9 — IMPLEMENTAÇÃO -->
-<div class="slide" id="s9">
-  <div class="inner">
-    <div class="tag fade-up">Execução Rápida</div>
-    <h2 class="title fade-up">Como começamos juntos</h2>
-    <p class="subtitle fade-up">Processo estruturado para gerar resultado desde o primeiro mês.</p>
-    <div class="timeline fade-up">
-      <div class="timeline-item">
-        <div class="tl-num">1</div>
-        <div class="tl-content">
-          <h4>Diagnóstico Estratégico</h4>
-          <p>Posicionamento, cardápio, concorrência e proposta de valor.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-num">2</div>
-        <div class="tl-content">
-          <h4>Estrutura de Oferta</h4>
-          <p>Criação de ofertas, combos e campanhas sazonais.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-num">3</div>
-        <div class="tl-content">
-          <h4>Aquisição Ativa</h4>
-          <p>Meta Ads, Google Ads e campanhas locais no ar.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-num">4</div>
-        <div class="tl-content">
-          <h4>Retenção e Escala</h4>
-          <p>CRM, reativação de base e crescimento de ticket médio.</p>
+    <!-- ░░░ S3 — ERRO COMUM ░░░ -->
+    <div class="slide" id="s3">
+      <div class="w scroll">
+        <div class="badge a">O Erro Mais Comum</div>
+        <h2 class="sec a">O problema não é o seu<br>restaurante. <span class="or">É com quem<br>você tentou
+            resolver.</span></h2>
+        <p class="sub a">Agências genéricas não entendem de ticket médio, CMV, horário de pico ou comportamento de quem
+          pede delivery.</p>
+        <div class="g3 a">
+          <div class="card">
+            <div class="num">01</div>
+            <div class="lbl">Sem Estratégia</div>
+            <p class="desc">Post bonito, zero resultado. Ninguém aparece.</p>
+          </div>
+          <div class="card">
+            <div class="num">02</div>
+            <div class="lbl">Sem Método</div>
+            <p class="desc">Tráfego sem funil não converte. É dinheiro queimado.</p>
+          </div>
+          <div class="card">
+            <div class="num">03</div>
+            <div class="lbl">Sem Resultado</div>
+            <p class="desc">Você paga todo mês. O faturamento continua igual.</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- SLIDE 10 — PROVA SOCIAL -->
-<div class="slide" id="s10">
-  <div class="inner">
-    <div class="tag fade-up">Resultado Prático</div>
-    <h2 class="title fade-up">Histórias <span class="o">Reais</span></h2>
-    <div class="fade-up" style="margin-bottom:20px">
-      <div class="testimonial">
-        <p class="quote">"Em 3 meses com a DKS, o faturamento saltou mais de 60%. As redes nunca foram tão ativas e o iFood chegou ao top 5 da região."</p>
-        <div class="author">Daniel Rodrigues, Proprietário <span>✓ Verificado</span></div>
-        <div class="big-stat">+60% de faturamento em 3 meses</div>
+    <!-- ░░░ S4 — 3 ALAVANCAS ░░░ -->
+    <div class="slide" id="s4">
+      <div class="w scroll">
+        <div class="badge a">A Raiz do Crescimento</div>
+        <h2 class="sec a">Para vender mais, existem<br>apenas <span class="or">3 alavancas.</span></h2>
+        <p class="sub a">Todo restaurante que cresce de forma previsível trabalha as três ao mesmo tempo.</p>
+        <div class="g3 a">
+          <div class="card">
+            <div class="num">1</div>
+            <div class="lbl">Aquisição</div>
+            <p class="desc">Atrair pessoas novas com campanhas estratégicas e presença local dominante.</p>
+          </div>
+          <div class="card">
+            <div class="num">2</div>
+            <div class="lbl">Recorrência</div>
+            <p class="desc">Fazer o cliente voltar toda semana. Reativação, CRM e fidelização ativa.</p>
+          </div>
+          <div class="card">
+            <div class="num">3</div>
+            <div class="lbl">Ticket Médio</div>
+            <p class="desc">Aumentar quanto cada cliente gasta por pedido. Engenharia de cardápio digital, iFood, Keeta
+              e 99Food.</p>
+          </div>
+        </div>
+        <div class="hl a" style="margin-top:20px">
+          <p style="font-style:normal;color:var(--or);font-weight:600">A maioria dos restaurantes trabalha só a
+            primeira. <strong>Nós trabalhamos as três.</strong></p>
+        </div>
       </div>
     </div>
-    <div class="card fade-up" style="padding:20px 24px">
-      <p class="quote" style="font-size:.9rem;color:#bbb;margin-bottom:10px">"Crescemos 38% no delivery e preenchemos mais mesas durante a semana. Algo que nunca conseguíamos antes."</p>
-      <div class="author" style="font-size:.8rem">Patricia Mendes, Sócia <span>✓ Verificado</span></div>
-    </div>
-    <p class="fade-up" style="text-align:center;margin-top:20px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase">+100 restaurantes atendidos em todo o Brasil</p>
-  </div>
-</div>
 
-<!-- SLIDE 11 — PLANOS -->
-<div class="slide" id="s11">
-  <div class="inner scroll">
-    <div class="tag fade-up">O Investimento</div>
-    <h2 class="title fade-up">O custo real de <span class="o">não agir.</span></h2>
-    <p class="subtitle fade-up" style="margin-bottom:24px">Cada semana sem estrutura é receita que não volta.</p>
-    <div class="grid2 fade-up">
-      <div class="price-card">
-        <div class="plan-name">DKS Estrutura</div>
-        <div class="price">R$ 2.497<span>/mês</span></div>
-        <div style="font-size:.78rem;color:#666;margin-top:-8px">Foco: Aquisição e presença</div>
-        <ul class="list">
-          <li><span class="check">✓</span> Planejamento estratégico de vendas</li>
-          <li><span class="check">✓</span> Tráfego pago Meta Ads + Google Ads</li>
-          <li><span class="check">✓</span> Google Meu Negócio</li>
-          <li><span class="check">✓</span> Diagnóstico de redes sociais</li>
-          <li><span class="check">✓</span> Estratégias para espaço físico e delivery</li>
-          <li><span class="check">✓</span> Relatórios de performance</li>
-        </ul>
-        <div class="price-note">Investimento mínimo em anúncios: R$ 1.500/mês (não incluso)</div>
-        <button class="cta-btn outline" onclick="window.open('https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7','_blank')" style="width:100%;font-size:.9rem;padding:14px">QUERO O ESTRUTURA</button>
-      </div>
-      <div class="price-card featured">
-        <div class="badge">RECOMENDADO</div>
-        <div class="plan-name" style="color:var(--orange)">DKS Escala</div>
-        <div class="price">R$ 2.997<span>/mês</span></div>
-        <div style="font-size:.78rem;color:#666;margin-top:-8px">Foco: As 3 alavancas completas</div>
-        <ul class="list">
-          <li><span class="check">✓</span> Tudo do plano Estrutura +</li>
-          <li><span class="check">✓</span> CRM — reativação, recorrência e fidelização</li>
-          <li><span class="check">✓</span> Engenharia de cardápio digital próprio</li>
-          <li><span class="check">✓</span> Gestão iFood + Keeta + 99Food</li>
-          <li><span class="check">✓</span> TripAdvisor</li>
-          <li><span class="check">✓</span> Estratégia de aumento de ticket médio</li>
-        </ul>
-        <div class="price-note">Investimento mínimo em anúncios: R$ 1.500/mês (não incluso)</div>
-        <div style="font-size:.75rem;color:var(--orange);font-style:italic;line-height:1.5">No Estrutura você atrai clientes. No Escala você atrai, faz voltarem e aumenta o ticket. São as 3 alavancas por apenas R$ 500 a mais.</div>
-        <button class="cta-btn" onclick="window.open('https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7','_blank')" style="width:100%;font-size:.9rem;padding:14px">QUERO O ESCALA →</button>
+    <!-- ░░░ S5 — IMPACTO VISUAL ░░░ -->
+    <div class="slide" id="s5">
+      <div class="bg-img"></div>
+      <div class="fade-r"></div>
+      <div class="fade-b"></div>
+      <div class="w" style="position:relative;z-index:1">
+        <div class="badge a">O Novo Padrão</div>
+        <h1 class="hero a" style="font-size:clamp(2.8rem,7.5vw,6rem)">
+          Salão cheio.<br>Delivery <span class="or">bombando.</span><br>Meta batida<br>antes do fim do mês.
+        </h1>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- SLIDE 12 — CTA FINAL -->
-<div class="slide" id="s12">
-  <div class="inner" style="text-align:center">
-    <div class="tag fade-up">A Decisão Final</div>
-    <div class="fade-up" style="font-size:3rem;margin-bottom:16px">🚀</div>
-    <h2 class="title fade-up" style="font-size:clamp(2.2rem,5vw,3.8rem)">
-      O restaurante é seu.<br><span class="o">O crescimento também<br>pode ser.</span>
-    </h2>
-    <p class="subtitle fade-up" style="margin:0 auto 32px;max-width:600px">
-      Você pode continuar testando sozinho, queimando dinheiro com agência genérica e olhando o salão vazio na terça-feira.<br><br>
-      <strong style="color:#fff">Ou pode ter uma estrutura real, com método, dados e um parceiro que entende de restaurante de verdade.</strong>
-    </p>
-    <div class="fade-up">
-      <a href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7" target="_blank" class="cta-btn" style="font-size:1.15rem;padding:20px 50px">
-        AGENDAR MEU DIAGNÓSTICO GRATUITO →
-      </a>
-      <p style="margin-top:16px;font-size:.78rem;color:var(--muted);letter-spacing:.08em">Gratuito e sem compromisso &nbsp;·&nbsp; Resposta em até 24h &nbsp;·&nbsp; +100 restaurantes atendidos</p>
+    <!-- ░░░ S6 — POR QUE A DKS ░░░ -->
+    <div class="slide" id="s6">
+      <div class="w scroll">
+        <div class="badge a">Nossa Diferença</div>
+        <div class="g2 a">
+          <div>
+            <p
+              style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:#444;margin-bottom:12px">
+              O que não somos</p>
+            <h3
+              style="font-size:1.2rem;font-weight:800;text-transform:uppercase;color:#888;margin-bottom:14px;line-height:1.2">
+              Agências genéricas não<br>funcionam para restaurantes.</h3>
+            <ul class="clean">
+              <li><span class="ico ico-no">✕</span> Não entendem de CMV nem margem</li>
+              <li><span class="ico ico-no">✕</span> Não sabem o que leva alguém a pedir delivery</li>
+              <li><span class="ico ico-no">✕</span> Medem sucesso por curtida, não por faturamento</li>
+              <li><span class="ico ico-no">✕</span> Postam por postar. Sem método, sem meta.</li>
+            </ul>
+            <div
+              style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:14px 18px;margin-top:16px">
+              <p style="font-size:.8rem;color:#f87171;font-weight:600">Agência genérica gera barulho. Não gera caixa.
+              </p>
+            </div>
+          </div>
+          <div>
+            <p
+              style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--or);margin-bottom:12px">
+              Por que a DKS é diferente</p>
+            <h3
+              style="font-size:1.3rem;font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:12px;line-height:1.2">
+              100% focados em<br><span class="or">restaurantes.</span></h3>
+            <p style="font-size:.8rem;color:#888;line-height:1.65;margin-bottom:14px">Entendemos a operação, a margem, o
+              horário de pico e o comportamento de quem pede delivery. Não fazemos marketing genérico. Fazemos marketing
+              com impacto direto no caixa.</p>
+            <ul class="clean">
+              <li><span class="ico ico-ok">✓</span> Faturamento previsível</li>
+              <li><span class="ico ico-ok">✓</span> Mesas cheias na semana</li>
+              <li><span class="ico ico-ok">✓</span> Delivery com volume e ranking</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-</div><!-- /deck -->
+    <!-- ░░░ S7 — MÉTODO ROMA ░░░ -->
+    <div class="slide" id="s7">
+      <div class="w scroll">
+        <div class="badge a">Nossa Metodologia</div>
+        <h2 class="sec a">Método <span class="or">ROMA</span></h2>
+        <p class="sub a">A estrutura exclusiva que transforma restaurantes estagnados em líderes de faturamento.</p>
+        <div class="g4 a">
+          <div class="card roma-card">
+            <div class="letter">R</div>
+            <div class="lbl">Resultado</div>
+            <p class="desc">Metas reais de faturamento definidas antes de qualquer ação.</p>
+          </div>
+          <div class="card roma-card">
+            <div class="letter">O</div>
+            <div class="lbl">Otimização</div>
+            <p class="desc">Cardápio, perfis, campanhas e precificação otimizados antes de escalar.</p>
+          </div>
+          <div class="card roma-card">
+            <div class="letter">M</div>
+            <div class="lbl">Método</div>
+            <p class="desc">Processos consistentes com ações semanais definidas e responsáveis.</p>
+          </div>
+          <div class="card roma-card">
+            <div class="letter">A</div>
+            <div class="lbl">Autoridade</div>
+            <p class="desc">Seu restaurante vira referência local. Autoridade reduz o custo de aquisição.</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<!-- NAVIGATION BAR -->
-<nav class="nav">
-  <span class="nav-counter" id="counter">SLIDE 1 / 12</span>
-  <div class="nav-dots" id="dots"></div>
-  <div class="nav-arrows">
-    <button class="nav-btn" id="prev" title="Anterior">&#8592;</button>
-    <button class="nav-btn" id="next" title="Próximo">&#8594;</button>
-  </div>
-</nav>
+    <!-- ░░░ S8 — ENTREGAS ░░░ -->
+    <div class="slide" id="s8">
+      <div class="w scroll">
+        <div class="badge a">Clareza no Processo</div>
+        <h2 class="sec a">O que a DKS <span class="or">entrega</span></h2>
+        <div class="g2 a">
+          <div class="card" style="border-color:rgba(34,197,94,.15)">
+            <div class="lbl" style="color:var(--green);margin-bottom:12px">ENTREGAMOS</div>
+            <ul class="clean" style="gap:4px">
+              <li><span class="ico ico-ok">✓</span> Planejamento estratégico de vendas</li>
+              <li><span class="ico ico-ok">✓</span> Estratégia focada em delivery</li>
+              <li><span class="ico ico-ok">✓</span> Estratégias para espaço físico</li>
+              <li><span class="ico ico-ok">✓</span> Diagnóstico das redes sociais</li>
+              <li><span class="ico ico-ok">✓</span> Gestão de tráfego pago Google Ads</li>
+              <li><span class="ico ico-ok">✓</span> Gestão de tráfego pago Meta Ads</li>
+              <li><span class="ico ico-ok">✓</span> CRM — implementação e análise</li>
+              <li><span class="ico ico-ok">✓</span> Google Meu Negócio</li>
+              <li><span class="ico ico-ok">✓</span> TripAdvisor</li>
+              <li><span class="ico ico-ok">✓</span> Engenharia do cardápio digital</li>
+              <li><span class="ico ico-ok">✓</span> Gestão iFood, Keeta e 99Food</li>
+            </ul>
+          </div>
+          <div class="card" style="border-color:rgba(239,68,68,.15)">
+            <div class="lbl" style="color:var(--red);margin-bottom:12px">NÃO FAZEMOS</div>
+            <ul class="clean">
+              <li><span class="ico ico-no">✕</span> Post recreativo para feed</li>
+              <li><span class="ico ico-no">✕</span> Não medimos sucesso por curtida</li>
+              <li><span class="ico ico-no">✕</span> Tráfego isolado sem estratégia comercial</li>
+              <li><span class="ico ico-no">✕</span> Marketing genérico sem impacto no caixa</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<script>
-const TOTAL = 12;
-let cur = 0;
+    <!-- ░░░ S9 — IMPLEMENTAÇÃO ░░░ -->
+    <div class="slide" id="s9">
+      <div class="w">
+        <div class="badge a">Execução Rápida</div>
+        <h2 class="sec a">Como <span class="or">começamos</span> juntos</h2>
+        <p class="sub a" style="margin-bottom:20px">Processo estruturado para gerar resultado desde o primeiro mês.</p>
+        <div class="tl a">
+          <div class="tl-item">
+            <div class="tl-line">
+              <div class="tl-dot">1</div>
+              <div class="tl-seg"></div>
+            </div>
+            <div class="tl-body">
+              <h4>Diagnóstico Estratégico</h4>
+              <p>Posicionamento, cardápio, concorrência e proposta de valor.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-line">
+              <div class="tl-dot">2</div>
+              <div class="tl-seg"></div>
+            </div>
+            <div class="tl-body">
+              <h4>Estrutura de Oferta</h4>
+              <p>Criação de ofertas, combos e campanhas sazonais.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-line">
+              <div class="tl-dot">3</div>
+              <div class="tl-seg"></div>
+            </div>
+            <div class="tl-body">
+              <h4>Aquisição Ativa</h4>
+              <p>Meta Ads, Google Ads e campanhas locais no ar.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-line">
+              <div class="tl-dot">4</div>
+            </div>
+            <div class="tl-body">
+              <h4>Retenção e Escala</h4>
+              <p>CRM, reativação de base e crescimento de ticket médio.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-const slides = document.querySelectorAll('.slide');
-const counter = document.getElementById('counter');
-const dotsEl = document.getElementById('dots');
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
+    <!-- ░░░ S10 — PROVA SOCIAL ░░░ -->
+    <div class="slide" id="s10">
+      <div class="w">
+        <div class="badge a">Resultado Prático</div>
+        <h2 class="sec a">Histórias <span class="or">Reais</span></h2>
+        <div class="tcard a" style="margin-bottom:14px">
+          <p class="q">"Em 3 meses com a DKS, o faturamento saltou mais de 60%. As redes nunca foram tão ativas e o
+            iFood chegou ao top 5 da região."</p>
+          <div class="author">Daniel Rodrigues, Proprietário <em>✓ Verificado</em></div>
+          <div class="big-num">+60% de faturamento em 3 meses</div>
+        </div>
+        <div class="card a" style="padding:18px 24px">
+          <p style="font-size:.82rem;color:#888;line-height:1.65;margin-bottom:10px">"Crescemos 38% no delivery e
+            preenchemos mais mesas durante a semana. Algo que nunca conseguíamos antes."</p>
+          <div style="font-size:.72rem;font-weight:700;color:#aaa">Patricia Mendes, Sócia <em
+              style="color:var(--or);font-style:normal">✓ Verificado</em></div>
+        </div>
+        <p class="a"
+          style="text-align:center;margin-top:16px;font-size:.62rem;letter-spacing:.22em;color:#333;text-transform:uppercase">
+          +100 restaurantes atendidos em todo o Brasil</p>
+      </div>
+    </div>
 
-// Build dots
-for(let i=0;i<TOTAL;i++){
-  const d = document.createElement('div');
-  d.className = 'dot' + (i===0?' active':'');
-  d.onclick = () => goTo(i);
-  dotsEl.appendChild(d);
-}
+    <!-- ░░░ S11 — PLANOS ░░░ -->
+    <div class="slide" id="s11">
+      <div class="w scroll">
+        <div class="badge a">O Investimento</div>
+        <h2 class="sec a">O custo real de <span class="or">não agir.</span></h2>
+        <p class="sub a" style="margin-bottom:20px">Cada semana sem estrutura é receita que não volta.</p>
+        <div class="g2 a">
+          <div class="pc">
+            <div class="pname">DKS Estrutura</div>
+            <div class="price">R$ 2.497<span style="font-size:.8rem;font-weight:400;color:#444">/mês</span></div>
+            <div class="pfocus">Foco: Aquisição e presença</div>
+            <div class="divider"></div>
+            <ul class="clean" style="flex:1">
+              <li><span class="ico ico-ok">✓</span> Planejamento estratégico de vendas</li>
+              <li><span class="ico ico-ok">✓</span> Tráfego pago Meta Ads + Google Ads</li>
+              <li><span class="ico ico-ok">✓</span> Google Meu Negócio</li>
+              <li><span class="ico ico-ok">✓</span> Diagnóstico de redes sociais</li>
+              <li><span class="ico ico-ok">✓</span> Estratégias para espaço físico e delivery</li>
+              <li><span class="ico ico-ok">✓</span> Relatórios de performance</li>
+            </ul>
+            <div class="pc-note">Investimento mínimo em anúncios: R$ 1.500/mês (não incluso)</div>
+            <button class="btn ghost"
+              onclick="window.open('https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7','_blank')"
+              style="width:100%;justify-content:center">QUERO O ESTRUTURA</button>
+          </div>
+          <div class="pc feat">
+            <div class="rec-badge">Recomendado</div>
+            <div class="pname" style="color:var(--or)">DKS Escala</div>
+            <div class="price">R$ 2.997<span style="font-size:.8rem;font-weight:400;color:#444">/mês</span></div>
+            <div class="pfocus">Foco: As 3 alavancas completas</div>
+            <div class="divider"></div>
+            <ul class="clean" style="flex:1">
+              <li><span class="ico ico-ok">✓</span> Tudo do plano Estrutura +</li>
+              <li><span class="ico ico-ok">✓</span> CRM — reativação, recorrência e fidelização</li>
+              <li><span class="ico ico-ok">✓</span> Engenharia de cardápio digital próprio</li>
+              <li><span class="ico ico-ok">✓</span> Gestão iFood + Keeta + 99Food</li>
+              <li><span class="ico ico-ok">✓</span> TripAdvisor</li>
+              <li><span class="ico ico-ok">✓</span> Estratégia de aumento de ticket médio</li>
+            </ul>
+            <div class="pc-note">Investimento mínimo em anúncios: R$ 1.500/mês (não incluso)</div>
+            <p style="font-size:.7rem;color:#b07040;line-height:1.55">No Estrutura você atrai clientes. No Escala você
+              atrai, faz voltarem e aumenta o ticket — por apenas R$ 500 a mais.</p>
+            <button class="btn" onclick="window.open('https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7','_blank')"
+              style="width:100%;justify-content:center">QUERO O ESCALA →</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-function goTo(n){
-  if(n<0||n>=TOTAL) return;
-  slides[cur].classList.remove('active');
-  cur = n;
-  slides[cur].classList.add('active');
-  counter.textContent = `SLIDE ${cur+1} / ${TOTAL}`;
-  document.querySelectorAll('.dot').forEach((d,i)=>{
-    d.classList.toggle('active', i===cur);
-  });
-}
+    <!-- ░░░ S12 — CTA FINAL ░░░ -->
+    <div class="slide" id="s12">
+      <div class="bg-glow"
+        style="width:800px;height:800px;bottom:-300px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(255,107,0,.1),transparent 70%)">
+      </div>
+      <div class="w" style="text-align:center;position:relative;z-index:1">
+        <div class="badge a" style="margin:0 auto 20px">A Decisão Final</div>
+        <div class="a" style="font-size:2.8rem;margin-bottom:16px">🚀</div>
+        <h1 class="hero a" style="font-size:clamp(2.2rem,5.5vw,4.5rem)">O restaurante é seu.<br><span class="or">O
+            crescimento<br>também pode ser.</span></h1>
+        <p class="sub a" style="margin:0 auto 36px;color:#666;max-width:560px">
+          Você pode continuar testando sozinho, queimando dinheiro com agência genérica e olhando o salão vazio na
+          terça-feira.<br>
+          <strong style="color:#aaa">Ou pode ter uma estrutura real, com método, dados e um parceiro que entende de
+            restaurante de verdade.</strong>
+        </p>
+        <div class="a">
+          <a href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7" target="_blank" class="btn big">AGENDAR MEU
+            DIAGNÓSTICO GRATUITO →</a>
+          <p style="margin-top:14px;font-size:.62rem;letter-spacing:.14em;color:#333;text-transform:uppercase">Gratuito
+            e sem compromisso &nbsp;·&nbsp; Resposta em até 24h &nbsp;·&nbsp; +100 restaurantes atendidos</p>
+        </div>
+      </div>
+    </div>
 
-function next(){ goTo(cur+1) }
-function prev(){ goTo(cur-1) }
+  </div><!-- /deck -->
 
-nextBtn.onclick = next;
-prevBtn.onclick = prev;
+  <!-- ── NAVIGATION BAR ── -->
+  <nav id="nav">
+    <span id="ctr">SLIDE 1 / 12</span>
+    <div class="nav-dots" id="dots"></div>
+    <div class="nav-arr">
+      <button class="arr" id="prev">&#8592;</button>
+      <button class="arr" id="next">&#8594;</button>
+    </div>
+  </nav>
 
-document.addEventListener('keydown', e=>{
-  if(e.code==='Space'||e.code==='ArrowRight') { e.preventDefault(); next(); }
-  else if(e.code==='ArrowLeft') { e.preventDefault(); prev(); }
-});
+  <script>
+    const N = 12;
+    let cur = 0;
+    const slides = [...document.querySelectorAll('.slide')];
+    const ctr = document.getElementById('ctr');
+    const dotsW = document.getElementById('dots');
 
-// Click on slide to advance (but not on links/buttons)
-document.getElementById('deck').addEventListener('click', e=>{
-  if(e.target.tagName!=='A' && e.target.tagName!=='BUTTON' && !e.target.closest('a') && !e.target.closest('button')) next();
-});
+    // build dots
+    for (let i = 0; i < N; i++) {
+      const d = document.createElement('div');
+      d.className = 'nd' + (i === 0 ? ' on' : '');
+      d.onclick = () => go(i);
+      dotsW.appendChild(d);
+    }
 
-// Touch swipe
-let ts=0,tx=0;
-document.addEventListener('touchstart',e=>{ts=e.touches[0].clientY;tx=e.touches[0].clientX},{passive:true});
-document.addEventListener('touchend',e=>{
-  const dy=e.changedTouches[0].clientY-ts;
-  const dx=e.changedTouches[0].clientX-tx;
-  if(Math.abs(dx)>Math.abs(dy)){
-    if(dx<-40) next();
-    else if(dx>40) prev();
-  }
-});
-</script>
+    function go(n) {
+      if (n < 0 || n >= N) return;
+      slides[cur].classList.remove('active');
+      slides[cur].classList.add('exit');
+      setTimeout(() => slides[cur].classList.remove('exit'), 420);
+      cur = n;
+      slides[cur].classList.add('active');
+      ctr.textContent = `SLIDE ${cur + 1} / ${N}`;
+      document.querySelectorAll('.nd').forEach((d, i) => d.classList.toggle('on', i === cur));
+    }
+
+    document.getElementById('next').onclick = () => go(cur + 1);
+    document.getElementById('prev').onclick = () => go(cur - 1);
+
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Space' || e.code === 'ArrowRight') { e.preventDefault(); go(cur + 1) }
+      else if (e.code === 'ArrowLeft') { e.preventDefault(); go(cur - 1) }
+    });
+
+    document.getElementById('deck').addEventListener('click', e => {
+      if (!e.target.closest('a') && !e.target.closest('button')) go(cur + 1);
+    });
+
+    // touch
+    let sx = 0, sy = 0;
+    window.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY }, { passive: true });
+    window.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - sx;
+      const dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) { dx < 0 ? go(cur + 1) : go(cur - 1) }
+    });
+  </script>
 </body>
+
 </html>
