@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Sora, Montserrat } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/ui/Header";
 import Footer from "@/components/ui/Footer";
@@ -51,6 +52,11 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+
+        {/* Leadster Widget */}
+        <Script id="leadster" strategy="afterInteractive">
+          {`(function(a,b,c,d){try{var e=b.head||b.getElementsByTagName("head")[0];var f=b.createElement("script");f.setAttribute("src",c);f.setAttribute("charset","UTF-8");f.defer=true;a.neuroleadId=d;e.appendChild(f)}catch(g){}})(window,document,"https://cdn.leadster.com.br/neurolead/neurolead.min.js","GADidxopEUrEBKvUxDNDepcO2")`}
+        </Script>
       </body>
     </html>
   );
