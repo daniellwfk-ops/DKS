@@ -169,7 +169,7 @@ export default function MetodoROMA() {
       `}</style>
 
             {/* Background ambient */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(212,175,55,0.06)_0%,transparent_70%)]" />
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_50%_50%,rgba(212,175,55,0.06)_0%,transparent_70%)]" />
 
             {/* Title */}
             <div className="relative text-center mb-16">
