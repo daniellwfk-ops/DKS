@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 const services = [
     {
@@ -59,74 +59,105 @@ const services = [
     }
 ];
 
+// Duplicate the services array for a seamless infinite loop
+const allServices = [...services, ...services];
+
 export default function ServicesCarousel() {
-    const carouselRef = useRef<HTMLDivElement>(null);
-
-    const scrollLeft = () => {
-        if (carouselRef.current) {
-            carouselRef.current.scrollBy({ left: -320, behavior: 'smooth' });
-        }
-    };
-
-    const scrollRight = () => {
-        if (carouselRef.current) {
-            carouselRef.current.scrollBy({ left: 320, behavior: 'smooth' });
-        }
-    };
+    const [paused, setPaused] = useState(false);
 
     return (
-        <div className="relative w-full max-w-[1200px] mx-auto group">
-            {/* Navigation Arrows */}
-            <button
-                onClick={scrollLeft}
-                className="absolute left-[-20px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white flex items-center justify-center rounded-sm shadow-lg text-black hover:bg-gray-200 transition-colors opacity-0 group-hover:opacity-100 hidden md:flex"
-            >
-                <i className="ph-bold ph-arrow-left text-xl"></i>
-            </button>
+        <>
+            <style>{`
+                @keyframes scroll-carousel {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+                .carousel-track {
+                    display: flex;
+                    gap: 1.5rem;
+                    animation: scroll-carousel 35s linear infinite;
+                    width: max-content;
+                }
+                .carousel-track.paused {
+                    animation-play-state: paused;
+                }
+                .carousel-wrapper {
+                    overflow: hidden;
+                    position: relative;
+                    width: 100%;
+                }
+                .carousel-fade-left {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    bottom: 0;
+                    width: 80px;
+                    background: linear-gradient(to right, #000000, transparent);
+                    z-index: 10;
+                    pointer-events: none;
+                }
+                .carousel-fade-right {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    width: 80px;
+                    background: linear-gradient(to left, #000000, transparent);
+                    z-index: 10;
+                    pointer-events: none;
+                }
+            `}</style>
 
-            <button
-                onClick={scrollRight}
-                className="absolute right-[-20px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white flex items-center justify-center rounded-sm shadow-lg text-black hover:bg-gray-200 transition-colors opacity-0 group-hover:opacity-100 hidden md:flex"
-            >
-                <i className="ph-bold ph-arrow-right text-xl"></i>
-            </button>
-
-            {/* Carousel Track */}
             <div
-                ref={carouselRef}
-                className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar px-6 md:px-0"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                className="carousel-wrapper pb-8 px-0"
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
             >
-                {services.map((service, idx) => (
-                    <div
-                        key={idx}
-                        className="flex-shrink-0 w-[280px] md:w-[340px] snap-start bg-[#0A0B10] border border-[#1A1C23] flex flex-col items-center p-8 transition-transform hover:-translate-y-2 duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-full relative"
-                    >
-                        {/* Image container with glow */}
-                        <div className="w-full relative flex items-center justify-center mb-8 h-[160px]">
-                            {/* Subtle background glow behind image placeholder */}
-                            <div className="absolute inset-0 bg-[#00AEEF]/10 blur-[40px] rounded-full"></div>
-                            {/* Simulating a graphic placeholder (Can be replaced with real images) */}
-                            <div className="relative z-10 w-[80%] h-full bg-[#1A1C23] rounded-lg border border-[#2A2D35] flex items-center justify-center overflow-hidden shadow-2xl">
-                                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-[#00AEEF]/5 to-transparent"></div>
-                                <i className="ph-light ph-laptop text-[#4A4D57] text-5xl"></i>
+                {/* Fade edges */}
+                <div className="carousel-fade-left" />
+                <div className="carousel-fade-right" />
+
+                {/* Scrolling track */}
+                <div className={`carousel-track${paused ? ' paused' : ''}`}>
+                    {allServices.map((service, idx) => (
+                        <div
+                            key={idx}
+                            className="flex-shrink-0 w-[280px] md:w-[320px] bg-[#050505] border border-white/5 rounded-2xl flex flex-col items-center p-8 transition-all hover:-translate-y-2 duration-300 shadow-[0_20px_40px_rgba(0,0,0,0.8)] hover:shadow-[0_20px_60px_rgba(212,175,55,0.12)] hover:border-[#D4AF37]/40 relative overflow-hidden group/card select-none"
+                        >
+                            {/* Top Accent Line */}
+                            <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"></div>
+
+                            {/* Image container with glow */}
+                            <div className="w-full relative flex items-center justify-center mb-8 h-[180px]">
+                                <div className="absolute inset-0 bg-[#D4AF37]/5 blur-[30px] rounded-full group-hover/card:bg-[#D4AF37]/20 transition-colors duration-500"></div>
+
+                                <div className="relative z-10 w-full h-full overflow-hidden shadow-2xl rounded-xl group-hover/card:shadow-[0_0_30px_rgba(212,175,55,0.2)] transition-all duration-500">
+                                    <img
+                                        src={service.image}
+                                        alt={service.title}
+                                        className="w-full h-full object-cover object-center transition-transform duration-700 group-hover/card:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                </div>
+                            </div>
+
+                            <div className="w-full">
+                                <div className="w-full relative z-10">
+                                    <h3 className="text-white text-xl font-bold mb-6 leading-tight border-b border-white/5 pb-4 group-hover/card:text-[#D4AF37] transition-colors duration-300">{service.title}</h3>
+                                    <ul className="space-y-4">
+                                        {service.points.map((point, pIdx) => (
+                                            <li key={pIdx} className="flex items-start gap-3">
+                                                <i className="ph-bold ph-check text-[#D4AF37] mt-[3px] text-sm flex-shrink-0"></i>
+                                                <span className="text-[#A1A1AA] text-[14px] leading-snug font-medium group-hover/card:text-[#CFCFCF] transition-colors">{point}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-
-                        <div className="w-full">
-                            <h3 className="text-[#00AEEF] text-xl font-bold mb-6 leading-tight h-[48px]">{service.title}</h3>
-                            <ul className="space-y-4">
-                                {service.points.map((point, pIdx) => (
-                                    <li key={pIdx} className="flex items-start gap-3">
-                                        <div className="w-[6px] h-[6px] rounded-full bg-[#00AEEF] mt-[8px] flex-shrink-0"></div>
-                                        <span className="text-[#A1A1AA] text-[14px] leading-snug">{point}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
-        </div>
+        </>
     );
 }

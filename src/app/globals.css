@@ -19,15 +19,15 @@
    Base & Variables
    ========================================================================== */
 :root {
-    /* Color Palette - DKS Institutional Black & Gold */
+    /* Pure Black for maximum contrast */
     --black-main: #000000;
-    --black-alt: #0A0A0A;
-    --gray-border: #2B2B2B;
+    --black-alt: #050505;
+    --gray-border: #1A1A1A;
 
-    /* Bright Yellow from reference image */
-    --gold-main: #FFC000;
-    --gold-hover: #E6AC00;
-    --gold-light: rgba(255, 192, 0, 0.1);
+    /* Unified Premium Gold (#D4AF37) */
+    --gold-main: #D4AF37;
+    --gold-hover: #C5A028;
+    --gold-light: rgba(212, 175, 55, 0.1);
 
     --white: #FFFFFF;
     --text-muted: #B3B3B3;

@@ -1,9 +1,15 @@
 import React from 'react';
 import ServicesCarousel from '@/components/ui/ServicesCarousel';
+import MetodoROMA from '@/components/ui/MetodoROMA';
+import ClientLogoCard from '@/components/ui/ClientLogoCard';
+import Feedbacks from '@/components/ui/Feedbacks';
+import DorDoLead from '@/components/ui/DorDoLead';
+import VisionFuturo from '@/components/ui/VisionFuturo';
+import FAQ from '@/components/ui/FAQ';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#000000] text-white font-sans overflow-hidden" style={{ fontFamily: "'Sora', sans-serif" }}>
+    <main className="min-h-screen bg-[#000000] text-white font-sans overflow-hidden" style={{ fontFamily: "var(--font-sora), sans-serif" }}>
       {/* Background Gradient removed as requested */}
 
       <section className="relative w-full min-h-[90vh] flex items-center pt-[100px] lg:pt-0 overflow-hidden">
@@ -43,7 +49,7 @@ export default function Home() {
             </h2>
 
             {/* CTA Button */}
-            <div className="mt-[40px] flex w-full relative max-w-[340px]">
+            <div className="mt-[40px] flex flex-col w-full relative max-w-[340px]">
               {/* Orange Glow Behind Button */}
               <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[240px] h-[70px] bg-[#FF9900]/60 blur-[40px] rounded-full -z-10 animate-pulse"></div>
 
@@ -51,10 +57,27 @@ export default function Home() {
                 href="#"
                 className="group relative bg-[#00CC00] text-white px-[30px] py-[20px] rounded-[16px] font-[800] text-[16px] md:text-[18px] flex items-center justify-center transition-all duration-300 hover:scale-105 hover:bg-[#00B300] shadow-[0px_0px_40px_rgba(0,204,0,0.5)] overflow-hidden w-full text-center"
               >
-                <span className="relative z-10 uppercase tracking-wide">Saiba Mais</span>
+                <span className="relative z-10 uppercase tracking-wide">Quero Descobrir o que Trava Meu Faturamento</span>
                 {/* Sweep light effect on hover */}
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-[sweep_0.8s_ease-in-out]"></div>
               </a>
+
+              {/* Social proof anchors */}
+              <div className="flex flex-col gap-2 mt-4">
+                {[
+                  "Gratuito e sem compromisso",
+                  "+100 restaurantes atendidos",
+                  "Resposta em até 24h",
+                ].map((item) => (
+                  <span key={item} className="flex items-center gap-1.5 text-[#888] text-xs">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <circle cx="6" cy="6" r="6" fill="#00CC00" fillOpacity="0.15" />
+                      <path d="M3.5 6l1.8 1.8L8.5 4.5" stroke="#00CC00" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
 
           </div>
@@ -80,22 +103,35 @@ export default function Home() {
           {/* Scrolling Content - Repeated twice for seamless loop */}
           <div className="flex animate-[marquee_40s_linear_infinite] whitespace-nowrap items-center hover:[animation-play-state:paused]">
             {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex gap-[40px] px-[20px] items-center">
+              <div key={i} className="flex gap-[32px] px-[16px] items-center">
                 {/* Client Logos (Mockups based on the image provided earlier) */}
                 {[
-                  "BABBO GIOVANNI", "OSSO", "Camarada Camarão",
-                  "SPOLETO", "O JARDIM", "COZINHA GRECCO",
-                  "Domino's Pizza", "Santa Fé", "BULLGUER", "LET'S POKE"
-                ].map((name, idx) => (
-                  <div key={idx} className="flex-shrink-0 w-[160px] md:w-[200px] h-[80px] bg-white/[0.03] border border-[#333333] rounded-xl flex items-center justify-center grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:bg-white/[0.08] transition-all duration-300">
-                    <span className="text-[#CFCFCF] font-bold text-xs md:text-sm text-center px-4 leading-tight whitespace-normal">{name}</span>
-                  </div>
+                  { name: "Japa Haus", image: "/images/japa-haus-logo.png" },
+                  { name: "Dora Marie", image: "/images/dora-marie-logo copy.png" },
+                  { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.png" },
+                  { name: "Saporito", image: "/images/Saporito logo.png" },
+                  { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.png" },
+                  { name: "Pão e Ponto", image: "/images/Pao e ponto logo.png" },
+                  { name: "Deco Pizzas", image: "/images/Deco Pizzas logo.png" },
+                  { name: "Steak Grill Burger", image: "/images/Steak Grill Burger logo.png" },
+                  { name: "My Beer", image: "/images/My beer logo.png" },
+                  { name: "Princeso Restaurante", image: "/images/PRINCESO RESTAURANTE.png" },
+                  { name: "Pizza&Cia", image: "/images/Pizza&Cia logo.png" },
+                  { name: "Dan Sushi", image: "/images/Dan Sushi logo.png" },
+                  { name: "The Familys Villa Germanica", image: "/images/The Familys Logo.png" },
+                  { name: "My Crush", image: "/images/My Crush Logo.png" },
+                  { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.png" },
+                ].map((client, idx) => (
+                  <ClientLogoCard key={idx} name={client.name} image={client.image} colorful={!!client.image} />
                 ))}
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Dor do Lead Section */}
+      <DorDoLead />
 
       {/* =========================================
           SECTION 3: COMPARISON TABLE (GENERIC VS DKS)
@@ -104,10 +140,17 @@ export default function Home() {
         <div className="max-w-[1000px] mx-auto px-6 w-full">
 
           <div className="text-center mb-12">
+            <span className="inline-block bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5">
+              💡 A raiz do problema
+            </span>
             <h2 className="text-[28px] md:text-[36px] lg:text-[42px] font-[800] leading-[1.2] text-white tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
-              Por que a <span className="text-[#D4AF37]">DKS</span> é diferente?
+              Você já tentou resolver.<br />
+              O problema é <span className="text-[#D4AF37]">com quem.</span>
             </h2>
-            <p className="text-[#A1A1AA] mt-4 text-[16px] md:text-[18px]">Veja o que nos separa de agências que não entendem o seu negócio.</p>
+            <p className="text-[#A1A1AA] mt-4 text-[16px] md:text-[18px] max-w-xl mx-auto">
+              Agência genérica não entende de restaurante. Não sabe o que leva alguém a pedir delivery,
+              lotar mesa ou deixar avaliação. Veja a diferença na prática.
+            </p>
           </div>
 
           <div className="w-full bg-[#111114] border border-[#222226] rounded-2xl overflow-hidden shadow-2xl">
@@ -228,14 +271,20 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Método ROMA Section */}
+      <MetodoROMA />
+
+      {/* Vision of Future Section */}
+      <VisionFuturo />
+
       {/* =========================================
           SECTION 4: DELIVERABLES CAROUSEL
           ========================================= */}
-      <section className="relative w-full py-[100px] bg-[#040814] overflow-hidden border-t border-white/5">
+      <section className="relative w-full py-[100px] bg-[#000000] overflow-hidden border-t border-white/5">
         <div className="max-w-[1200px] mx-auto px-6 w-full text-center mb-16">
           <h2 className="text-[32px] md:text-[48px] font-[800] leading-[1.2] text-white tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
-            Como a <span className="text-[#D4AF37]">DKS</span> pode aumentar<br className="hidden md:block" />
-            <span className="text-[#00AEEF]">seu faturamento</span>
+            Como a DKS pode aumentar<br className="hidden md:block" />
+            <span className="text-[#D4AF37]">seu faturamento</span>
           </h2>
           <p className="text-[#CFCFCF] mt-6 text-[16px] md:text-[20px] font-medium">
             Conheça todos os serviços que oferecemos para que seu<br className="hidden md:block" />
@@ -274,6 +323,12 @@ export default function Home() {
           transform: translateY(-10px) translateZ(50px) rotate(2deg);
         }
       `}} />
+
+      {/* Feedbacks Section */}
+      <Feedbacks />
+
+      {/* FAQ Section */}
+      <FAQ />
     </main>
   );
 }
