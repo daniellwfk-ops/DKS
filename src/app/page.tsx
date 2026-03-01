@@ -311,7 +311,9 @@ export default function Home() {
           {/* Bottom CTA for Comparison */}
           <div className="mt-12 flex justify-center">
             <a
-              href="#"
+              href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative bg-[#00CC00] text-white px-[40px] py-[20px] rounded-[16px] font-[800] text-[16px] md:text-[18px] flex items-center justify-center transition-all duration-300 hover:scale-105 hover:bg-[#00B300] shadow-[0px_0px_40px_rgba(0,204,0,0.4)] overflow-hidden text-center"
             >
               <span className="relative z-10 uppercase tracking-wide">Quero a DKS no meu negócio</span>
