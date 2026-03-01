@@ -12,13 +12,13 @@ export default function Home() {
     <main className="min-h-screen bg-[#000000] text-white font-sans overflow-hidden" style={{ fontFamily: "var(--font-sora), sans-serif" }}>
       {/* Background Gradient removed as requested */}
 
-      <section className="relative w-full min-h-[90vh] flex items-center pt-[100px] lg:pt-0 overflow-hidden">
+      <section className="relative w-full min-h-[auto] md:min-h-[90vh] flex items-center pt-[80px] md:pt-0 pb-4 md:pb-0 overflow-hidden">
         {/* Background Image Container */}
         <div className="absolute inset-0 w-full h-full z-0">
           <img
             src="/images/dks-hero-fullbg.jpg"
             alt="DKS Marketing Background"
-            className="w-full h-full object-cover object-center lg:object-[80%_center]"
+            className="w-full h-full object-cover object-[60%_center] lg:object-[80%_center]"
             style={{ filter: 'contrast(1.05)' }}
           />
           {/* Overlay to ensure text readability on mobile where the image might clash */}
@@ -49,7 +49,7 @@ export default function Home() {
             </h2>
 
             {/* CTA Button */}
-            <div className="mt-[40px] flex flex-col w-full relative max-w-[340px]">
+            <div className="mt-[24px] md:mt-[40px] flex flex-col w-full relative max-w-[340px]">
               {/* Orange Glow Behind Button */}
               <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[240px] h-[70px] bg-[#FF9900]/60 blur-[40px] rounded-full -z-10 animate-pulse"></div>
 
@@ -87,8 +87,8 @@ export default function Home() {
       {/* =========================================
           SECTION 2: LOGO CAROUSEL (SOCIAL PROOF) 
           ========================================= */}
-      <section className="relative w-full py-[60px] md:py-[80px] bg-[#000000] border-y border-[#333333] overflow-hidden">
-        <div className="max-w-[1200px] mx-auto px-6 mb-[40px] text-center">
+      <section className="relative w-full py-[36px] md:py-[80px] bg-[#000000] border-y border-[#333333] overflow-hidden">
+        <div className="max-w-[1200px] mx-auto px-6 mb-[20px] md:mb-[40px] text-center">
           <h2 className="text-[20px] md:text-[28px] lg:text-[34px] font-[500] leading-[1.2] text-white tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
             As marcas que <span className="text-[#FFC000] font-[700]">mais crescem no Brasil</span> escolhem a DKS.
           </h2>

@@ -195,7 +195,7 @@ export default function MetodoROMA() {
                         {phases.filter(p => p.position === "tl" || p.position === "bl").map((phase) => (
                             <div
                                 key={phase.letter}
-                                className="roma-card bg-[#050505] border border-white/5 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition-all duration-300 hover:-translate-y-1 group"
+                                className="roma-card bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition-all duration-300 hover:-translate-y-1 group"
                             >
                                 <div className="flex items-start justify-between mb-4">
                                     <div>
@@ -279,7 +279,7 @@ export default function MetodoROMA() {
                         {phases.filter(p => p.position === "tr" || p.position === "br").map((phase) => (
                             <div
                                 key={phase.letter}
-                                className="roma-card bg-[#050505] border border-white/5 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition-all duration-300 hover:-translate-y-1 group"
+                                className="roma-card bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition-all duration-300 hover:-translate-y-1 group"
                             >
                                 <div className="flex items-start justify-between mb-4">
                                     <div>
@@ -338,7 +338,7 @@ export default function MetodoROMA() {
                     {phases.map((phase) => (
                         <div
                             key={phase.letter}
-                            className="roma-card w-full bg-[#050505] border border-white/5 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition-all"
+                            className="roma-card w-full bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition-all"
                         >
                             <div className="flex items-start justify-between mb-4">
                                 <p className="text-white font-black text-lg uppercase" style={{ fontFamily: "var(--font-montserrat)" }}>

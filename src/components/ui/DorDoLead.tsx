@@ -99,7 +99,7 @@ export default function DorDoLead() {
                 {pains.map((pain, i) => (
                     <div
                         key={i}
-                        className={`pain-card relative bg-[#050505] border border-red-900/30 rounded-2xl p-6 hover:border-red-500/40 transition-all duration-300 group${visible ? " visible" : ""}`}
+                        className={`pain-card relative bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-red-500/40 hover:bg-white/[0.07] transition-all duration-300 group shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] ${visible ? " visible" : ""}`}
                         style={{ animationDelay: `${i * 0.1}s` }}
                     >
                         {/* Top red line */}
