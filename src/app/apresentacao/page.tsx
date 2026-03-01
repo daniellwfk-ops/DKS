@@ -1,14 +1,14 @@
-import ProposalSlideDeck from "@/components/ProposalSlideDeck";
-
 export const metadata = {
-    title: "Apresentação Estratégica | DKS Marketing",
-    description: "Conheça o Método ROMA e como a DKS acelera vendas de restaurantes e deliveries de forma previsível.",
+    title: "Apresentação Comercial | DKS Marketing",
+    description: "Apresentação comercial estratégica da DKS Marketing — Método ROMA para restaurantes.",
 };
 
-export default function ApresentacaoCorporativaPage() {
+export default function ApresentacaoPage() {
     return (
-        <main className="min-h-screen bg-black w-full text-white">
-            <ProposalSlideDeck />
-        </main>
+        <iframe
+            src="/apresentacao.html"
+            style={{ position: "fixed", inset: 0, width: "100%", height: "100%", border: "none" }}
+            title="Apresentação Comercial DKS Marketing"
+        />
     );
 }
