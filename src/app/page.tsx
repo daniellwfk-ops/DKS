@@ -12,15 +12,20 @@ export default function Home() {
     <main className="min-h-screen bg-[#000000] text-white font-sans overflow-hidden" style={{ fontFamily: "var(--font-sora), sans-serif" }}>
       {/* Background Gradient removed as requested */}
 
-      <section className="relative w-full min-h-[auto] md:min-h-[90vh] flex items-center pt-[80px] md:pt-0 pb-4 md:pb-0 overflow-hidden">
+      <section className="relative w-full min-h-[60vh] md:min-h-[90vh] flex items-end md:items-center pt-0 md:pt-0 pb-6 md:pb-0 overflow-hidden">
         {/* Background Image Container */}
         <div className="absolute inset-0 w-full h-full z-0">
-          <img
-            src="/images/dks-hero-fullbg.jpg"
-            alt="DKS Marketing Background"
-            className="w-full h-full object-cover object-[60%_center] lg:object-[80%_center]"
-            style={{ filter: 'contrast(1.05)' }}
-          />
+          <picture>
+            {/* Mobile: nova foto B&W */}
+            <source media="(max-width: 767px)" srcSet="/images/foto-dks-nova.jpg" />
+            {/* Desktop: foto de fundo original */}
+            <img
+              src="/images/dks-hero-fullbg.jpg"
+              alt="DKS Marketing Background"
+              className="w-full h-full object-cover object-[60%_top] md:object-[60%_center] lg:object-[80%_center]"
+              style={{ filter: 'contrast(1.05)' }}
+            />
+          </picture>
           {/* Overlay to ensure text readability on mobile where the image might clash */}
           <div className="absolute inset-0 bg-black/70 lg:bg-transparent pointer-events-none"></div>
           {/* Subtle gradient starting from left to make sure the text POPS against the dark left side of the bg */}
@@ -63,7 +68,7 @@ export default function Home() {
               </a>
 
               {/* Social proof anchors */}
-              <div className="flex flex-col gap-2 mt-4">
+              <div className="flex flex-col gap-2 mt-4 items-center md:items-start">
                 {[
                   "Gratuito e sem compromisso",
                   "+100 restaurantes atendidos",
@@ -87,7 +92,7 @@ export default function Home() {
       {/* =========================================
           SECTION 2: LOGO CAROUSEL (SOCIAL PROOF) 
           ========================================= */}
-      <section className="relative w-full py-[36px] md:py-[80px] bg-[#000000] border-y border-[#333333] overflow-hidden">
+      <section className="relative w-full py-[24px] md:py-[80px] bg-[#000000] border-y border-[#333333] overflow-hidden">
         <div className="max-w-[1200px] mx-auto px-6 mb-[20px] md:mb-[40px] text-center">
           <h2 className="text-[20px] md:text-[28px] lg:text-[34px] font-[500] leading-[1.2] text-white tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
             As marcas que <span className="text-[#FFC000] font-[700]">mais crescem no Brasil</span> escolhem a DKS.
@@ -100,32 +105,77 @@ export default function Home() {
           <div className="absolute inset-y-0 left-0 w-[50px] md:w-[150px] bg-gradient-to-r from-[#000000] to-transparent z-10 pointer-events-none"></div>
           <div className="absolute inset-y-0 right-0 w-[50px] md:w-[150px] bg-gradient-to-l from-[#000000] to-transparent z-10 pointer-events-none"></div>
 
-          {/* Scrolling Content - Repeated twice for seamless loop */}
-          <div className="flex animate-[marquee_40s_linear_infinite] whitespace-nowrap items-center hover:[animation-play-state:paused]">
-            {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex gap-[32px] px-[16px] items-center">
-                {/* Client Logos (Mockups based on the image provided earlier) */}
-                {[
-                  { name: "Japa Haus", image: "/images/japa-haus-logo.png" },
-                  { name: "Dora Marie", image: "/images/dora-marie-logo copy.png" },
-                  { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.png" },
-                  { name: "Saporito", image: "/images/Saporito logo.png" },
-                  { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.png" },
-                  { name: "Pão e Ponto", image: "/images/Pao e ponto logo.png" },
-                  { name: "Deco Pizzas", image: "/images/Deco Pizzas logo.png" },
-                  { name: "Steak Grill Burger", image: "/images/Steak Grill Burger logo.png" },
-                  { name: "My Beer", image: "/images/My beer logo.png" },
-                  { name: "Princeso Restaurante", image: "/images/PRINCESO RESTAURANTE.png" },
-                  { name: "Pizza&Cia", image: "/images/Pizza&Cia logo.png" },
-                  { name: "Dan Sushi", image: "/images/Dan Sushi logo.png" },
-                  { name: "The Familys Villa Germanica", image: "/images/The Familys Logo.png" },
-                  { name: "My Crush", image: "/images/My Crush Logo.png" },
-                  { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.png" },
-                ].map((client, idx) => (
-                  <ClientLogoCard key={idx} name={client.name} image={client.image} colorful={!!client.image} />
+          {/* Scrolling Content - Mobile: 2 rows (opposing), Desktop: 1 row */}
+          <div className="flex flex-col md:flex-row gap-6 md:gap-0 w-max">
+
+            {/* Mobile View: 2 Rows */}
+            <div className="md:hidden flex flex-col gap-6 w-max">
+              {/* Row 1 */}
+              <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap items-center hover:[animation-play-state:paused]">
+                {[...Array(2)].map((_, i) => (
+                  <div key={i} className="flex gap-[24px] px-[12px] items-center">
+                    {[
+                      { name: "Japa Haus", image: "/images/japa-haus-logo.png" },
+                      { name: "Dora Marie", image: "/images/dora-marie-logo copy.png" },
+                      { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.png" },
+                      { name: "Saporito", image: "/images/Saporito logo.png" },
+                      { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.png" },
+                      { name: "Pão e Ponto", image: "/images/Pao e ponto logo.png" },
+                      { name: "Deco Pizzas", image: "/images/Deco Pizzas logo.png" },
+                    ].map((client, idx) => (
+                      <ClientLogoCard key={`r1-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
+                    ))}
+                  </div>
                 ))}
               </div>
-            ))}
+              {/* Row 2 */}
+              <div className="flex animate-[marquee-reverse_20s_linear_infinite] whitespace-nowrap items-center hover:[animation-play-state:paused]">
+                {[...Array(2)].map((_, i) => (
+                  <div key={i} className="flex gap-[24px] px-[12px] items-center">
+                    {[
+                      { name: "Steak Grill Burger", image: "/images/Steak Grill Burger logo.png" },
+                      { name: "My Beer", image: "/images/My beer logo.png" },
+                      { name: "Princeso Restaurante", image: "/images/PRINCESO RESTAURANTE.png" },
+                      { name: "Pizza&Cia", image: "/images/Pizza&Cia logo.png" },
+                      { name: "Dan Sushi", image: "/images/Dan Sushi logo.png" },
+                      { name: "The Familys Villa Germanica", image: "/images/The Familys Logo.png" },
+                      { name: "My Crush", image: "/images/My Crush Logo.png" },
+                      { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.png" },
+                    ].map((client, idx) => (
+                      <ClientLogoCard key={`r2-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop View: 1 Continuous Row */}
+            <div className="hidden md:flex animate-[marquee_40s_linear_infinite] whitespace-nowrap items-center hover:[animation-play-state:paused] w-max">
+              {[...Array(2)].map((_, i) => (
+                <div key={i} className="flex gap-[32px] px-[16px] items-center">
+                  {[
+                    { name: "Japa Haus", image: "/images/japa-haus-logo.png" },
+                    { name: "Dora Marie", image: "/images/dora-marie-logo copy.png" },
+                    { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.png" },
+                    { name: "Saporito", image: "/images/Saporito logo.png" },
+                    { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.png" },
+                    { name: "Pão e Ponto", image: "/images/Pao e ponto logo.png" },
+                    { name: "Deco Pizzas", image: "/images/Deco Pizzas logo.png" },
+                    { name: "Steak Grill Burger", image: "/images/Steak Grill Burger logo.png" },
+                    { name: "My Beer", image: "/images/My beer logo.png" },
+                    { name: "Princeso Restaurante", image: "/images/PRINCESO RESTAURANTE.png" },
+                    { name: "Pizza&Cia", image: "/images/Pizza&Cia logo.png" },
+                    { name: "Dan Sushi", image: "/images/Dan Sushi logo.png" },
+                    { name: "The Familys Villa Germanica", image: "/images/The Familys Logo.png" },
+                    { name: "My Crush", image: "/images/My Crush Logo.png" },
+                    { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.png" },
+                  ].map((client, idx) => (
+                    <ClientLogoCard key={`desktop-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
+                  ))}
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>

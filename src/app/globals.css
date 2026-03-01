@@ -235,6 +235,16 @@ section {
     }
 }
 
+@keyframes marquee-reverse {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
 .animate-marquee {
     animation: marquee 35s linear infinite;
     display: inline-flex;
