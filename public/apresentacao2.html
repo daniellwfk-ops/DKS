@@ -1596,47 +1596,8 @@
                 margin: 40px auto
             }
 
-            /* Mobile Vertical Scroll Setup */
-            html,
-            body {
-                overflow-y: auto !important;
-                overflow-x: hidden;
-            }
-
-            #deck {
-                position: relative;
-                height: auto;
-                overflow: visible;
-                display: flex;
-                flex-direction: column;
-            }
-
-            .slide {
-                position: relative !important;
-                opacity: 1 !important;
-                pointer-events: auto !important;
-                transform: none !important;
-                min-height: 100svh;
-                height: auto;
-                padding: 60px 5vw 80px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                /* Separator */
-            }
-
-            .slide.active {
-                opacity: 1;
-                transform: none;
-            }
-
             #nav {
-                display: none;
-                /* Hide nav controls on mobile */
-            }
-
-            .a {
-                opacity: 1;
-                transform: translateY(0);
-                /* Pre-reveal elements */
+                padding: 20px 8vw
             }
 
             #prog-bg {
@@ -3041,15 +3002,9 @@
             else if (e.code === 'ArrowLeft') { e.preventDefault(); go(cur - 1) }
         });
 
-        // Mobile Swipe (Disable if screen is mobile to allow scrolling)
         let sx = 0;
-        window.addEventListener('touchstart', e => {
-            if (window.innerWidth <= 900) return;
-            sx = e.touches[0].clientX
-        }, { passive: true });
-
+        window.addEventListener('touchstart', e => { sx = e.touches[0].clientX }, { passive: true });
         window.addEventListener('touchend', e => {
-            if (window.innerWidth <= 900) return;
             const dx = e.changedTouches[0].clientX - sx;
             if (Math.abs(dx) > 40) { dx < 0 ? go(cur + 1) : go(cur - 1) }
         });
