@@ -1110,22 +1110,25 @@
         }
 
         .price-card {
-            background: linear-gradient(145deg, rgba(17, 17, 17, 0.9) 0%, rgba(20, 20, 20, 0.8) 100%);
-            border: 1px solid var(--border);
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             padding: 50px 40px;
             position: relative;
             text-align: left;
-            transition: transform 0.4s, border-color 0.4s;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s, box-shadow 0.4s, background 0.4s;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .price-card.anchor {
-            border-color: var(--gold);
-            background: linear-gradient(145deg, rgba(20, 20, 20, 0.95) 0%, rgba(30, 30, 30, 0.9) 100%);
+            border-color: rgba(212, 175, 55, 0.6);
+            background: rgba(212, 175, 55, 0.08);
             transform: scale(1.05);
             /* Highlight anchor */
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.2);
         }
 
         .price-card:not(.anchor):hover {
@@ -1139,6 +1142,20 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.2);
         }
 
+        @keyframes badgePulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
+        }
+
         .price-card .badge {
             position: absolute;
             top: 20px;
@@ -1149,8 +1166,49 @@
             font-weight: 800;
             letter-spacing: 2px;
             padding: 6px 16px;
-            border-radius: 100px;
+            border-radius: 20px;
             text-transform: uppercase;
+            animation: badgePulse 2s infinite;
+        }
+
+        /* WhatsApp Button Animation */
+        @keyframes wppPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        .btn-wpp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: #fff !important;
+            padding: 24px 60px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: wppPulse 2s infinite;
+            border: 2px solid transparent;
+        }
+
+        .btn-wpp:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+            border-color: #25D366;
         }
 
         .price-title {
@@ -1466,6 +1524,179 @@
             #prog-bg {
                 width: 120px
             }
+
+            /* Global Typography & Spacing tweaks */
+            .slide {
+                padding: 100px 5vw 120px;
+                /* Add top padding to clear status bars, adjust sides */
+            }
+
+            .h-xl {
+                font-size: 3rem !important;
+                /* Cap hero size */
+                margin-bottom: 20px;
+            }
+
+            .h-lg {
+                font-size: 2.2rem !important;
+                margin-bottom: 20px;
+            }
+
+            .sub {
+                font-size: 1rem !important;
+                margin-bottom: 40px !important;
+            }
+
+            /* S2 The Gap */
+            .dashboard {
+                padding: 20px !important;
+            }
+
+            /* S3 Pillars */
+            .glass.a {
+                padding: 30px !important;
+            }
+
+            /* S4/S5 Visuals & Phone Mockup */
+            .net-visual {
+                transform: scale(0.65);
+                margin: 0 auto -60px;
+                /* Pull up next content */
+            }
+
+            .phone {
+                transform: scale(0.85);
+                /* Slightly smaller phone */
+                margin: 0 auto;
+            }
+
+            /* S6 Chart */
+            .chart-box {
+                overflow-x: auto;
+                /* Allow side scroll if strict */
+                padding-bottom: 10px;
+            }
+
+            .chart-box svg {
+                min-width: 500px;
+                /* Ensure curve doesn't break aspect ratio completely */
+            }
+
+            /* S7 Stats */
+            .stat-mega {
+                font-size: 3.5rem !important;
+            }
+
+            /* S8 Timeline */
+            .timeline {
+                padding-left: 40px;
+                /* Less left indent */
+            }
+
+            .timeline-fill {
+                left: 19px;
+            }
+
+            .tl-dot {
+                left: -29px;
+            }
+
+            /* S9 Logos */
+            .logo-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                /* 2 wide max on phone */
+                gap: 12px;
+            }
+
+            .logo-card {
+                height: 120px;
+            }
+
+            .logo-name {
+                font-size: 1.1rem;
+            }
+
+            .logo-stat {
+                font-size: 0.7rem;
+            }
+
+            /* S10-S14 Responsive tweaks */
+            #s10 .a>div {
+                padding: 0;
+            }
+
+            .lever-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+                padding: 24px;
+            }
+
+            #s11 ul {
+                grid-template-columns: 1fr !important;
+            }
+
+            #s11 .a {
+                padding: 30px 20px !important;
+            }
+
+            .check-item {
+                font-size: 1rem !important;
+            }
+
+            .feedback-slider {
+                flex-direction: column;
+                mask-image: none;
+                -webkit-mask-image: none;
+                overflow-x: auto;
+                padding: 20px 0;
+                scroll-snap-type: x mandatory;
+            }
+
+            .feedback-track {
+                animation: none;
+                display: flex;
+                gap: 16px;
+            }
+
+            .feedback-card {
+                width: 85vw;
+                scroll-snap-align: center;
+                flex-shrink: 0;
+                padding: 30px 24px;
+            }
+
+            .feedback-text {
+                font-size: 1.1rem !important;
+            }
+
+            #s13 .a>div {
+                flex-direction: column !important;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .price-card {
+                width: 100% !important;
+                padding: 40px 30px !important;
+            }
+
+            #s14 .h-xl {
+                font-size: 2.2rem !important;
+            }
+
+            .btn-wpp {
+                padding: 18px 20px !important;
+                font-size: .95rem !important;
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .btn-wpp svg {
+                margin: 0 0 8px 0;
+            }
         }
     </style>
 </head>
@@ -1494,10 +1725,14 @@
 
         <!-- S2 THE GAP -->
         <div class="slide" id="s2">
-            <div class="w g2">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1600'); opacity: 0.15; z-index: 1;">
+            </div>
+            <div class="w g2" style="position: relative; z-index: 2;">
                 <div>
                     <div class="tag a">A Realidade</div>
-                    <h2 class="h-lg a">Post bonito<br>não paga os<br><span class="gold">boletos da cozinha.</span></h2>
+                    <h2 class="h-lg a">Post bonito<br>não paga os<br><span class="gold">boletos do seu
+                            restaurante.</span></h2>
                     <p class="sub a">Enquanto você foca na cor da arte do Instagram, seu concorrente que entendeu o jogo
                         digital está roubando seus clientes terça-feira à noite.</p>
                     <ul class="a"
@@ -1588,7 +1823,10 @@
 
         <!-- S4 ECOSYSTEM -->
         <div class="slide" id="s4">
-            <div class="w g2">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1600'); opacity: 0.15; z-index: 1;">
+            </div>
+            <div class="w g2" style="position: relative; z-index: 2;">
                 <div class="a">
                     <div class="net-sys">
                         <svg class="net-lines" viewBox="0 0 450 450">
@@ -1692,7 +1930,10 @@
 
         <!-- S5 iFOOD -->
         <div class="slide" id="s5">
-            <div class="w g2" style="grid-template-columns:1fr 400px">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1600'); opacity: 0.15; z-index: 1;">
+            </div>
+            <div class="w g2" style="grid-template-columns:1fr 400px; position: relative; z-index: 2;">
                 <div>
                     <div class="tag a">Domínio de Plataforma</div>
                     <h2 class="h-lg a">A Arte de hackear<br>o algoritmo do <span class="gold">Delivery.</span></h2>
@@ -1754,7 +1995,10 @@
 
         <!-- S6 RECURRENCE CHART -->
         <div class="slide" id="s6">
-            <div class="w">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1600'); opacity: 0.15; z-index: 1;">
+            </div>
+            <div class="w" style="position: relative; z-index: 2;">
                 <div class="tag a" style="justify-content:center;display:flex;width:100%">O Jogo do Longo Prazo</div>
                 <h2 class="h-lg a" style="text-align:center;max-width:800px;margin:0 auto 20px">Vender uma vez é o dever
                     de casa.<br><span class="gold">Fazer voltar é o lucro.</span></h2>
@@ -1787,10 +2031,10 @@
                         <!-- Points -->
                         <circle class="chart-pt" cx="300" cy="188" />
                         <circle class="chart-pt" cx="600" cy="116" />
-                        <circle class="chart-pt" cx="850" cy="40" />
+                        <circle class="chart-pt" cx="820" cy="60" />
                         <circle class="chart-pt" cx="1000" cy="20" />
 
-                        <text x="890" y="75" fill="#D4AF37" font-weight="bold" font-size="16" font-family="Outfit">Com
+                        <text x="810" y="90" fill="#D4AF37" font-weight="bold" font-size="16" font-family="Outfit">Com
                             CRM</text>
                     </svg>
                 </div>
@@ -1921,7 +2165,10 @@
 
         <!-- S10 3 ALAVANCAS -->
         <div class="slide" id="s10">
-            <div class="w" style="text-align:center">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=1600'); opacity: 0.15; z-index: 1;">
+            </div>
+            <div class="w" style="text-align:center; position: relative; z-index: 2;">
                 <div class="tag a" style="justify-content:center;display:flex;width:100%">Motor de Crescimento</div>
                 <h2 class="h-lg a" style="max-width:800px;margin:0 auto 20px">O nosso objetivo é fazer o seu restaurante
                     <span class="gold-shine" style="font-weight:900">aumentar o faturamento.</span>
@@ -2314,8 +2561,11 @@
         </div>
 
         <!-- S13 PRICING PITCH -->
-        <div class="slide" id="s13" style="background:#0a0a0c;">
-            <div class="w" style="max-width:100%">
+        <div class="slide" id="s13">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600'); opacity: 0.15; z-index: 1;">
+            </div>
+            <div class="w" style="max-width:100%; position: relative; z-index: 2;">
                 <div class="a" style="text-align:center; margin-bottom: 50px;">
                     <div class="tag">Seu Investimento</div>
                     <h2 class="h-lg" style="font-size:clamp(2rem, 4vw, 3.2rem); margin-bottom: 10px;">
@@ -2342,28 +2592,49 @@
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
-                                <span>Tráfego Pago Especializado (Meta + Google Ads)</span>
+                                <span>Diagnóstico Estratégico dos Canais Digitais</span>
                             </li>
                             <li>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
-                                <span>CRM de Vendas no WhatsApp</span>
+                                <span>Tráfego Pago Meta Ads</span>
                             </li>
                             <li>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
-                                <span>Recuperação de Inativos Mensal</span>
+                                <span>Tráfego Pago Google Ads</span>
                             </li>
                             <li>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
-                                <span>Dashboards e BI de Resultados</span>
+                                <span>Gestão e Otimizações Google Meu Negócio</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Gestão e Otimizações Tripadvisor</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Suporte em Grupo no WhatsApp</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Implementação, Monitoramento e Análise de CRM</span>
                             </li>
                             <li>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2377,14 +2648,7 @@
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
-                                <span>Assessoria de Conteúdo</span>
-                            </li>
-                            <li>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                <span>Suporte em Grupo no WhatsApp</span>
+                                <span>Relatórios de Performance</span>
                             </li>
                             <li style="opacity:0.4">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2416,13 +2680,15 @@
                                 </svg>
                                 <span style="color:#fff; font-weight: 600;">Tudo incluso no Plano Base +</span>
                             </li>
-                            <li>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <li
+                                style="background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.3); padding: 12px; border-radius: 8px; margin: 15px 0; transform: scale(1.03); box-shadow: 0 4px 15px rgba(212,175,55,0.1);">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
-                                <span style="color:var(--gold-l); font-weight:700">Gestão Completa de
-                                    iFood/Marketplace</span>
+                                <span
+                                    style="color:var(--gold-l); font-weight:800; font-size: 1.05rem; letter-spacing: 0.5px;">Gestão
+                                    Completa de iFood/Marketplace</span>
                             </li>
                             <li>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2448,6 +2714,19 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="a" style="text-align:center; margin-top: 50px;">
+                    <span
+                        style="background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.3); padding: 10px 30px; border-radius: 50px; color: var(--gold-l); font-size: 0.95rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; box-shadow: 0 0 20px rgba(212,175,55,0.15); display: inline-block;">
+                        Contrato sem tempo mínimo
+                    </span>
+                    <p
+                        style="font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px;">
+                        Investimento Mínimo Recomendado Em Mídia: R$ 1.500/mês | Proposta válida para investimento de
+                        até
+                        R$ 5.000,00/mês em anúncios
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -2465,18 +2744,25 @@
                         <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                 </div>
-                <h1 class="h-xl a">HORA DE ASSUMIR O CONTROLE<br><span class="gold">DO CAIXA.</span></h1>
-                <p class="sub a" style="margin:0 auto 40px;font-size:1.15rem;color:#ddd">Deixe de operar no nível da
-                    esperança e comece a escalar no nível do método. Se o seu produto é impecável, ele merece a vitrine
-                    que mais converte.</p>
+                <h1 class="h-xl a" style="max-width: 900px; margin: 0 auto; line-height: 1.1; margin-bottom: 20px;">
+                    A OPORTUNIDADE DE DOMINAR A SUA <span class="gold">REGIÃO COMEÇA AQUI.</span>
+                </h1>
+                <p class="sub a" style="margin:0 auto 40px;font-size:1.15rem;color:#ddd">
+                    O mercado não perdoa amadores. Ou você tem uma máquina de vendas previsível, ou você está deixando o
+                    seu concorrente levar os seus clientes. Clique abaixo se você está pronto para escalar com
+                    responsabilidade.
+                </p>
                 <div class="a">
-                    <a href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7" target="_blank" class="btn"
-                        style="font-size:1.1rem;padding:24px 60px">
-                        SOLICITAR ANÁLISE DO MEU NEGÓCIO
+                    <a href="https://api.whatsapp.com/send?phone=5547991620354&text=Olá!%20Acabei%20de%20ver%20a%20apresentação%20e%20quero%20fechar%20a%20nossa%20parceria."
+                        target="_blank" class="btn-wpp">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                            </path>
+                        </svg>
+                        FECHAR CONTRATO E INICIAR PARCERIA
                     </a>
-                    <p
-                        style="margin-top:20px;font-size:.7rem;font-weight:600;letter-spacing:.1em;color:var(--gold);text-transform:uppercase">
-                        Entraremos em contato para uma auditoria estratégica gratuita.</p>
                 </div>
             </div>
         </div>
