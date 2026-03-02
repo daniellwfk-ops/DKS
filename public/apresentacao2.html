@@ -1607,7 +1607,9 @@
             /* Global Typography & Spacing tweaks */
             .slide {
                 padding: 100px 5vw 120px;
-                /* Add top padding to clear status bars, adjust sides */
+                overflow-y: auto;
+                overflow-x: hidden;
+                /* Add top padding to clear status bars, adjust sides, and allow scroll */
             }
 
             .h-xl {
@@ -3004,11 +3006,18 @@
             else if (e.code === 'ArrowLeft') { e.preventDefault(); go(cur - 1) }
         });
 
-        let sx = 0;
-        window.addEventListener('touchstart', e => { sx = e.touches[0].clientX }, { passive: true });
+        let sx = 0, sy = 0;
+        window.addEventListener('touchstart', e => {
+            sx = e.touches[0].clientX;
+            sy = e.touches[0].clientY;
+        }, { passive: true });
         window.addEventListener('touchend', e => {
             const dx = e.changedTouches[0].clientX - sx;
-            if (Math.abs(dx) > 40) { dx < 0 ? go(cur + 1) : go(cur - 1) }
+            const dy = e.changedTouches[0].clientY - sy;
+            // Only trigger horizontal swipe if dx is significantly larger than dy (prevents accidental trigger while scrolling)
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+                dx < 0 ? go(cur + 1) : go(cur - 1);
+            }
         });
 
         // Init
