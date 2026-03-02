@@ -360,8 +360,10 @@
 
         /* S2 Live Dashboard */
         .dash-board {
-            background: var(--panel);
-            border: 1px solid var(--panel-bd);
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 24px;
             padding: 32px;
             position: relative;
@@ -384,9 +386,11 @@
             flex-direction: column;
             gap: 4px;
             padding: 16px;
-            background: rgba(255, 255, 255, .02);
+            background: rgba(255, 255, 255, .03);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, .03)
+            border: 1px solid rgba(255, 255, 255, .05)
         }
 
         .metric-val {
@@ -459,18 +463,19 @@
 
         .net-node-item {
             position: absolute;
-            background: rgba(15, 15, 15, 0.9);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            color: #ccc;
-            padding: 8px 12px;
-            border-radius: 6px;
+            background: rgba(15, 15, 15, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: #ddd;
+            padding: 8px 16px;
+            border-radius: 100px;
             font-size: 0.8rem;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 5;
             animation: float-node 4s ease-in-out infinite alternate;
         }
@@ -630,6 +635,80 @@
             border-bottom-left-radius: 12px;
             border-bottom-right-radius: 12px;
             z-index: 10
+        }
+
+        .checklist-glass {
+            background: rgba(15, 15, 15, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 50px 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .text-glow {
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.5);
+            animation: pulseText 2s infinite alternate;
+        }
+
+        @keyframes pulseText {
+            0% {
+                text-shadow: 0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.5);
+            }
+
+            100% {
+                text-shadow: 0 0 20px rgba(212, 175, 55, 1), 0 0 40px rgba(212, 175, 55, 0.8);
+            }
+        }
+
+        .consq-box {
+            background: rgba(15, 15, 15, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .consq-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: skewX(-25deg);
+        }
+
+        .consq-box:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.15);
+            background: rgba(15, 15, 15, 0.6);
+        }
+
+        .consq-box:hover::after {
+            animation: shine 1.5s ease-out;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 200%;
+            }
         }
 
         .notif-wrap {
@@ -1909,19 +1988,19 @@
                         na sua esteira.</p>
                     <div class="a" style="display:flex;flex-wrap:wrap;gap:12px">
                         <span
-                            style="padding:8px 18px;border:1px solid #444;border-radius:100px;font-size:.85rem;color:#ddd;background:transparent;">Meta
+                            style="padding:8px 18px;border:1px solid rgba(255,255,255,0.1);border-radius:100px;font-size:.85rem;color:#ddd;background:rgba(20,20,20,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">Meta
                             Ads</span>
                         <span
-                            style="padding:8px 18px;border:1px solid #444;border-radius:100px;font-size:.85rem;color:#ddd;background:transparent;">Google
+                            style="padding:8px 18px;border:1px solid rgba(255,255,255,0.1);border-radius:100px;font-size:.85rem;color:#ddd;background:rgba(20,20,20,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">Google
                             Ads</span>
                         <span
-                            style="padding:8px 18px;border:1px solid var(--gold);border-radius:100px;font-size:.85rem;color:var(--gold);background:transparent;">CRM
+                            style="padding:8px 18px;border:1px solid rgba(212,175,55,0.4);border-radius:100px;font-size:.85rem;color:var(--gold);background:rgba(212,175,55,0.1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">CRM
                             Inteligente</span>
                         <span
-                            style="padding:8px 18px;border:1px solid #444;border-radius:100px;font-size:.85rem;color:#ddd;background:transparent;">Otimização
+                            style="padding:8px 18px;border:1px solid rgba(255,255,255,0.1);border-radius:100px;font-size:.85rem;color:#ddd;background:rgba(20,20,20,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">Otimização
                             iFood</span>
                         <span
-                            style="padding:8px 18px;border:1px solid #444;border-radius:100px;font-size:.85rem;color:#ddd;background:transparent;">Assessoria
+                            style="padding:8px 18px;border:1px solid rgba(255,255,255,0.1);border-radius:100px;font-size:.85rem;color:#ddd;background:rgba(20,20,20,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">Assessoria
                             de Conteúdo</span>
                     </div>
                 </div>
@@ -1939,8 +2018,7 @@
                     <h2 class="h-lg a">A Arte de hackear<br>o algoritmo do <span class="gold">Delivery.</span></h2>
                     <p class="sub a">Estar no iFood é fácil. Ser o primeiro nas buscas da sua região é onde nós entramos
                         com SEO para restaurantes, engenharia de categorias e táticas de conversão de combos.</p>
-                    <div class="a glass"
-                        style="padding:24px;border-color:rgba(212,175,55,.3);background:rgba(212,175,55,.05);margin-top:40px">
+                    <div class="a consq-box">
                         <h4 style="font-family:var(--font-h);font-size:1.2rem;margin-bottom:12px;color:var(--gold)">A
                             consequência direta:</h4>
                         <div style="font-size:.9rem;color:#ddd;line-height:1.6;margin-bottom:8px">✓ Cliente que busca
@@ -1969,8 +2047,8 @@
                             </svg>
                         </div>
                         <div class="lock-header">
-                            <div class="lock-date">Segunda, 11 Novembro</div>
-                            <div class="lock-time">10:21</div>
+                            <div class="lock-date">Quarta feira, 08 de outubro</div>
+                            <div class="lock-time">11:55</div>
                         </div>
                         <div class="notif-wrap" id="notif-box">
                             <!-- Populated by JS -->
@@ -2220,9 +2298,9 @@
             <div class="w">
                 <h2 class="h-lg a"
                     style="text-align:center;margin-bottom:50px;max-width:1050px;margin-left:auto;margin-right:auto;font-size:clamp(2rem, 4vw, 3.2rem)">
-                    O que vamos fazer para o seu restaurante <span class="gold">bater recorde de faturamento</span></h2>
-                <div class="a"
-                    style="max-width:1000px;margin:0 auto;background:linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%);border:1px solid rgba(255,255,255,0.08);padding:50px 60px;border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)">
+                    O que vamos fazer para o seu restaurante <span class="text-glow">bater recorde de faturamento</span>
+                </h2>
+                <div class="a checklist-glass">
                     <ul
                         style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;column-gap:40px;row-gap:24px">
                         <li class="check-item"
@@ -2737,13 +2815,7 @@
             </div>
             <div class="overlay"></div>
             <div class="w" style="text-align:center">
-                <div class="a"
-                    style="width:80px;height:80px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 30px;box-shadow:0 0 50px var(--gold-l)">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                </div>
+
                 <h1 class="h-xl a" style="max-width: 900px; margin: 0 auto; line-height: 1.1; margin-bottom: 20px;">
                     A OPORTUNIDADE DE DOMINAR A SUA <span class="gold">REGIÃO COMEÇA AQUI.</span>
                 </h1>
