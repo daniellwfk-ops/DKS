@@ -72,7 +72,7 @@ export default function Home() {
               {/* Social proof anchors */}
               <div className="flex flex-col gap-2 mt-4 items-center md:items-start">
                 {[
-                  "Gratuito e sem compromisso",
+                  "Venha aumentar o seu faturamento",
                   "+100 restaurantes atendidos",
                   "Resposta em até 24h",
                 ].map((item) => (

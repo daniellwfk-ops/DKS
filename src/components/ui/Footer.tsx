@@ -54,7 +54,7 @@ export default function Footer() {
                         <p className="text-white font-black text-2xl md:text-3xl mb-1" style={{ fontFamily: "var(--font-montserrat)" }}>
                             Pronto para escalar seu restaurante?
                         </p>
-                        <p className="text-[#888] text-sm">Fale com um especialista e descubra o que está travando seu faturamento.</p>
+                        <p className="text-[#888] text-sm">Fale com um especialista e comece a faturar mais hoje mesmo.</p>
                     </div>
                     <a
                         href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7"
@@ -62,7 +62,7 @@ export default function Footer() {
                         rel="noopener noreferrer"
                         className="flex-shrink-0 inline-block bg-[#00CC00] text-white font-black text-sm uppercase tracking-widest px-8 py-4 rounded hover:bg-[#00B300] transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(0,204,0,0.25)]"
                     >
-                        Agendar Diagnóstico Gratuito →
+                        Quero Contratar a DKS →
                     </a>
                 </div>
 
@@ -133,7 +133,7 @@ export default function Footer() {
                                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" /><circle cx="12" cy="9" r="2.5" />
                                     </svg>
                                 </span>
-                                Brasil — Atendimento nacional
+                                Blumenau — Santa Catarina
                             </li>
                             <li className="flex items-center gap-3 text-[#666]">
                                 <span className="w-8 h-8 rounded-lg bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center flex-shrink-0">
