@@ -64,7 +64,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="group relative bg-[#00CC00] text-white px-[30px] py-[20px] rounded-[16px] font-[800] text-[16px] md:text-[18px] flex items-center justify-center transition-all duration-300 hover:scale-105 hover:bg-[#00B300] shadow-[0px_0px_40px_rgba(0,204,0,0.5)] overflow-hidden w-full text-center"
               >
-                <span className="relative z-10 uppercase tracking-wide">Quero Descobrir o que Trava Meu Faturamento</span>
+                <span className="relative z-10 uppercase tracking-wide">Quero Contratar a DKS Marketing</span>
                 {/* Sweep light effect on hover */}
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-[sweep_0.8s_ease-in-out]"></div>
               </a>

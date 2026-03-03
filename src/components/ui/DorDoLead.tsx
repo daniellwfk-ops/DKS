@@ -153,7 +153,7 @@ export default function DorDoLead() {
                     rel="noopener noreferrer"
                     className="inline-block bg-[#00CC00] text-white font-black text-sm uppercase tracking-widest px-10 py-4 rounded hover:bg-[#00B300] transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(0,204,0,0.25)]"
                 >
-                    Quero descobrir o que está travando meu faturamento
+                    Quero contratar a DKS Marketing
                 </a>
             </div>
         </section>
