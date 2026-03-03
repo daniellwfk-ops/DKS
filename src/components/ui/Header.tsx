@@ -31,12 +31,8 @@ export default function Header() {
                     DKS<span className="text-[#D4AF37]">.</span>
                 </Link>
 
-                {/* Right side Nav & CTA */}
+                {/* Right side CTA */}
                 <div className="flex items-center gap-4 sm:gap-6">
-                    <Link href="/blog" className="hidden sm:block text-white font-bold text-xs sm:text-sm uppercase tracking-wider hover:text-[#D4AF37] transition-colors">
-                        Blog
-                    </Link>
-
                     {/* CTA — visible on all screen sizes */}
                     <a
                         href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7"
