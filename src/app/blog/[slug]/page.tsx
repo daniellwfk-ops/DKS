@@ -28,6 +28,15 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
                     ← Voltar para o Blog
                 </Link>
 
+                {post.coverImage && (
+                    <div
+                        className="w-full h-[400px] md:h-[500px] rounded-3xl mb-12 bg-cover bg-center border border-white/10 shadow-2xl relative overflow-hidden"
+                        style={{ backgroundImage: `url(${post.coverImage})` }}
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-black/40 to-transparent"></div>
+                    </div>
+                )}
+
                 <h1 className="text-3xl md:text-5xl font-black mb-6 leading-tight" style={{ fontFamily: "var(--font-montserrat)" }}>{post.title as string}</h1>
                 <div className="flex items-center gap-4 text-[#888] text-sm mb-10 pb-10 border-b border-white/10">
                     <span>Por <strong className="text-white">{post.author as string}</strong></span>
