@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const navLinks = [
     { label: "Início", href: "/" },
+    { label: "Blog", href: "/blog" },
 ];
 
 const socialLinks = [

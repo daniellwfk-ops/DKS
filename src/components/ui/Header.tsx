@@ -31,15 +31,22 @@ export default function Header() {
                     DKS<span className="text-[#D4AF37]">.</span>
                 </Link>
 
-                {/* CTA — visible on all screen sizes */}
-                <a
-                    href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-[#00CC00] text-white hover:bg-[#00B300] font-bold text-[10px] sm:text-xs px-3 sm:px-5 py-2 rounded uppercase tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(0,204,0,0.4)] hover:shadow-[0_0_30px_rgba(0,204,0,0.6)] hover:-translate-y-0.5 whitespace-nowrap"
-                >
-                    QUERO CONTRATAR A DKS
-                </a>
+                {/* Right side Nav & CTA */}
+                <div className="flex items-center gap-4 sm:gap-6">
+                    <Link href="/blog" className="hidden sm:block text-white font-bold text-xs sm:text-sm uppercase tracking-wider hover:text-[#D4AF37] transition-colors">
+                        Blog
+                    </Link>
+
+                    {/* CTA — visible on all screen sizes */}
+                    <a
+                        href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-[#00CC00] text-white hover:bg-[#00B300] font-bold text-[10px] sm:text-xs px-3 sm:px-5 py-2 rounded uppercase tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(0,204,0,0.4)] hover:shadow-[0_0_30px_rgba(0,204,0,0.6)] hover:-translate-y-0.5 whitespace-nowrap"
+                    >
+                        QUERO CONTRATAR A DKS
+                    </a>
+                </div>
             </div>
         </header>
     );
