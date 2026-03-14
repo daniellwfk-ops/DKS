@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano de Marca Pessoal — Anderson Silva | PRO</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #050a10;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-card-hover: rgba(255, 255, 255, 0.06);
+    --gold: #dfb160;
+    --gold-light: #f7d58b;
+    --gold-dark: #a8813f;
+    --text-main: #f0f4f8;
+    --text-muted: #94a3b8;
+    --accent: #2563eb;
+    --border-subtle: rgba(223, 177, 96, 0.15);
+    --border-glow: rgba(223, 177, 96, 0.4);
+    --glass-blur: blur(16px);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  html, body { 
+    height: 100%; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background: var(--bg-dark); 
+    color: var(--text-main); 
+    overflow: hidden; 
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* GRAIN TEXTURE */
+  .grain {
+    position: fixed; inset: 0; z-index: 1000;
+    pointer-events: none; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  /* BACKGROUND GLOWS */
+  .glow-orb {
+    position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(223,177,96,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0; transition: all 1.5s cubic-bezier(0.2,0.8,0.2,1);
+  }
+  .glow-orb-1 { top: -200px; right: -100px; background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%); }
+  .glow-orb-2 { bottom: -200px; left: -200px; background: radial-gradient(circle, rgba(223,177,96,0.05) 0%, transparent 70%); }
+
+  /* OVERALL LAYOUT */
+  #slides-container { width: 100vw; height: 100vh; position: relative; z-index: 10; perspective: 1000px; }
+  
+  .slide {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    padding: 8vh 6vw; opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+  }
+  .slide.active { opacity: 1; visibility: visible; pointer-events: all; }
+  
+  .slide-content { 
+    max-width: 1200px; width: 100%; position: relative;
+    /* initial state for staggered animation */
+    transform: translateY(30px) scale(0.98); opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+  }
+  .slide.active .slide-content { transform: translateY(0) scale(1); opacity: 1; }
+
+  /* STAGGERED CHILDREN */
+  .slide.active .stagger-1 { animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+  .slide.active .stagger-2 { animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; }
+  .slide.active .stagger-3 { animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
+  .slide.active .stagger-4 { animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; opacity: 0; }
+  .slide.active .stagger-5 { animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; opacity: 0; }
+
+  @keyframes slideUpFade {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* TYPOGRAPHY */
+  .label-eyebrow {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); display: inline-flex; align-items: center; gap: 12px; margin-bottom: 24px;
+  }
+  .label-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+  
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 6rem); line-height: 1.05; letter-spacing: -0.02em; font-weight: 600; margin-bottom: 16px; }
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 24px; }
+  h3 { font-size: 1.1rem; font-weight: 600; color: var(--text-main); margin-bottom: 10px; letter-spacing: 0.01em; }
+  p { font-size: 1.05rem; line-height: 1.6; color: var(--text-muted); font-weight: 300; }
+  
+  .text-gold { color: var(--gold); }
+  .text-highlight { color: var(--text-main); font-weight: 500; }
+
+  /* CAROUSEL CONTROLS */
+  .controls {
+    position: fixed; bottom: 40px; right: 6vw; display: flex; align-items: center; gap: 24px; z-index: 100;
+  }
+  .btn-nav {
+    width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.02); color: var(--text-main);
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    backdrop-filter: var(--glass-blur); transition: all 0.3s ease;
+  }
+  .btn-nav:hover:not(:disabled) { background: var(--gold); color: var(--bg-dark); border-color: var(--gold); transform: scale(1.05); }
+  .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+  
+  .slide-counter { font-variant-numeric: tabular-nums; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; color: var(--text-muted); }
+  .slide-counter span { color: var(--gold); }
+
+  /* PROGRESS BAR */
+  .progress-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.05); z-index: 1000;
+  }
+  .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.6s cubic-bezier(0.2,0.8,0.2,1); }
+
+  /* PREMIUM CARDS (GLASSMORPHISM) */
+  .card-grid { display: grid; gap: 20px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  
+  .glass-card {
+    background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px;
+    padding: 32px; backdrop-filter: var(--glass-blur); transition: all 0.4s ease;
+    position: relative; overflow: hidden;
+  }
+  .glass-card::before {
+    content: ''; position: absolute; inset: 0; background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(223,177,96,0.06), transparent 40%); opacity: 0; transition: opacity 0.3s;
+  }
+  .glass-card:hover { border-color: var(--border-glow); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+  .glass-card:hover::before { opacity: 1; }
+  
+  .card-icon { font-size: 2rem; margin-bottom: 20px; display: inline-block; background: linear-gradient(135deg, var(--gold-light), var(--gold-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  
+  /* BADGES & TAGS */
+  .badge-hollow {
+    display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 40px;
+    border: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--text-muted); transition: all 0.3s;
+  }
+  .badge-hollow:hover { border-color: var(--gold); color: var(--gold); }
+  
+  .tag-solid {
+    display: inline-block; padding: 4px 10px; border-radius: 6px; background: rgba(223,177,96,0.15);
+    color: var(--gold); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;
+  }
+
+  /* LISTS & TABLE REPLACEMENTS (Premium UI) */
+  .ui-list { list-style: none; }
+  .ui-list li {
+    display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: flex-start;
+  }
+  .ui-list li:last-child { border-bottom: none; }
+  .ui-list .icon-check { color: #10b981; font-size: 1.2rem; flex-shrink: 0; }
+  .ui-list .icon-cross { color: #ef4444; font-size: 1.2rem; flex-shrink: 0; }
+
+  /* COMPARISON PANEL */
+  .comparison-panel { display: flex; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+  .comp-side { flex: 1; padding: 32px; }
+  .comp-before { background: rgba(255,68,68,0.03); border-right: 1px solid rgba(255,255,255,0.05); }
+  .comp-after { background: rgba(16,185,129,0.03); }
+
+  /* METRICS GRID */
+  .metric-large { text-align: center; }
+  .metric-large .val { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold); line-height: 1; margin-bottom: 8px; }
+  .metric-large .lbl { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 600; }
+
+  /* QUOTE BLOCK */
+  .premium-quote {
+    border-left: 2px solid var(--gold); padding: 20px 32px; background: linear-gradient(90deg, rgba(223,177,96,0.05), transparent);
+    font-size: 1.1rem; line-height: 1.7; color: var(--text-main); font-style: italic; font-weight: 300; border-radius: 0 12px 12px 0;
+  }
+
+  /* HEADER BRANDING */
+  .brand-header {
+    position: fixed; top: 32px; left: 6vw; z-index: 100;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--text-main); display: flex; align-items: center; gap: 12px;
+  }
+  .brand-header .dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; }
+
+  /* SCROLL AREA INSIDE SLIDE */
+  .scroll-area { max-height: 60vh; overflow-y: auto; padding-right: 16px; }
+  .scroll-area::-webkit-scrollbar { width: 4px; }
+  .scroll-area::-webkit-scrollbar-track { background: transparent; }
+  .scroll-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+  .scroll-area::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .comparison-panel { flex-direction: column; }
+    .comp-before { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  }
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .slide { padding: 12vh 6vw 15vh 6vw; }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 1.8rem; }
+    .controls { right: 50%; transform: translateX(50%); bottom: 20px; }
+    .scroll-area { max-height: 70vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="glow-orb glow-orb-1" id="orb1"></div>
+<div class="glow-orb glow-orb-2" id="orb2"></div>
+
+<div class="progress-container">
+  <div class="progress-fill" id="progress"></div>
+</div>
+
+<div class="brand-header">
+  <span>Agência DKS</span><span class="dot"></span><span>Anderson Silva</span>
+</div>
+
+<div id="slides-container">
+
+  <!-- SLIDE 1: COVER -->
+  <div class="slide active">
+    <div class="slide-content">
+      <div class="stagger-1 label-eyebrow">Masterplan Digital 2025</div>
+      <h1 class="stagger-2">Autoridade em<br><span class="text-gold">Alto Padrão.</span></h1>
+      <p class="stagger-3" style="font-size: 1.25rem; max-width: 600px; margin-bottom: 40px; color: var(--text-muted);">
+        Estratégia executiva de marca pessoal para dominar a percepção de valor no mercado imobiliário do <span class="text-highlight">Litoral Norte de SC</span>.
+      </p>
+      
+      <div class="stagger-4" style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 60px;">
+        <span class="badge-hollow">Piçarras & Penha</span>
+        <span class="badge-hollow">Balneário Camboriú</span>
+        <span class="badge-hollow">Kammer Imobiliária</span>
+      </div>
+
+      <div class="stagger-5 grid-3" style="max-width: 600px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 32px;">
+        <div>
+          <div style="font-family:'Playfair Display';font-size:2.5rem;color:var(--text-main);line-height:1;">11</div>
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-top:8px;">Etapas de Ação</div>
+        </div>
+        <div>
+          <div style="font-family:'Playfair Display';font-size:2.5rem;color:var(--text-main);line-height:1;">6.5k</div>
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-top:8px;">Audiência Atual</div>
+        </div>
+        <div>
+          <div style="font-family:'Playfair Display';font-size:2.5rem;color:var(--gold);line-height:1;">10k+</div>
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);margin-top:8px;">Meta 90 Dias</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: DIAGNOSIS -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="stagger-1 label-eyebrow">01. Diagnóstico do Presente</div>
+      <h2 class="stagger-2">A Fenda de <span class="text-gold">Posicionamento</span></h2>
+      
+      <div class="grid-2 stagger-3" style="gap: 40px;">
+        <div>
+          <p style="margin-bottom: 24px;">Atualmente, a estrutura do perfil não reflete a grandiosidade de <span class="text-highlight">R$ 30M em VGV</span>. A marca precisa se comportar como o produto premium que vende.</p>
+          
+          <ul class="ui-list">
+            <li>
+              <span class="icon-cross">✕</span>
+              <div>
+                <h3 style="margin-bottom: 4px;">Rosto Invisível</h3>
+                <p style="font-size: 0.9rem;">Anderson não aparece nos vídeos. Sem rosto, não há conexão humana e, consequentemente, confiança.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon-cross">✕</span>
+              <div>
+                <h3 style="margin-bottom: 4px;">Comunicação Genérica</h3>
+                <p style="font-size: 0.9rem;">"Viver com o mar no horizonte". Falta apelo a objeções reais, dor e desejo do investidor.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon-cross">✕</span>
+              <div>
+                <h3 style="margin-bottom: 4px;">Arquitetura Desalinhada</h3>
+                <p style="font-size: 0.9rem;">Destaques por empreendimento (Serena, Corá) em vez da jornada do comprador (Por que investir, Disponíveis).</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="display: flex; flex-direction: column; justify-content: center;">
+          <h3 style="margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; color: var(--gold);">Gap de Oportunidade</h3>
+          <div style="margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.9rem; color: var(--text-muted);">Engajamento Atual (Reels)</span>
+              <span style="font-weight: 600;">15-25 curtidas</span>
+            </div>
+            <div style="width: 100%; height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px;">
+              <div style="width: 15%; height: 100%; background: var(--text-muted); border-radius: 2px;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 0.9rem; color: var(--gold);">Potencial Imediato (Drone Comprovado)</span>
+              <span style="font-weight: 600; color: var(--gold);">247+ curtidas</span>
+            </div>
+            <div style="width: 100%; height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px;">
+              <div style="width: 85%; height: 100%; background: var(--gold); border-radius: 2px; box-shadow: 0 0 10px rgba(223,177,96,0.5);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: BIO ENG -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="stagger-1 label-eyebrow">02. Otimização de Perfil</div>
+      <h2 class="stagger-2">A Nova Engenharia de <span class="text-gold">Bio</span></h2>
+      
+      <div class="comparison-panel stagger-3">
+        <div class="comp-side comp-before">
+          <div style="font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #ef4444; margin-bottom: 16px; font-weight: 600;">Antes: Foco na Função</div>
+          <p style="font-family: monospace; font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; opacity: 0.7; text-decoration: line-through;">
+            Agente imobiliário<br>
+            @kammerimoveis<br>
+            Corretor de imóveis<br>
+            Creci 50937F<br>
+            Fone: 47 992411453
+          </p>
+        </div>
+        <div class="comp-side comp-after">
+          <div style="font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #10b981; margin-bottom: 16px; font-weight: 600;">Depois: Foco na Autoridade</div>
+          <div style="font-size: 1.1rem; line-height: 1.7; color: var(--text-main); font-weight: 400;">
+            Especialista em imóveis no Litoral de SC 🌊<br>
+            <span style="color: var(--gold); font-weight: 600;">+R$ 30M em negócios realizados</span><br>
+            APTOS | LANÇAMENTOS | INVESTIMENTO<br>
+            CRECI 50937F | Kammer Imóveis<br>
+            <span style="color: var(--text-muted); font-size: 0.95rem; margin-top: 8px; display: inline-block;">👇 Encontre seu imóvel aqui</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-4 stagger-4" style="margin-top: 24px;">
+        <div class="glass-card" style="padding: 20px;">
+          <h4 style="color: var(--gold); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px;">1. Nicho Claro</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Demarca o território: Litoral de SC.</p>
+        </div>
+        <div class="glass-card" style="padding: 20px;">
+          <h4 style="color: var(--gold); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px;">2. Prova Social</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">VGV de 30M cria respeito instantâneo.</p>
+        </div>
+        <div class="glass-card" style="padding: 20px;">
+          <h4 style="color: var(--gold); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px;">3. Objeto</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Deixa explícito o que entrega para o cliente.</p>
+        </div>
+        <div class="glass-card" style="padding: 20px;">
+          <h4 style="color: var(--gold); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px;">4. CTA Sem Fricção</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Link com mensagem pronta via WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: HIGHLIGHTS -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="stagger-1 label-eyebrow">03. Destaques (Highlights)</div>
+      <h2 class="stagger-2">Jornada Intencional do <span class="text-gold">Lead</span></h2>
+      <p class="stagger-3" style="margin-bottom: 32px; max-width: 600px;">Substituímos o catálogo estático de prédios por um funil de vendas psicológico, guiando o usuário do interesse à prova social.</p>
+      
+      <div class="scroll-area stagger-4">
+        <div class="grid-3">
+          <div class="glass-card" style="padding: 24px;">
+            <div class="card-icon" style="font-size: 1.5rem;">🏆</div>
+            <h3 style="font-size: 1rem;">VENDIDOS</h3>
+            <p style="font-size: 0.85rem;">Imóveis entregues, clientes felizes, chaves na mão. Conversão pura baseada em prova social.</p>
+          </div>
+          <div class="glass-card" style="padding: 24px;">
+            <div class="card-icon" style="font-size: 1.5rem;">🌊</div>
+            <h3 style="font-size: 1rem;">LITORAL SC</h3>
+            <p style="font-size: 0.85rem;">Criação de desejo pela região. Imagens aéreas e infraestrutura das cidades de atuação.</p>
+          </div>
+          <div class="glass-card" style="padding: 24px;">
+            <div class="card-icon" style="font-size: 1.5rem;">🏠</div>
+            <h3 style="font-size: 1rem;">DISPONÍVEIS</h3>
+            <p style="font-size: 0.85rem;">Agregado prático das oportunidades atuais. Categorizado por tipologia e valor.</p>
+          </div>
+          <div class="glass-card" style="padding: 24px;">
+            <div class="card-icon" style="font-size: 1.5rem;">🚀</div>
+            <h3 style="font-size: 1rem;">LANÇAMENTOS</h3>
+            <p style="font-size: 0.85rem;">Serena, Corá, Portier. Oportunidades de entrada na planta com condições atrativas.</p>
+          </div>
+          <div class="glass-card" style="padding: 24px;">
+            <div class="card-icon" style="font-size: 1.5rem;">💰</div>
+            <h3 style="font-size: 1rem;">INVESTIMENTO</h3>
+            <p style="font-size: 0.85rem;">Linguagem para o investidor: ROI, valorização ao longo dos anos, VGL, segurança.</p>
+          </div>
+          <div class="glass-card" style="padding: 24px;">
+            <div class="card-icon" style="font-size: 1.5rem;">👤</div>
+            <h3 style="font-size: 1rem;">QUEM SOU EU</h3>
+            <p style="font-size: 0.85rem;">A âncora de confiança. A trajetória de Anderson e seu compromisso com a clareza.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: CONTENT PILLARS -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="stagger-1 label-eyebrow">04. Matriz de Conteúdo Semanal</div>
+      <h2 class="stagger-2">Máquina de <span class="text-gold">Atração e Conversão</span></h2>
+
+      <div class="grid-2 stagger-3" style="gap: 40px; align-items: center;">
+        <div>
+          <div style="display: flex; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 16px;">
+            <div style="font-size: 1.5rem; color: var(--gold);">01</div>
+            <div>
+              <h3 style="font-size: 1rem; margin-bottom: 4px;">Autoridade (Educação)</h3>
+              <p style="font-size: 0.85rem;">Erros ao comprar, como analisar contrato. Gera inscritos qualificados.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 16px;">
+            <div style="font-size: 1.5rem; color: var(--gold);">02</div>
+            <div>
+              <h3 style="font-size: 1rem; margin-bottom: 4px;">Cidade (Ação de Topo)</h3>
+              <p style="font-size: 0.85rem;">Altíssimo potencial viral (drone). Traz novos olhos para o perfil.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 16px;">
+            <div style="font-size: 1.5rem; color: var(--gold);">03</div>
+            <div>
+              <h3 style="font-size: 1rem; margin-bottom: 4px;">Produto (Oferta)</h3>
+              <p style="font-size: 0.85rem;">Anderson em Pip (Picture in Picture) no imóvel. Conversão direta para agendamento.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 16px;">
+            <div style="font-size: 1.5rem; color: var(--gold);">04</div>
+            <div>
+              <h3 style="font-size: 1rem; margin-bottom: 4px;">Prova Social</h3>
+              <p style="font-size: 0.85rem;">Depoimentos. Transforma o 'será que é bom?' em 'eu quero também'.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px;">
+            <div style="font-size: 1.5rem; color: var(--gold);">05</div>
+            <div>
+              <h3 style="font-size: 1rem; margin-bottom: 4px;">Bastidores</h3>
+              <p style="font-size: 0.85rem;">Stories dinâmicos de negociações e rotina. Humaniza a marca implacavelmente.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card stagger-4" style="background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(223,177,96,0.05));">
+          <h3 style="text-align: center; margin-bottom: 24px; font-family: 'Playfair Display'; font-size: 1.5rem; border-bottom: 1px solid rgba(223,177,96,0.2); padding-bottom: 16px;">Cronograma Ideal</h3>
+          <ul class="ui-list" style="font-size: 0.9rem;">
+            <li><span style="color:var(--gold); font-weight: 600; width: 60px;">SEG</span> <span>📚 Reel Educativo (Autoridade)</span></li>
+            <li><span style="color:var(--gold); font-weight: 600; width: 60px;">TER</span> <span>🏠 Reel de Imóvel (Câmera)</span></li>
+            <li><span style="color:var(--gold); font-weight: 600; width: 60px;">QUA</span> <span>🚁 Drone Piçarras (Viral)</span></li>
+            <li><span style="color:var(--gold); font-weight: 600; width: 60px;">QUI</span> <span>🏆 Showcase de Vendidos</span></li>
+            <li><span style="color:var(--gold); font-weight: 600; width: 60px;">SEX</span> <span>🎬 Vlogs e Negociações (Stories)</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: VIDEO FORMATS -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="stagger-1 label-eyebrow">05. Cinematografia Digital</div>
+      <h2 class="stagger-2">Formatos Que Retêm a <span class="text-gold">Atenção</span></h2>
+      
+      <div class="scroll-area stagger-3">
+        <div class="grid-2">
+          <div class="glass-card">
+            <span class="tag-solid">Formato Primário</span>
+            <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Talking Head (Rosto do Herói)</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 16px;">O Anderson falando diretamente com o espectador estabelece a maior taxa de confiança. Fundo neutro ou vista pro mar, tripé, contato visual sólido.</p>
+            <div style="font-size: 0.8rem; color: var(--gold); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px;">Duração: 30 a 90 segundos</div>
+          </div>
+          
+          <div class="glass-card">
+            <span class="tag-solid" style="background: rgba(37,99,235,0.2); color: #60a5fa;">Alto Engajamento</span>
+            <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Drone Cinematográfico + Copy</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 16px;">Imagens aéreas de altíssima qualidade de Piçarras/Penha. O vídeo descansa o olhar enquanto a legenda conta uma história de valorização.</p>
+            <div style="font-size: 0.8rem; color: var(--gold); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px;">Duração: 15 a 30 segundos</div>
+          </div>
+
+          <div class="glass-card">
+            <span class="tag-solid">Produto Humanizado</span>
+            <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Picture-in-Picture (PiP)</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 16px;">Em vez de apenas mostrar um vídeo do imóvel com música, Anderson aparece no canto da tela (em bolha ou quadrado) guiando a experiência.</p>
+            <div style="font-size: 0.8rem; color: var(--gold); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px;">Ideal para walkthroughs rápidos</div>
+          </div>
+
+          <div class="glass-card">
+            <span class="tag-solid">Valor Estático</span>
+            <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Carrossel de Info-Análise</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 16px;">Design polido, gráficos e bullet points respondendo a: 'Diferença entre VGV, VPL e Retorno de Investimento'. Arquivável e compartilhável.</p>
+            <div style="font-size: 0.8rem; color: var(--gold); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px;">Foco em salvar (Save rate)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: SCRIPTING -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="stagger-1 label-eyebrow">06. Scripts Táticos</div>
+      <h2 class="stagger-2">Frameworks de <span class="text-gold">Roteiro</span></h2>
+      <p class="stagger-3" style="margin-bottom: 32px; max-width: 650px;">A estrutura de vídeo não é improvisada. Utilizamos o formato <span class="text-highlight">Hook (Gatilho) → Valor/Agitação → Call to Action Específico</span>.</p>
+
+      <div class="glass-card stagger-4" style="margin-bottom: 16px; border-left: 3px solid var(--gold);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h3 style="margin: 0;">Script 01: O Manifesto (Fixado)</h3>
+          <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">60 seg</span>
+        </div>
+        <p style="font-size: 0.95rem; margin-bottom: 12px;"><strong style="color: var(--text-main);">Hook:</strong> "Se você quer comprar ou investir no litoral de SC, precisa me conhecer primeiro."</p>
+        <p style="font-size: 0.95rem; margin-bottom: 12px;"><strong style="color: var(--text-main);">Corpo:</strong> "Meu nome é Anderson. Já ajudei dezenas de famílias. Se você quer o pé na areia ou blindar seu capital em lançamentos, eu te guio nisso."</p>
+        <p style="font-size: 0.95rem;"><strong style="color: var(--gold);">Gravar no escritório ou com mar de fundo. Roupas alinhadas.</strong></p>
+      </div>
+
+      <div class="grid-2 stagger-5">
+        <div class="glass-card" style="border-left: 3px solid #60a5fa;">
+          <h3 style="font-size: 1.1rem; margin-bottom: 12px;">Script 02: Antipadrão (Educativo)</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 8px;">"3 erros ao comprar na planta."</p>
+          <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 16px;">
+            <li>1. Credibilidade da construtora.</li>
+            <li>2. Preço de tela vs Custo Total (30% a +, CUB).</li>
+            <li>3. Falta de representação do corretor pessoal.</li>
+          </ul>
+        </div>
+        <div class="glass-card" style="border-left: 3px solid #10b981;">
+          <h3 style="font-size: 1.1rem; margin-bottom: 12px;">Script 03: Prova Social</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 8px;">Apresentar o cliente real e fazer as 3 perguntas de ouro da conversão:</p>
+          <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 16px;">
+            <li>Como chegou até mim?</li>
+            <li>Qual era seu maior medo?</li>
+            <li>O que diria a quem está na dúvida?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: CTA OPTIMIZATION -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="stagger-1 label-eyebrow">07. Engenharia de Conversão</div>
+      <h2 class="stagger-2">Destruindo <span class="text-gold">Fricções</span> Pós-Vídeo</h2>
+      
+      <div class="comparison-panel stagger-3" style="margin-bottom: 32px;">
+        <div class="comp-side comp-before" style="padding: 24px;">
+          <div style="font-size: 0.8rem; text-transform: uppercase; color: #ef4444; margin-bottom: 12px; font-weight: 600;">O Comum (Passivo)</div>
+          <ul class="ui-list">
+            <li><span class="icon-cross" style="font-size: 1rem;">✕</span> <span style="font-size: 0.9rem;">"Fale conosco e agende visita"</span></li>
+            <li><span class="icon-cross" style="font-size: 1rem;">✕</span> <span style="font-size: 0.9rem;">"Entre em contato"</span></li>
+            <li><span class="icon-cross" style="font-size: 1rem;">✕</span> <span style="font-size: 0.9rem;">"Saiba mais"</span></li>
+          </ul>
+        </div>
+        <div class="comp-side comp-after" style="padding: 24px; background: rgba(223,177,96,0.05);">
+          <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; font-weight: 600;">Diretiva DKS (Claro & Imediato)</div>
+          <ul class="ui-list">
+            <li><span class="icon-check" style="color:var(--gold); font-size: 1rem;">✓</span> <span style="font-size: 0.9rem;">"Me chama no WhatsApp agora — link na bio 👇"</span></li>
+            <li><span class="icon-check" style="color:var(--gold); font-size: 1rem;">✓</span> <span style="font-size: 0.9rem;">"Clica no link e me manda a palavra: QUERO VER"</span></li>
+            <li><span class="icon-check" style="color:var(--gold); font-size: 1rem;">✓</span> <span style="font-size: 0.9rem;">"Salva esse vídeo para não esquecer depois."</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="premium-quote stagger-4">
+        "O CTA precisa carregar o lead pela mão. O link da bio deve remeter diretamente ao <strong>WhatsApp com mensagem pré-escrita</strong>. A barreira de enviar a primeira mensagem é onde 60% dos clientes travam. Nós quebramos isso."
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: BRAND IDENTITY -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="stagger-1 label-eyebrow">08. Branding Architecture</div>
+      <h2 class="stagger-2">A Estética da <span class="text-gold">Confiança Absoluta</span></h2>
+
+      <div class="grid-3 stagger-3">
+        <div class="glass-card">
+          <div style="width: 48px; height: 48px; border-radius: 8px; background: linear-gradient(135deg, #0a192f, #112240); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px;"></div>
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Cromática</h3>
+          <p style="font-size: 0.85rem;"><strong>Azul Marinho</strong> para segurança corporativa e alusão ao mar, contrastado com <strong>Branco</strong> e acentos em <strong>Dourado Fosco</strong>. Carga sensorial de luxo silencioso.</p>
+        </div>
+        <div class="glass-card">
+          <div style="font-family: 'Playfair Display'; font-size: 2rem; color: var(--text-main); margin-bottom: 12px; line-height: 1;">Aa</div>
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Tipografia</h3>
+          <p style="font-size: 0.85rem;"><strong>Playfair Display</strong> ou <strong>Cinzel</strong> para títulos (sofisticação atemporal).<br><strong>Montserrat</strong> ou corpo sans-serif (legibilidade cirúrgica, moderna).</p>
+        </div>
+        <div class="glass-card">
+          <div style="width: 48px; height: 48px; border-radius: 50%; background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqL0mJtXlCjTss_oYvM8ZqfG3nks2A_5_8Rw&s') center/cover; margin-bottom: 20px;"></div>
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Watermark & Retrato</h3>
+          <p style="font-size: 0.85rem;">Assinatura discreta nos vídeos. Fotografia de perfil alinhada (sem fundos barulhentos, iluminação de estúdio recortada, postura aberta, sorriso blindado).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: ROADMAP -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="stagger-1 label-eyebrow">09. Planiamento de Execução</div>
+      <h2 class="stagger-2">O Sprint de <span class="text-gold">90 Dias</span></h2>
+
+      <div class="grid-3 stagger-3">
+        <div class="glass-card" style="border-top: 4px solid var(--text-muted);">
+          <h3 style="font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Fase 01 <br><span style="font-size:0.75rem; color:rgba(255,255,255,0.4);">Semanas 01 - 02</span></h3>
+          <h4 style="font-size: 1.2rem; margin-bottom: 16px;">Infraestrutura Base</h4>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted); padding-left: 0;">
+            <li style="margin-bottom: 8px;">• Hack da nova Bio e Linktree c/ Msg Pronta.</li>
+            <li style="margin-bottom: 8px;">• Design system (capas, paleta, Canva devs).</li>
+            <li style="margin-bottom: 8px;">• Reestruturação dos 6 Destaques (Highlights).</li>
+            <li>• Lançamento do Vídeo Manifesto (Fixado).</li>
+          </ul>
+        </div>
+        <div class="glass-card" style="border-top: 4px solid #60a5fa;">
+          <h3 style="font-size: 1rem; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Fase 02 <br><span style="font-size:0.75rem; color:rgba(255,255,255,0.4);">Semanas 03 - 04</span></h3>
+          <h4 style="font-size: 1.2rem; margin-bottom: 16px;">Cadência Absoluta</h4>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted); padding-left: 0;">
+            <li style="margin-bottom: 8px;">• 1 Reel por dia útil (Construção do Hábito).</li>
+            <li style="margin-bottom: 8px;">• Batching: Gravar 4-5 Reels num turno único.</li>
+            <li style="margin-bottom: 8px;">• Implementação tática do Reel aéreo (Drone) 1x por semana.</li>
+          </ul>
+        </div>
+        <div class="glass-card" style="border-top: 4px solid var(--gold);">
+          <h3 style="font-size: 1rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Fase 03 <br><span style="font-size:0.75rem; color:rgba(255,255,255,0.4);">Mês 02 - 03</span></h3>
+          <h4 style="font-size: 1.2rem; margin-bottom: 16px;">Escala e Aceleração</h4>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted); padding-left: 0;">
+            <li style="margin-bottom: 8px;">• Meta de Tração Alcançada: 10K Followers.</li>
+            <li style="margin-bottom: 8px;">• Injeção de Meta Ads (Tráfego Pago) nos vídeos topo de funil vencedores.</li>
+            <li>• Outbound silencioso via Direct com os engajados.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: CLOSURE -->
+  <div class="slide">
+    <div class="slide-content" style="text-align: center;">
+      <div class="stagger-1 label-eyebrow" style="justify-content: center;">Execução Implacável</div>
+      <h2 class="stagger-2" style="font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 40px;">O novo padrão<br>foi estabelecido.</h2>
+      
+      <div class="stagger-3 glass-card" style="max-width: 500px; margin: 0 auto; padding: 40px;">
+        <div style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;">Estratégia Proprietária Desenvolvida por</div>
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%23dfb160' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 2 7 12 12 22 7 12 2'/%3E%3Cpolyline points='2 17 12 22 22 17'/%3E%3Cpolyline points='2 12 12 17 22 12'/%3E%3C/svg%3E" alt="DKS Logo" style="margin-bottom: 16px;">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--text-main); margin-bottom: 8px;">AGÊNCIA DKS</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Especialistas em Marketing e<br>Geração de Demanda no Litoral</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="slide-counter"><span id="curr-slide">01</span> / <span id="tot-slide">11</span></div>
+  <div style="display: flex; gap: 8px;">
+    <button class="btn-nav" id="btn-prev" aria-label="Anterior">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="btn-nav" id="btn-next" aria-label="Próximo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  
+  const progressBar = document.getElementById('progress');
+  const dCurr = document.getElementById('curr-slide');
+  const dTot = document.getElementById('tot-slide');
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+  
+  // Format numbers to 2 digits
+  dTot.textContent = total.toString().padStart(2, '0');
+
+  function update() {
+    slides.forEach((s, i) => {
+      if(i === current) {
+        s.classList.add('active');
+        s.style.zIndex = '5';
+      } else {
+        s.classList.remove('active');
+        s.style.zIndex = '1';
+      }
+    });
+    
+    // UI Update
+    dCurr.textContent = (current + 1).toString().padStart(2, '0');
+    progressBar.style.width = ((current / (total - 1)) * 100) + '%';
+    
+    btnPrev.disabled = current === 0;
+    btnNext.disabled = current === total - 1;
+  }
+
+  function next() { if(current < total - 1) { current++; update(); } }
+  function prev() { if(current > 0) { current--; update(); } }
+
+  btnNext.addEventListener('click', next);
+  btnPrev.addEventListener('click', prev);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prev(); }
+  });
+
+  // Ambient mouse follow effect for glow orbs
+  document.addEventListener('mousemove', e => {
+    const x = e.clientX / window.innerWidth;
+    const y = e.clientY / window.innerHeight;
+    
+    document.getElementById('orb1').style.transform = `translate(${x * -60}px, ${y * -60}px)`;
+    document.getElementById('orb2').style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+    
+    // Mouse hover effect for glass cards
+    document.querySelectorAll('.glass-card').forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const vx = e.clientX - rect.left;
+      const vy = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${vx}px`);
+      card.style.setProperty('--mouse-y', `${vy}px`);
+    });
+  });
+
+  // Touch Swipe
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
+  document.addEventListener('touchend', e => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchEndX - touchStartX;
+    if (diff < -50) next();
+    if (diff > 50) prev();
+  }, {passive: true});
+
+  // Initial call
+  update();
+</script>
+</body>
+</html>
