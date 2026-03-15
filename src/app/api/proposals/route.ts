@@ -1,20 +1,31 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { randomBytes } from "crypto";
+import { rateLimit } from "@/lib/rate-limit";
+import { ProposalSchema } from "@/lib/schemas";
 
 function createSlug(name: string) {
-    // Simple slugify: lowercase, remove accents, replace spaces with hyphens, remove special chars
-    return name
+    const base = name
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/\s+/g, "-")
-        .replace(/[^a-z0-9-]/g, "")
-        // add short random string to avoid collisions
-        + "-" + Math.random().toString(36).substring(2, 6);
+        .replace(/[^a-z0-9-]/g, "");
+    return `${base}-${randomBytes(4).toString("hex")}`;
 }
 
 export async function POST(req: Request) {
+    const ip = req.headers.get("x-forwarded-for") ?? "anonymous";
+    const { success } = rateLimit(`proposals:${ip}`, 20);
+
+    if (!success) {
+        return NextResponse.json(
+            { error: "Too many requests." },
+            { status: 429 }
+        );
+    }
+
     try {
         const session = await auth();
         const role = (session?.user as { role?: string })?.role;
@@ -23,7 +34,15 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
         }
 
-        const data = await req.json();
+        const body = await req.json();
+        const parsed = ProposalSchema.safeParse(body);
+
+        if (!parsed.success) {
+            const message = parsed.error.issues[0]?.message ?? "Dados inválidos.";
+            return NextResponse.json({ error: message }, { status: 422 });
+        }
+
+        const data = parsed.data;
         const slug = createSlug(data.clientName);
 
         const proposal = await prisma.proposal.create({
@@ -35,8 +54,8 @@ export async function POST(req: Request) {
                 phone: data.phone || null,
                 services: JSON.stringify(data.services),
                 total: data.total,
-                validity: Number(data.validity),
-                contractMonths: Number(data.contractMonths),
+                validity: data.validity,
+                contractMonths: data.contractMonths,
                 observations: data.observations || null,
             },
         });

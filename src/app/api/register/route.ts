@@ -1,25 +1,30 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
+import { rateLimit } from "@/lib/rate-limit";
+import { RegisterSchema } from "@/lib/schemas";
 
 export async function POST(req: Request) {
+    const ip = req.headers.get("x-forwarded-for") ?? "anonymous";
+    const { success } = rateLimit(`register:${ip}`, 5);
+
+    if (!success) {
+        return NextResponse.json(
+            { error: "Muitas tentativas. Aguarde alguns minutos e tente novamente." },
+            { status: 429 }
+        );
+    }
+
     try {
         const body = await req.json();
-        const { name, email, password, restaurant, phone } = body;
+        const parsed = RegisterSchema.safeParse(body);
 
-        if (!name || !email || !password) {
-            return NextResponse.json(
-                { error: "Nome, email e senha são obrigatórios." },
-                { status: 400 }
-            );
+        if (!parsed.success) {
+            const message = parsed.error.issues[0]?.message ?? "Dados inválidos.";
+            return NextResponse.json({ error: message }, { status: 422 });
         }
 
-        if (password.length < 6) {
-            return NextResponse.json(
-                { error: "Senha precisa ter no mínimo 6 caracteres." },
-                { status: 400 }
-            );
-        }
+        const { name, email, password, restaurant, phone } = parsed.data;
 
         const existing = await prisma.user.findUnique({ where: { email } });
         if (existing) {

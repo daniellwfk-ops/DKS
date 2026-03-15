@@ -19,8 +19,51 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "DKS Marketing | Faturamento e Mesas Cheias",
-  description: "Transformamos restaurantes em referências de faturamento e mesas cheias. Especialistas em marketing gastronômico.",
+  metadataBase: new URL("https://dksmarketing.com.br"),
+  title: "DKS Marketing | Agência de Marketing para Restaurantes",
+  description: "Transformamos restaurantes em referências de faturamento e mesas cheias. Especialistas em marketing gastronômico com o Método ROMA.",
+  keywords: [
+    "marketing para restaurantes",
+    "agência de marketing para gastronomia",
+    "aumentar vendas no ifood",
+    "marketing gastronômico",
+    "dks marketing",
+    "lotar mesas",
+    "aumentar faturamento restaurante"
+  ],
+  openGraph: {
+    title: "DKS Marketing | Faturamento e Mesas Cheias",
+    description: "Transformamos restaurantes em referências de faturamento e mesas cheias.",
+    url: "https://dksmarketing.com.br",
+    siteName: "DKS Marketing",
+    locale: "pt_BR",
+    type: "website",
+    images: [
+      {
+        url: "/images/dks-hero-fullbg.jpg",
+        width: 1200,
+        height: 630,
+        alt: "DKS Marketing - Especialistas em crescimento para restaurantes",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DKS Marketing",
+    description: "Transformamos restaurantes em referências.",
+    images: ["/images/dks-hero-fullbg.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -32,6 +75,27 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${sora.variable} ${montserrat.variable}`}>
       <head>
         <script src="https://unpkg.com/@phosphor-icons/web" async></script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+             __html: JSON.stringify({
+               "@context": "https://schema.org",
+               "@type": "ProfessionalService",
+               "name": "DKS Marketing",
+               "url": "https://dksmarketing.com.br",
+               "logo": "https://dksmarketing.com.br/icon.png",
+               "image": "https://dksmarketing.com.br/images/dks-hero-fullbg.jpg",
+               "description": "Agência de marketing especializada em restaurantes e deliveries. Ajudamos a aumentar seu faturamento e lotar suas mesas com o Método ROMA.",
+               "address": {
+                 "@type": "PostalAddress",
+                 "addressCountry": "BR"
+               },
+               "sameAs": [
+                 "https://www.instagram.com/dksmarketing/"
+               ]
+             })
+          }}
+        />
       </head>
       <body className="antialiased font-sans bg-black text-white min-h-screen flex flex-col">
         {/* Google Tag Manager (noscript) */}

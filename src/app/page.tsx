@@ -6,6 +6,15 @@ import Feedbacks from '@/components/ui/Feedbacks';
 import DorDoLead from '@/components/ui/DorDoLead';
 import VisionFuturo from '@/components/ui/VisionFuturo';
 import FAQ from '@/components/ui/FAQ';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "DKS Marketing | Venda Mais no seu Restaurante",
+  description: "A assessoria de marketing que faz restaurantes e deliveries baterem recordes de faturamento todos os meses. Venha lotar suas mesas com a DKS.",
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function Home() {
   return (

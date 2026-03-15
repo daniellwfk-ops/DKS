@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Performance | Janeiro 2024</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="relatorio_performance.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="glow-effect top-right"></div>
+    <div class="glow-effect bottom-left"></div>
+
+    <main class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div>
+                <span class="badge">Relatório Executivo</span>
+                <h1 class="page-title">Performance <span>Geral</span></h1>
+                <p class="subtitle">Visão consolidada de todas as plataformas e faturamento do período.</p>
+            </div>
+            <div class="date-selector">
+                <i data-lucide="calendar"></i>
+                <span>Janeiro de 2024</span>
+            </div>
+        </header>
+
+        <!-- KPI Grid -->
+        <section class="kpi-grid">
+            <div class="kpi-card glass highlight">
+                <div class="kpi-card-header">
+                    <h3>Faturamento Total</h3>
+                    <div class="icon-box green"><i data-lucide="dollar-sign"></i></div>
+                </div>
+                <div class="kpi-value">R$ 119.242,73</div>
+                <div class="kpi-trend positive">
+                    <i data-lucide="trending-up"></i>
+                    <span>+12.5% em relação a Dezembro</span>
+                </div>
+            </div>
+
+            <div class="kpi-card glass">
+                <div class="kpi-card-header">
+                    <h3>Faturamento em Anúncios</h3>
+                    <div class="icon-box purple"><i data-lucide="megaphone"></i></div>
+                </div>
+                <div class="kpi-value">R$ 110.825,54</div>
+                <div class="kpi-breakdown">
+                    <div class="breakdown-item">
+                        <span class="dot facebook"></span> Facebook: R$ 55.412,77
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="dot google"></span> Google: R$ 55.412,77
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-card glass">
+                <div class="kpi-card-header">
+                    <h3>Vendas Diretas</h3>
+                    <div class="icon-box blue"><i data-lucide="shopping-bag"></i></div>
+                </div>
+                <div class="kpi-value">R$ 119.242,73</div>
+                <div class="kpi-breakdown">
+                    <div class="breakdown-item">
+                        <span class="dot ifood"></span> iFood: R$ 63.829,96
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="dot cardapio"></span> Cardápio: R$ 55.412,77
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform performance details -->
+        <div class="details-grid">
+            <!-- Coluna Principal -->
+            <div class="main-column">
+                
+                <section class="platform-section glass" id="meta-ads">
+                    <header class="section-header">
+                        <div class="section-title">
+                            <i data-lucide="facebook" class="text-blue"></i>
+                            <h2>Meta Ads</h2>
+                        </div>
+                    </header>
+                    <div class="chart-container">
+                        <canvas id="metaChart"></canvas>
+                    </div>
+                    <div class="insight-box alert-box">
+                        <i data-lucide="alert-triangle"></i>
+                        <p><strong>Observação Estratégica:</strong> Podemos notar uma grande quantidade de pessoas acessando o cardápio (tráfego qualificado), no entanto, uma quantidade bem menor efetuando adições de produtos ao carrinho. Isso se deve ao fato de que precisamos focar na otimização de conversão na página de destino.</p>
+                    </div>
+                </section>
+
+                <section class="platform-section glass" id="google-ads">
+                    <header class="section-header">
+                        <div class="section-title">
+                            <i data-lucide="search" class="text-orange"></i>
+                            <h2>Google Ads</h2>
+                        </div>
+                    </header>
+                    <div class="chart-container">
+                        <canvas id="googleChart"></canvas>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Coluna Secundária -->
+            <div class="side-column">
+                <section class="platform-section glass" id="ifood">
+                    <header class="section-header">
+                        <div class="section-title">
+                            <i data-lucide="utensils" class="text-red"></i>
+                            <h2>iFood</h2>
+                        </div>
+                    </header>
+                    <div class="mini-kpis">
+                        <div class="mini-kpi">
+                            <span class="lbl">Receita iFood</span>
+                            <span class="val">R$ 63.829,96</span>
+                        </div>
+                    </div>
+                    <div class="chart-container small">
+                         <canvas id="ifoodChart"></canvas>
+                    </div>
+                </section>
+
+                <section class="platform-section glass" id="cardapio">
+                    <header class="section-header">
+                        <div class="section-title">
+                            <i data-lucide="monitor" class="text-purple"></i>
+                            <h2>Cardápio Digital</h2>
+                        </div>
+                    </header>
+                    <div class="mini-kpis">
+                        <div class="mini-kpi">
+                            <span class="lbl">Receita Cardápio</span>
+                            <span class="val">R$ 55.412,77</span>
+                        </div>
+                    </div>
+                    <div class="chart-container small">
+                        <canvas id="cardapioChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- CTA Widget -->
+                <section class="cta-widget glass-strong gradient-border">
+                    <div class="cta-content">
+                        <h3>Vamos conversar sobre os seus resultados?</h3>
+                        <p>Podemos alinhar os próximos passos e traçar uma estratégia otimizada para o próximo mês.</p>
+                        <div class="cta-buttons">
+                            <a href="https://wa.me/#" class="btn primary">
+                                <i data-lucide="message-circle"></i> Falar no WhatsApp
+                            </a>
+                            <a href="#" class="btn secondary">
+                                <i data-lucide="calendar-plus"></i> Agendar Reunião
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // Common Chart Defaults
+        Chart.defaults.color = 'rgba(255, 255, 255, 0.6)';
+        Chart.defaults.font.family = 'Inter';
+
+        // Meta Ads Chart
+        const metaCtx = document.getElementById('metaChart').getContext('2d');
+        new Chart(metaCtx, {
+            type: 'line',
+            data: {
+                labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+                datasets: [{
+                    label: 'Cliques no Link',
+                    data: [1200, 1900, 1500, 2200],
+                    borderColor: '#1877F2',
+                    backgroundColor: 'rgba(24, 119, 242, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: 'Adições ao Carrinho',
+                    data: [300, 450, 320, 500],
+                    borderColor: '#F5A623',
+                    borderWidth: 2,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' }
+                },
+                scales: {
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Google Ads Chart
+        const googleCtx = document.getElementById('googleChart').getContext('2d');
+        new Chart(googleCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Campanha Search', 'Campanha Display', 'Performance Max'],
+                datasets: [{
+                    label: 'Conversões',
+                    data: [150, 80, 320],
+                    backgroundColor: ['#4285F4', '#EA4335', '#FBBC05'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // iFood Doughnut
+        const ifoodCtx = document.getElementById('ifoodChart').getContext('2d');
+        new Chart(ifoodCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Almoço', 'Jantar', 'Madrugada'],
+                datasets: [{
+                    data: [25, 60, 15],
+                    backgroundColor: ['#EA1D2C', '#FF5B68', '#4A0D11'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // Cardapio Line
+        const cardapioCtx = document.getElementById('cardapioChart').getContext('2d');
+        new Chart(cardapioCtx, {
+            type: 'line',
+            data: {
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                datasets: [{
+                    label: 'Acessos',
+                    data: [120, 150, 140, 200, 350, 400, 380],
+                    borderColor: '#9C27B0',
+                    backgroundColor: 'rgba(156, 39, 176, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { display: false },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

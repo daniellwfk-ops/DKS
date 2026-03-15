@@ -72,3 +72,18 @@ model Proposal {
   observations   String?
   createdAt      DateTime @default(now())
 }
+model Lead {
+  id           String   @id @default(cuid())
+  nome         String
+  endereco     String?
+  bairro       String?
+  telefone     String?
+  instagram    String?
+  rating       Float?
+  totalReviews Int?
+  status       String   @default("capturados") // "capturados" | "qualificados" | "abordados" | "respondeu" | "reuniao" | "ganho" | "perdido"
+  nicho        String?
+  cidade       String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

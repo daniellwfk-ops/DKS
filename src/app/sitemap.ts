@@ -14,9 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/consultoria',
         '/diagnostico',
         '/proposta',
-        '/portal',
-        '/admin' // depending on whether you want to crawl this or not
-        // remove /login and /cadastro for SEO if needed
     ].map((route) => ({
         url: `${SITE_URL}${route}`,
         lastModified: new Date().toISOString(),
