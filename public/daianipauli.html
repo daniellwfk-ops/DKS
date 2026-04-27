@@ -293,6 +293,7 @@
         .footer-info span { display: flex; align-items: center; gap: 8px; }
         
     
+        
         /* MOBILE RESPONSIVENESS */
         @media (max-width: 768px) {
             html { font-size: 14px; }
@@ -309,20 +310,29 @@
             
             .glass-card { 
                 padding: 24px !important; 
-                transform: none !important; /* Disable heavy scaling/translating on mobile for simplicity */
-                opacity: 1 !important; /* Skip delay animations to prevent invisible content if scroll gets weird */
+                transform: none !important;
+                opacity: 1 !important;
+            }
+            
+            .slide {
+                align-items: flex-start !important;
+                overflow-y: auto !important;
+                padding-top: 60px !important;
+                padding-bottom: 120px !important;
+                -webkit-overflow-scrolling: touch;
             }
             
             .slide.active .mindmap-card {
                 transform: scale(1) translateY(0) !important;
-                transition-delay: 0s !important; /* Show instantly on mobile to avoid waiting 3 seconds looking at a blank screen */
+                transition-delay: 0s !important;
             }
             
             .topic-item { padding: 12px 16px !important; font-size: 1.1rem !important; }
             
-            #controls { bottom: 20px; right: 20px; }
+            #controls { bottom: 15px; right: 15px; }
             #controls button { width: 44px; height: 44px; }
         }
+
 
     </style>
 </head>
