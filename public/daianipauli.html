@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Daiani Pauli - 5 Maiores Problemas de Quem Trabalha Sentado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #00C2FF; /* Cyan/Sky Blue */
+            --primary-g: rgba(0, 194, 255, .15);
+            --primary-l: rgba(0, 194, 255, .4);
+            --bg: #050505;
+            --panel: #0f0f0f;
+            --panel-bd: #1f1f1f;
+            --text: #ffffff;
+            --dim: #888888;
+            --dim2: #444444;
+            --r: 12px;
+            --font-h: 'Outfit', sans-serif;
+            --font-p: 'Inter', sans-serif;
+        }
+
+        html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); font-family: var(--font-p); color: var(--text); }
+        
+        #deck { position: relative; width: 100vw; height: 100svh; overflow: hidden; }
+
+        /* Horizontal Slider */
+        .slide {
+            position: absolute; inset: 0; display: flex; align-items: center; padding: 40px 6vw;
+            opacity: 0; pointer-events: none;
+            transition: opacity .6s cubic-bezier(0.4, 0, 0.2, 1), transform .6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(100px);
+        }
+        .slide.active { opacity: 1; pointer-events: all; transform: translateX(0); }
+        .slide.exit { opacity: 0; transform: translateX(-100px); pointer-events: none; }
+        .slide.reverse-enter { transform: translateX(-100px); }
+        .slide.reverse-exit { transform: translateX(100px); }
+
+        /* Typography */
+        h1, h2, h3 { font-family: var(--font-h); }
+        .h-xl { font-size: clamp(2.8rem, 5.5vw, 4.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -.02em; margin-bottom: 24px; }
+        .h-lg { font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 600; line-height: 1.15; letter-spacing: -.01em; margin-bottom: 20px; }
+        .h-md { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 600; line-height: 1.2; letter-spacing: 0; margin-bottom: 16px; }
+        .sub { font-size: clamp(1.1rem, 1.4vw, 1.4rem); color: var(--dim); line-height: 1.6; font-weight: 400; max-width: 800px; margin-bottom: 32px; }
+        
+        .primary { color: var(--primary); }
+        
+        .tag { 
+            display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-h); 
+            font-size: .8rem; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; 
+            color: var(--dim); margin-bottom: 24px; 
+        }
+
+        .animated-divider {
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px var(--primary-l);
+        }
+        .animated-divider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            animation: energy-beam 5s infinite ease-in-out;
+        }
+        @keyframes energy-beam {
+            0% { left: -100%; }
+            50% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* Layout Utilities */
+        .w { width: 100%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2; }
+        .g2-asym { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+        .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        
+        /* New Information Boxes (More Commercial/Impactful) */
+        .info-box {
+            background: var(--panel);
+            border: 1px solid var(--panel-bd);
+            padding: 32px 40px;
+            border-radius: var(--r);
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .info-box::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--panel-bd); transition: background 0.3s;
+        }
+        .info-box:hover { transform: translateX(5px); border-color: rgba(255,255,255,0.1); }
+        .glass-card.highlight { 
+            border-color: var(--panel-bd); 
+            background: var(--panel);
+            transition: all 0.8s ease;
+        }
+        .glass-card.highlight.is-lit { 
+            border-color: var(--primary-l); 
+            background: linear-gradient(135deg, rgba(0,194,255,0.08) 0%, rgba(0,0,0,0) 100%);
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 20px rgba(0, 194, 255, 0.05); border-color: var(--primary-l); }
+            50% { box-shadow: 0 0 35px rgba(0, 194, 255, 0.25); border-color: var(--primary); }
+            100% { box-shadow: 0 0 20px rgba(0, 194, 255, 0.05); border-color: var(--primary-l); }
+        }
+        .glass-card.highlight::before { background: var(--panel-bd); transition: background 0.8s ease; }
+        .glass-card.highlight.is-lit::before { background: var(--primary); }
+        
+        .box-title { font-size: 1.2rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dim); transition: color 0.8s ease; }
+        .glass-card.highlight.is-lit .box-title { color: var(--primary); font-weight: 800; }
+        .info-box p { font-size: 1.05rem; color: #ddd; line-height: 1.6; }
+
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .glass-card.highlight {
+            border-color: rgba(0, 194, 255, 0.2);
+            background: linear-gradient(135deg, rgba(0,194,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+        }
+        .glass-card.highlight.is-lit {
+            border-color: rgba(0, 194, 255, 0.6);
+            background: linear-gradient(135deg, rgba(0,194,255,0.12) 0%, rgba(255,255,255,0.02) 100%);
+            box-shadow: 0 15px 50px rgba(0, 194, 255, 0.15);
+            transform: translateY(-8px);
+        }
+        .glass-card .box-title {
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            color: var(--dim);
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .glass-card.highlight .box-title { color: var(--primary); }
+        .glass-icon { font-size: 2.5rem; margin-bottom: 24px; opacity: 0.8; }
+        .glass-card.highlight .glass-icon { filter: drop-shadow(0 0 10px rgba(0,194,255,0.5)); }
+        .glass-card p { font-size: 1.15rem; color: #ddd; line-height: 1.6; }
+
+        
+        
+        /* Mindmap Connecting Lines */
+        .mindmap-branches {
+            position: absolute; top: -50px; left: 0; width: 100%; height: 50px;
+            pointer-events: none; z-index: 0;
+        }
+        .branch-center {
+            position: absolute; top: -20px; left: 50%; width: 2px; height: 35px;
+            background: rgba(0, 194, 255, 0.4); transform-origin: top; transform: scaleY(0);
+        }
+        .branch-h-left {
+            position: absolute; top: 15px; right: 50%; width: 25%; height: 2px;
+            background: rgba(0, 194, 255, 0.4); transform-origin: right; transform: scaleX(0);
+        }
+        .branch-v-left {
+            position: absolute; top: 15px; left: 25%; width: 2px; height: 35px;
+            background: rgba(0, 194, 255, 0.4); transform-origin: top; transform: scaleY(0);
+        }
+        .branch-h-right {
+            position: absolute; top: 15px; left: 50%; width: 25%; height: 2px;
+            background: rgba(0, 194, 255, 0.4); transform-origin: left; transform: scaleX(0);
+        }
+        .branch-v-right {
+            position: absolute; top: 15px; right: 25%; width: 2px; height: 35px;
+            background: rgba(0, 194, 255, 0.4); transform-origin: top; transform: scaleY(0);
+        }
+
+        /* Line Drawing Animations */
+        .slide.active .branch-center { animation: draw-line 0.4s ease forwards 0.6s; }
+        .slide.active .branch-h-left { animation: draw-line 0.4s ease forwards 1.0s; }
+        .slide.active .branch-v-left { animation: draw-line 0.3s ease forwards 1.4s; }
+        
+        .slide.active .branch-h-right { animation: draw-line 0.4s ease forwards 2.7s; }
+        .slide.active .branch-v-right { animation: draw-line 0.3s ease forwards 3.1s; }
+
+        @keyframes draw-line { to { transform: scale(1); } }
+
+        /* Dots at the ends of lines */
+        .branch-v-left::after, .branch-v-right::after {
+            content: ''; position: absolute; bottom: -4px; left: -3px; width: 8px; height: 8px; 
+            background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary);
+            opacity: 0;
+        }
+        .slide.active .branch-v-left::after { animation: fade-in 0.2s forwards 1.7s; }
+        .slide.active .branch-v-right::after { animation: fade-in 0.2s forwards 3.4s; }
+        @keyframes fade-in { to { opacity: 1; } }
+
+        /* Mindmap Animation */
+        .mindmap-card {
+            opacity: 0;
+            transform: scale(0.8) translateY(40px);
+            transition: opacity 0.8s ease, transform 1s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            transform-origin: center top;
+        }
+        .slide.active .mindmap-card {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        .slide.active .mindmap-card:nth-child(2) { transition-delay: 1.5s !important; }
+        .slide.active .mindmap-card:nth-child(3) { transition-delay: 3.5s !important; }
+
+        /* Topic List (Slide 2) */
+        .topic-list { display: flex; flex-direction: column; gap: 12px; }
+        .topic-item { 
+            display: flex; align-items: center; gap: 16px; font-size: 1.25rem; 
+            font-weight: 500; color: #ccc; padding: 16px 24px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px; transition: transform 0.3s, background 0.3s, border-color 0.3s, box-shadow 0.3s, color 0.3s;
+            position: relative; overflow: hidden; cursor: default;
+            opacity: 0; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .topic-item::before { 
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; 
+            background: var(--primary); transform: scaleY(0); transition: transform 0.3s;
+        }
+        .topic-item:hover, .topic-item.light-on { 
+            color: #fff; transform: translateX(8px); 
+            border-color: rgba(0, 194, 255, 0.4); 
+            box-shadow: 0 8px 32px rgba(0, 194, 255, 0.15);
+            background: rgba(0, 194, 255, 0.1);
+        }
+        .topic-item:hover::before, .topic-item.light-on::before { transform: scaleY(1); }
+        .topic-icon { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; opacity: 0.5; transition: opacity 0.3s; box-shadow: 0 0 8px var(--primary); }
+        .topic-item:hover .topic-icon, .topic-item.light-on .topic-icon { opacity: 1; transform: scale(1.5); }
+
+        @keyframes topic-entrance {
+            0% { opacity: 0; transform: translateX(40px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        .slide.active .topic-item { animation: topic-entrance 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .slide.active .topic-item:nth-child(1) { animation-delay: 0.4s; }
+        .slide.active .topic-item:nth-child(2) { animation-delay: 0.8s; }
+        .slide.active .topic-item:nth-child(3) { animation-delay: 1.2s; }
+        .slide.active .topic-item:nth-child(4) { animation-delay: 1.6s; }
+        .slide.active .topic-item:nth-child(5) { animation-delay: 2.0s; }
+        .slide.active .topic-item:nth-child(6) { animation-delay: 2.4s; }
+        .slide.active .topic-item:nth-child(7) { animation-delay: 2.8s; }
+        .slide.active .topic-item:nth-child(8) { animation-delay: 3.2s; }
+
+        /* Background */
+        .bg-gradient { 
+            position: absolute; inset: 0; z-index: 0;
+            background: radial-gradient(circle at 100% 0%, rgba(0, 194, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 0% 100%, rgba(0, 194, 255, 0.05) 0%, transparent 50%);
+        }
+
+        /* Animations */
+        .a { opacity: 0; transform: translateY(24px); transition: all .8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .slide.active .a { opacity: 1; transform: translateY(0); }
+        .slide.active .a:nth-child(1) { transition-delay: .1s; }
+        .slide.active .a:nth-child(2) { transition-delay: .2s; }
+        .slide.active .a:nth-child(3) { transition-delay: .3s; }
+        .slide.active .a:nth-child(4) { transition-delay: .4s; }
+        .slide.active .a:nth-child(5) { transition-delay: .5s; }
+
+        /* Controls */
+        #nav { position: fixed; bottom: 30px; right: 40px; display: flex; gap: 16px; z-index: 100; }
+        .nav-btn { width: 50px; height: 50px; border-radius: 50%; background: var(--panel); border: 1px solid var(--panel-bd); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; }
+        .nav-btn:hover { background: var(--primary); border-color: var(--primary); transform: scale(1.1); }
+        .nav-btn svg { width: 24px; height: 24px; fill: currentColor; }
+
+        /* Progress Bar */
+        #progress { position: fixed; top: 0; left: 0; height: 4px; background: var(--primary); z-index: 100; width: 0%; transition: width 0.3s ease; box-shadow: 0 0 10px var(--primary); }
+
+        .footer-info { position: fixed; bottom: 30px; left: 6vw; z-index: 90; font-size: 0.8rem; color: var(--dim); display: flex; gap: 32px; font-family: var(--font-h); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
+        .footer-info span { display: flex; align-items: center; gap: 8px; }
+        
+    
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 768px) {
+            html { font-size: 14px; }
+            .h-xl { font-size: clamp(2.5rem, 10vw, 3.5rem) !important; }
+            .h-lg { font-size: clamp(2rem, 8vw, 2.5rem) !important; }
+            .sub { font-size: 1.1rem !important; margin-bottom: 30px !important; }
+            
+            .g2, .g2-asym { 
+                grid-template-columns: 1fr !important; 
+                gap: 20px !important; 
+            }
+            
+            .mindmap-branches { display: none !important; }
+            
+            .glass-card { 
+                padding: 24px !important; 
+                transform: none !important; /* Disable heavy scaling/translating on mobile for simplicity */
+                opacity: 1 !important; /* Skip delay animations to prevent invisible content if scroll gets weird */
+            }
+            
+            .slide.active .mindmap-card {
+                transform: scale(1) translateY(0) !important;
+                transition-delay: 0s !important; /* Show instantly on mobile to avoid waiting 3 seconds looking at a blank screen */
+            }
+            
+            .topic-item { padding: 12px 16px !important; font-size: 1.1rem !important; }
+            
+            #controls { bottom: 20px; right: 20px; }
+            #controls button { width: 44px; height: 44px; }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="progress"></div>
+    <div class="bg-gradient"></div>
+    <div id="deck">
+
+        <!-- Slide 1: Abertura -->
+        <div class="slide active">
+            <div class="w" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="tag a" style="justify-content: center; letter-spacing: 0.15em;">Especial 28 de Abril - Dia da Segurança e Saúde no Trabalho</div>
+                <h1 class="h-xl a" style="max-width: 1100px;">O Impacto Real da<br><span style="color: var(--primary);">Saúde Ocupacional</span></h1>
+                <p class="sub a" style="font-size: 1.6rem; color: #ccc; max-width: 850px; margin-top: 20px;">Os desafios silenciosos de quem trabalha sentado e como a prevenção transforma o seu bem-estar.</p>
+                
+                <div class="a" style="margin-top: 60px; display: flex; flex-direction: column; gap: 20px; align-items: center;">
+                    <div class="animated-divider"></div>
+                    <div>
+                        <h3 style="color: #fff; font-size: 1.4rem; margin-bottom: 4px; letter-spacing: 0.1em; text-transform: uppercase;">Daiani Pauli</h3>
+                        <p style="color: var(--dim); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">Enfermeira • COREN-SC 535.071</p>
+                        <p style="color: var(--primary); font-size: 0.9rem; margin-top: 12px; font-weight: 600; letter-spacing: 0.1em; padding: 6px 16px; border: 1px solid var(--primary-l); border-radius: 100px; background: var(--primary-g);">ADVOCACIA MARQUETTI | 28/04/2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Visão Geral -->
+        <div class="slide">
+            <div class="w g2-asym">
+                <div class="left-col">
+
+                    <h2 class="h-lg a">O que vamos<br><span style="color: var(--primary);">abordar hoje</span></h2>
+                    <p class="sub a" style="font-size: 1.2rem; margin-top: 30px;">Cada tema traz a dor real, o que a ciência comprovou e o que você pode fazer agora para resolver.</p>
+                </div>
+                <div class="right-col">
+                    <div class="topic-list">
+                        <div class="topic-item glass-card" style="justify-content: center; text-align: center; padding: 16px 24px;"><div class="topic-icon"></div>Dor lombar e cervical crônica</div>
+                        <div class="topic-item glass-card" style="justify-content: center; text-align: center; padding: 16px 24px;"><div class="topic-icon"></div>Encurtamento muscular e desequilíbrio</div>
+                        <div class="topic-item glass-card" style="justify-content: center; text-align: center; padding: 16px 24px;"><div class="topic-icon"></div>Risco cardiovascular elevado</div>
+                        <div class="topic-item glass-card" style="justify-content: center; text-align: center; padding: 16px 24px;"><div class="topic-icon"></div>Diabetes tipo 2 e resistência à insulina</div>
+                        <div class="topic-item glass-card" style="justify-content: center; text-align: center; padding: 16px 24px;"><div class="topic-icon"></div>Aumento de peso e dislipidemias</div>
+                        <div class="topic-item glass-card" style="justify-content: center; text-align: center; padding: 16px 24px;"><div class="topic-icon"></div>Exaustão física e baixa satisfação</div>
+                        <div class="topic-item glass-card" style="justify-content: center; text-align: center; padding: 16px 24px;"><div class="topic-icon"></div>Depressão e ansiedade</div>
+                        <div class="topic-item glass-card" style="justify-content: center; text-align: center; padding: 16px 24px;"><div class="topic-icon"></div>Burnout e esgotamento profissional</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <!-- Slide 3: Tema 1 -->
+        <div class="slide">
+            <div class="w" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <h2 class="h-lg a" style="margin-bottom: 24px;">Dor Lombar e<br><span style="color: var(--primary);">Cervical Crônica</span></h2>
+                <p class="sub a" style="font-size: 1.3rem; color: #fff; font-style: italic; max-width: 900px; margin-bottom: 50px;">
+                    "Você termina o dia com aquela sensação de que sua coluna vai partir ao meio? Dores no pescoço que viraram parte da rotina? Isso não é normal, é um sinal."
+                </p>
+                
+                <div class="g2" style="width: 100%; max-width: 1100px; text-align: center; gap: 30px; position: relative;">
+                    <div class="mindmap-branches">
+                        <div class="branch-center"></div>
+                        <div class="branch-h-left"></div>
+                        <div class="branch-v-left"></div>
+                        <div class="branch-h-right"></div>
+                        <div class="branch-v-right"></div>
+                    </div>
+                    <div class="glass-card mindmap-card">
+                        <div class="glass-icon">🔬</div>
+                        <h3 class="box-title">O que a ciência diz</h3>
+                        <p>Segundo a OMS, a dor lombar é a principal causa de afastamento do trabalho no mundo. Ficar sentado por mais de 6 horas por dia aumenta em <strong>54% o risco</strong> de desenvolver dor crônica na coluna.</p>
+                    </div>
+                    <div class="glass-card highlight mindmap-card">
+                        <div class="glass-icon">💡</div>
+                        <h3 class="box-title">O que você pode fazer</h3>
+                        <p>Levante-se pelo menos 1 vez a cada hora. Ajuste a altura da cadeira para que os pés fiquem apoiados no chão e o monitor na altura dos olhos. Pequenos movimentos valem mais do que uma hora de academia no fim de semana.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+                <!-- Slide 4: Tema 2 -->
+        <div class="slide">
+            <div class="w" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <h2 class="h-lg a" style="margin-bottom: 24px;">Encurtamento<br>Muscular e<br><span style="color: var(--primary);">Desequilíbrio Postural</span></h2>
+                <p class="sub a" style="font-size: 1.3rem; color: #fff; font-style: italic; max-width: 900px; margin-bottom: 50px;">
+                    "Sente os ombros sempre tensos? Dificuldade de se alongar sem sentir dor? O corpo que passa horas na mesma posição começa a 'esquecer' como se mover corretamente."
+                </p>
+                
+                <div class="g2" style="width: 100%; max-width: 1100px; text-align: center; gap: 30px; position: relative;">
+                    <div class="mindmap-branches">
+                        <div class="branch-center"></div>
+                        <div class="branch-h-left"></div>
+                        <div class="branch-v-left"></div>
+                        <div class="branch-h-right"></div>
+                        <div class="branch-v-right"></div>
+                    </div>
+                    <div class="glass-card mindmap-card">
+                        <div class="glass-icon">🔬</div>
+                        <h3 class="box-title">O que a ciência diz</h3>
+                        <p>Pesquisas mostram que profissionais sedentários apresentam encurtamento dos flexores do quadril e enfraquecimento do core em média após 3 anos de trabalho sentado. Isso gera uma cascata de compensações posturais.</p>
+                    </div>
+                    <div class="glass-card highlight mindmap-card">
+                        <div class="glass-icon">💡</div>
+                        <h3 class="box-title">O que você pode fazer</h3>
+                        <p>3 minutos de alongamento de pescoço, ombros e quadril durante o expediente já reduzem a tensão muscular acumulada. Consistência diária vale mais do que intensidade eventual.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+                <!-- Slide 5: Tema 3 -->
+        <div class="slide">
+            <div class="w" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <h2 class="h-lg a" style="margin-bottom: 24px;">Risco<br>Cardiovascular<br><span style="color: var(--primary);">Elevado</span></h2>
+                <p class="sub a" style="font-size: 1.3rem; color: #fff; font-style: italic; max-width: 900px; margin-bottom: 50px;">
+                    "Cansaço fácil, falta de ar ao subir escadas, pressão que não baixa? O coração também paga o preço do sedentarismo."
+                </p>
+                
+                <div class="g2" style="width: 100%; max-width: 1100px; text-align: center; gap: 30px; position: relative;">
+                    <div class="mindmap-branches">
+                        <div class="branch-center"></div>
+                        <div class="branch-h-left"></div>
+                        <div class="branch-v-left"></div>
+                        <div class="branch-h-right"></div>
+                        <div class="branch-v-right"></div>
+                    </div>
+                    <div class="glass-card mindmap-card">
+                        <div class="glass-icon">🔬</div>
+                        <h3 class="box-title">O que a ciência diz</h3>
+                        <p>Um estudo no Journal of the American College of Cardiology mostrou que pessoas sentadas >10h/dia têm <strong>risco 34% maior</strong> de doenças cardíacas, independentemente de praticarem exercícios fora do trabalho.</p>
+                    </div>
+                    <div class="glass-card highlight mindmap-card">
+                        <div class="glass-icon">💡</div>
+                        <h3 class="box-title">O que você pode fazer</h3>
+                        <p>Monitore sua pressão arterial regularmente. Inclua caminhadas curtas, 10 minutos após o almoço já impactam positivamente a saúde. Reduza o sal e mantenha-se hidratado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+                <!-- Slide 6: Tema 4 -->
+        <div class="slide">
+            <div class="w" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <h2 class="h-lg a" style="margin-bottom: 24px;">Diabetes Tipo 2 e<br><span style="color: var(--primary);">Resistência à Insulina</span></h2>
+                <p class="sub a" style="font-size: 1.3rem; color: #fff; font-style: italic; max-width: 900px; margin-bottom: 50px;">
+                    "Vontade de comer doce o tempo todo? Cansaço depois das refeições? Ganho de peso sem comer muito? Seu corpo pode estar mandando sinais de alerta."
+                </p>
+                
+                <div class="g2" style="width: 100%; max-width: 1100px; text-align: center; gap: 30px; position: relative;">
+                    <div class="mindmap-branches">
+                        <div class="branch-center"></div>
+                        <div class="branch-h-left"></div>
+                        <div class="branch-v-left"></div>
+                        <div class="branch-h-right"></div>
+                        <div class="branch-v-right"></div>
+                    </div>
+                    <div class="glass-card mindmap-card">
+                        <div class="glass-icon">🔬</div>
+                        <h3 class="box-title">O que a ciência diz</h3>
+                        <p>O sedentarismo reduz a sensibilidade à insulina em até <strong>40% em apenas 5 dias</strong> de inatividade (Universidade de Missouri). O músculo parado não consome glicose, elevando o açúcar no sangue silenciosamente.</p>
+                    </div>
+                    <div class="glass-card highlight mindmap-card">
+                        <div class="glass-icon">💡</div>
+                        <h3 class="box-title">O que você pode fazer</h3>
+                        <p>Mexa-se após as refeições. Evite ficar sentado por mais de 2 horas sem se levantar. Reduza ultraprocessados e prefira refeições com fibras para estabilizar a glicemia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+                <!-- Slide 7: Tema 5 -->
+        <div class="slide">
+            <div class="w" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <h2 class="h-lg a" style="margin-bottom: 24px;">Aumento de Peso e<br><span style="color: var(--primary);">Dislipidemias</span></h2>
+                <p class="sub a" style="font-size: 1.3rem; color: #fff; font-style: italic; max-width: 900px; margin-bottom: 50px;">
+                    "O trabalho sedentário é um dos maiores sabotadores silenciosos do metabolismo."
+                </p>
+                
+                <div class="g2" style="width: 100%; max-width: 1100px; text-align: center; gap: 30px; position: relative;">
+                    <div class="mindmap-branches">
+                        <div class="branch-center"></div>
+                        <div class="branch-h-left"></div>
+                        <div class="branch-v-left"></div>
+                        <div class="branch-h-right"></div>
+                        <div class="branch-v-right"></div>
+                    </div>
+                    <div class="glass-card mindmap-card">
+                        <div class="glass-icon">🔬</div>
+                        <h3 class="box-title">O que a ciência diz</h3>
+                        <p>Trabalhar sentado reduz o gasto calórico diário em até 300 kcal. Em um ano, isso equivale a ~15 kg que não são queimados. Associado a isso, o estresse eleva o cortisol, favorecendo gordura abdominal.</p>
+                    </div>
+                    <div class="glass-card highlight mindmap-card">
+                        <div class="glass-icon">💡</div>
+                        <h3 class="box-title">O que você pode fazer</h3>
+                        <p>Não é necessário dieta radical. Trocar o elevador pela escada, caminhar até o colega e beber água antes das refeições são passos concretos e sustentáveis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+                <!-- Slide 8: Tema 6 -->
+        <div class="slide">
+            <div class="w" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <h2 class="h-lg a" style="margin-bottom: 24px;">Exaustão Física e<br><span style="color: var(--primary);">Baixa Satisfação</span></h2>
+                <p class="sub a" style="font-size: 1.3rem; color: #fff; font-style: italic; max-width: 900px; margin-bottom: 50px;">
+                    "Chega em casa sem energia para nada? Sente que trabalha muito mas produz pouco? O corpo parado por horas paradoxalmente se torna um corpo esgotado."
+                </p>
+                
+                <div class="g2" style="width: 100%; max-width: 1100px; text-align: center; gap: 30px; position: relative;">
+                    <div class="mindmap-branches">
+                        <div class="branch-center"></div>
+                        <div class="branch-h-left"></div>
+                        <div class="branch-v-left"></div>
+                        <div class="branch-h-right"></div>
+                        <div class="branch-v-right"></div>
+                    </div>
+                    <div class="glass-card mindmap-card">
+                        <div class="glass-icon">🔬</div>
+                        <h3 class="box-title">O que a ciência diz</h3>
+                        <p>A fadiga ocupacional associada ao sedentarismo reduz a produtividade em até 20% (Harvard Business Review). Sem movimento, o cérebro entra em modo de economia de energia.</p>
+                    </div>
+                    <div class="glass-card highlight mindmap-card">
+                        <div class="glass-icon">💡</div>
+                        <h3 class="box-title">O que você pode fazer</h3>
+                        <p>Pause conscientemente. Levante, beba água, respire fundo. Micro-pausas de 5 minutos a cada 90 minutos de trabalho aumentam a produtividade e reduzem a fadiga no final do dia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+                <!-- Slide 9: Tema 7 -->
+        <div class="slide">
+            <div class="w" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <h2 class="h-lg a" style="margin-bottom: 24px;">Depressão e<br><span style="color: var(--primary);">Ansiedade</span></h2>
+                <p class="sub a" style="font-size: 1.3rem; color: #fff; font-style: italic; max-width: 900px; margin-bottom: 50px;">
+                    "Sensação de angústia sem motivo claro? Pensamentos acelerados que não deixam dormir? O corpo e a mente estão mais conectados do que imaginamos."
+                </p>
+                
+                <div class="g2" style="width: 100%; max-width: 1100px; text-align: center; gap: 30px; position: relative;">
+                    <div class="mindmap-branches">
+                        <div class="branch-center"></div>
+                        <div class="branch-h-left"></div>
+                        <div class="branch-v-left"></div>
+                        <div class="branch-h-right"></div>
+                        <div class="branch-v-right"></div>
+                    </div>
+                    <div class="glass-card mindmap-card">
+                        <div class="glass-icon">🔬</div>
+                        <h3 class="box-title">O que a ciência diz</h3>
+                        <p>Metanálise (JAMA Psychiatry): o comportamento sedentário aumenta o risco de depressão em 25% e de ansiedade em 32%. O exercício atua como antidepressivo natural elevando serotonina.</p>
+                    </div>
+                    <div class="glass-card highlight mindmap-card">
+                        <div class="glass-icon">💡</div>
+                        <h3 class="box-title">O que você pode fazer</h3>
+                        <p>Movimento é remédio. Caminhar 20 min/dia já apresenta impacto clínico mensurável no humor. Estabeleça limites rígidos entre trabalho e vida pessoal para se recuperar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+                <!-- Slide 10: Tema 8 -->
+        <div class="slide">
+            <div class="w" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <h2 class="h-lg a" style="margin-bottom: 24px;">Burnout e<br><span style="color: var(--primary);">Esgotamento Profissional</span></h2>
+                <p class="sub a" style="font-size: 1.3rem; color: #fff; font-style: italic; max-width: 900px; margin-bottom: 50px;">
+                    "Acordar já cansado? Sentir que não tem mais nada a dar? Dificuldade de se importar com o trabalho que antes fazia sentido? Isso tem nome e é sério."
+                </p>
+                
+                <div class="g2" style="width: 100%; max-width: 1100px; text-align: center; gap: 30px; position: relative;">
+                    <div class="mindmap-branches">
+                        <div class="branch-center"></div>
+                        <div class="branch-h-left"></div>
+                        <div class="branch-v-left"></div>
+                        <div class="branch-h-right"></div>
+                        <div class="branch-v-right"></div>
+                    </div>
+                    <div class="glass-card mindmap-card">
+                        <div class="glass-icon">🔬</div>
+                        <h3 class="box-title">O que a ciência diz</h3>
+                        <p>Reconhecido pela OMS em 2019. Profissionais de escritório estão entre os grupos de maior risco, especialmente combinando alta demanda, baixa autonomia e sedentarismo.</p>
+                    </div>
+                    <div class="glass-card highlight mindmap-card">
+                        <div class="glass-icon">💡</div>
+                        <h3 class="box-title">O que você pode fazer</h3>
+                        <p>Identifique seus limites antes de ultrapassá-los. Busque apoio psicológico. Estabeleça uma rotina com lazer não negociável. Cuidar de si é pré-requisito para cuidar do resto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Slide 11: Fechamento -->
+        <div class="slide">
+            <div class="w" style="text-align: center; max-width: 1000px;">
+
+                <h2 class="h-xl a" style="font-size: clamp(3.5rem, 7vw, 6.5rem);">Seu corpo fala.<br><span style="color: var(--primary);">Você está ouvindo?</span></h2>
+                <p class="sub a" style="margin: 0 auto 60px auto; font-size: 1.6rem; color: #ddd; max-width: 850px;">
+                    Cada sinal de dor, cansaço ou desânimo é uma mensagem. Não espere o corpo gritar para começar a cuidar. 
+                </p>
+                
+                <div class="a glass-card" style="display: inline-block; width: auto; padding: 40px 80px;">
+                    <h3 style="color: #fff; font-size: 1.8rem; margin-bottom: 12px; font-weight: 500;">Hoje você deu o primeiro passo: se informou.</h3>
+                    <p style="color: var(--primary); font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em;">O próximo passo é seu.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-info">
+        <span>DAIANI PAULI</span>
+        <span style="color: var(--primary);">•</span>
+        <span>ENFERMEIRA</span>
+        <span style="color: var(--primary);">•</span>
+        <span>COREN-SC 535.071</span>
+        <span style="color: var(--primary);">•</span>
+        <span>(47) 9 8864-5638</span>
+    </div>
+
+    <!-- Navigation -->
+    <div id="nav">
+        <button class="nav-btn" id="prevBtn" aria-label="Anterior">
+            <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+        </button>
+        <button class="nav-btn" id="nextBtn" aria-label="Próximo">
+            <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressBar = document.getElementById('progress');
+        let current = 0;
+        let isAnimating = false;
+
+        function updateProgress() {
+            const percent = ((current) / (slides.length - 1)) * 100;
+            progressBar.style.width = percent + '%';
+        }
+
+        function goToSlide(index, reverse = false) {
+            if(isAnimating || index < 0 || index >= slides.length) return;
+            isAnimating = true;
+
+            const currentSlide = slides[current];
+            const nextSlide = slides[index];
+
+            currentSlide.classList.remove('active', 'exit', 'reverse-enter', 'reverse-exit');
+            nextSlide.classList.remove('active', 'exit', 'reverse-enter', 'reverse-exit');
+
+            if(reverse) {
+                currentSlide.classList.add('reverse-exit');
+                nextSlide.classList.add('reverse-enter');
+            } else {
+                currentSlide.classList.add('exit');
+            }
+
+            // Force reflow
+            void nextSlide.offsetWidth;
+
+            nextSlide.classList.add('active');
+
+            current = index;
+            updateProgress();
+
+            setTimeout(() => {
+                isAnimating = false;
+                checkTopicAutoLight();
+                handleHighlights();
+            }, 600);
+        }
+
+        let highlightTimeout = null;
+
+        function handleHighlights() {
+            if(highlightTimeout) clearTimeout(highlightTimeout);
+            const allHighlights = document.querySelectorAll('.glass-card.highlight');
+            allHighlights.forEach(el => el.classList.remove('is-lit'));
+
+            const currentSlideEl = slides[current];
+            const slideHighlights = currentSlideEl.querySelectorAll('.glass-card.highlight');
+            
+            if (slideHighlights.length > 0) {
+                highlightTimeout = setTimeout(() => {
+                    if(slides[current] === currentSlideEl) {
+                        slideHighlights.forEach(el => el.classList.add('is-lit'));
+                    }
+                }, 6500);
+            }
+        }
+
+        let topicAutoInterval = null;
+        let currentAutoTopic = 0;
+        let autoLightTimeout = null;
+
+        function checkTopicAutoLight() {
+            const slide2 = slides[1];
+            const topics = slide2.querySelectorAll('.topic-item');
+            
+            if(topicAutoInterval) clearInterval(topicAutoInterval);
+            if(autoLightTimeout) clearTimeout(autoLightTimeout);
+            topics.forEach(t => t.classList.remove('light-on'));
+            
+            if(current === 1) { // if on Slide 2
+                currentAutoTopic = 0;
+                
+                // Wait for the cascade entrance animation to finish (approx 1.5s + 1s = 2.5s)
+                autoLightTimeout = setTimeout(() => {
+                    if(current !== 1) return;
+                    
+                    topics[0].classList.add('light-on');
+                    topicAutoInterval = setInterval(() => {
+                        if(current !== 1) {
+                            clearInterval(topicAutoInterval);
+                            return;
+                        }
+                        topics[currentAutoTopic].classList.remove('light-on');
+                        currentAutoTopic++;
+                        
+                        if(currentAutoTopic < topics.length) {
+                            topics[currentAutoTopic].classList.add('light-on');
+                        } else {
+                            clearInterval(topicAutoInterval);
+                        }
+                    }, 3000);
+                }, 4500);
+            }
+        }
+
+        nextBtn.addEventListener('click', () => goToSlide(current + 1));
+        prevBtn.addEventListener('click', () => goToSlide(current - 1, true));
+
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') goToSlide(current + 1);
+            if(e.key === 'ArrowLeft' || e.key === 'ArrowUp') goToSlide(current - 1, true);
+        });
+
+        // Initialize progress
+        updateProgress();
+    </script>
+</body>
+</html>
