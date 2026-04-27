@@ -6,6 +6,8 @@ export const metadata = {
   title: 'DKS Prospect | Mini-CRM',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProspectPage() {
   const dbLeads = await prisma.lead.findMany({
     orderBy: { createdAt: 'desc' },
