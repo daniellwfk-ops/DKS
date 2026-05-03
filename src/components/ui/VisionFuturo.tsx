@@ -61,7 +61,7 @@ export default function VisionFuturo() {
                     from { opacity:0; transform:translateY(28px) scale(0.97); }
                     to   { opacity:1; transform:translateY(0)   scale(1); }
                 }
-                .vision-card { opacity:0; }
+                .vision-card { opacity:0; will-change: transform, opacity; }
                 .vision-card.visible { animation: visionCardIn 0.55s ease forwards; }
                 @keyframes goldPulse {
                     0%,100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
@@ -113,7 +113,7 @@ export default function VisionFuturo() {
                 {futures.map((f, i) => (
                     <div
                         key={i}
-                        className={`vision-card relative bg-[#050505] border border-[#D4AF37]/15 rounded-2xl p-7 group hover:border-[#D4AF37]/50 transition-all duration-500${visible ? " visible" : ""}`}
+                        className={`vision-card relative bg-[#050505] border border-[#D4AF37]/15 rounded-2xl p-7 group hover:border-[#D4AF37]/50 transition duration-500${visible ? " visible" : ""}`}
                         style={{
                             animationDelay: `${f.delay}s`,
                             animation: visible ? `visionCardIn 0.55s ease ${f.delay}s forwards, goldPulse 4s ease-in-out ${f.delay + 0.6}s infinite` : undefined,
@@ -166,7 +166,7 @@ export default function VisionFuturo() {
                         href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block bg-[#00CC00] text-white font-black text-sm uppercase tracking-widest px-10 py-4 rounded hover:bg-[#00B300] transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(0,204,0,0.25)]"
+                        className="inline-block bg-[#00CC00] text-white font-black text-sm uppercase tracking-widest px-10 py-4 rounded hover:bg-[#00B300] transition duration-300 hover:scale-105 shadow-[0_0_30px_rgba(0,204,0,0.25)]"
                     >
                         Quero esse restaurante para mim
                     </a>

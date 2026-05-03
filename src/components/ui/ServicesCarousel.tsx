@@ -78,6 +78,7 @@ export default function ServicesCarousel() {
                     gap: 1.5rem;
                     animation: scroll-carousel 35s linear infinite;
                     width: max-content;
+                    will-change: transform;
                 }
                 .carousel-track.paused {
                     animation-play-state: paused;
@@ -123,7 +124,7 @@ export default function ServicesCarousel() {
                     {allServices.map((service, idx) => (
                         <div
                             key={idx}
-                            className="flex-shrink-0 w-[280px] md:w-[320px] bg-[#050505] border border-white/5 rounded-2xl flex flex-col items-center p-8 transition-all hover:-translate-y-2 duration-300 shadow-[0_20px_40px_rgba(0,0,0,0.8)] hover:shadow-[0_20px_60px_rgba(212,175,55,0.12)] hover:border-[#D4AF37]/40 relative overflow-hidden group/card select-none"
+                            className="flex-shrink-0 w-[280px] md:w-[320px] bg-[#050505] border border-white/5 rounded-2xl flex flex-col items-center p-8 transition hover:-translate-y-2 duration-300 shadow-[0_20px_40px_rgba(0,0,0,0.8)] hover:shadow-[0_20px_60px_rgba(212,175,55,0.12)] hover:border-[#D4AF37]/40 relative overflow-hidden group/card select-none"
                         >
                             {/* Top Accent Line */}
                             <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"></div>
@@ -132,7 +133,7 @@ export default function ServicesCarousel() {
                             <div className="w-full relative flex items-center justify-center mb-8 h-[180px]">
                                 <div className="absolute inset-0 bg-[#D4AF37]/5 blur-[30px] rounded-full group-hover/card:bg-[#D4AF37]/20 transition-colors duration-500"></div>
 
-                                <div className="relative z-10 w-full h-full overflow-hidden shadow-2xl rounded-xl group-hover/card:shadow-[0_0_30px_rgba(212,175,55,0.2)] transition-all duration-500">
+                                <div className="relative z-10 w-full h-full overflow-hidden shadow-2xl rounded-xl group-hover/card:shadow-[0_0_30px_rgba(212,175,55,0.2)] transition-shadow duration-500">
                                     <img
                                         src={service.image}
                                         alt={service.title}

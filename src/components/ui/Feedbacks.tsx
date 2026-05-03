@@ -126,7 +126,7 @@ export default function Feedbacks() {
                     {doubled.map((t, i) => (
                         <div
                             key={i}
-                            className="w-[320px] flex-shrink-0 bg-[#080808] border border-white/5 rounded-2xl p-7 hover:border-[#D4AF37]/30 transition-all duration-300 group cursor-default"
+                            className="w-[320px] flex-shrink-0 bg-[#080808] border border-white/5 rounded-2xl p-7 hover:border-[#D4AF37]/30 transition duration-300 group cursor-default"
                             style={{ boxShadow: "0 4px 30px rgba(0,0,0,0.4)" }}
                         >
                             {/* Quote mark */}
@@ -185,7 +185,7 @@ export default function Feedbacks() {
                     href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-[#00CC00] text-white font-black text-sm uppercase tracking-widest px-10 py-4 rounded transition-all duration-300 hover:bg-[#00B300] hover:scale-105 shadow-[0_0_25px_rgba(0,204,0,0.25)]"
+                    className="inline-block bg-[#00CC00] text-white font-black text-sm uppercase tracking-widest px-10 py-4 rounded transition duration-300 hover:bg-[#00B300] hover:scale-105 shadow-[0_0_25px_rgba(0,204,0,0.25)]"
                 >
                     Quero Resultados Como Esses
                 </a>

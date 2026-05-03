@@ -152,7 +152,7 @@ export default function MetodoROMA() {
         @keyframes cardIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         @keyframes letterGlow { 0%,100%{text-shadow:0 0 6px rgba(212,175,55,0.4)} 50%{text-shadow:0 0 20px rgba(212,175,55,0.9)} }
         @keyframes connectorPulse { 0%,100%{opacity:0.15} 50%{opacity:0.5} }
-        .roma-card { animation: cardIn 0.6s ease forwards; opacity:0; }
+        .roma-card { animation: cardIn 0.6s ease forwards; opacity:0; will-change: transform, opacity; }
         .roma-card:nth-child(1) { animation-delay:0.1s }
         .roma-card:nth-child(2) { animation-delay:0.25s }
         .roma-card:nth-child(3) { animation-delay:0.4s }
@@ -195,7 +195,7 @@ export default function MetodoROMA() {
                         {phases.filter(p => p.position === "tl" || p.position === "bl").map((phase) => (
                             <div
                                 key={phase.letter}
-                                className="roma-card bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition-all duration-300 hover:-translate-y-1 group"
+                                className="roma-card bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition duration-300 hover:-translate-y-1 group"
                             >
                                 <div className="flex items-start justify-between mb-4">
                                     <div>
@@ -279,7 +279,7 @@ export default function MetodoROMA() {
                         {phases.filter(p => p.position === "tr" || p.position === "br").map((phase) => (
                             <div
                                 key={phase.letter}
-                                className="roma-card bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition-all duration-300 hover:-translate-y-1 group"
+                                className="roma-card bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition duration-300 hover:-translate-y-1 group"
                             >
                                 <div className="flex items-start justify-between mb-4">
                                     <div>
@@ -338,7 +338,7 @@ export default function MetodoROMA() {
                     {phases.map((phase) => (
                         <div
                             key={phase.letter}
-                            className="roma-card w-full bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition-all"
+                            className="roma-card w-full bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-[#D4AF37]/40 transition"
                         >
                             <div className="flex items-start justify-between mb-4">
                                 <p className="text-white font-black text-lg uppercase" style={{ fontFamily: "var(--font-montserrat)" }}>
@@ -361,7 +361,7 @@ export default function MetodoROMA() {
                     href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-[#00CC00] text-white font-black text-sm uppercase tracking-widest px-10 py-4 rounded hover:bg-[#00B300] transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(0,204,0,0.25)]"
+                    className="inline-block bg-[#00CC00] text-white font-black text-sm uppercase tracking-widest px-10 py-4 rounded hover:bg-[#00B300] transition duration-300 hover:scale-105 shadow-[0_0_30px_rgba(0,204,0,0.25)]"
                 >
                     Aplicar o Método ROMA no Meu Restaurante
                 </a>

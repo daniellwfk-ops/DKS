@@ -61,7 +61,7 @@ export default function DorDoLead() {
                     from { opacity: 0; transform: translateY(24px); }
                     to   { opacity: 1; transform: translateY(0); }
                 }
-                .pain-card { opacity: 0; }
+                .pain-card { opacity: 0; will-change: transform, opacity; }
                 .pain-card.visible { animation: painCardIn 0.5s ease forwards; }
                 @keyframes pulse-red { 0%,100%{ box-shadow: 0 0 0 0 rgba(220,38,38,0); } 50%{ box-shadow: 0 0 0 8px rgba(220,38,38,0); } }
                 @keyframes glitch {
@@ -99,7 +99,7 @@ export default function DorDoLead() {
                 {pains.map((pain, i) => (
                     <div
                         key={i}
-                        className={`pain-card relative bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-red-500/40 hover:bg-white/[0.07] transition-all duration-300 group shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] ${visible ? " visible" : ""}`}
+                        className={`pain-card relative bg-white/[0.04] backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-red-500/40 hover:bg-white/[0.07] transition duration-300 group shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] ${visible ? " visible" : ""}`}
                         style={{ animationDelay: `${i * 0.1}s` }}
                     >
                         {/* Top red line */}
@@ -151,7 +151,7 @@ export default function DorDoLead() {
                     href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-[#00CC00] text-white font-black text-sm uppercase tracking-widest px-10 py-4 rounded hover:bg-[#00B300] transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(0,204,0,0.25)]"
+                    className="inline-block bg-[#00CC00] text-white font-black text-sm uppercase tracking-widest px-10 py-4 rounded hover:bg-[#00B300] transition duration-300 hover:scale-105 shadow-[0_0_30px_rgba(0,204,0,0.25)]"
                 >
                     Quero contratar a DKS Marketing
                 </a>
