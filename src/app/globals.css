@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -33,9 +32,9 @@
     --text-muted: #B3B3B3;
 
     /* Typography - Matching the bold structured look of the reference */
-    --font-heading: 'Montserrat', sans-serif;
-    --font-sub: 'Montserrat', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: var(--font-montserrat), sans-serif;
+    --font-sub: var(--font-montserrat), sans-serif;
+    --font-body: var(--font-sora), sans-serif;
 
     /* Spacing & Layout */
     --section-spacing: 120px;
