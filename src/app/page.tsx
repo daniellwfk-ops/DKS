@@ -122,79 +122,32 @@ export default function Home() {
           <div className="absolute inset-y-0 left-0 w-[50px] md:w-[150px] bg-gradient-to-r from-[#000000] to-transparent z-10 pointer-events-none"></div>
           <div className="absolute inset-y-0 right-0 w-[50px] md:w-[150px] bg-gradient-to-l from-[#000000] to-transparent z-10 pointer-events-none"></div>
 
-          {/* Scrolling Content - Mobile: 2 rows (opposing), Desktop: 1 row */}
-          <div className="flex flex-col md:flex-row gap-6 md:gap-0 w-max">
-
-            {/* Mobile View: 2 Rows */}
-            <div className="md:hidden flex flex-col gap-6 w-max">
-              {/* Row 1 */}
-              <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap items-center hover:[animation-play-state:paused]">
-                {[...Array(2)].map((_, i) => (
-                  <div key={i} className="flex gap-[24px] px-[12px] items-center">
-                    {[
-                      { name: "Japa Haus", image: "/images/japa-haus-logo.webp" },
-                      { name: "Dora Marie", image: "/images/dora-marie-logo.webp" },
-                      { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.webp" },
-                      { name: "Saporito", image: "/images/Saporito LOGO.webp" },
-                      { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.webp" },
-                      { name: "Pão e Ponto", image: "/images/Pao e ponto logo.webp" },
-                      { name: "Deco Pizzas", image: "/images/Deco Pizzas logo.webp" },
-                      { name: "Padaria Bublitz", image: "/images/Bublitz logo.webp" },
-                    ].map((client, idx) => (
-                      <ClientLogoCard key={`r1-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
-                    ))}
-                  </div>
+          {/* Unified Scrolling Content - 1 Continuous Row for Mobile and Desktop */}
+          <div className="flex animate-[marquee_40s_linear_infinite] whitespace-nowrap items-center hover:[animation-play-state:paused] w-max">
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="flex gap-[24px] md:gap-[32px] px-[12px] md:px-[16px] items-center">
+                {[
+                  { name: "Japa Haus", image: "/images/japa-haus-logo.webp" },
+                  { name: "Dora Marie", image: "/images/dora-marie-logo.webp" },
+                  { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.webp" },
+                  { name: "Saporito", image: "/images/Saporito LOGO.webp" },
+                  { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.webp" },
+                  { name: "Pão e Ponto", image: "/images/Pao e ponto logo.webp" },
+                  { name: "Deco Pizzas", image: "/images/Deco Pizzas logo.webp" },
+                  { name: "Steak Grill Burger", image: "/images/Steak Grill Burger logo.webp" },
+                  { name: "My Beer", image: "/images/My beer logo.webp" },
+                  { name: "Princeso Restaurante", image: "/images/PRINCESO RESTAURANTE.webp" },
+                  { name: "Pizza&Cia", image: "/images/Pizza&Cia logo.webp" },
+                  { name: "Dan Sushi", image: "/images/Dan Sushi logo.webp" },
+                  { name: "The Familys Villa Germanica", image: "/images/The Familys Logo.webp" },
+                  { name: "My Crush", image: "/images/My Crush Logo.webp" },
+                  { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.webp" },
+                  { name: "Padaria Bublitz", image: "/images/Bublitz logo.webp" },
+                ].map((client, idx) => (
+                  <ClientLogoCard key={`unified-${i}-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
                 ))}
               </div>
-              {/* Row 2 */}
-              <div className="flex animate-[marquee-reverse_20s_linear_infinite] whitespace-nowrap items-center hover:[animation-play-state:paused]">
-                {[...Array(2)].map((_, i) => (
-                  <div key={i} className="flex gap-[24px] px-[12px] items-center">
-                    {[
-                      { name: "Steak Grill Burger", image: "/images/Steak Grill Burger logo.webp" },
-                      { name: "My Beer", image: "/images/My beer logo.webp" },
-                      { name: "Princeso Restaurante", image: "/images/PRINCESO RESTAURANTE.webp" },
-                      { name: "Pizza&Cia", image: "/images/Pizza&Cia logo.webp" },
-                      { name: "Dan Sushi", image: "/images/Dan Sushi logo.webp" },
-                      { name: "The Familys Villa Germanica", image: "/images/The Familys Logo.webp" },
-                      { name: "My Crush", image: "/images/My Crush Logo.webp" },
-                      { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.webp" },
-                    ].map((client, idx) => (
-                      <ClientLogoCard key={`r2-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Desktop View: 1 Continuous Row */}
-            <div className="hidden md:flex animate-[marquee_40s_linear_infinite] whitespace-nowrap items-center hover:[animation-play-state:paused] w-max">
-              {[...Array(2)].map((_, i) => (
-                <div key={i} className="flex gap-[32px] px-[16px] items-center">
-                  {[
-                    { name: "Japa Haus", image: "/images/japa-haus-logo.webp" },
-                    { name: "Dora Marie", image: "/images/dora-marie-logo.webp" },
-                    { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.webp" },
-                    { name: "Saporito", image: "/images/Saporito LOGO.webp" },
-                    { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.webp" },
-                    { name: "Pão e Ponto", image: "/images/Pao e ponto logo.webp" },
-                    { name: "Deco Pizzas", image: "/images/Deco Pizzas logo.webp" },
-                    { name: "Steak Grill Burger", image: "/images/Steak Grill Burger logo.webp" },
-                    { name: "My Beer", image: "/images/My beer logo.webp" },
-                    { name: "Princeso Restaurante", image: "/images/PRINCESO RESTAURANTE.webp" },
-                    { name: "Pizza&Cia", image: "/images/Pizza&Cia logo.webp" },
-                    { name: "Dan Sushi", image: "/images/Dan Sushi logo.webp" },
-                    { name: "The Familys Villa Germanica", image: "/images/The Familys Logo.webp" },
-                    { name: "My Crush", image: "/images/My Crush Logo.webp" },
-                    { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.webp" },
-                    { name: "Padaria Bublitz", image: "/images/Bublitz logo.webp" },
-                  ].map((client, idx) => (
-                    <ClientLogoCard key={`desktop-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
-                  ))}
-                </div>
-              ))}
-            </div>
-
+            ))}
           </div>
         </div>
       </section>
