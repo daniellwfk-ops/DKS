@@ -1,11 +1,14 @@
 import React from 'react';
-import ServicesCarousel from '@/components/ui/ServicesCarousel';
-import MetodoROMA from '@/components/ui/MetodoROMA';
+import dynamic from 'next/dynamic';
 import ClientLogoCard from '@/components/ui/ClientLogoCard';
-import Feedbacks from '@/components/ui/Feedbacks';
-import DorDoLead from '@/components/ui/DorDoLead';
-import VisionFuturo from '@/components/ui/VisionFuturo';
-import FAQ from '@/components/ui/FAQ';
+
+const ServicesCarousel = dynamic(() => import('@/components/ui/ServicesCarousel'), { ssr: true });
+const MetodoROMA = dynamic(() => import('@/components/ui/MetodoROMA'), { ssr: true });
+const Feedbacks = dynamic(() => import('@/components/ui/Feedbacks'), { ssr: true });
+const DorDoLead = dynamic(() => import('@/components/ui/DorDoLead'), { ssr: true });
+const VisionFuturo = dynamic(() => import('@/components/ui/VisionFuturo'), { ssr: true });
+const FAQ = dynamic(() => import('@/components/ui/FAQ'), { ssr: true });
+import { X, Check } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -238,11 +241,11 @@ export default function Home() {
               {/* Row 1 */}
               <div className="grid grid-cols-1 md:grid-cols-2 transition-colors hover:bg-white/[0.02]">
                 <div className="p-6 md:p-8 text-center md:border-r border-[#222226] flex flex-col items-center justify-center gap-3">
-                  <i className="ph-bold ph-x text-[#EF4444] text-2xl"></i>
+                  <X className="text-[#EF4444] w-6 h-6 flex-shrink-0" strokeWidth={3} />
                   <p className="text-[#888888] text-sm md:text-base font-medium">Faz post bonitinho sem estratégia</p>
                 </div>
                 <div className="p-6 md:p-8 text-center bg-[#D4AF37]/[0.02] flex flex-col items-center justify-center gap-3">
-                  <i className="ph-bold ph-check text-[#10B981] text-2xl"></i>
+                  <Check className="text-[#10B981] w-6 h-6 flex-shrink-0" strokeWidth={3} />
                   <p className="text-white text-sm md:text-base font-bold">Cria campanhas de vendas com metas e métricas</p>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from 'react';
+import { Check } from 'lucide-react';
 
 const services = [
     {
@@ -150,7 +151,7 @@ export default function ServicesCarousel() {
                                     <ul className="space-y-4">
                                         {service.points.map((point, pIdx) => (
                                             <li key={pIdx} className="flex items-start gap-3">
-                                                <i className="ph-bold ph-check text-[#D4AF37] mt-[3px] text-sm flex-shrink-0"></i>
+                                                <Check className="text-[#D4AF37] mt-[3px] w-4 h-4 flex-shrink-0" strokeWidth={3} />
                                                 <span className="text-[#A1A1AA] text-[14px] leading-snug font-medium group-hover/card:text-[#CFCFCF] transition-colors">{point}</span>
                                             </li>
                                         ))}

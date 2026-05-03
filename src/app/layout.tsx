@@ -74,7 +74,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${sora.variable} ${montserrat.variable}`}>
       <head>
-        <script src="https://unpkg.com/@phosphor-icons/web" async></script>
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
