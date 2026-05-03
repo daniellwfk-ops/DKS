@@ -19,8 +19,10 @@ const securityHeaders = [
       "img-src 'self' data: blob: https:",
       "connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net",
       "frame-ancestors 'self'",
+      "require-trusted-types-for 'script'",
     ].join("; "),
   },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
 ];
 
 const nextConfig: NextConfig = {

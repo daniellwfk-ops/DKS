@@ -25,6 +25,57 @@ const INITIAL_STATE: DiagnosticState = {
 
 const TOTAL_SLIDES = 10;
 
+const DiagnosticContext = React.createContext<{
+    state: DiagnosticState;
+    handleTextChange: (slideId: string, fieldId: string, value: string) => void;
+    handleCheckboxChange: (slideId: string, checkboxId: string) => void;
+} | null>(null);
+
+const CheckboxItem = ({ slideId, id, label }: { slideId: string, id: string, label: string }) => {
+    const ctx = React.useContext(DiagnosticContext);
+    if (!ctx) return null;
+    const { state, handleCheckboxChange } = ctx;
+    return (
+        <label className="flex items-start gap-4 cursor-pointer group mb-3" onClick={() => handleCheckboxChange(slideId, id)}>
+            <div className={`mt-1 flex-shrink-0 w-6 h-6 rounded border flex items-center justify-center transition-colors ${state[slideId].checkboxes[id] ? 'bg-[#D4AF37] border-[#D4AF37]' : 'border-zinc-600 bg-zinc-900 group-hover:border-[#D4AF37]'}`}>
+                {state[slideId].checkboxes[id] && (
+                    <svg className="w-4 h-4 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                )}
+            </div>
+            <span className={`text-lg transition-colors ${state[slideId].checkboxes[id] ? 'text-white' : 'text-zinc-400 group-hover:text-zinc-300'}`}>{label}</span>
+        </label>
+    );
+};
+
+const EditableText = ({ slideId, id, placeholder, multiline = false, className = "" }: { slideId: string, id: string, placeholder: string, multiline?: boolean, className?: string }) => {
+    const ctx = React.useContext(DiagnosticContext);
+    if (!ctx) return null;
+    const { state, handleTextChange } = ctx;
+    const value = state[slideId].textFields[id] || '';
+    if (multiline) {
+        return (
+            <textarea
+                value={value}
+                onChange={(e) => handleTextChange(slideId, id, e.target.value)}
+                placeholder={placeholder}
+                className={`w-full bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] resize-none transition-colors ${className}`}
+                rows={5}
+            />
+        );
+    }
+    return (
+        <input
+            type="text"
+            value={value}
+            onChange={(e) => handleTextChange(slideId, id, e.target.value)}
+            placeholder={placeholder}
+            className={`bg-transparent border-b border-zinc-700 pb-1 text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#D4AF37] transition-colors w-full ${className}`}
+        />
+    );
+};
+
 export default function DiagnosticoPage() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [state, setState] = useState<DiagnosticState>(INITIAL_STATE);
@@ -76,45 +127,10 @@ export default function DiagnosticoPage() {
         window.print();
     };
 
-    // UI Components
-    const CheckboxItem = ({ slideId, id, label }: { slideId: string, id: string, label: string }) => (
-        <label className="flex items-start gap-4 cursor-pointer group mb-3">
-            <div className={`mt-1 flex-shrink-0 w-6 h-6 rounded border flex items-center justify-center transition-colors ${state[slideId].checkboxes[id] ? 'bg-[#D4AF37] border-[#D4AF37]' : 'border-zinc-600 bg-zinc-900 group-hover:border-[#D4AF37]'}`}>
-                {state[slideId].checkboxes[id] && (
-                    <svg className="w-4 h-4 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                    </svg>
-                )}
-            </div>
-            <span className={`text-lg transition-colors ${state[slideId].checkboxes[id] ? 'text-white' : 'text-zinc-400 group-hover:text-zinc-300'}`}>{label}</span>
-        </label>
-    );
-
-    const EditableText = ({ slideId, id, placeholder, multiline = false, className = "" }: { slideId: string, id: string, placeholder: string, multiline?: boolean, className?: string }) => {
-        const value = state[slideId].textFields[id] || '';
-        if (multiline) {
-            return (
-                <textarea
-                    value={value}
-                    onChange={(e) => handleTextChange(slideId, id, e.target.value)}
-                    placeholder={placeholder}
-                    className={`w-full bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] resize-none transition-colors ${className}`}
-                    rows={5}
-                />
-            );
-        }
-        return (
-            <input
-                type="text"
-                value={value}
-                onChange={(e) => handleTextChange(slideId, id, e.target.value)}
-                placeholder={placeholder}
-                className={`bg-transparent border-b border-zinc-700 pb-1 text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#D4AF37] transition-colors w-full ${className}`}
-            />
-        );
-    };
+    // UI Components are moved to context
 
     return (
+        <DiagnosticContext.Provider value={{ state, handleTextChange, handleCheckboxChange }}>
         <div className="min-h-screen bg-[#030303] text-white font-sans overflow-hidden print:overflow-visible print:bg-black" ref={containerRef}>
 
             {/* Estilos Globais de Impressão (PDF) */}
@@ -431,7 +447,7 @@ export default function DiagnosticoPage() {
                         <div className="mb-12">
                             <h2 className="text-[#D4AF37] font-bold tracking-widest text-sm mb-4">MÓDULO 08</h2>
                             <h1 className="text-5xl font-black">Rede de Pesquisa: Google Ads</h1>
-                            <p className="text-zinc-400 mt-4 text-xl">Capturando a intenção pura: quem pesquisa "onde comer agora" tem cartão na mão.</p>
+                            <p className="text-zinc-400 mt-4 text-xl">Capturando a intenção pura: quem pesquisa &quot;onde comer agora&quot; tem cartão na mão.</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
@@ -498,5 +514,6 @@ export default function DiagnosticoPage() {
 
             </div>
         </div>
+        </DiagnosticContext.Provider>
     );
 }

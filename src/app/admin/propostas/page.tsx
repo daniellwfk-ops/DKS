@@ -77,7 +77,7 @@ export default function PropostasPage() {
             } else {
                 alert("Erro ao salvar proposta: " + (data.error || "Desconhecido"));
             }
-        } catch (e) {
+        } catch {
             alert("Erro ao conectar com servidor.");
         } finally {
             setIsSaving(false);

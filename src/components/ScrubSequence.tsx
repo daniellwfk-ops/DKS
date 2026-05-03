@@ -39,7 +39,6 @@ export function ScrubSequence({
     // Priority-load frame 1 so first paint is immediate
     const first = new Image();
     first.src = urls[0];
-    // @ts-ignore — fetchpriority is valid but typings lag
     first.fetchPriority = "high";
     imgs[0] = first;
 

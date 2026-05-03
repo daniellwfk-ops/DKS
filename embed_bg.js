@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const imgPath = '/Users/danielsoares/.gemini/antigravity/brain/388884eb-2239-4b10-808d-a96639d28cfc/media__1772332565154.jpg';
 const htmlPath = '/Users/danielsoares/Documents/DKS/public/apresentacao2.html';

@@ -150,7 +150,7 @@ export default function VisionFuturo() {
                     {/* Glow behind */}
                     <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(212,175,55,0.1),transparent_70%)] pointer-events-none" />
 
-                    <p className="text-[#D4AF37]/50 text-5xl font-black mb-4" style={{ fontFamily: "Georgia, serif" }}>"</p>
+                    <p className="text-[#D4AF37]/50 text-5xl font-black mb-4" style={{ fontFamily: "Georgia, serif" }}>&quot;</p>
 
                     <p className="text-white text-xl md:text-2xl font-bold leading-relaxed mb-6" style={{ fontFamily: "var(--font-montserrat)" }}>
                         Esse restaurante existe.<br />

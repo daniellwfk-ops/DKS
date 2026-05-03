@@ -71,9 +71,9 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
                     {/* Brand */}
                     <div className="md:col-span-1">
-                        <a href="/" className="inline-block font-black text-4xl tracking-tighter text-white mb-4">
+                        <Link href="/" className="inline-block font-black text-4xl tracking-tighter text-white mb-4">
                             DKS<span className="text-[#D4AF37]">.</span>
-                        </a>
+                        </Link>
                         <p className="text-[#666] text-sm leading-relaxed mb-6 max-w-xs">
                             Assessoria de marketing especializada em restaurantes. Método estruturado para atrair, reter e escalar faturamento.
                         </p>

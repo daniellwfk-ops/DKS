@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Check } from 'lucide-react';
 
 const services = [

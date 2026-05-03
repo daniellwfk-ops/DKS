@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 interface SelectedService {
     id: string;
@@ -24,11 +24,31 @@ export default function ProposalSlideDeck({
     proposal?: ProposalData;
 }) {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [direction, setDirection] = useState(0);
+    const [, setDirection] = useState(0);
 
     // Determine if it's a generic institutional presentation
     const isInstitutional = !proposal;
     const totalSlides = isInstitutional ? 6 : 6 + (proposal?.services?.length || 0);
+
+    const nextSlide = useCallback(() => {
+        setCurrentSlide((prev) => {
+            if (prev < totalSlides - 1) {
+                setDirection(1);
+                return prev + 1;
+            }
+            return prev;
+        });
+    }, [totalSlides]);
+
+    const prevSlide = useCallback(() => {
+        setCurrentSlide((prev) => {
+            if (prev > 0) {
+                setDirection(-1);
+                return prev - 1;
+            }
+            return prev;
+        });
+    }, []);
 
     // Keyboard navigation
     useEffect(() => {
@@ -41,21 +61,7 @@ export default function ProposalSlideDeck({
         }
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [currentSlide, totalSlides]);
-
-    function nextSlide() {
-        if (currentSlide < totalSlides - 1) {
-            setDirection(1);
-            setCurrentSlide((prev) => prev + 1);
-        }
-    }
-
-    function prevSlide() {
-        if (currentSlide > 0) {
-            setDirection(-1);
-            setCurrentSlide((prev) => prev - 1);
-        }
-    }
+    }, [nextSlide, prevSlide]);
 
     // Define Slides
     const slides = [];

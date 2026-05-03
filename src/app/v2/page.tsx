@@ -10,7 +10,6 @@ import { FRAMES_PATH, FRAME_COUNT, FRAME_EXT } from '@/lib/constants';
 // --- DATA ---
 const BRAND_NAME = "DKS";
 const BRAND_TAGLINE = "Assessoria para Restaurantes";
-const LANG = "pt-BR";
 const PARTNERS = ["Fratelli's", "Steak Grill", "Dan Sushi", "Tempero Brasileiro", "Chiquinho", "Deco Pizzas", "Padaria Bublitz"];
 
 const services = [
@@ -60,6 +59,7 @@ const faqs = [
 ];
 
 // --- UI COMPONENTS ---
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Button({ variant = "hero", className = "", children, asChild, href, ...props }: any) {
   const base = "inline-flex items-center justify-center transition-colors cursor-pointer whitespace-nowrap";
   const variants = {
@@ -352,7 +352,7 @@ function Testimonials() {
           {[...testimonials, ...testimonials].map((t, i) => (
             <div key={i} className="bg-[#0a0a0a] border border-white/5 rounded-[32px] p-8 w-[340px] md:w-[420px] shrink-0 flex flex-col gap-6">
               <Quote className="size-8 text-[#D4AF37]/40" />
-              <p className="font-body text-neutral-300 italic leading-relaxed text-[16px]">"{t.quote}"</p>
+              <p className="font-body text-neutral-300 italic leading-relaxed text-[16px]">&quot;{t.quote}&quot;</p>
               <div className="mt-auto flex items-center gap-4 border-t border-white/10 pt-6">
                 <div className="size-12 rounded-full bg-gradient-to-br from-[#D4AF37]/40 to-black border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37] font-black font-heading">{t.name[0]}</div>
                 <div>
@@ -367,7 +367,7 @@ function Testimonials() {
           {[...testimonials.slice(3), ...testimonials.slice(0,3), ...testimonials.slice(3), ...testimonials.slice(0,3)].map((t, i) => (
             <div key={i} className="bg-[#0a0a0a] border border-white/5 rounded-[32px] p-8 w-[340px] md:w-[420px] shrink-0 flex flex-col gap-6">
               <Quote className="size-8 text-[#D4AF37]/40" />
-              <p className="font-body text-neutral-300 italic leading-relaxed text-[16px]">"{t.quote}"</p>
+              <p className="font-body text-neutral-300 italic leading-relaxed text-[16px]">&quot;{t.quote}&quot;</p>
               <div className="mt-auto flex items-center gap-4 border-t border-white/10 pt-6">
                 <div className="size-12 rounded-full bg-gradient-to-br from-[#D4AF37]/40 to-black border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37] font-black font-heading">{t.name[0]}</div>
                 <div>

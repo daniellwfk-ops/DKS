@@ -23,6 +23,7 @@ export function BlurText({
   const words = text.split(" ");
 
   return (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <Tag ref={ref as any} className={className}>
       {words.map((w, i) => (
         <motion.span

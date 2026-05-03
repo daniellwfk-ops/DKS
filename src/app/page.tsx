@@ -267,7 +267,7 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 transition-colors hover:bg-white/[0.02]">
                 <div className="p-6 md:p-8 text-center md:border-r border-[#222226] flex flex-col items-center justify-center gap-3">
                   <i className="ph-bold ph-x text-[#EF4444] text-2xl"></i>
-                  <p className="text-[#888888] text-sm md:text-base font-medium">Posta "por postar"</p>
+                  <p className="text-[#888888] text-sm md:text-base font-medium">Posta &quot;por postar&quot;</p>
                 </div>
                 <div className="p-6 md:p-8 text-center bg-[#D4AF37]/[0.02] flex flex-col items-center justify-center gap-3">
                   <i className="ph-bold ph-check text-[#10B981] text-2xl"></i>

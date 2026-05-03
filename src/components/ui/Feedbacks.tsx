@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 
 const testimonials = [
     {
@@ -134,7 +134,7 @@ export default function Feedbacks() {
                                 className="text-5xl font-black leading-none mb-4"
                                 style={{ color: t.color, opacity: 0.25, fontFamily: "Georgia, serif" }}
                             >
-                                "
+                                &quot;
                             </div>
 
                             {/* Stars */}
@@ -142,7 +142,7 @@ export default function Feedbacks() {
 
                             {/* Quote text */}
                             <p className="text-[#C0C0C0] text-sm leading-relaxed mt-4 mb-6">
-                                "{t.text}"
+                                &quot;{t.text}&quot;
                             </p>
 
                             {/* Bottom bar */}
