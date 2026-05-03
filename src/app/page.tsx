@@ -126,8 +126,8 @@ export default function Home() {
                 {[...Array(2)].map((_, i) => (
                   <div key={i} className="flex gap-[24px] px-[12px] items-center">
                     {[
-                      { name: "Japa Haus", image: "/images/japa-haus-logo.png" },
-                      { name: "Dora Marie", image: "/images/dora-marie-logo copy.png" },
+                      { name: "Japa Haus", image: "/images/japa-haus-logo.jpg" },
+                      { name: "Dora Marie", image: "/images/dora-marie-logo.jpg" },
                       { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.png" },
                       { name: "Saporito", image: "/images/Saporito LOGO.png" },
                       { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.png" },
@@ -166,8 +166,8 @@ export default function Home() {
               {[...Array(2)].map((_, i) => (
                 <div key={i} className="flex gap-[32px] px-[16px] items-center">
                   {[
-                    { name: "Japa Haus", image: "/images/japa-haus-logo.png" },
-                    { name: "Dora Marie", image: "/images/dora-marie-logo copy.png" },
+                    { name: "Japa Haus", image: "/images/japa-haus-logo.jpg" },
+                    { name: "Dora Marie", image: "/images/dora-marie-logo.jpg" },
                     { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.png" },
                     { name: "Saporito", image: "/images/Saporito LOGO.png" },
                     { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.png" },
