@@ -17,6 +17,9 @@ export default function ClientLogoCard({ name, image, colorful }: Props) {
                 <img
                     src={image}
                     alt={name}
+                    width={100}
+                    height={100}
+                    loading="lazy"
                     className="w-full h-full object-cover object-center"
                     onError={() => setImgFailed(true)}
                 />

@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/dks-hero-fullbg.jpg",
+        url: "/images/dks-hero-fullbg.webp",
         width: 1200,
         height: 630,
         alt: "DKS Marketing - Especialistas em crescimento para restaurantes",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "DKS Marketing",
     description: "Transformamos restaurantes em referências.",
-    images: ["/images/dks-hero-fullbg.jpg"],
+    images: ["/images/dks-hero-fullbg.webp"],
   },
   robots: {
     index: true,
@@ -83,8 +83,8 @@ export default function RootLayout({
                "@type": "ProfessionalService",
                "name": "DKS Marketing",
                "url": "https://dksmarketing.com.br",
-               "logo": "https://dksmarketing.com.br/icon.png",
-               "image": "https://dksmarketing.com.br/images/dks-hero-fullbg.jpg",
+               "logo": "https://dksmarketing.com.br/icon.webp",
+               "image": "https://dksmarketing.com.br/images/dks-hero-fullbg.webp",
                "description": "Agência de marketing especializada em restaurantes e deliveries. Ajudamos a aumentar seu faturamento e lotar suas mesas com o Método ROMA.",
                "address": {
                  "@type": "PostalAddress",

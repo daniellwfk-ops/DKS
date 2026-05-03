@@ -5,7 +5,7 @@ import React, { useRef, useState } from 'react';
 const services = [
     {
         title: "Tráfego pago",
-        image: "/images/service-mockup-1.jpg",
+        image: "/images/service-mockup-1.webp",
         points: [
             "Campanhas de alta conversão",
             "Análise de dados avançada",
@@ -14,7 +14,7 @@ const services = [
     },
     {
         title: "Otimização de Delivery",
-        image: "/images/service-mockup-2.jpg",
+        image: "/images/service-mockup-2.webp",
         points: [
             "Análise de cardápios no iFood",
             "Estratégias de rankeamento",
@@ -23,7 +23,7 @@ const services = [
     },
     {
         title: "Acompanhamento e Análises",
-        image: "/images/service-mockup-3.jpg",
+        image: "/images/service-mockup-3.webp",
         points: [
             "Reuniões mensais de acompanhamento",
             "Suporte via Grupo de WhatsApp",
@@ -32,7 +32,7 @@ const services = [
     },
     {
         title: "CRM",
-        image: "/images/service-mockup-4.jpg",
+        image: "/images/service-mockup-4.webp",
         points: [
             "Disparo de mensagens via WhatsApp",
             "Reativação de clientes inativos",
@@ -41,7 +41,7 @@ const services = [
     },
     {
         title: "Google Meu Negócio & TripAdvisor",
-        image: "/images/service-mockup-5.jpg",
+        image: "/images/service-mockup-5.webp",
         points: [
             "Otimização e SEO local",
             "Gestão de avaliações",
@@ -50,7 +50,7 @@ const services = [
     },
     {
         title: "Assessoria de Conteúdo",
-        image: "/images/service-mockup-6.jpg",
+        image: "/images/service-mockup-6.webp",
         points: [
             "Estratégia editorial para Insta/TikTok",
             "Roteiros para vídeos virais",
@@ -135,6 +135,9 @@ export default function ServicesCarousel() {
                                     <img
                                         src={service.image}
                                         alt={service.title}
+                                        width={320}
+                                        height={180}
+                                        loading="lazy"
                                         className="w-full h-full object-cover object-center transition-transform duration-700 group-hover/card:scale-105"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>

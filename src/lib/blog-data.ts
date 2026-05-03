@@ -16,7 +16,7 @@ export const blogPosts: BlogPost[] = [
         category: "Estratégia",
         date: "2026-02-15",
         readTime: "8 min",
-        image: "/images/blog/blog-1.jpg",
+        image: "/images/blog/blog-1.webp",
         summary:
             "Descubra as ações práticas que restaurantes de sucesso aplicam para dobrar o faturamento no primeiro mês sem aumentar os custos operacionais.",
         content: `
@@ -88,7 +88,7 @@ A DKS Marketing é especialista em crescimento para restaurantes. Entre em conta
         category: "iFood",
         date: "2026-02-10",
         readTime: "7 min",
-        image: "/images/blog/blog-2.jpg",
+        image: "/images/blog/blog-2.webp",
         summary:
             "Aparecer no topo do iFood não é sorte — é estratégia. Confira as 7 táticas que os melhores restaurantes usam para dominar o ranking.",
         content: `
@@ -146,7 +146,7 @@ Ranquear no iFood é um trabalho contínuo que combina estratégia de conteúdo,
         category: "Tráfego Pago",
         date: "2026-02-05",
         readTime: "10 min",
-        image: "/images/blog/blog-3.jpg",
+        image: "/images/blog/blog-3.webp",
         summary:
             "Meta Ads e Google Ads para restaurantes: tudo que você precisa saber para anunciar com eficiência e sem desperdício de dinheiro.",
         content: `
@@ -223,7 +223,7 @@ Para restaurantes em fase de crescimento, recomendamos começar com **R$ 800 a R
         category: "CRM",
         date: "2026-01-28",
         readTime: "6 min",
-        image: "/images/blog/blog-4.jpg",
+        image: "/images/blog/blog-4.webp",
         summary:
             "Clientes que já pediram de você têm 5x mais chance de comprar novamente. Veja como usar o WhatsApp para criar campanhas de reativação que convertem.",
         content: `
@@ -286,7 +286,7 @@ Restaurantes que implementam campanhas de reativação mensais reportam:
         category: "SEO Local",
         date: "2026-01-20",
         readTime: "9 min",
-        image: "/images/blog/blog-5.jpg",
+        image: "/images/blog/blog-5.webp",
         summary:
             "Apareça no Google quando alguém busca por restaurante perto de você. O Google Meu Negócio otimizado pode triplicar o número de clientes novos.",
         content: `
@@ -362,7 +362,7 @@ O Google Meu Negócio oferece métricas de visibilidade:
         category: "CRM",
         date: "2026-01-15",
         readTime: "8 min",
-        image: "/images/blog/blog-6.jpg",
+        image: "/images/blog/blog-6.webp",
         summary:
             "CRM não é só para grandes empresas. Descubra como restaurantes usam a gestão de relacionamento com clientes para faturar mais todo mês.",
         content: `
@@ -427,7 +427,7 @@ Acompanhe mensalmente:
         category: "Conteúdo",
         date: "2026-01-08",
         readTime: "7 min",
-        image: "/images/blog/blog-7.jpg",
+        image: "/images/blog/blog-7.webp",
         summary:
             "O TikTok pode transformar um restaurante desconhecido em um fenômeno local. Veja a estratégia de conteúdo que gera milhões de visualizações.",
         content: `
@@ -479,7 +479,7 @@ Um bom vídeo para TikTok segue esta estrutura:
         category: "Estratégia",
         date: "2025-12-28",
         readTime: "6 min",
-        image: "/images/blog/blog-8.jpg",
+        image: "/images/blog/blog-8.webp",
         summary:
             "Esses 5 erros custam muito dinheiro e ainda assim são cometidos por 9 em 10 restaurantes. Veja como identificar e corrigir cada um deles.",
         content: `
@@ -531,7 +531,7 @@ O cardápio é sua principal ferramenta de vendas. Restaurantes que constroem o 
         category: "Estratégia",
         date: "2025-12-20",
         readTime: "7 min",
-        image: "/images/blog/blog-9.jpg",
+        image: "/images/blog/blog-9.webp",
         summary:
             "Aumentar o ticket médio é mais eficiente do que conquistar novos clientes. Confira estratégias práticas que você pode implementar ainda hoje.",
         content: `
@@ -584,7 +584,7 @@ Ofereça opções premium como adicional pago:
         category: "Conteúdo",
         date: "2025-12-12",
         readTime: "9 min",
-        image: "/images/blog/blog-10.jpg",
+        image: "/images/blog/blog-10.webp",
         summary:
             "Uma estratégia de Instagram bem executada pode ser o canal de aquisição mais poderoso do seu restaurante. Veja como montar a sua do zero.",
         content: `
@@ -641,7 +641,7 @@ Responda todos os comentários, interaja nos stories, responda DMs rapidamente. 
         category: "Gestão",
         date: "2025-12-05",
         readTime: "8 min",
-        image: "/images/blog/blog-11.jpg",
+        image: "/images/blog/blog-11.webp",
         summary:
             "Donos de restaurante que tomam decisões baseadas em dados crescem 3x mais do que os que trabalham no feeling. Veja por onde começar.",
         content: `
@@ -709,7 +709,7 @@ Para restaurantes com múltiplas unidades ou alto volume, ferramentas de BI inte
         category: "Metodologia",
         date: "2025-11-28",
         readTime: "10 min",
-        image: "/images/blog/blog-12.jpg",
+        image: "/images/blog/blog-12.webp",
         summary:
             "Conheça o Método ROMA — a metodologia exclusiva da DKS que combina Resultado, Otimização, Método e Autoridade para transformar restaurantes em líderes de mercado.",
         content: `

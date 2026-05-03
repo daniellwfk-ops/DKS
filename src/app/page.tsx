@@ -26,11 +26,14 @@ export default function Home() {
         <div className="absolute inset-0 w-full h-full z-0">
           <picture>
             {/* Mobile: nova foto B&W */}
-            <source media="(max-width: 767px)" srcSet="/images/foto-dks-nova.jpg" />
+            <source media="(max-width: 767px)" srcSet="/images/foto-dks-nova.webp" />
             {/* Desktop: foto de fundo original */}
             <img
-              src="/images/dks-hero-fullbg.jpg"
+              src="/images/dks-hero-fullbg.webp"
               alt="DKS Marketing Background"
+              width={1920}
+              height={1080}
+              fetchPriority="high"
               className="w-full h-full object-cover object-[60%_top] md:object-[60%_center] lg:object-[80%_center]"
               style={{ filter: 'contrast(1.05)' }}
             />
@@ -126,14 +129,14 @@ export default function Home() {
                 {[...Array(2)].map((_, i) => (
                   <div key={i} className="flex gap-[24px] px-[12px] items-center">
                     {[
-                      { name: "Japa Haus", image: "/images/japa-haus-logo.jpg" },
-                      { name: "Dora Marie", image: "/images/dora-marie-logo.jpg" },
-                      { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.png" },
-                      { name: "Saporito", image: "/images/Saporito LOGO.png" },
-                      { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.png" },
-                      { name: "Pão e Ponto", image: "/images/Pao e ponto logo.png" },
-                      { name: "Deco Pizzas", image: "/images/Deco Pizzas logo.png" },
-                      { name: "Padaria Bublitz", image: "/images/Bublitz logo.png" },
+                      { name: "Japa Haus", image: "/images/japa-haus-logo.webp" },
+                      { name: "Dora Marie", image: "/images/dora-marie-logo.webp" },
+                      { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.webp" },
+                      { name: "Saporito", image: "/images/Saporito LOGO.webp" },
+                      { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.webp" },
+                      { name: "Pão e Ponto", image: "/images/Pao e ponto logo.webp" },
+                      { name: "Deco Pizzas", image: "/images/Deco Pizzas logo.webp" },
+                      { name: "Padaria Bublitz", image: "/images/Bublitz logo.webp" },
                     ].map((client, idx) => (
                       <ClientLogoCard key={`r1-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
                     ))}
@@ -145,14 +148,14 @@ export default function Home() {
                 {[...Array(2)].map((_, i) => (
                   <div key={i} className="flex gap-[24px] px-[12px] items-center">
                     {[
-                      { name: "Steak Grill Burger", image: "/images/Steak Grill Burger logo.png" },
-                      { name: "My Beer", image: "/images/My beer logo.png" },
-                      { name: "Princeso Restaurante", image: "/images/PRINCESO RESTAURANTE.png" },
-                      { name: "Pizza&Cia", image: "/images/Pizza&Cia logo.png" },
-                      { name: "Dan Sushi", image: "/images/Dan Sushi logo.png" },
-                      { name: "The Familys Villa Germanica", image: "/images/The Familys Logo.png" },
-                      { name: "My Crush", image: "/images/My Crush Logo.png" },
-                      { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.png" },
+                      { name: "Steak Grill Burger", image: "/images/Steak Grill Burger logo.webp" },
+                      { name: "My Beer", image: "/images/My beer logo.webp" },
+                      { name: "Princeso Restaurante", image: "/images/PRINCESO RESTAURANTE.webp" },
+                      { name: "Pizza&Cia", image: "/images/Pizza&Cia logo.webp" },
+                      { name: "Dan Sushi", image: "/images/Dan Sushi logo.webp" },
+                      { name: "The Familys Villa Germanica", image: "/images/The Familys Logo.webp" },
+                      { name: "My Crush", image: "/images/My Crush Logo.webp" },
+                      { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.webp" },
                     ].map((client, idx) => (
                       <ClientLogoCard key={`r2-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
                     ))}
@@ -166,22 +169,22 @@ export default function Home() {
               {[...Array(2)].map((_, i) => (
                 <div key={i} className="flex gap-[32px] px-[16px] items-center">
                   {[
-                    { name: "Japa Haus", image: "/images/japa-haus-logo.jpg" },
-                    { name: "Dora Marie", image: "/images/dora-marie-logo.jpg" },
-                    { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.png" },
-                    { name: "Saporito", image: "/images/Saporito LOGO.png" },
-                    { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.png" },
-                    { name: "Pão e Ponto", image: "/images/Pao e ponto logo.png" },
-                    { name: "Deco Pizzas", image: "/images/Deco Pizzas logo.png" },
-                    { name: "Steak Grill Burger", image: "/images/Steak Grill Burger logo.png" },
-                    { name: "My Beer", image: "/images/My beer logo.png" },
-                    { name: "Princeso Restaurante", image: "/images/PRINCESO RESTAURANTE.png" },
-                    { name: "Pizza&Cia", image: "/images/Pizza&Cia logo.png" },
-                    { name: "Dan Sushi", image: "/images/Dan Sushi logo.png" },
-                    { name: "The Familys Villa Germanica", image: "/images/The Familys Logo.png" },
-                    { name: "My Crush", image: "/images/My Crush Logo.png" },
-                    { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.png" },
-                    { name: "Padaria Bublitz", image: "/images/Bublitz logo.png" },
+                    { name: "Japa Haus", image: "/images/japa-haus-logo.webp" },
+                    { name: "Dora Marie", image: "/images/dora-marie-logo.webp" },
+                    { name: "Fratelli's Pizzaria", image: "/images/Fratellis Pizzaria Logo.webp" },
+                    { name: "Saporito", image: "/images/Saporito LOGO.webp" },
+                    { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.webp" },
+                    { name: "Pão e Ponto", image: "/images/Pao e ponto logo.webp" },
+                    { name: "Deco Pizzas", image: "/images/Deco Pizzas logo.webp" },
+                    { name: "Steak Grill Burger", image: "/images/Steak Grill Burger logo.webp" },
+                    { name: "My Beer", image: "/images/My beer logo.webp" },
+                    { name: "Princeso Restaurante", image: "/images/PRINCESO RESTAURANTE.webp" },
+                    { name: "Pizza&Cia", image: "/images/Pizza&Cia logo.webp" },
+                    { name: "Dan Sushi", image: "/images/Dan Sushi logo.webp" },
+                    { name: "The Familys Villa Germanica", image: "/images/The Familys Logo.webp" },
+                    { name: "My Crush", image: "/images/My Crush Logo.webp" },
+                    { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.webp" },
+                    { name: "Padaria Bublitz", image: "/images/Bublitz logo.webp" },
                   ].map((client, idx) => (
                     <ClientLogoCard key={`desktop-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
                   ))}
