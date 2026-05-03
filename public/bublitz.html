@@ -1,0 +1,3051 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>DKS Marketing — Diagnóstico e Plano de Ação - Padaria Bublitz</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --gold-g: rgba(212, 175, 55, .15);
+            --gold-l: rgba(212, 175, 55, .4);
+            --bg: #030303;
+            --panel: #0a0a0a;
+            --panel-bd: #1a1a1a;
+            --text: #ffffff;
+            --dim: #888888;
+            --dim2: #444444;
+            --r: 16px;
+            --font-h: 'Outfit', sans-serif;
+            --font-p: 'Inter', sans-serif;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: var(--bg);
+            font-family: var(--font-p);
+            color: var(--text)
+        }
+
+        /* Master Layout */
+        #deck {
+            position: relative;
+            width: 100vw;
+            height: 100svh;
+            overflow: hidden
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            padding: 40px 6vw;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .6s cubic-bezier(0.4, 0, 0.2, 1), transform .6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(30px)
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0)
+        }
+
+        .slide.exit {
+            opacity: 0;
+            transform: translateY(-30px);
+            pointer-events: none
+        }
+
+        .slide.reverse-enter {
+            transform: translateY(-30px)
+        }
+
+        .slide.reverse-exit {
+            transform: translateY(30px)
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-h)
+        }
+
+        .h-xl {
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -.03em;
+            margin-bottom: 24px
+        }
+
+        .h-lg {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -.02em;
+            margin-bottom: 20px
+        }
+
+        .h-md {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -.01em;
+            margin-bottom: 16px
+        }
+
+        .sub {
+            font-size: clamp(1rem, 1.2vw, 1.2rem);
+            color: var(--dim);
+            line-height: 1.6;
+            font-weight: 400;
+            max-width: 640px;
+            margin-bottom: 32px
+        }
+
+        .gold {
+            color: var(--gold)
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-h);
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 24px
+        }
+
+        .tag::before {
+            content: '';
+            width: 32px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px
+        }
+
+        /* Layout Utilities */
+        .w {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2
+        }
+
+        .g2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center
+        }
+
+        .g3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px
+        }
+
+        /* Background Image Control */
+        .bg-img {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+            opacity: .25;
+            filter: blur(3px) brightness(.6);
+            transform: scale(1.05);
+            transition: transform 10s ease-out
+        }
+
+        .slide.active .bg-img {
+            transform: scale(1)
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, var(--bg) 0%, rgba(3, 3, 3, 0.8) 50%, rgba(3, 3, 3, 0.4) 100%);
+            z-index: 1
+        }
+
+        /* Glass Cards */
+        .glass {
+            background: rgba(10, 10, 10, .6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, .05);
+            border-radius: var(--r);
+            padding: 40px
+        }
+
+        .glass:hover {
+            border-color: var(--gold-l);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, .5), inset 0 0 0 1px rgba(212, 175, 55, .1)
+        }
+
+        /* Sequential Animation */
+        .a {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all .8s cubic-bezier(0.2, 0.8, 0.2, 1)
+        }
+
+        .slide.active .a {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .slide.active .a:nth-child(1) {
+            transition-delay: .1s
+        }
+
+        .slide.active .a:nth-child(2) {
+            transition-delay: .2s
+        }
+
+        .slide.active .a:nth-child(3) {
+            transition-delay: .3s
+        }
+
+        .slide.active .a:nth-child(4) {
+            transition-delay: .4s
+        }
+
+        .slide.active .a:nth-child(5) {
+            transition-delay: .5s
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--gold);
+            color: #000;
+            font-family: var(--font-h);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: 20px 48px;
+            border-radius: 100px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all .3s ease;
+            box-shadow: 0 0 0 rgba(212, 175, 55, 0)
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .5), transparent);
+            transform: skewX(-25deg);
+            transition: all .6s ease
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, .3)
+        }
+
+        .btn:hover::after {
+            left: 150%
+        }
+
+        /* DKS Brandbox Animation */
+        .dks-brandbox {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .dks-logo {
+            font-family: var(--font-h);
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .dks-line {
+            width: 2px;
+            height: 30px;
+            background: var(--gold);
+            animation: line-pulse 2s infinite alternate;
+        }
+
+        @keyframes line-pulse {
+            0% {
+                transform: scaleY(0.8);
+                opacity: 0.3;
+                box-shadow: 0 0 5px transparent;
+            }
+
+            100% {
+                transform: scaleY(1.3);
+                opacity: 1;
+                box-shadow: 0 0 15px var(--gold);
+            }
+        }
+
+        .dks-text {
+            font-size: .8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .2em;
+            background: linear-gradient(90deg, #555 0%, #fff 50%, #555 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: text-shine 3s linear infinite;
+        }
+
+        @keyframes text-shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Custom Comps */
+        /* S1 Typing */
+        .type::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: var(--gold)
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0
+            }
+        }
+
+        /* S2 Live Dashboard */
+        .dash-board {
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 32px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .8);
+            overflow: hidden
+        }
+
+        .dash-board::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent)
+        }
+
+        .metric-box {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 16px;
+            background: rgba(255, 255, 255, .03);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, .05)
+        }
+
+        .metric-val {
+            font-family: var(--font-h);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .metric-lbl {
+            font-size: .75rem;
+            color: var(--dim);
+            text-transform: uppercase;
+            letter-spacing: .1em
+        }
+
+        .up-arrow {
+            font-size: 1rem;
+            color: #00ff88;
+            animation: bounce 2s infinite
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-4px)
+            }
+        }
+
+        /* S4 Network System */
+        .net-sys {
+            position: relative;
+            width: 450px;
+            height: 450px;
+            margin: 0 auto;
+        }
+
+        .net-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-h);
+            font-weight: 900;
+            color: var(--gold);
+            font-size: 3.5rem;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            z-index: 10;
+        }
+
+        .net-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .net-node-item {
+            position: absolute;
+            background: rgba(15, 15, 15, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: #ddd;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 5;
+            animation: float-node 4s ease-in-out infinite alternate;
+        }
+
+        .nn1 {
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 0s;
+        }
+
+        .nn2 {
+            top: 40px;
+            right: -50px;
+            animation-delay: -1s;
+        }
+
+        .nn3 {
+            top: 190px;
+            right: -70px;
+            animation-delay: -2s;
+        }
+
+        .nn4 {
+            bottom: 40px;
+            right: -50px;
+            animation-delay: -0.5s;
+        }
+
+        .nn5 {
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: -1.5s;
+        }
+
+        .nn6 {
+            bottom: 40px;
+            left: -60px;
+            animation-delay: -2.5s;
+        }
+
+        .nn7 {
+            top: 190px;
+            left: -80px;
+            animation-delay: -1.2s;
+        }
+
+        .nn8 {
+            top: 40px;
+            left: -60px;
+            animation-delay: -0.8s;
+        }
+
+        @keyframes float-node {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* S5 Phone & Notifications */
+        .phone {
+            width: 320px;
+            height: 600px;
+            background: #000 url('/images/lock-screen-bg.png') center/cover no-repeat;
+            border: 6px solid #222;
+            border-radius: 40px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, .6)
+        }
+
+        .lock-status {
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .lock-status svg {
+            fill: #fff;
+            height: 12px;
+        }
+
+        .lock-header {
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .lock-date {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: -2px;
+        }
+
+        .lock-time {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 5.5rem;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .lock-bottom {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .lock-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(40, 40, 40, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lock-btn svg {
+            fill: #fff;
+            width: 22px;
+            height: 22px;
+        }
+
+        .phone::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 20px;
+            background: #222;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 10
+        }
+
+        .checklist-glass {
+            background: rgba(15, 15, 15, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 50px 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .text-glow {
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.5);
+            animation: pulseText 2s infinite alternate;
+        }
+
+        @keyframes pulseText {
+            0% {
+                text-shadow: 0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.5);
+            }
+
+            100% {
+                text-shadow: 0 0 20px rgba(212, 175, 55, 1), 0 0 40px rgba(212, 175, 55, 0.8);
+            }
+        }
+
+        .consq-box {
+            background: rgba(15, 15, 15, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .consq-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: skewX(-25deg);
+        }
+
+        .consq-box:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.15);
+            background: rgba(15, 15, 15, 0.6);
+        }
+
+        .consq-box:hover::after {
+            animation: shine 1.5s ease-out;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 200%;
+            }
+        }
+
+        .notif-wrap {
+            position: absolute;
+            top: 220px;
+            left: 12px;
+            right: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 15;
+        }
+
+        .notif {
+            background: rgba(20, 20, 20, .85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, .3);
+            border-radius: 16px;
+            padding: 16px;
+            transform: translateY(-120%);
+            opacity: 0;
+            transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+        }
+
+        .notif.show {
+            transform: translateY(0);
+            opacity: 1
+        }
+
+        .notif-head {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px
+        }
+
+        .notif-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 10px;
+            font-weight: bold
+        }
+
+        .notif-title {
+            font-size: .7rem;
+            font-weight: 600;
+            color: #fff
+        }
+
+        .notif-time {
+            font-size: .65rem;
+            color: var(--dim);
+            margin-left: auto
+        }
+
+        .notif-body {
+            font-size: .8rem;
+            color: #ccc
+        }
+
+        .notif-val {
+            color: #00ff88;
+            font-weight: 700
+        }
+
+        /* S6 SVG Chart */
+        .chart-box {
+            width: 100%;
+            height: 300px;
+            position: relative
+        }
+
+        .chart-line {
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1)
+        }
+
+        .slide.active .chart-line {
+            stroke-dashoffset: 0;
+            transition-delay: .6s
+        }
+
+        .chart-area {
+            fill: url(#goldGrad);
+            opacity: 0;
+            transition: opacity 1s ease
+        }
+
+        .slide.active .chart-area {
+            opacity: 1;
+            transition-delay: 1.5s
+        }
+
+        .chart-pt {
+            fill: var(--bg);
+            stroke: var(--gold);
+            stroke-width: 3;
+            r: 0;
+            transition: r .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+        }
+
+        .slide.active .chart-pt {
+            r: 6
+        }
+
+        /* Lever Cards */
+        .lever-card {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-left: 4px solid var(--gold);
+            padding: 25px 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateZ(0);
+        }
+
+        .lever-card:hover {
+            transform: scale(1.03) translateX(10px);
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+            border-left: 4px solid #fff;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.2);
+        }
+
+        .lever-card:hover .lever-num {
+            opacity: 0.6;
+            transform: scale(1.1);
+        }
+
+        .lever-num {
+            font-size: 4.5rem;
+            color: var(--gold);
+            font-weight: 900;
+            line-height: 1;
+            opacity: 0.3;
+            min-width: 80px;
+            transition: all 0.4s ease;
+        }
+
+        .gold-shine {
+            background: linear-gradient(90deg, var(--gold) 0%, #ffeb99 30%, #fff 50%, #ffeb99 70%, var(--gold) 100%);
+            background-size: 200% auto;
+            color: var(--gold);
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: textShine 3s linear infinite;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+        }
+
+        @keyframes textShine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Check Animation */
+        .check-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(0, 210, 106, 0.05);
+            border: 1.5px solid rgba(0, 210, 106, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .check-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke: #00d26a;
+            stroke-dasharray: 20;
+            stroke-dashoffset: 20;
+            transition: stroke-dashoffset 0.5s ease 0.3s;
+        }
+
+        .slide.active .check-icon {
+            opacity: 1;
+            transform: scale(1);
+            background: #00d26a;
+            border-color: #00d26a;
+            box-shadow: 0 0 15px rgba(0, 210, 106, 0.4);
+        }
+
+        .slide.active .check-icon svg {
+            stroke: #fff;
+            stroke-dashoffset: 0;
+        }
+
+        .slide.active .check-item:nth-child(1) .check-icon {
+            transition-delay: 0.2s;
+        }
+
+        .slide.active .check-item:nth-child(2) .check-icon {
+            transition-delay: 0.4s;
+        }
+
+        .slide.active .check-item:nth-child(3) .check-icon {
+            transition-delay: 0.6s;
+        }
+
+        .slide.active .check-item:nth-child(4) .check-icon {
+            transition-delay: 0.8s;
+        }
+
+        .slide.active .check-item:nth-child(5) .check-icon {
+            transition-delay: 1.0s;
+        }
+
+        .slide.active .check-item:nth-child(6) .check-icon {
+            transition-delay: 1.2s;
+        }
+
+        .slide.active .check-item:nth-child(7) .check-icon {
+            transition-delay: 1.4s;
+        }
+
+        .slide.active .check-item:nth-child(8) .check-icon {
+            transition-delay: 1.6s;
+        }
+
+        .slide.active .check-item:nth-child(9) .check-icon {
+            transition-delay: 1.8s;
+        }
+
+        .slide.active .check-item:nth-child(10) .check-icon {
+            transition-delay: 2.0s;
+        }
+
+        .slide.active .check-item:nth-child(11) .check-icon {
+            transition-delay: 2.2s;
+        }
+
+        .slide.active .check-item:nth-child(1) .check-icon svg {
+            transition-delay: 0.4s;
+        }
+
+        .slide.active .check-item:nth-child(2) .check-icon svg {
+            transition-delay: 0.6s;
+        }
+
+        .slide.active .check-item:nth-child(3) .check-icon svg {
+            transition-delay: 0.8s;
+        }
+
+        .slide.active .check-item:nth-child(4) .check-icon svg {
+            transition-delay: 1.0s;
+        }
+
+        .slide.active .check-item:nth-child(5) .check-icon svg {
+            transition-delay: 1.2s;
+        }
+
+        .slide.active .check-item:nth-child(6) .check-icon svg {
+            transition-delay: 1.4s;
+        }
+
+        .slide.active .check-item:nth-child(7) .check-icon svg {
+            transition-delay: 1.6s;
+        }
+
+        .slide.active .check-item:nth-child(8) .check-icon svg {
+            transition-delay: 1.8s;
+        }
+
+        .slide.active .check-item:nth-child(9) .check-icon svg {
+            transition-delay: 2.0s;
+        }
+
+        .slide.active .check-item:nth-child(10) .check-icon svg {
+            transition-delay: 2.2s;
+        }
+
+        .slide.active .check-item:nth-child(11) .check-icon svg {
+            transition-delay: 2.4s;
+        }
+
+        /* S12 Feedback Carousel Animation */
+        .feedback-slider {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            overflow: hidden;
+            display: flex;
+            padding: 20px 0 60px;
+            /* Fade edges */
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+        }
+
+        .feedback-track {
+            display: flex;
+            gap: 30px;
+            width: max-content;
+            animation: scrollFeedbacks 25s linear infinite;
+        }
+
+        .feedback-track:hover {
+            animation-play-state: paused;
+        }
+
+        .feedback-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.4) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 450px;
+            flex-shrink: 0;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .feedback-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        @keyframes scrollFeedbacks {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(calc(-50% - 15px));
+            }
+        }
+
+        /* Star Animation */
+        @keyframes starFill {
+            0% {
+                opacity: 0.2;
+                transform: scale(0.5);
+                color: #555;
+            }
+
+            50% {
+                transform: scale(1.3);
+                color: var(--gold);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                color: var(--gold);
+            }
+        }
+
+        .feedback-card>div:first-child svg {
+            opacity: 0.2;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        .slide.active .feedback-card>div:first-child svg {
+            animation: starFill 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .slide.active .feedback-card>div:first-child svg:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        .slide.active .feedback-card>div:first-child svg:nth-child(2) {
+            animation-delay: 0.65s;
+        }
+
+        .slide.active .feedback-card>div:first-child svg:nth-child(3) {
+            animation-delay: 0.8s;
+        }
+
+        .slide.active .feedback-card>div:first-child svg:nth-child(4) {
+            animation-delay: 0.95s;
+        }
+
+        .slide.active .feedback-card>div:first-child svg:nth-child(5) {
+            animation-delay: 1.1s;
+        }
+
+        .slide.active .chart-pt:nth-of-type(1) {
+            transition-delay: 1s
+        }
+
+        .slide.active .chart-pt:nth-of-type(2) {
+            transition-delay: 1.3s
+        }
+
+        .slide.active .chart-pt:nth-of-type(3) {
+            transition-delay: 1.6s
+        }
+
+        .slide.active .chart-pt:nth-of-type(4) {
+            transition-delay: 1.9s
+        }
+
+        /* S7 Number Grid */
+        .stat-mega {
+            font-family: var(--font-h);
+            font-size: clamp(4rem, 9vw, 8rem);
+            font-weight: 900;
+            color: var(--gold);
+            line-height: .9;
+            display: block
+        }
+
+        /* Number Counter Animation */
+        .counter {
+            display: inline-block;
+            min-width: 1ch
+        }
+
+        /* Timeline S8 */
+        .timeline {
+            position: relative;
+            padding-left: 40px
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 10px;
+            width: 2px;
+            background: var(--panel-bd)
+        }
+
+        .timeline-fill {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 2px;
+            background: var(--gold);
+            height: 0;
+            transition: height 2s cubic-bezier(0.4, 0, 0.2, 1)
+        }
+
+        .slide.active .timeline-fill {
+            height: calc(100% - 20px);
+            transition-delay: .4s
+        }
+
+        /* Pricing S13 */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 50px 40px;
+            position: relative;
+            text-align: left;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s, box-shadow 0.4s, background 0.4s;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .price-card.anchor {
+            border-color: rgba(212, 175, 55, 0.6);
+            background: rgba(212, 175, 55, 0.08);
+            transform: scale(1.05);
+            /* Highlight anchor */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .price-card:not(.anchor):hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .price-card.anchor:hover {
+            transform: scale(1.08);
+            /* slight hover lift for anchor */
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.2);
+        }
+
+        @keyframes badgePulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
+        }
+
+        .price-card .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            animation: badgePulse 2s infinite;
+        }
+
+        /* WhatsApp Button Animation */
+        @keyframes wppPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        .btn-wpp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: #fff !important;
+            padding: 24px 60px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: wppPulse 2s infinite;
+            border: 2px solid transparent;
+        }
+
+        .btn-wpp:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+            border-color: #25D366;
+        }
+
+        .price-title {
+            font-size: 1.4rem;
+            font-family: var(--font-h);
+            color: var(--muted);
+            margin-bottom: 5px;
+        }
+
+        .anchor .price-title {
+            color: var(--gold);
+        }
+
+        .price-value {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1;
+            margin: 10px 0 20px;
+            color: #fff;
+        }
+
+        .price-value span {
+            font-size: 1.2rem;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .anchor .price-value {
+            color: var(--gold-l);
+        }
+
+        .price-desc {
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .price-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 40px;
+            /* Space for absolute button */
+        }
+
+        .price-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .price-features li svg {
+            flex-shrink: 0;
+            margin-top: 3px;
+            color: var(--gold);
+        }
+
+        .price-card .btn {
+            width: 100%;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .price-card:not(.anchor) .btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .price-card:not(.anchor) .btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Slide specific animations */
+        .slide.active .price-card:nth-child(1) {
+            animation: slideUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: 0.4s;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .slide.active .price-card.anchor {
+            animation: slideUpScale 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: 0.6s;
+            opacity: 0;
+            transform: translateY(40px) scale(1);
+        }
+
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpScale {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1.05);
+            }
+        }
+
+        .tl-item {
+            position: relative;
+            padding-bottom: 40px
+        }
+
+        .tl-item:last-child {
+            padding-bottom: 0
+        }
+
+        .tl-dot {
+            position: absolute;
+            left: -39px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--dim2);
+            transition: all .4s
+        }
+
+        .slide.active .tl-item:nth-child(1) .tl-dot {
+            border-color: var(--gold);
+            background: var(--gold);
+            transition-delay: .4s;
+            box-shadow: 0 0 15px var(--gold-l)
+        }
+
+        .slide.active .tl-item:nth-child(2) .tl-dot {
+            border-color: var(--gold);
+            background: var(--gold);
+            transition-delay: .9s;
+            box-shadow: 0 0 15px var(--gold-l)
+        }
+
+        .slide.active .tl-item:nth-child(3) .tl-dot {
+            border-color: var(--gold);
+            background: var(--gold);
+            transition-delay: 1.4s;
+            box-shadow: 0 0 15px var(--gold-l)
+        }
+
+        .slide.active .tl-item:nth-child(4) .tl-dot {
+            border-color: var(--gold);
+            background: var(--gold);
+            transition-delay: 1.9s;
+            box-shadow: 0 0 15px var(--gold-l)
+        }
+
+        /* Grid Logos S9 */
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px
+        }
+
+        .logo-card {
+            height: 160px;
+            border-radius: 12px;
+            background: #111;
+            border: 1px solid #222;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .logo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: .3;
+            transition: opacity .3s, transform .3s
+        }
+
+        .logo-card:hover img {
+            opacity: .6;
+            transform: scale(1.05)
+        }
+
+        .logo-content {
+            position: absolute;
+            z-index: 2;
+            text-align: center;
+            pointer-events: none
+        }
+
+        .logo-name {
+            font-family: var(--font-h);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px
+        }
+
+        .logo-stat {
+            font-size: .8rem;
+            color: var(--gold);
+            font-weight: 600;
+            background: rgba(0, 0, 0, .6);
+            padding: 4px 12px;
+            border-radius: 100px
+        }
+
+        /* Control Bar */
+        #nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: linear-gradient(to top, var(--bg), transparent);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 24px 6vw;
+            z-index: 999;
+            pointer-events: none
+        }
+
+        .nav-wrap {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            pointer-events: all
+        }
+
+        #prog-bg {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, .1);
+            border-radius: 2px;
+            overflow: hidden
+        }
+
+        #prog-fill {
+            height: 100%;
+            background: var(--gold);
+            width: 10%;
+            transition: width .4s cubic-bezier(0.4, 0, 0.2, 1)
+        }
+
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .2s;
+            font-size: 16px
+        }
+
+        .nav-btn:hover {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold)
+        }
+
+        #counter {
+            font-family: var(--font-h);
+            font-size: .9rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            color: var(--dim)
+        }
+
+        @media(max-width:900px) {
+
+            .g2,
+            .g3 {
+                grid-template-columns: 1fr;
+                gap: 24px
+            }
+
+            .slide {
+                padding: 40px 8vw 100px;
+                align-items: flex-start
+            }
+
+            .slide .a {
+                transform: translateY(16px)
+            }
+
+            .overlay {
+                background: linear-gradient(180deg, var(--bg) 0%, rgba(3, 3, 3, 0.8) 40%, rgba(3, 3, 3, 0.7) 100%)
+            }
+
+            .orbit-sys {
+                transform: scale(0.8);
+                margin: 40px auto
+            }
+
+            #nav {
+                padding: 20px 8vw
+            }
+
+            #prog-bg {
+                width: 120px
+            }
+
+            /* Global Typography & Spacing tweaks */
+            .slide {
+                padding: 100px 5vw 120px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                /* Add top padding to clear status bars, adjust sides, and allow scroll */
+            }
+
+            .h-xl {
+                font-size: 3rem !important;
+                /* Cap hero size */
+                margin-bottom: 20px;
+            }
+
+            .h-lg {
+                font-size: 2.2rem !important;
+                margin-bottom: 20px;
+            }
+
+            .sub {
+                font-size: 1rem !important;
+                margin-bottom: 40px !important;
+            }
+
+            /* S2 The Gap */
+            .dash-board {
+                padding: 24px !important;
+                margin-bottom: 60px !important;
+                /* Prevent overlap with nav bar */
+            }
+
+            /* S3 Pillars */
+            .glass.a {
+                padding: 30px !important;
+            }
+
+            /* S4/S5 Visuals & Phone Mockup */
+            .net-visual,
+            .net-sys {
+                transform: scale(0.45);
+                transform-origin: center top;
+                margin: 0 auto -220px;
+                /* Pull up next content */
+            }
+
+            #s4 .w>div:nth-child(2) {
+                width: 100% !important;
+                max-width: 100%;
+                align-items: center !important;
+                text-align: center !important;
+                padding: 0 5vw;
+                box-sizing: border-box;
+            }
+
+            #s4 .sub {
+                margin: 0 auto 32px !important;
+            }
+
+            #s4 .a[style*="gap:12px"] {
+                justify-content: center !important;
+            }
+
+            .phone {
+                transform: scale(0.85);
+                /* Slightly smaller phone */
+                margin: 0 auto;
+            }
+
+            /* S6 Chart */
+            .chart-box {
+                overflow-x: auto;
+                /* Allow side scroll if strict */
+                padding-bottom: 10px;
+            }
+
+            .chart-box svg {
+                min-width: 500px;
+                /* Ensure curve doesn't break aspect ratio completely */
+            }
+
+            /* S7 Stats */
+            .stat-mega {
+                font-size: 3.5rem !important;
+            }
+
+            /* S8 Timeline */
+            .timeline {
+                padding-left: 40px;
+                /* Less left indent */
+            }
+
+            .timeline-fill {
+                left: 19px;
+            }
+
+            .tl-dot {
+                left: -29px;
+            }
+
+            /* S9 Logos */
+            .logo-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                /* 2 wide max on phone */
+                gap: 12px;
+            }
+
+            .logo-card {
+                height: 120px;
+            }
+
+            .logo-name {
+                font-size: 1.1rem;
+            }
+
+            .logo-stat {
+                font-size: 0.7rem;
+            }
+
+            /* S10-S14 Responsive tweaks */
+            #s10 .a>div {
+                padding: 0;
+            }
+
+            .lever-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+                padding: 24px;
+            }
+
+            #s11 ul {
+                grid-template-columns: 1fr !important;
+            }
+
+            #s11 .a {
+                padding: 30px 20px !important;
+            }
+
+            .check-item {
+                font-size: 1rem !important;
+            }
+
+            .feedback-slider {
+                flex-direction: column;
+                mask-image: none;
+                -webkit-mask-image: none;
+                overflow-x: auto;
+                padding: 20px 0;
+                scroll-snap-type: x mandatory;
+            }
+
+            .feedback-track {
+                animation: none;
+                display: flex;
+                gap: 16px;
+            }
+
+            .feedback-card {
+                width: 85vw;
+                scroll-snap-align: center;
+                flex-shrink: 0;
+                padding: 30px 24px;
+            }
+
+            .feedback-text {
+                font-size: 1.1rem !important;
+            }
+
+            #s13 .a>div {
+                flex-direction: column !important;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .price-card {
+                width: 100% !important;
+                padding: 40px 30px !important;
+            }
+
+            #s14 .h-xl {
+                font-size: 2.2rem !important;
+            }
+
+            .btn-wpp {
+                padding: 18px 20px !important;
+                font-size: .95rem !important;
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .btn-wpp svg {
+                margin: 0 0 8px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="deck">
+
+        <!-- S1 HERO -->
+        <div class="slide active" id="s1">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1514933651103-005eab06c04d?q=80&w=1600')">
+            </div>
+            <div class="overlay"></div>
+            <div class="w">
+                <div class="tag a">Bem-vindo à Nova Era</div>
+                <h1 class="h-xl a">Diagnóstico e Plano de Ação:<br><span class="gold">Padaria Bublitz</span></h1>
+                <p class="sub a">Plano estratégico de aceleração digital e estruturação de vendas focado em traduzir os mais de 40 anos de tradição da Padaria e Restaurante Bublitz em lucro escalável.</p>
+                <div class="dks-brandbox a">
+                    <div class="dks-logo">DKS</div>
+                    <div class="dks-line"></div>
+                    <div class="dks-text">Apresentação Comercial</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S2 THE GAP -->
+        <div class="slide" id="s2">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1600'); opacity: 0.15; z-index: 1;">
+            </div>
+            <div class="w g2" style="position: relative; z-index: 2;">
+                <div>
+                    <div class="tag a">A Realidade</div>
+                    <h2 class="h-lg a">Post bonito<br>não paga os<br><span class="gold">boletos do seu
+                            restaurante.</span></h2>
+                    <p class="sub a">Enquanto você foca na cor da arte do Instagram, seu concorrente que entendeu o jogo
+                        digital está roubando seus clientes terça-feira à noite.</p>
+                    <ul class="a"
+                        style="list-style:none;display:flex;flex-direction:column;gap:16px;margin-bottom:30px">
+                        <li style="display:flex;gap:12px;align-items:center">
+                            <div style="width:16px;height:16px;border-radius:50%;background:#EF4444;flex-shrink:0">
+                            </div><span style="color:var(--text)">Autoridade e tradição mal exploradas no digital</span>
+                        </li>
+                        <li style="display:flex;gap:12px;align-items:center">
+                            <div style="width:16px;height:16px;border-radius:50%;background:#EF4444;flex-shrink:0">
+                            </div><span style="color:var(--text)">Dependência do fluxo orgânico presencial</span>
+                        </li>
+                        <li style="display:flex;gap:12px;align-items:center">
+                            <div style="width:16px;height:16px;border-radius:50%;background:#EF4444;flex-shrink:0">
+                            </div><span style="color:var(--text)">Falta de uma máquina de atração contínua</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="a">
+                    <div class="dash-board">
+                        <h3 class="h-md" style="font-size:1.2rem;margin-bottom:24px">O outro lado do balcão:</h3>
+                        <div style="display:flex;flex-direction:column;gap:12px">
+                            <div class="metric-box">
+                                <div class="metric-lbl">Receita Mensal em Delivery</div>
+                                <div class="metric-val">R$ <span class="counter" data-target="184500"
+                                        data-format="currency">0</span><span class="up-arrow">↑</span></div>
+                            </div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                                <div class="metric-box">
+                                    <div class="metric-lbl">Pedidos Novos</div>
+                                    <div class="metric-val">+<span class="counter" data-target="1240">0</span></div>
+                                </div>
+                                <div class="metric-box">
+                                    <div class="metric-lbl">Custo Aquisição</div>
+                                    <div class="metric-val" style="color:#fff">R$ <span class="counter"
+                                            data-target="6.45" data-float="true">0</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S3 PILLARS -->
+        <div class="slide" id="s3">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1600')">
+            </div>
+            <div class="overlay"></div>
+            <div class="w">
+                <div class="tag a" style="justify-content:center;display:flex;width:100%">A Matemática do Lucro</div>
+                <h2 class="h-lg a" style="text-align:center;max-width:800px;margin:0 auto 48px">Seu Restaurante precisa
+                    dominar <span class="gold">3 Variáveis:</span></h2>
+                <div class="g3">
+                    <div class="glass a">
+                        <div
+                            style="font-family:var(--font-h);font-size:4rem;color:var(--gold);font-weight:900;line-height:1;margin-bottom:12px;opacity:.3">
+                            01</div>
+                        <h3 class="h-md" style="font-size:1.5rem">Atrair<br><span
+                                style="color:var(--dim);font-weight:400">Escalabilidade</span></h3>
+                        <p style="color:#aaa;line-height:1.6;font-size:.9rem;margin-top:16px">Estratégias agressivas de
+                            anúncios no Meta e Google para colocar sua marca na frente de quem tem fome agora.</p>
+                    </div>
+                    <div class="glass a">
+                        <div
+                            style="font-family:var(--font-h);font-size:4rem;color:var(--gold);font-weight:900;line-height:1;margin-bottom:12px;opacity:.3">
+                            02</div>
+                        <h3 class="h-md" style="font-size:1.5rem">Converter<br><span
+                                style="color:var(--dim);font-weight:400">Eficiência</span></h3>
+                        <p style="color:#aaa;line-height:1.6;font-size:.9rem;margin-top:16px">Engenharia de cardápio,
+                            fotos alinhadas, otimizacao forte dentro do cardápio proprio e dos apps (ifood/keeta/99food)
+                        </p>
+                    </div>
+                    <div class="glass a" style="border-color:var(--gold-l);background:rgba(212,175,55,.05)">
+                        <div
+                            style="font-family:var(--font-h);font-size:4rem;color:var(--gold);font-weight:900;line-height:1;margin-bottom:12px;opacity:1">
+                            03</div>
+                        <h3 class="h-md" style="font-size:1.5rem;color:var(--gold)">Reter<br><span
+                                style="color:#fff;font-weight:400">O Verdadeiro Lucro</span></h3>
+                        <p style="color:#ccc;line-height:1.6;font-size:.9rem;margin-top:16px">Implantação de CRM ativo.
+                            Mandar mensagens programadas, fazer o aniversariante comemorar aí e gerar caixa recorrente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S4 ECOSYSTEM -->
+        <div class="slide" id="s4">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1600'); opacity: 0.15; z-index: 1;">
+            </div>
+            <div class="w g2" style="position: relative; z-index: 2;">
+                <div class="a">
+                    <div class="net-sys">
+                        <svg class="net-lines" viewBox="0 0 450 450">
+                            <defs>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur" />
+                                        <feMergeNode in="SourceGraphic" />
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            <polygon points="225,25 400,75 450,195 400,385 225,425 25,385 -20,195 25,75"
+                                fill="rgba(212,175,55,0.02)" stroke="rgba(212,175,55,0.15)" stroke-width="1.5"
+                                stroke-dasharray="4 4" />
+                            <line x1="225" y1="225" x2="225" y2="25" stroke="rgba(212,175,55,0.3)" stroke-width="1.5" />
+                            <line x1="225" y1="225" x2="400" y2="75" stroke="rgba(212,175,55,0.3)" stroke-width="1.5" />
+                            <line x1="225" y1="225" x2="450" y2="195" stroke="rgba(212,175,55,0.3)"
+                                stroke-width="1.5" />
+                            <line x1="225" y1="225" x2="400" y2="385" stroke="rgba(212,175,55,0.3)"
+                                stroke-width="1.5" />
+                            <line x1="225" y1="225" x2="225" y2="425" stroke="rgba(212,175,55,0.3)"
+                                stroke-width="1.5" />
+                            <line x1="225" y1="225" x2="25" y2="385" stroke="rgba(212,175,55,0.3)" stroke-width="1.5" />
+                            <line x1="225" y1="225" x2="-20" y2="195" stroke="rgba(212,175,55,0.3)"
+                                stroke-width="1.5" />
+                            <line x1="225" y1="225" x2="25" y2="75" stroke="rgba(212,175,55,0.3)" stroke-width="1.5" />
+
+                            <!-- Animated Data Pulses (Center to Outer) -->
+                            <circle r="3" fill="#FFEBAA" filter="url(#glow)">
+                                <animateMotion dur="2s" repeatCount="indefinite" path="M 225 225 L 225 25" />
+                            </circle>
+                            <circle r="3" fill="#FFEBAA" filter="url(#glow)">
+                                <animateMotion dur="2.5s" repeatCount="indefinite" path="M 225 225 L 400 75" />
+                            </circle>
+                            <circle r="3" fill="#FFEBAA" filter="url(#glow)">
+                                <animateMotion dur="3s" repeatCount="indefinite" path="M 225 225 L 450 195" />
+                            </circle>
+                            <circle r="3" fill="#FFEBAA" filter="url(#glow)">
+                                <animateMotion dur="2.2s" repeatCount="indefinite" path="M 225 225 L 400 385" />
+                            </circle>
+                            <circle r="3" fill="#FFEBAA" filter="url(#glow)">
+                                <animateMotion dur="2.8s" repeatCount="indefinite" path="M 225 225 L 225 425" />
+                            </circle>
+                            <circle r="3" fill="#FFEBAA" filter="url(#glow)">
+                                <animateMotion dur="2.4s" repeatCount="indefinite" path="M 225 225 L 25 385" />
+                            </circle>
+                            <circle r="3" fill="#FFEBAA" filter="url(#glow)">
+                                <animateMotion dur="3.5s" repeatCount="indefinite" path="M 225 225 L -20 195" />
+                            </circle>
+                            <circle r="3" fill="#FFEBAA" filter="url(#glow)">
+                                <animateMotion dur="2.9s" repeatCount="indefinite" path="M 225 225 L 25 75" />
+                            </circle>
+                        </svg>
+
+                        <div class="net-center">DKS</div>
+
+                        <div class="net-node-item nn1">Meta Ads</div>
+                        <div class="net-node-item nn2">Google Ads</div>
+                        <div class="net-node-item nn3">TripAdvisor</div>
+                        <div class="net-node-item nn4">Google Meu Negócio</div>
+                        <div class="net-node-item nn5">CRM Inteligente</div>
+                        <div class="net-node-item nn6">Otimização iFood</div>
+                        <div class="net-node-item nn7">Cardápio Digital</div>
+                        <div class="net-node-item nn8">Assessoria de Conteúdo</div>
+                    </div>
+                </div>
+                <div style="display:flex;flex-direction:column;justify-content:center;">
+                    <div class="tag a"
+                        style="background:transparent;border:none;padding:0;color:var(--gold);font-weight:700;letter-spacing:.15em;display:flex;align-items:center;margin-bottom:20px;">
+                        ECOSSISTEMA
+                        CONECTADO
+                    </div>
+                    <h2 class="a"
+                        style="font-family:var(--font-h);font-size:clamp(2.5rem, 4.5vw, 4.5rem);font-weight:900;line-height:1.05;margin-bottom:24px;">
+                        Sua operação<br>blindada e<br>vendendo <span class="gold">24/7.</span></h2>
+                    <p class="sub a" style="font-size:1rem;color:#aaa;margin-bottom:32px;max-width:95%;">Chega de ações
+                        isoladas. Nós estruturamos um ecossistema digital onde Tráfego,
+                        Cardápio, Avaliações e Retenção conversam para formar uma máquina que injeta clientes todo dia
+                        na sua esteira.</p>
+                    <div class="a" style="display:flex;flex-wrap:wrap;gap:12px">
+                        <span
+                            style="padding:8px 18px;border:1px solid rgba(255,255,255,0.1);border-radius:100px;font-size:.85rem;color:#ddd;background:rgba(20,20,20,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">Meta
+                            Ads</span>
+                        <span
+                            style="padding:8px 18px;border:1px solid rgba(255,255,255,0.1);border-radius:100px;font-size:.85rem;color:#ddd;background:rgba(20,20,20,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">Google
+                            Ads</span>
+                        <span
+                            style="padding:8px 18px;border:1px solid rgba(212,175,55,0.4);border-radius:100px;font-size:.85rem;color:var(--gold);background:rgba(212,175,55,0.1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">CRM
+                            Inteligente</span>
+                        <span
+                            style="padding:8px 18px;border:1px solid rgba(255,255,255,0.1);border-radius:100px;font-size:.85rem;color:#ddd;background:rgba(20,20,20,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">Otimização
+                            iFood</span>
+                        <span
+                            style="padding:8px 18px;border:1px solid rgba(255,255,255,0.1);border-radius:100px;font-size:.85rem;color:#ddd;background:rgba(20,20,20,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">Assessoria
+                            de Conteúdo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S5 iFOOD -->
+        <div class="slide" id="s5">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1600'); opacity: 0.15; z-index: 1;">
+            </div>
+            <div class="w g2" style="grid-template-columns:1fr 400px; position: relative; z-index: 2;">
+                <div>
+                    <div class="tag a">Domínio de Plataforma</div>
+                    <h2 class="h-lg a">A Arte de hackear<br>o algoritmo do <span class="gold">Delivery.</span></h2>
+                    <p class="sub a">Estar no iFood é fácil. Ser o primeiro nas buscas da sua região é onde nós entramos
+                        com SEO para restaurantes, engenharia de categorias e táticas de conversão de combos.</p>
+                    <div class="a consq-box">
+                        <h4 style="font-family:var(--font-h);font-size:1.2rem;margin-bottom:12px;color:var(--gold)">A
+                            consequência direta:</h4>
+                        <div style="font-size:.9rem;color:#ddd;line-height:1.6;margin-bottom:8px">✓ Cliente que busca
+                            pizza na sua região, te acha primeiro.</div>
+                        <div style="font-size:.9rem;color:#ddd;line-height:1.6;margin-bottom:8px">✓ Ticket médio maior
+                            com combos estratégicos.</div>
+                        <div style="font-size:.9rem;color:#ddd;line-height:1.6">✓ Mais avaliações, mais confiança, mais
+                            pedidos.</div>
+                    </div>
+                </div>
+                <div class="a" style="display:flex;justify-content:center">
+                    <div class="phone">
+                        <div class="lock-status">
+                            <svg viewBox="0 0 18 12">
+                                <path d="M1 10h3v2H1v-2zm5-3h3v5H6V7zm5-3h3v8h-3V4zm5-4h3v12h-3V0z" />
+                            </svg>
+                            <svg viewBox="0 0 18 12">
+                                <path
+                                    d="M9 1.5c-4 0-7.5 1.5-10 4l2 2.5c2-2 4.5-3.5 8-3.5s6 1.5 8 3.5l2-2.5c-2.5-2.5-6-4-10-4zM9 5c-2.5 0-5 1-6.5 2.5l2 2.5c1-1.5 3-2 4.5-2s3.5 .5 4.5 2l2-2.5c-1.5-1.5-4-2.5-6.5-2.5zM9 8c-1 0-2 .5-2.5 1.5l2.5 3l2.5-3c-.5-1-1.5-1.5-2.5-1.5z" />
+                            </svg>
+                            <svg viewBox="0 0 24 12">
+                                <rect x="1" y="1" width="20" height="10" rx="3" fill="none" stroke="#fff"
+                                    stroke-width="1.5" />
+                                <rect x="3" y="3" width="16" height="6" rx="1" />
+                                <path d="M22 4v4a1 1 0 001-1V5a1 1 0 00-1-1z" />
+                            </svg>
+                        </div>
+                        <div class="lock-header">
+                            <div class="lock-date">Quarta feira, 08 de outubro</div>
+                            <div class="lock-time">11:55</div>
+                        </div>
+                        <div class="notif-wrap" id="notif-box">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="lock-bottom">
+                            <div class="lock-btn">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M9 2h6v4h-6v-4zm0 5h6l1 5v10h-8v-10l1-5zm2-3v2h2v-2h-2z" />
+                                </svg>
+                            </div>
+                            <div class="lock-btn">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 15c1.65 0 3-1.35 3-3s-1.35-3-3-3-3 1.35-3 3 1.35 3 3 3zm8-8h-3l-2-2H9L7 7H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 12H4V9h16v10z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S6 RECURRENCE CHART -->
+        <div class="slide" id="s6">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1600'); opacity: 0.15; z-index: 1;">
+            </div>
+            <div class="w" style="position: relative; z-index: 2;">
+                <div class="tag a" style="justify-content:center;display:flex;width:100%">O Jogo do Longo Prazo</div>
+                <h2 class="h-lg a" style="text-align:center;max-width:800px;margin:0 auto 20px">Vender uma vez é o dever
+                    de casa.<br><span class="gold">Fazer voltar é o lucro.</span></h2>
+                <p class="sub a" style="text-align:center;margin:0 auto 50px">Restaurantes quebram no CAC. Sobrevivem no
+                    LTV.<br>Veja o que um sistema de retenção CRM faz com seu caixa ao longo dos meses.</p>
+
+                <div class="chart-box a">
+                    <svg width="100%" height="100%" viewBox="0 0 1000 300" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="rgba(212,175,55,0.4)" />
+                                <stop offset="100%" stop-color="rgba(212,175,55,0)" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Grid lines -->
+                        <path d="M0,250 L1000,250" stroke="#222" stroke-width="1" stroke-dasharray="4,4" />
+                        <path d="M0,150 L1000,150" stroke="#222" stroke-width="1" stroke-dasharray="4,4" />
+                        <path d="M0,50 L1000,50" stroke="#222" stroke-width="1" stroke-dasharray="4,4" />
+
+                        <!-- Base line without CRM -->
+                        <path d="M0,250 C300,240 600,230 1000,220" fill="none" stroke="#444" stroke-width="3"
+                            stroke-dasharray="5,5" />
+                        <text x="900" y="210" fill="#666" font-size="14" font-family="Inter">Sem CRM</text>
+
+                        <!-- Golden Growth Line -->
+                        <path class="chart-area"
+                            d="M0,250 C200,220 400,150 700,100 S900,20 1000,20 L1000,300 L0,300 Z" />
+                        <path class="chart-line" d="M0,250 C200,220 400,150 700,100 S900,20 1000,20" />
+
+                        <!-- Points -->
+                        <circle class="chart-pt" cx="300" cy="188" />
+                        <circle class="chart-pt" cx="600" cy="116" />
+                        <circle class="chart-pt" cx="820" cy="60" />
+                        <circle class="chart-pt" cx="1000" cy="20" />
+
+                        <text x="810" y="90" fill="#D4AF37" font-weight="bold" font-size="16" font-family="Outfit">Com
+                            CRM</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- S7 TRACTION -->
+        <div class="slide" id="s7">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1600')">
+            </div>
+            <div class="overlay"></div>
+            <div class="w g2">
+                <div>
+                    <div class="tag a">Background Sólido</div>
+                    <h2 class="h-lg a">Não fazemos laboratório com o <span class="gold">seu dinheiro.</span></h2>
+                    <p class="sub a" style="color:#ddd">Sabemos a foto de hambúrguer que converte. Sabemos em que
+                        quilômetro do raio do seu delivery sua conversão cai. Tudo
+                        isso graças a base de inteligência que construímos com anos de operação.</p>
+                </div>
+                <div class="a" style="display:flex;flex-direction:column;gap:32px">
+                    <div>
+                        <span class="stat-mega">+<span class="counter" data-target="97">0</span></span>
+                        <div
+                            style="font-size:1.2rem;font-weight:600;color:#fff;text-transform:uppercase;letter-spacing:.05em">
+                            Marcas Gastronômicas Atendidas</div>
+                    </div>
+                    <div style="width:100%;height:1px;background:rgba(255,255,255,.1)"></div>
+                    <div>
+                        <span class="stat-mega" style="font-size:clamp(3rem,6vw,5rem)">R$ <span class="counter"
+                                data-target="5.3" data-float="true" data-decimals="1"
+                                data-suffix=" MILHÕES">0</span></span>
+                        <div
+                            style="font-size:1.2rem;font-weight:600;color:#fff;text-transform:uppercase;letter-spacing:.05em">
+                            Investidos em Anúncios do Setor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S8 TIMELINE -->
+        <div class="slide" id="s8">
+            <div class="w g2">
+                <div style="padding-right:60px">
+                    <div class="tag a">Método ROMA na Prática</div>
+                    <h2 class="h-lg a">Como a revolução começa nos primeiros <span class="gold">30 Dias.</span></h2>
+                    <p class="sub a">Nosso processo de on-boarding não demora para dar tração. Entramos rasgando na
+                        execução porque tempo com mesa vazia custa muito caro.</p>
+                </div>
+                <div class="a">
+                    <div class="timeline">
+                        <div class="timeline-fill"></div>
+                        <div class="tl-item">
+                            <div class="tl-dot"></div>
+                            <h3 class="h-md" style="font-size:1.4rem;color:var(--gold);margin-bottom:8px">Semana 1: Raio
+                                X e Engenharia</h3>
+                            <p style="color:var(--dim);line-height:1.6;font-size:.95rem">Auditoria de redes, engenharia
+                                do cardápio digital e marketplace.</p>
+                        </div>
+                        <div class="tl-item">
+                            <div class="tl-dot"></div>
+                            <h3 class="h-md" style="font-size:1.4rem;color:#fff;margin-bottom:8px">Semana 2: Setup de
+                                Tráfego</h3>
+                            <p style="color:var(--dim);line-height:1.6;font-size:.95rem">Pixel, UTMs, estruturação de
+                                campanhas Locais (Google) e de Conversão Direta (Meta Ads) com criativos de alto apetite
+                                visual.</p>
+                        </div>
+                        <div class="tl-item">
+                            <div class="tl-dot"></div>
+                            <h3 class="h-md" style="font-size:1.4rem;color:#fff;margin-bottom:8px">Semana 3: Disparo de
+                                Tração</h3>
+                            <p style="color:var(--dim);line-height:1.6;font-size:.95rem">Anúncios no ar. Coleta de dados
+                                do CRM para entender comportamento de compra dos clientes. Início de disparos via
+                                whatsapp para aumentar a recorrência.</p>
+                        </div>
+                        <div class="tl-item">
+                            <div class="tl-dot"></div>
+                            <h3 class="h-md" style="font-size:1.4rem;color:#fff;margin-bottom:8px">Semana 4: Ciclo e
+                                Escala</h3>
+                            <p style="color:var(--dim);line-height:1.6;font-size:.95rem">Primeiro relatório de
+                                performance focado em faturamento. Ajustes, otimizações e análise de todo o cenário
+                                atual do restaurante. Ajustes e escala.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S9 PROOF -->
+        <div class="slide" id="s9">
+            <div class="w sc">
+                <div class="tag a" style="justify-content:center;display:flex;width:100%">O Caso de Sucesso é Você</div>
+                <h2 class="h-lg a" style="text-align:center;max-width:800px;margin:0 auto 40px">Quem constrói conosco
+                    não aceita <span class="gold">voltar para o amadorismo.</span></h2>
+
+                <div class="logo-grid a">
+                    <div class="logo-card">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400" alt="bg">
+                        <div class="logo-content">
+                            <div class="logo-name">Burguer Hub</div>
+                            <div class="logo-stat">+ 140% no iFood</div>
+                        </div>
+                    </div>
+                    <div class="logo-card">
+                        <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=400" alt="bg">
+                        <div class="logo-content">
+                            <div class="logo-name">Sushi Prime</div>
+                            <div class="logo-stat">Terças Cheias</div>
+                        </div>
+                    </div>
+                    <div class="logo-card">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=400" alt="bg">
+                        <div class="logo-content">
+                            <div class="logo-name">Trattoria Duo</div>
+                            <div class="logo-stat">+R$ 40k via CRM</div>
+                        </div>
+                    </div>
+                    <div class="logo-card">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=400" alt="bg">
+                        <div class="logo-content">
+                            <div class="logo-name">Pizza Nápoles</div>
+                            <div class="logo-stat">Zero dependência de apps</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S10 3 ALAVANCAS -->
+        <div class="slide" id="s10">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=1600'); opacity: 0.15; z-index: 1;">
+            </div>
+            <div class="w" style="text-align:center; position: relative; z-index: 2;">
+                <div class="tag a" style="justify-content:center;display:flex;width:100%">Motor de Crescimento</div>
+                <h2 class="h-lg a" style="max-width:800px;margin:0 auto 20px">O nosso objetivo é fazer o seu restaurante
+                    <span class="gold-shine" style="font-weight:900">aumentar o faturamento.</span>
+                </h2>
+                <p class="sub a" style="max-width:900px;margin:0 auto 60px">Essas são as 3 alavancas para o seu
+                    restaurante vender mais, e nós da DKS sabemos <strong style="color:#fff">o que</strong> e <strong
+                        style="color:#fff">como</strong> fazer para isso acontecer.</p>
+
+                <div class="a"
+                    style="display:flex;flex-direction:column;gap:20px;text-align:left;max-width:850px;margin:0 auto">
+                    <div class="lever-card">
+                        <div class="lever-num">01</div>
+                        <div>
+                            <h3 style="font-size:1.6rem;color:#fff;margin-bottom:8px;font-family:var(--font-h)">
+                                Aquisição de Clientes</h3>
+                            <p style="color:var(--dim);line-height:1.6;font-size:.95rem;margin:0">Atrair público
+                                qualificado todos os dias para a sua operação, dominando a sua região e superando a
+                                concorrência nas buscas.</p>
+                        </div>
+                    </div>
+
+                    <div class="lever-card">
+                        <div class="lever-num">02</div>
+                        <div>
+                            <h3 style="font-size:1.6rem;color:#fff;margin-bottom:8px;font-family:var(--font-h)">Aumento
+                                de Ticket Médio</h3>
+                            <p style="color:var(--dim);line-height:1.6;font-size:.95rem;margin:0">Estratégias de
+                                engenharia de cardápio, combos e upsell inteligente para fazer o cliente gastar mais a
+                                cada pedido realizado.</p>
+                        </div>
+                    </div>
+
+                    <div class="lever-card">
+                        <div class="lever-num">03</div>
+                        <div>
+                            <h3 style="font-size:1.6rem;color:#fff;margin-bottom:8px;font-family:var(--font-h)">
+                                Recorrência (LTV)</h3>
+                            <p style="color:var(--dim);line-height:1.6;font-size:.95rem;margin:0">Transformar clientes
+                                esporádicos em fregueses fiéis que compram várias vezes no mês através de automações de
+                                CRM.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S11 ENTREGAS -->
+        <div class="slide" id="s11">
+            <div class="w">
+                <h2 class="h-lg a"
+                    style="text-align:center;margin-bottom:50px;max-width:1050px;margin-left:auto;margin-right:auto;font-size:clamp(2rem, 4vw, 3.2rem)">
+                    O que vamos fazer para o seu restaurante <span class="text-glow">bater recorde de faturamento</span>
+                </h2>
+                <div class="a checklist-glass">
+                    <ul
+                        style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;column-gap:40px;row-gap:24px">
+                        <li class="check-item"
+                            style="display:flex;align-items:center;gap:16px;color:#fff;font-size:1.15rem;font-weight:600">
+                            <div class="check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                            </div>
+                            Planejamento estratégico para aumento de vendas
+                        </li>
+                        <li class="check-item"
+                            style="display:flex;align-items:center;gap:16px;color:#fff;font-size:1.15rem;font-weight:600">
+                            <div class="check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                            </div>
+                            Planejamento estratégico focado no delivery
+                        </li>
+                        <li class="check-item"
+                            style="display:flex;align-items:center;gap:16px;color:#fff;font-size:1.15rem;font-weight:600">
+                            <div class="check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                            </div>
+                            Estratégias de marketing para o espaço físico
+                        </li>
+                        <li class="check-item"
+                            style="display:flex;align-items:center;gap:16px;color:#fff;font-size:1.15rem;font-weight:600">
+                            <div class="check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                            </div>
+                            Diagnóstico das redes sociais
+                        </li>
+                        <li class="check-item"
+                            style="display:flex;align-items:center;gap:16px;color:#fff;font-size:1.15rem;font-weight:600">
+                            <div class="check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                            </div>
+                            Gestão de tráfego pago Google Ads
+                        </li>
+                        <li class="check-item"
+                            style="display:flex;align-items:center;gap:16px;color:#fff;font-size:1.15rem;font-weight:600">
+                            <div class="check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                            </div>
+                            Gestão de tráfego pago Meta Ads
+                        </li>
+                        <li class="check-item"
+                            style="display:flex;align-items:center;gap:16px;color:#fff;font-size:1.15rem;font-weight:600">
+                            <div class="check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                            </div>
+                            Implementação, monitoramento e análise de CRM
+                        </li>
+                        <li class="check-item"
+                            style="display:flex;align-items:center;gap:16px;color:#fff;font-size:1.15rem;font-weight:600">
+                            <div class="check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                            </div>
+                            Gestão do Google meu Negócio
+                        </li>
+                        <li class="check-item"
+                            style="display:flex;align-items:center;gap:16px;color:#fff;font-size:1.15rem;font-weight:600">
+                            <div class="check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                            </div>
+                            Gestão do Tripadvisor
+                        </li>
+                        <li class="check-item"
+                            style="display:flex;align-items:center;gap:16px;color:#fff;font-size:1.15rem;font-weight:600">
+                            <div class="check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                            </div>
+                            Gestão e engenharia do cardápio digital (cardápio próprio)
+                        </li>
+                        <li class="check-item"
+                            style="display:flex;align-items:center;gap:16px;color:#fff;font-size:1.15rem;font-weight:600">
+                            <div class="check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                            </div>
+                            Gestão e engenharia de marketplace (iFood, 99food, keeta)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- S12 FEEDBACKS -->
+        <div class="slide" id="s12"
+            style="overflow:hidden; background-image: linear-gradient(rgba(10,10,12,0.85), rgba(10,10,12,0.95)), url('https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=1600'); background-position: center center; background-size: cover; background-repeat: no-repeat;">
+            <div class="w" style="max-width:100%">
+                <h2 class="h-lg a" style="text-align:center;margin-bottom:20px;font-size:clamp(2rem, 4vw, 3.2rem)">
+                    Resultados que <span class="gold-shine">falam por si</span></h2>
+                <p class="a subtitle-feedbacks"
+                    style="text-align:center; color:#ccc; max-width:800px; margin: 0 auto 60px; font-size:1.15rem; line-height:1.6; transition-delay:0.1s">
+                    Não somos apenas uma agência, somos <span class="gold">parceiros de expansão</span>. Veja os
+                    resultados de quando a estratégia
+                    certa de <span class="gold">aquisição, menu e CRM</span> é executada com excelência.
+                </p>
+
+                <div class="a feedback-slider" style="transition-delay:0.3s">
+                    <div class="feedback-track">
+                        <!-- CLONE 1 -->
+                        <div class="feedback-card">
+                            <div style="display:flex;gap:4px;color:var(--gold)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <p style="color:#ddd;font-size:1.1rem;line-height:1.6;font-style:italic">"Nunca imaginei que
+                                em tão pouco tempo a gente fosse bater um recorde de faturamento. A parceria com a DKS
+                                mudou completamente a forma como o nosso restaurante aparece no iFood. Os pedidos
+                                aumentaram, o salão encheu e os números falaram por si."</p>
+                            <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05)">
+                                <h4 style="color:#fff;margin:0;font-size:1.05rem;font-family:var(--font-h)">João
+                                    Silva</h4>
+                            </div>
+                        </div>
+
+                        <div class="feedback-card">
+                            <div style="display:flex;gap:4px;color:var(--gold)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <p style="color:#ddd;font-size:1.1rem;line-height:1.6;font-style:italic">"Antes tinha dia
+                                que o salão ficava vazio no jantar. Depois que a DKS entrou, o movimento mudou de vez.
+                                Hoje a gente tem fila de espera nos fins de semana e as vendas no delivery nunca
+                                estiveram tão altas."</p>
+                            <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05)">
+                                <h4 style="color:#fff;margin:0;font-size:1.05rem;font-family:var(--font-h)">Maria
+                                    Oliveira</h4>
+                            </div>
+                        </div>
+
+                        <div class="feedback-card">
+                            <div style="display:flex;gap:4px;color:var(--gold)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <p style="color:#ddd;font-size:1.1rem;line-height:1.6;font-style:italic">"A gente trabalha
+                                duro todo dia, mas faltava a estratégia certa. A DKS trouxe isso. Resultado? Recorde de
+                                faturamento no mês passado, salão cheio e uma equipe motivada porque vê o negócio
+                                crescendo de verdade."</p>
+                            <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05)">
+                                <h4 style="color:#fff;margin:0;font-size:1.05rem;font-family:var(--font-h)">Carlos
+                                    Mendes</h4>
+                            </div>
+                        </div>
+
+                        <!-- CLONE 2 CONTINUOUS -->
+                        <div class="feedback-card">
+                            <div style="display:flex;gap:4px;color:var(--gold)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <p style="color:#ddd;font-size:1.1rem;line-height:1.6;font-style:italic">"Nunca imaginei que
+                                em tão pouco tempo a gente fosse bater um recorde de faturamento. A parceria com a DKS
+                                mudou completamente a forma como o nosso restaurante aparece no iFood. Os pedidos
+                                aumentaram, o salão encheu e os números falaram por si."</p>
+                            <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05)">
+                                <h4 style="color:#fff;margin:0;font-size:1.05rem;font-family:var(--font-h)">João
+                                    Silva</h4>
+                            </div>
+                        </div>
+
+                        <div class="feedback-card">
+                            <div style="display:flex;gap:4px;color:var(--gold)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <p style="color:#ddd;font-size:1.1rem;line-height:1.6;font-style:italic">"Antes tinha dia
+                                que o salão ficava vazio no jantar. Depois que a DKS entrou, o movimento mudou de vez.
+                                Hoje a gente tem fila de espera nos fins de semana e as vendas no delivery nunca
+                                estiveram tão altas."</p>
+                            <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05)">
+                                <h4 style="color:#fff;margin:0;font-size:1.05rem;font-family:var(--font-h)">Maria
+                                    Oliveira</h4>
+                            </div>
+                        </div>
+
+                        <div class="feedback-card">
+                            <div style="display:flex;gap:4px;color:var(--gold)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                </svg>
+                            </div>
+                            <p style="color:#ddd;font-size:1.1rem;line-height:1.6;font-style:italic">"A gente trabalha
+                                duro todo dia, mas faltava a estratégia certa. A DKS trouxe isso. Resultado? Recorde de
+                                faturamento no mês passado, salão cheio e uma equipe motivada porque vê o negócio
+                                crescendo de verdade."</p>
+                            <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05)">
+                                <h4 style="color:#fff;margin:0;font-size:1.05rem;font-family:var(--font-h)">Carlos
+                                    Mendes</h4>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S13 PRICING PITCH -->
+        <div class="slide" id="s13">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600'); opacity: 0.15; z-index: 1;">
+            </div>
+            <div class="w" style="max-width:100%; position: relative; z-index: 2;">
+                <div class="a" style="text-align:center; margin-bottom: 50px;">
+                    <div class="tag">Seu Investimento</div>
+                    <h2 class="h-lg" style="font-size:clamp(2rem, 4vw, 3.2rem); margin-bottom: 10px;">
+                        Planos de <span class="gold-shine">Parceria</span>
+                    </h2>
+                    <p style="color:var(--muted); font-size:1.1rem; max-width:600px; margin:0 auto;">
+                        Escolha o nível de aceleração ideal para o seu momento. Ambos exigem total comprometimento com o
+                        resultado.
+                    </p>
+                </div>
+
+                <div class="pricing-grid">
+                    <!-- PLAN 1: Standard -->
+                    <div class="price-card">
+                        <div class="price-title">Plano Base</div>
+                        <div class="price-value">R$ 1.997<span>/mês</span></div>
+                        <div class="price-desc">
+                            A estrutura digital obrigatória para vender todos os dias e resgatar clientes perdidos, sem
+                            gestão de marketplaces.
+                        </div>
+                        <ul class="price-features">
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Diagnóstico Estratégico dos Canais Digitais</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Tráfego Pago Meta Ads</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Tráfego Pago Google Ads</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Gestão e Otimizações Google Meu Negócio</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Gestão e Otimizações Tripadvisor</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Suporte em Grupo no WhatsApp</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Implementação, Monitoramento e Análise de CRM</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Engenharia de Cardápio Digital (Próprio)</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Relatórios de Performance</span>
+                            </li>
+                            <li style="opacity:0.4">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 6 6 18" />
+                                    <path d="m6 6 12 12" />
+                                </svg>
+                                <span>Gestão Completa de iFood/Marketplace</span>
+                            </li>
+                        </ul>
+                        <p style="font-size:0.8rem; color:#555; text-align:center; margin-bottom: 10px;">*Não inclui
+                            verba de mídia nem mensalidade de ferramentas</p>
+                    </div>
+
+                    <!-- PLAN 2: Premium (Anchor) -->
+                    <div class="price-card anchor">
+                        <div class="badge">Recomendado</div>
+                        <div class="price-title">Plano Growth</div>
+                        <div class="price-value">R$ 2.497<span>/mês</span></div>
+                        <div class="price-desc">
+                            Ecossistema completo de vendas. Nós dominamos as duas frentes (iFood e Canal Próprio) para o
+                            máximo de performance.
+                        </div>
+                        <ul class="price-features">
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span style="color:#fff; font-weight: 600;">Tudo incluso no Plano Base +</span>
+                            </li>
+                            <li
+                                style="background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.3); padding: 12px; border-radius: 8px; margin: 15px 0; transform: scale(1.03); box-shadow: 0 4px 15px rgba(212,175,55,0.1);">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span
+                                    style="color:var(--gold-l); font-weight:800; font-size: 1.05rem; letter-spacing: 0.5px;">Gestão
+                                    Completa de iFood/Marketplace</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Criação, edição e engenharia avançada</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Campanhas internas, descontos e visibilidade</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Estratégia Cross-Selling Diária e Relatórios</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="a" style="text-align:center; margin-top: 50px;">
+                    <span
+                        style="background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.3); padding: 10px 30px; border-radius: 50px; color: var(--gold-l); font-size: 0.95rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; box-shadow: 0 0 20px rgba(212,175,55,0.15); display: inline-block;">
+                        Contrato sem tempo mínimo
+                    </span>
+                    <p
+                        style="font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px;">
+                        Investimento Mínimo Recomendado Em Mídia: R$ 1.500/mês | Proposta válida para investimento de
+                        até
+                        R$ 5.000,00/mês em anúncios
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- S14 CTA -->
+        <div class="slide" id="s14">
+            <div class="bg-img"
+                style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1600')">
+            </div>
+            <div class="overlay"></div>
+            <div class="w" style="text-align:center">
+
+                <h1 class="h-xl a" style="max-width: 900px; margin: 0 auto; line-height: 1.1; margin-bottom: 20px;">
+                    A OPORTUNIDADE DE DOMINAR A SUA <span class="gold">REGIÃO COMEÇA AQUI.</span>
+                </h1>
+                <p class="sub a" style="margin:0 auto 40px;font-size:1.15rem;color:#ddd">
+                    O mercado não perdoa amadores. Ou você tem uma máquina de vendas previsível, ou você está deixando o
+                    seu concorrente levar os seus clientes. Clique abaixo se você está pronto para escalar com
+                    responsabilidade.
+                </p>
+                <div class="a">
+                    <a href="https://api.whatsapp.com/send?phone=5547991620354&text=Olá!%20Acabei%20de%20ver%20a%20apresentação%20e%20quero%20fechar%20a%20nossa%20parceria."
+                        target="_blank" class="btn-wpp">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                            </path>
+                        </svg>
+                        FECHAR CONTRATO E INICIAR PARCERIA
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /deck -->
+
+    <nav id="nav">
+        <div class="nav-wrap">
+            <div class="nav-btn" id="prev">←</div>
+            <div class="nav-btn" id="next">→</div>
+            <div id="counter">01 / 14</div>
+        </div>
+        <div id="prog-bg">
+            <div id="prog-fill"></div>
+        </div>
+    </nav>
+
+    <script>
+        // Logic for Phone Notifications
+        const notifBox = document.getElementById('notif-box');
+        const names = ['Ana P.', 'João M.', 'Carlos R.', 'Mariana T.', 'Felipe B.', 'Juliana C.'];
+        const items = ['Combo Casal Smash', 'Sushi Festival 40pçs', 'Pizza Família + Coca', ' Executivo Parmegiana'];
+        let notifTimer;
+
+        function createNotif() {
+            const n = document.createElement('div');
+            n.className = 'notif';
+            const name = names[Math.floor(Math.random() * names.length)];
+            const item = items[Math.floor(Math.random() * items.length)];
+            const val = (Math.random() * 120 + 40).toFixed(2).replace('.', '\,');
+            n.innerHTML = `
+    <div class="notif-head">
+      <img src="/images/ifood-logo-user1.png" style="width:20px;height:20px;border-radius:4px;object-fit:cover" alt="ifood">
+      <div class="notif-title">Novo Pedido</div>
+      <div class="notif-time">Agora</div>
+    </div>
+    <div class="notif-body">
+      ${name} — ${item} <br>
+      <span class="notif-val">+ R$ ${val}</span>
+    </div>
+  `;
+            notifBox.prepend(n);
+            // Force reflow
+            n.offsetHeight;
+            n.classList.add('show');
+
+            const allList = notifBox.querySelectorAll('.notif');
+            if (allList.length > 3) {
+                allList[allList.length - 1].remove();
+            }
+        }
+
+        // Typing effect S1
+        const typePhrase = "RESTAURANTE.";
+        let currentType = "";
+        let typeIdx = 0;
+        const typeEl = document.querySelector('.type');
+        function loopType() {
+            if (typeIdx < typePhrase.length) {
+                currentType += typePhrase.charAt(typeIdx);
+                typeEl.textContent = currentType;
+                typeIdx++;
+                setTimeout(loopType, 120);
+            }
+        }
+
+        // Running Counters
+        function runCounters(slide) {
+            const counters = slide.querySelectorAll('.counter');
+            counters.forEach(c => {
+                const t = parseFloat(c.getAttribute('data-target'));
+                const isFloat = c.getAttribute('data-float') === 'true';
+                const decimals = parseInt(c.getAttribute('data-decimals') || '2', 10);
+                const isCurrency = c.getAttribute('data-format') === 'currency';
+                const sfx = c.getAttribute('data-suffix') || '';
+
+                let start = 0;
+                const dur = 2000;
+                const steps = 60;
+                const stepTime = Math.abs(Math.floor(dur / steps));
+                const inc = t / steps;
+
+                const timer = setInterval(() => {
+                    start += inc;
+                    if (start >= t) {
+                        clearInterval(timer);
+                        start = t;
+                    }
+
+                    let display = '';
+                    if (isCurrency) {
+                        display = Math.floor(start).toLocaleString('pt-BR');
+                    } else if (isFloat) {
+                        display = start.toFixed(decimals).replace('.', ',');
+                    } else {
+                        display = Math.floor(start);
+                    }
+                    c.textContent = display + sfx;
+                }, stepTime);
+            });
+        }
+
+        // Sub animations runner
+        function handleSlideTriggers(idx) {
+            clearInterval(notifTimer);
+
+            if (idx === 0) {
+                typeIdx = 0;
+                currentType = "";
+                typeEl.textContent = "";
+                setTimeout(loopType, 600);
+            }
+            if (idx === 4) {
+                notifBox.innerHTML = '';
+                setTimeout(createNotif, 800);
+                notifTimer = setInterval(createNotif, 2500);
+            }
+
+            runCounters(slides[idx]);
+        }
+
+        // Main Navigation
+        const N = 14;
+        const slides = [...document.querySelectorAll('.slide')];
+        const counterEl = document.getElementById('counter');
+        const fillEl = document.getElementById('prog-fill');
+        let cur = 0;
+
+        function go(n) {
+            if (n < 0 || n >= N) return;
+            const old = slides[cur];
+            const isNext = n > cur;
+
+            // Reset classes
+            old.classList.remove('active', 'reverse-enter', 'reverse-exit');
+            slides[n].classList.remove('active', 'reverse-enter', 'reverse-exit', 'exit');
+
+            if (isNext) {
+                old.classList.add('exit');
+            } else {
+                old.classList.add('reverse-exit');
+                slides[n].classList.add('reverse-enter');
+            }
+
+            setTimeout(() => {
+                old.classList.remove('exit', 'reverse-exit');
+            }, 600);
+
+            cur = n;
+
+            // Force reflow for enter class application
+            slides[cur].offsetHeight;
+            slides[cur].classList.add('active');
+
+            counterEl.textContent = `0${cur + 1}`.slice(-2) + ' / ' + N;
+            fillEl.style.width = ((cur + 1) / N) * 100 + '%';
+
+            handleSlideTriggers(cur);
+        }
+
+        document.getElementById('next').onclick = () => go(cur + 1);
+        document.getElementById('prev').onclick = () => go(cur - 1);
+        document.addEventListener('keydown', e => {
+            if (e.code === 'Space' || e.code === 'ArrowRight') { e.preventDefault(); go(cur + 1) }
+            else if (e.code === 'ArrowLeft') { e.preventDefault(); go(cur - 1) }
+        });
+
+        let sx = 0, sy = 0;
+        window.addEventListener('touchstart', e => {
+            sx = e.touches[0].clientX;
+            sy = e.touches[0].clientY;
+        }, { passive: true });
+        window.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - sx;
+            const dy = e.changedTouches[0].clientY - sy;
+            // Only trigger horizontal swipe if dx is significantly larger than dy (prevents accidental trigger while scrolling)
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+                dx < 0 ? go(cur + 1) : go(cur - 1);
+            }
+        });
+
+        // Init
+        setTimeout(() => {
+            slides[0].classList.add('active');
+            handleSlideTriggers(0);
+            fillEl.style.width = '10%';
+        }, 100);
+
+    </script>
+</body>
+
+</html>

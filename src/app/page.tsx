@@ -133,6 +133,7 @@ export default function Home() {
                       { name: "Tempero Brasileiro", image: "/images/Tempero Brasileiro logo.png" },
                       { name: "Pão e Ponto", image: "/images/Pao e ponto logo.png" },
                       { name: "Deco Pizzas", image: "/images/Deco Pizzas logo.png" },
+                      { name: "Padaria Bublitz", image: "/images/Bublitz logo.png" },
                     ].map((client, idx) => (
                       <ClientLogoCard key={`r1-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
                     ))}
@@ -180,6 +181,7 @@ export default function Home() {
                     { name: "The Familys Villa Germanica", image: "/images/The Familys Logo.png" },
                     { name: "My Crush", image: "/images/My Crush Logo.png" },
                     { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.png" },
+                    { name: "Padaria Bublitz", image: "/images/Bublitz logo.png" },
                   ].map((client, idx) => (
                     <ClientLogoCard key={`desktop-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
                   ))}

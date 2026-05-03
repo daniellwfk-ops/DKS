@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Sora, Montserrat } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
 
-// Configure Sora font
-const sora = Sora({
+// Configure Inter font (Body)
+const sora = Inter({
   subsets: ["latin"],
   variable: "--font-sora",
   display: 'swap',
 });
 
-// Configure Montserrat font
-const montserrat = Montserrat({
+// Configure Outfit font (Headings)
+const montserrat = Outfit({
   subsets: ["latin"],
   variable: "--font-montserrat",
   display: 'swap',
