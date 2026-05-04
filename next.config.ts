@@ -13,13 +13,12 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.leadster.com.br",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com data:",
       "img-src 'self' data: blob: https:",
-      "connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net",
-      "frame-ancestors 'self'",
-      "require-trusted-types-for 'script'",
+      "connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net wss://*.leadster.com.br https://*.leadster.com.br",
+      "frame-ancestors 'self'"
     ].join("; "),
   },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
