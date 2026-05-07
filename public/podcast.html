@@ -5,630 +5,305 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>DKS Podcast — Media Kit 2026</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
+            --bg: #050505;
+            --surface: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.06);
             --o: #D4AF37;
-            --ol: rgba(212, 175, 55, .12);
-            --ob: rgba(212, 175, 55, .3);
-            --bg: #000000;
-            --c1: #111111;
-            --c2: #0a0a0a;
-            --b1: #1f1f1f;
-            --txt: #fff;
-            --mu: #999;
-            --mu2: #555;
+            --o-glow: rgba(212, 175, 55, 0.15);
+            --text: #FFFFFF;
+            --muted: #8A8A8A;
             --ok: #D4AF37;
-            --no: #EF4444;
-            --r: 12px
+            --no: #444;
+            --r: 20px;
         }
 
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: var(--bg);
-            font-family: 'Inter', sans-serif;
-            color: var(--txt)
+        html, body {
+            width: 100%; height: 100%; overflow: hidden;
+            background: var(--bg); font-family: 'Inter', sans-serif;
+            color: var(--text); -webkit-font-smoothing: antialiased;
         }
 
-        #deck {
-            position: relative;
-            width: 100vw;
-            height: 100svh;
-            overflow: hidden
+        .ambient-glow {
+            position: absolute; width: 60vw; height: 60vw;
+            border-radius: 50%; background: radial-gradient(circle, var(--o-glow) 0%, transparent 60%);
+            filter: blur(100px); opacity: 0.6; z-index: 0; pointer-events: none;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
         }
+
+        #deck { position: relative; width: 100vw; height: 100svh; overflow: hidden; }
 
         .slide {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 36px 64px 72px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .3s, transform .3s;
-            transform: translateX(44px)
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 40px 80px 100px;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(40px) scale(0.95); z-index: 1;
         }
 
-        .slide.active {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateX(0)
-        }
+        .slide.active { opacity: 1; pointer-events: all; transform: none; z-index: 10; }
+        .slide.exit { opacity: 0; transform: translateY(-40px) scale(0.95); pointer-events: none; }
 
-        .slide.exit {
-            opacity: 0;
-            transform: translateX(-44px);
-            pointer-events: none
-        }
-
-        .w {
-            width: 100%;
-            max-width: 1080px;
-            margin: 0 auto
-        }
-
-        .sc {
-            overflow-y: auto;
-            max-height: calc(100svh - 108px);
-            padding-right: 4px;
-            scrollbar-width: thin;
-            scrollbar-color: #222 transparent
-        }
+        .w { width: 100%; max-width: 1160px; margin: 0 auto; position: relative; z-index: 2; }
+        .sc { overflow-y: auto; max-height: calc(100svh - 140px); padding-right: 12px; scrollbar-width: none; }
+        .sc::-webkit-scrollbar { display: none; }
 
         .a {
-            opacity: 0;
-            transform: translateY(18px);
-            transition: opacity .5s, transform .5s
+            opacity: 0; transform: translateY(30px); filter: blur(8px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .slide.active .a {
-            opacity: 1;
-            transform: none
-        }
+        .slide.active .a { opacity: 1; transform: none; filter: blur(0); }
+        .slide.active .a:nth-child(1) { transition-delay: 0.1s; }
+        .slide.active .a:nth-child(2) { transition-delay: 0.2s; }
+        .slide.active .a:nth-child(3) { transition-delay: 0.3s; }
+        .slide.active .a:nth-child(4) { transition-delay: 0.4s; }
+        .slide.active .a:nth-child(5) { transition-delay: 0.5s; }
+        .slide.active .a:nth-child(6) { transition-delay: 0.6s; }
 
-        .slide.active .a:nth-child(1) {
-            transition-delay: .04s
-        }
-
-        .slide.active .a:nth-child(2) {
-            transition-delay: .12s
-        }
-
-        .slide.active .a:nth-child(3) {
-            transition-delay: .20s
-        }
-
-        .slide.active .a:nth-child(4) {
-            transition-delay: .28s
-        }
-
-        .slide.active .a:nth-child(5) {
-            transition-delay: .36s
-        }
-
-        .slide.active .a:nth-child(6) {
-            transition-delay: .44s
-        }
-
-        /* tag */
+        /* Typography */
         .tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--o);
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: .72rem;
-            font-weight: 800;
-            letter-spacing: .3em;
-            text-transform: uppercase;
-            margin-bottom: 18px
+            display: inline-flex; align-items: center; gap: 12px;
+            color: var(--o); font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem; font-weight: 800; letter-spacing: 0.3em;
+            text-transform: uppercase; margin-bottom: 24px;
         }
+        .tag::before { content: ''; width: 30px; height: 2px; background: var(--o); }
 
-        .tag::before {
-            content: '';
-            width: 20px;
-            height: 2px;
-            background: var(--o);
-            flex-shrink: 0
-        }
-
-        /* type */
         h1.hero {
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: clamp(3rem, 9vw, 7.5rem);
-            font-weight: 900;
-            line-height: .93;
-            letter-spacing: -.01em;
-            text-transform: uppercase;
-            margin-bottom: 22px
+            font-size: clamp(4rem, 10vw, 9rem);
+            font-weight: 900; line-height: 0.9;
+            letter-spacing: -0.02em; text-transform: uppercase;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #FFFFFF 0%, #999999 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         h2.sec {
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: clamp(1.8rem, 4.5vw, 3.8rem);
-            font-weight: 900;
-            line-height: 1;
-            letter-spacing: -.01em;
-            text-transform: uppercase;
-            margin-bottom: 14px
+            font-size: clamp(2.5rem, 5vw, 4.8rem);
+            font-weight: 900; line-height: 0.95;
+            letter-spacing: -0.02em; text-transform: uppercase;
+            margin-bottom: 20px;
         }
 
         .or {
-            color: var(--o)
+            background: linear-gradient(180deg, #EEDD88 0%, #B8860B 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .sub {
-            font-size: clamp(.84rem, 1.25vw, .98rem);
-            color: var(--mu);
-            line-height: 1.7;
-            max-width: 700px;
-            margin-bottom: 22px
+            font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--muted);
+            line-height: 1.6; max-width: 680px; margin-bottom: 36px;
         }
 
-        /* grids */
-        .g2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px
-        }
+        /* Grids */
+        .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
-        .g3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px
-        }
-
-        .g4 {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px
-        }
-
-        /* card */
+        /* Glass Cards */
         .card {
-            background: var(--c1);
-            border: 1px solid var(--b1);
-            border-radius: var(--r);
-            padding: 22px 24px;
-            transition: border-color .2s, transform .2s
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r); padding: 36px;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden; display: flex; flex-direction: column;
         }
-
+        .card::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 60%);
+            opacity: 0; transition: opacity 0.4s;
+        }
         .card:hover {
-            border-color: var(--ob);
-            transform: translateY(-2px)
+            transform: translateY(-8px); border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), 0 0 40px -10px rgba(212, 175, 55,0.15);
         }
-
+        .card:hover::before { opacity: 1; }
+        
         .card.feat {
-            border-color: var(--ob);
-            background: linear-gradient(145deg, rgba(212, 175, 55, .06), var(--c1))
+            background: linear-gradient(145deg, rgba(212, 175, 55,0.06), var(--surface));
+            border-color: rgba(212, 175, 55, 0.3);
         }
 
-        .card .bignum {
+        .bignum {
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: clamp(2.8rem, 4vw, 4rem);
-            font-weight: 900;
-            color: var(--o);
-            line-height: 1;
-            margin-bottom: 8px
+            font-size: clamp(3.5rem, 5vw, 5rem);
+            font-weight: 900; color: var(--o);
+            line-height: 1; margin-bottom: 12px;
+            text-shadow: 0 4px 30px rgba(212, 175, 55,0.4);
         }
 
-        .card .lbl {
+        .lbl {
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: .68rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: .14em;
-            color: #ccc;
-            margin-bottom: 6px
+            font-size: 1.2rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            color: #FFF; margin-bottom: 12px;
         }
 
-        .card .desc {
-            font-size: .8rem;
-            color: var(--mu2);
-            line-height: 1.55
-        }
+        .desc { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
 
-        /* list */
-        ul.cl {
-            list-style: none
-        }
-
+        /* Lists */
+        ul.cl { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
         ul.cl li {
-            display: flex;
-            align-items: flex-start;
-            gap: 9px;
-            font-size: .84rem;
-            color: var(--mu);
-            padding: 5px 0;
-            line-height: 1.45
+            display: flex; align-items: flex-start; gap: 12px;
+            font-size: 0.95rem; color: #CCC; line-height: 1.5;
+            background: rgba(255,255,255,0.02);
+            padding: 14px 16px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.02);
         }
+        .ok { color: var(--ok); font-weight: bold; font-size: 1.1rem; }
+        .no { color: var(--no); font-weight: bold; font-size: 1.1rem; }
 
-        .ok {
-            color: var(--ok);
-            flex-shrink: 0
-        }
-
-        .no {
-            color: var(--no);
-            flex-shrink: 0
-        }
-
-        /* highlight box */
+        /* Highlight */
         .hl {
-            border-left: 2px solid var(--o);
-            padding: 14px 18px;
-            background: var(--ol);
-            border-radius: 0 var(--r) var(--r) 0;
-            margin-top: 14px
+            border-left: 4px solid var(--o); padding: 24px 32px;
+            background: linear-gradient(90deg, rgba(212, 175, 55,0.08), transparent);
+            border-radius: 0 16px 16px 0; margin-top: 32px;
         }
+        .hl p { font-size: 1.1rem; color: #FFF; line-height: 1.6; font-weight: 500; }
 
-        .hl p {
-            font-size: .86rem;
-            color: rgba(212, 175, 55, .85);
-            line-height: 1.65;
-            font-style: italic
-        }
-
-        /* badge */
+        /* Badge */
         .badge {
-            display: inline-block;
-            background: var(--o);
-            color: #000;
+            display: inline-block; background: var(--o); color: #000;
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: .6rem;
-            font-weight: 900;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-            padding: 3px 10px;
-            border-radius: 100px;
-            margin-bottom: 8px
+            font-size: 0.75rem; font-weight: 900;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            padding: 8px 16px; border-radius: 100px;
+            margin-bottom: 20px; align-self: flex-start;
+            box-shadow: 0 0 20px rgba(212, 175, 55,0.4);
         }
 
-        /* buttons */
+        /* Buttons */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--o);
-            color: #000;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: #FFF; color: #000;
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: .95rem;
-            font-weight: 900;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-            padding: 17px 40px;
-            border-radius: var(--r);
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 0 0 rgba(212, 175, 55, 0);
-            transition: all .25s
+            font-size: 1.1rem; font-weight: 900;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 22px 48px; border-radius: 100px;
+            text-decoration: none; border: none; cursor: pointer;
+            transition: all 0.3s ease;
         }
-
         .btn:hover {
-            box-shadow: 0 0 40px rgba(212, 175, 55, .4);
-            transform: translateY(-2px);
-            background: #c9a028
+            background: var(--o); color: #000;
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(212, 175, 55,0.4);
         }
 
-        .btn.big {
-            font-size: 1.1rem;
-            padding: 20px 52px
-        }
-
-        /* glow */
-        .glow {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            pointer-events: none;
-            z-index: 0
-        }
-
-        /* divider */
-        .div {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--b1) 40%, var(--b1) 60%, transparent);
-            margin: 14px 0
-        }
-
-        /* timeline */
-        .tl {
-            display: flex;
-            flex-direction: column;
-            gap: 0
-        }
-
-        .tlr {
-            display: flex;
-            gap: 18px
-        }
-
-        .tlc {
-            display: flex;
-            flex-direction: column;
-            align-items: center
-        }
-
+        /* Timeline */
+        .tl { display: flex; flex-direction: column; gap: 0; }
+        .tlr { display: flex; gap: 24px; }
+        .tlc { display: flex; flex-direction: column; align-items: center; }
         .tld {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: var(--o);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-weight: 900;
-            font-size: .9rem;
-            color: #000;
-            flex-shrink: 0
+            width: 48px; height: 48px; border-radius: 50%;
+            background: var(--surface); border: 2px solid var(--o);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+            font-size: 1.2rem; color: var(--o); flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(212, 175, 55,0.2);
         }
-
-        .tll {
-            width: 2px;
-            flex: 1;
-            background: var(--b1);
-            margin: 4px 0
-        }
-
-        .tlb {
-            flex: 1;
-            padding-bottom: 20px
-        }
-
+        .tll { width: 2px; flex: 1; background: rgba(255,255,255,0.1); margin: 8px 0; }
+        .tlb { flex: 1; padding-bottom: 32px; padding-top: 8px; }
         .tlb h4 {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: .8rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: .12em;
-            color: #fff;
-            margin-bottom: 4px
+            font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem;
+            font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+            color: #FFF; margin-bottom: 8px;
         }
+        .tlb p { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
 
-        .tlb p {
-            font-size: .82rem;
-            color: var(--mu2);
-            line-height: 1.55
-        }
-
-        /* S1 extras */
-        @keyframes blk {
-
-            0%,
-            100% {
-                opacity: 1
-            }
-
-            50% {
-                opacity: .15
-            }
-        }
-
-        .blink {
-            animation: blk 1.6s ease-in-out infinite
-        }
-
-        @keyframes scan {
-            0% {
-                top: -1px;
-                opacity: 0
-            }
-
-            8% {
-                opacity: 1
-            }
-
-            92% {
-                opacity: .6
-            }
-
-            100% {
-                top: 100dvh;
-                opacity: 0
-            }
-        }
-
-        /* S5 bg */
-        #s5 .bi {
-            position: absolute;
-            inset: 0;
-            background: url('https://images.unsplash.com/photo-1590301157890-4810ed352733?w=1400&q=75') center/cover no-repeat;
-            opacity: .1
-        }
-
-        #s5 .fr {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 80% 80% at 60% 50%, transparent 20%, #0a0a0a 78%)
-        }
-
-        #s5 .fb {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 40%, #0a0a0a)
-        }
-
-        /* nav */
+        /* Nav */
         #nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 54px;
-            background: rgba(10, 10, 10, .95);
-            backdrop-filter: blur(16px);
-            border-top: 1px solid #1a1a1a;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 28px;
-            z-index: 200
+            position: fixed; bottom: 0; left: 0; right: 0;
+            height: 80px; background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 40px; z-index: 200;
         }
-
         #ctr {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: .65rem;
-            font-weight: 800;
-            letter-spacing: .28em;
-            color: #2a2a2a;
-            text-transform: uppercase
+            font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem;
+            font-weight: 800; letter-spacing: 0.3em; color: #888; text-transform: uppercase;
         }
-
-        .dots {
-            display: flex;
-            gap: 5px;
-            align-items: center
-        }
-
+        .dots { display: flex; gap: 10px; align-items: center; }
         .dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: #1f1f1f;
-            cursor: pointer;
-            transition: all .25s
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(255,255,255,0.15); cursor: pointer; transition: all 0.3s;
         }
-
-        .dot.on {
-            background: var(--o);
-            width: 20px;
-            border-radius: 3px
-        }
-
-        .arrs {
-            display: flex;
-            gap: 8px
-        }
-
+        .dot.on { background: var(--o); width: 28px; border-radius: 4px; box-shadow: 0 0 15px var(--o); }
+        .arrs { display: flex; gap: 12px; }
         .arr {
-            width: 38px;
-            height: 38px;
-            border-radius: var(--r);
-            background: #111;
-            border: 1px solid #222;
-            color: #444;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all .2s
+            width: 48px; height: 48px; border-radius: 50%;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: #FFF; cursor: pointer; font-size: 18px;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s;
         }
+        .arr:hover { background: #FFF; color: #000; transform: scale(1.1); }
 
-        .arr:hover {
-            background: var(--o);
-            border-color: var(--o);
-            color: #000
-        }
-
-        .sc::-webkit-scrollbar {
-            width: 3px
-        }
-
-        .sc::-webkit-scrollbar-track {
-            background: transparent
-        }
-
-        .sc::-webkit-scrollbar-thumb {
-            background: #222;
-            border-radius: 3px
-        }
-
-        @media(max-width:720px) {
-            .slide {
-                padding: 24px 20px 68px
-            }
-
-            .g2,
-            .g3,
-            .g4 {
-                grid-template-columns: 1fr
-            }
-
-            h1.hero {
-                font-size: 2.8rem
-            }
-
-            h2.sec {
-                font-size: 1.9rem
-            }
-
-            .dots {
-                display: none
-            }
+        @media(max-width: 768px) {
+            .slide { padding: 40px 24px 120px; }
+            .g2, .g3, .g4 { grid-template-columns: 1fr; gap: 16px; }
+            h1.hero { font-size: 3.5rem; }
+            h2.sec { font-size: 2.2rem; }
+            .dots { display: none; }
+            #nav { padding: 0 20px; height: 70px; }
+            .card { padding: 24px; }
+            .ambient-glow { width: 100vw; height: 100vw; }
         }
     </style>
 </head>
 
 <body>
     <div id="deck">
+        <div class="ambient-glow"></div>
 
         <!-- S1 CAPA -->
-        <div class="slide active" id="s1" style="overflow:hidden;text-align:center">
-            <div class="glow"
-                style="width:700px;height:700px;top:-180px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(212,175,55,.12),transparent 70%)">
-            </div>
-            <canvas id="s1c"
-                style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
-
-            <div class="w" style="position:relative;z-index:1">
+        <div class="slide active" id="s1" style="text-align:center">
+            <div class="w">
                 <div class="tag a">Media Kit · Temporada 2026</div>
                 <h1 class="hero a">DKS<br><span class="or">Podcast</span></h1>
-                <p class="a"
-                    style="font-size:clamp(1rem,2.2vw,1.35rem);color:var(--o);font-family:'Barlow Condensed',sans-serif;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px">
-                    O podcast de food marketing do Vale do Itajaí.</p>
-                <p class="sub a" style="margin:0 auto 36px;font-size:1rem">Para marcas que querem falar com quem decide
-                    dentro de um restaurante.</p>
-                <p class="blink a"
-                    style="font-family:'Barlow Condensed',sans-serif;font-size:.65rem;font-weight:800;letter-spacing:.28em;color:var(--o);text-transform:uppercase">
-                    PRESSIONE ESPAÇO OU CLIQUE PARA COMEÇAR</p>
+                <p class="a" style="font-size:clamp(1.1rem,2.2vw,1.4rem);color:var(--o);font-family:'Barlow Condensed',sans-serif;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:16px;text-shadow:0 0 20px rgba(212, 175, 55,0.3)">
+                    O podcast de food marketing do Vale do Itajaí.
+                </p>
+                <p class="sub a" style="margin:0 auto 48px;">Para marcas que querem falar com quem decide dentro de um restaurante.</p>
+                <p class="a" style="animation: pulse 2s infinite; font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;font-weight:800;letter-spacing:0.25em;color:rgba(255,255,255,0.5);text-transform:uppercase">
+                    PRESSIONE ESPAÇO OU CLIQUE PARA COMEÇAR
+                </p>
             </div>
+            <style>@keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }</style>
         </div>
 
         <!-- S2 CONTEXTO -->
         <div class="slide" id="s2">
             <div class="w sc">
                 <div class="tag a">O Tamanho do Mercado</div>
-                <h2 class="sec a">Você sabia que o Vale do Itajaí é o <span class="or">maior polo</span> de novos
-                    negócios de Santa Catarina?</h2>
+                <h2 class="sec a">O <span class="or">maior polo</span> de novos negócios de Santa Catarina.</h2>
+                <p class="sub a">Você sabia que o Vale do Itajaí lidera a abertura de empresas no estado?</p>
                 <div class="g3 a">
                     <div class="card">
                         <div class="bignum">+74k</div>
                         <div class="lbl">Novos CNPJs</div>
-                        <p class="desc">abertos no Vale do Itajaí em 2024 — liderança absoluta no estado. <em
-                                style="color:#444">Fonte: Jucesc 2025</em></p>
+                        <p class="desc">Abertos no Vale do Itajaí em 2024 — liderança absoluta no estado. <br><em style="color:#666; font-size:0.8rem">Fonte: Jucesc 2025</em></p>
                     </div>
                     <div class="card">
                         <div class="bignum">+17k</div>
                         <div class="lbl">Empresas de Alimentação</div>
-                        <p class="desc">ativas no setor de restaurantes e alimentação em Santa Catarina. <em
-                                style="color:#444">Fonte: Econodata 2024</em></p>
+                        <p class="desc">Ativas no setor de restaurantes e alimentação em SC. <br><em style="color:#666; font-size:0.8rem">Fonte: Econodata 2024</em></p>
                     </div>
                     <div class="card">
                         <div class="bignum">+1.7k</div>
-                        <div class="lbl">Restaurantes em Blumenau</div>
-                        <p class="desc">estabelecimentos ativos — 3ª cidade com mais restaurantes no estado. <em
-                                style="color:#444">Fonte: Econodata 2024</em></p>
+                        <div class="lbl">Restaurantes na Região</div>
+                        <p class="desc">Estabelecimentos ativos nas principais cidades do Vale. <br><em style="color:#666; font-size:0.8rem">Fonte: Econodata 2024</em></p>
                     </div>
                 </div>
-                <div class="hl a" style="margin-top:18px">
-                    <p style="font-style:normal;color:var(--o);font-weight:700">Este é o mercado que o DKS Podcast
-                        atinge diretamente. E ele está crescendo todo mês.</p>
+                <div class="hl a">
+                    <p>Este é o mercado que o DKS Podcast atinge diretamente. Um ecossistema bilionário crescendo todo mês.</p>
                 </div>
             </div>
         </div>
@@ -637,28 +312,25 @@
         <div class="slide" id="s3">
             <div class="w sc">
                 <div class="tag a">Por que esse Podcast Existe</div>
-                <h2 class="sec a">O mercado gastronômico do Vale cresce.<br><span class="or">O conhecimento não
-                        acompanha.</span></h2>
-                <p class="sub a">Donos de restaurante trabalham mais de 12 horas por dia e não têm acesso a conteúdo
-                    estratégico de qualidade sobre o próprio setor. Não existe nenhum podcast de food marketing focado
-                    nessa região.</p>
+                <h2 class="sec a">O mercado cresce.<br><span class="or">O conhecimento não acompanha.</span></h2>
+                <p class="sub a">Donos de restaurante não têm acesso a conteúdo estratégico de qualidade focado na região. Não existia uma voz de autoridade para falar com eles. Agora existe.</p>
                 <div class="g2 a">
-                    <div>
-                        <div class="lbl" style="margin-bottom:10px;color:var(--mu2)">O que falta</div>
+                    <div class="card">
+                        <div class="lbl" style="color:var(--muted)">O que faltava no mercado</div>
                         <ul class="cl">
-                            <li><span class="no">✗</span> Conteúdo estratégico para donos de restaurante</li>
-                            <li><span class="no">✗</span> Referências regionais de crescimento</li>
-                            <li><span class="no">✗</span> Comunidade gastronômica no Vale do Itajaí</li>
-                            <li><span class="no">✗</span> Voz que fala sobre o mercado local com autoridade</li>
+                            <li><span class="no">✗</span> Conteúdo estratégico regional</li>
+                            <li><span class="no">✗</span> Cases e histórias locais de sucesso</li>
+                            <li><span class="no">✗</span> Comunidade forte de donos de restaurante</li>
+                            <li><span class="no">✗</span> Voz com autoridade no Vale do Itajaí</li>
                         </ul>
                     </div>
-                    <div>
-                        <div class="lbl" style="margin-bottom:10px;color:var(--o)">O que o DKS Podcast entrega</div>
+                    <div class="card feat">
+                        <div class="lbl" style="color:var(--o)">O que a DKS entrega</div>
                         <ul class="cl">
-                            <li><span class="ok">✓</span> Estratégia real de faturamento e marketing</li>
-                            <li><span class="ok">✓</span> Cases e histórias de quem cresceu na região</li>
-                            <li><span class="ok">✓</span> Conteúdo técnico: delivery, ticket médio, tráfego pago</li>
-                            <li><span class="ok">✓</span> A primeira voz do food marketing no Vale do Itajaí</li>
+                            <li><span class="ok">✓</span> Estratégia real de faturamento</li>
+                            <li><span class="ok">✓</span> Bastidores de quem cresceu na região</li>
+                            <li><span class="ok">✓</span> Conteúdo técnico de alto nível</li>
+                            <li><span class="ok">✓</span> A 1ª voz do food marketing do Vale</li>
                         </ul>
                     </div>
                 </div>
@@ -668,29 +340,27 @@
         <!-- S4 O PROJETO -->
         <div class="slide" id="s4">
             <div class="w sc">
-                <div class="tag a">O Projeto</div>
+                <div class="tag a">A Solução</div>
                 <h2 class="sec a">DKS <span class="or">Podcast</span></h2>
-                <p class="sub a">O primeiro podcast de food marketing do Vale do Itajaí.</p>
-                <p class="a"
-                    style="font-size:.9rem;color:var(--mu);line-height:1.72;max-width:800px;margin-bottom:24px">
-                    Produzido pela DKS Marketing — agência especializada em restaurantes com mais de 100 negócios
-                    atendidos — o DKS Podcast reúne donos de restaurante, especialistas do setor e estrategistas do
-                    mercado gastronômico para conversas diretas, sem enrolação, sobre crescimento real.</p>
+                <p class="sub a">Produzido por quem entende de faturamento para restaurantes.</p>
+                <div class="card a" style="margin-bottom:24px">
+                    <p style="font-size:1.05rem; color:#DDD; line-height:1.7;">A DKS Marketing, agência com mais de 100 operações gastronômicas atendidas, apresenta conversas diretas, sem enrolação, sobre crescimento real, tráfego, vendas e gestão para quem vive a realidade dos restaurantes.</p>
+                </div>
                 <div class="g3 a">
-                    <div class="card feat">
-                        <div style="font-size:2rem;margin-bottom:8px">🎬</div>
-                        <div class="lbl">Formato</div>
-                        <p class="desc">Vídeo + Áudio. Disponível no YouTube e Spotify.</p>
+                    <div class="card feat" style="padding: 24px">
+                        <div style="font-size:2.5rem;margin-bottom:16px;filter:drop-shadow(0 0 10px rgba(212, 175, 55,0.5))">🎬</div>
+                        <div class="lbl">Formato Premium</div>
+                        <p class="desc">Vídeo e Áudio de alta qualidade. Disponível no YouTube e Spotify.</p>
                     </div>
-                    <div class="card feat">
-                        <div style="font-size:2rem;margin-bottom:8px">📅</div>
-                        <div class="lbl">Frequência</div>
-                        <p class="desc">3 episódios por mês. Consistência e volume de conteúdo.</p>
+                    <div class="card feat" style="padding: 24px">
+                        <div style="font-size:2.5rem;margin-bottom:16px;filter:drop-shadow(0 0 10px rgba(212, 175, 55,0.5))">📅</div>
+                        <div class="lbl">Consistência</div>
+                        <p class="desc">3 episódios estratégicos por mês. Volume e retenção de audiência.</p>
                     </div>
-                    <div class="card feat">
-                        <div style="font-size:2rem;margin-bottom:8px">🎯</div>
-                        <div class="lbl">Conteúdo</div>
-                        <p class="desc">Estratégia, cases reais, entrevistas com donos e especialistas do setor.</p>
+                    <div class="card feat" style="padding: 24px">
+                        <div style="font-size:2.5rem;margin-bottom:16px;filter:drop-shadow(0 0 10px rgba(212, 175, 55,0.5))">🎯</div>
+                        <div class="lbl">Conteúdo Direto</div>
+                        <p class="desc">Convidados que são referência no setor, donos de grandes operações e especialistas.</p>
                     </div>
                 </div>
             </div>
@@ -698,175 +368,128 @@
 
         <!-- S5 PÚBLICO -->
         <div class="slide" id="s5">
-            <div class="bi"></div>
-            <div class="fr"></div>
-            <div class="fb"></div>
-            <div class="w sc" style="position:relative;z-index:1">
-                <div class="tag a">O Público</div>
-                <h2 class="sec a">Seu produto na frente de<br><span class="or">quem decide.</span></h2>
-                <p class="sub a">O ouvinte do DKS Podcast é o dono, sócio ou gestor de restaurante. É quem compra,
-                    contrata e decide.</p>
+            <div class="w sc">
+                <div class="tag a">A Audiência</div>
+                <h2 class="sec a">Na frente de<br><span class="or">quem assina o cheque.</span></h2>
+                <p class="sub a">Não buscamos cliques vazios. O ouvinte do DKS Podcast é o dono, sócio ou gestor. É quem toma a decisão de compra no final do dia.</p>
                 <div class="g4 a">
-                    <div class="card">
-                        <div style="font-size:1.8rem;margin-bottom:8px">👤</div>
+                    <div class="card" style="padding:24px">
+                        <div style="font-size:2rem;margin-bottom:16px">👤</div>
                         <div class="lbl">Perfil</div>
-                        <p class="desc">Donos e sócios de restaurantes, deliveries e dark kitchens</p>
+                        <p class="desc">Donos e sócios de restaurantes, franquias e dark kitchens.</p>
                     </div>
-                    <div class="card">
-                        <div style="font-size:1.8rem;margin-bottom:8px">📍</div>
+                    <div class="card" style="padding:24px">
+                        <div style="font-size:2rem;margin-bottom:16px">📍</div>
                         <div class="lbl">Região</div>
-                        <p class="desc">Vale do Itajaí — Blumenau, Balneário Camboriú, Itajaí, Brusque e região</p>
+                        <p class="desc">Foco absoluto no Vale do Itajaí (Blumenau, BC, Itajaí, Brusque).</p>
                     </div>
-                    <div class="card">
-                        <div style="font-size:1.8rem;margin-bottom:8px">💳</div>
-                        <div class="lbl">Decisão</div>
-                        <p class="desc">Tomam decisões de compra de insumos, sistemas, equipamentos e serviços</p>
+                    <div class="card" style="padding:24px">
+                        <div style="font-size:2rem;margin-bottom:16px">💳</div>
+                        <div class="lbl">Poder</div>
+                        <p class="desc">Tomam decisões sobre insumos, sistemas, equipamentos e reformas.</p>
                     </div>
-                    <div class="card">
-                        <div style="font-size:1.8rem;margin-bottom:8px">🚀</div>
+                    <div class="card" style="padding:24px">
+                        <div style="font-size:2rem;margin-bottom:16px">🚀</div>
                         <div class="lbl">Momento</div>
-                        <p class="desc">Buscando ativamente crescer — público com intenção de investimento</p>
+                        <p class="desc">Estão ativamente buscando formas de otimizar e escalar o negócio.</p>
                     </div>
                 </div>
-                <div class="hl a" style="margin-top:16px">
-                    <p style="font-style:normal;color:var(--o);font-weight:700">Não é audiência genérica. É o comprador
-                        do seu produto assistindo ao seu anúncio.</p>
+                <div class="hl a">
+                    <p>Você não está pagando por impressões genéricas. Você está investindo na atenção exclusiva dos maiores compradores do setor gastronômico.</p>
                 </div>
             </div>
         </div>
 
-        <!-- S6 POR QUE PATROCINAR -->
+        <!-- S6 COTAS (3 Opções Modernas) -->
         <div class="slide" id="s6">
             <div class="w sc">
-                <div class="tag a">O Argumento</div>
-                <h2 class="sec a">Publicidade que não<br><span class="or">parece publicidade.</span></h2>
-                <p class="sub a">Seu produto não vai aparecer em um banner ignorado. Vai ser apresentado por quem o
-                    público já respeita, no meio de um conteúdo que ele escolheu consumir.</p>
-                <div class="g2 a">
-                    <div>
-                        <div class="lbl" style="margin-bottom:12px;color:var(--o)">Por que o podcast funciona para sua
-                            marca</div>
+                <div class="tag a">Parcerias e Cotas</div>
+                <h2 class="sec a">Escolha o seu<br><span class="or">Nível de Presença.</span></h2>
+                <p class="sub a">Criamos 3 formatos de parceria para garantir que sua marca seja vista com autoridade no mercado.</p>
+                
+                <div class="g3 a">
+                    <!-- START -->
+                    <div class="card">
+                        
+                        <div class="lbl" style="font-size:1.5rem; color:#DDD; margin-bottom:16px">Cota Start</div>
+                        <p class="desc" style="margin-bottom:24px; min-height:48px;">Ideal para marcas que buscam o primeiro contato de autoridade com o público.</p>
                         <ul class="cl">
-                            <li><span class="ok">✓</span> Audiência qualificada e segmentada</li>
-                            <li><span class="ok">✓</span> Associação de marca com autoridade e conteúdo</li>
-                            <li><span class="ok">✓</span> Menção natural dentro do episódio — não é anúncio interrompido
-                            </li>
-                            <li><span class="ok">✓</span> Presença simultânea no YouTube e Spotify</li>
-                            <li><span class="ok">✓</span> Conteúdo que permanece disponível — não some em 24h</li>
+                            <li><span class="ok">✓</span> Menção natural no início do episódio</li>
+                            <li><span class="ok">✓</span> Logo na arte oficial</li>
+                            <li><span class="ok">✓</span> Marcação nos Stories de divulgação</li>
+                            <li><span class="ok">✓</span> Link na descrição (YouTube/Spotify)</li>
                         </ul>
                     </div>
-                    <div class="card feat">
-                        <p style="font-size:.92rem;color:rgba(212,175,55,.85);line-height:1.7;font-style:italic">"Um
-                            restaurante que cresce precisa de embalagem, sistema, insumo, equipamento. Seu produto é
-                            exatamente o que o nosso público consome. A questão é: eles vão conhecer sua marca por nós
-                            ou pelo concorrente?"</p>
+                    
+                    <!-- GROWTH -->
+                    <div class="card">
+                        
+                        <div class="lbl" style="font-size:1.5rem; color:var(--o); margin-bottom:16px">Cota Growth</div>
+                        <p class="desc" style="margin-bottom:24px; color:#FFF; min-height:48px;">O formato de maior conversão para quem quer vender de forma direta e consistente.</p>
+                        <ul class="cl">
+                            <li><span class="ok">✓</span> <strong>Bloco Comercial Dedicado (60s)</strong></li>
+                            <li><span class="ok">✓</span> Post exclusivo no Instagram da DKS</li>
+                            <li><span class="ok">✓</span> Menção em TODOS os episódios do mês</li>
+                            <li><span class="ok">✓</span> Todos os benefícios da Cota Start</li>
+                        </ul>
+                    </div>
+
+                    <!-- DOMINATION -->
+                    <div class="card">
+                        
+                        <div class="lbl" style="font-size:1.5rem; color:#FFF; margin-bottom:16px">Cota Domination</div>
+                        <p class="desc" style="margin-bottom:24px; min-height:48px;">Para gigantes que querem dominar a categoria e ditar o ritmo do mercado gastronômico.</p>
+                        <ul class="cl">
+                            <li><span class="ok">✓</span> <strong>Naming Rights do Episódio</strong></li>
+                            <li><span class="ok">✓</span> Exclusividade total de Categoria</li>
+                            <li><span class="ok">✓</span> Participação como convidado especial</li>
+                            <li><span class="ok">✓</span> Todos os benefícios da Cota Growth</li>
+                        </ul>
                     </div>
                 </div>
+                <p class="a" style="text-align:center; margin-top:32px; font-size:0.85rem; color:var(--muted); letter-spacing:0.05em; text-transform:uppercase;">Valores sob consulta. Parcerias firmadas a partir de ciclos trimestrais para garantia de resultados.</p>
             </div>
         </div>
 
-        <!-- S7 COTAS -->
+        <!-- S7 CREDIBILIDADE -->
         <div class="slide" id="s7">
             <div class="w sc">
-                <div class="tag a">As Cotas</div>
-                <h2 class="sec a">Escolha como sua<br><span class="or">marca aparece.</span></h2>
-                <p class="sub a" style="margin-bottom:18px">Cotas pensadas para gerar visibilidade real, não apenas uma
-                    menção de passagem.</p>
-                <div class="g3 a">
-                    <!-- Apoiador -->
-                    <div class="card">
-                        <span class="badge" style="background:#333;color:#aaa">Entrada</span>
-                        <div class="lbl" style="margin-bottom:10px">Cota Apoiador</div>
-                        <ul class="cl">
-                            <li><span class="ok">✓</span> Menção no início do episódio</li>
-                            <li><span class="ok">✓</span> Logo na arte do episódio</li>
-                            <li><span class="ok">✓</span> Menção nos stories de divulgação</li>
-                        </ul>
-                        <div
-                            style="margin-top:12px;font-size:.72rem;color:var(--mu2);border-top:1px solid var(--b1);padding-top:10px">
-                            Ideal para primeiros contatos de marca com o público</div>
-                    </div>
-                    <!-- Patrocinador -->
-                    <div class="card feat">
-                        <span class="badge">Recomendado</span>
-                        <div class="lbl" style="margin-bottom:10px;color:var(--o)">Cota Patrocinador</div>
-                        <ul class="cl">
-                            <li><span class="ok">✓</span> Tudo da cota Apoiador +</li>
-                            <li><span class="ok">✓</span> Bloco de 60s no meio do episódio (mid-roll)</li>
-                            <li><span class="ok">✓</span> Post dedicado no Instagram da DKS</li>
-                            <li><span class="ok">✓</span> Link na descrição do episódio</li>
-                            <li><span class="ok">✓</span> Menção em todos os 3 episódios do mês</li>
-                        </ul>
-                        <div
-                            style="margin-top:12px;font-size:.72rem;color:var(--mu2);border-top:1px solid rgba(255,107,0,.2);padding-top:10px">
-                            Ideal para marcas que querem presença consistente e memorável</div>
-                    </div>
-                    <!-- Master -->
-                    <div class="card">
-                        <span class="badge" style="background:#1a1a1a;color:var(--o);border:1px solid var(--o)">Máxima
-                            Visibilidade</span>
-                        <div class="lbl" style="margin-bottom:10px">Cota Master</div>
-                        <ul class="cl">
-                            <li><span class="ok">✓</span> Tudo da cota Patrocinador +</li>
-                            <li><span class="ok">✓</span> Naming rights do episódio</li>
-                            <li><span class="ok">✓</span> Participação em episódio especial por trimestre</li>
-                            <li><span class="ok">✓</span> Conteúdo co-criado com a marca</li>
-                            <li><span class="ok">✓</span> Exclusividade de categoria</li>
-                        </ul>
-                        <div
-                            style="margin-top:12px;font-size:.72rem;color:var(--mu2);border-top:1px solid var(--b1);padding-top:10px">
-                            Ideal para marcas que querem ser referência no mercado gastronômico regional</div>
-                    </div>
-                </div>
-                <p class="a" style="text-align:center;margin-top:14px;font-size:.72rem;color:var(--mu2)">Os valores de
-                    cada cota são apresentados mediante contato. Trabalhamos com parcerias de no mínimo 3 meses.</p>
-            </div>
-        </div>
-
-        <!-- S8 CREDIBILIDADE -->
-        <div class="slide" id="s8">
-            <div class="w sc">
-                <div class="tag a">A Credibilidade</div>
-                <h2 class="sec a">Não é um podcast <span class="or">qualquer.</span></h2>
-                <p class="sub a">É produzido por quem já está no mercado, com audiência e autoridade construídas.</p>
+                <div class="tag a">Nossa Autoridade</div>
+                <h2 class="sec a">A Força por trás<br>do <span class="or">Microfone.</span></h2>
                 <div class="g2 a">
                     <div>
-                        <div class="lbl" style="margin-bottom:12px;color:var(--o)">Sobre a DKS</div>
+                        <p class="sub" style="margin-bottom:24px">A DKS não é uma produtora de conteúdo amadora. Somos uma agência de performance especializada no setor gastronômico.</p>
                         <ul class="cl">
-                            <li><span class="ok">✓</span> +100 restaurantes atendidos no Brasil</li>
-                            <li><span class="ok">✓</span> Especialistas em faturamento para o setor gastronômico</li>
-                            <li><span class="ok">✓</span> Presença ativa em Blumenau e região</li>
-                            <li><span class="ok">✓</span> Metodologia própria de crescimento para restaurantes</li>
-                            <li><span class="ok">✓</span> Cases com +60% de crescimento em 3 meses</li>
+                            <li><span class="ok">✓</span> +100 operações de food service escaladas.</li>
+                            <li><span class="ok">✓</span> Domínio em engenharia de cardápio e tráfego.</li>
+                            <li><span class="ok">✓</span> Autoridade comprovada no Vale do Itajaí.</li>
+                            <li><span class="ok">✓</span> Metodologia validada com +60% de crescimento médio em 3 meses nos clientes.</li>
                         </ul>
                     </div>
-                    <div class="card feat">
-                        <p style="font-size:.9rem;color:rgba(255,107,0,.85);line-height:1.72;font-style:italic">"A DKS
-                            não é um criador de conteúdo que resolveu fazer podcast. Somos uma referência no mercado
-                            gastronômico que está construindo o maior hub de conteúdo sobre food marketing do Vale do
-                            Itajaí."</p>
+                    <div class="card feat" style="display:flex; justify-content:center; align-items:center;">
+                        <p style="font-size:1.2rem; color:#FFF; line-height:1.7; font-style:italic; text-align:center;">
+                            "Um restaurante que cresce precisa de sistema, insumo, embalagem e equipamento. O nosso público consome os seus produtos diariamente.<br><br><strong style="color:var(--o)">Eles vão conhecer você por nós ou pelo seu concorrente?</strong>"
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- S9 PRÓXIMOS PASSOS -->
-        <div class="slide" id="s9">
+        <!-- S8 PRÓXIMOS PASSOS -->
+        <div class="slide" id="s8">
             <div class="w">
-                <div class="tag a">Vamos Conversar</div>
-                <h2 class="sec a">Sua marca no episódio certo,<br>na frente do <span class="or">público certo.</span>
-                </h2>
-                <p class="sub a">Patrocinar o DKS Podcast é posicionar sua marca como referência para quem decide dentro
-                    de um restaurante.</p>
-                <div class="tl a" style="margin-bottom:24px">
+                <div class="tag a">O Processo</div>
+                <h2 class="sec a">Como ativar a<br><span class="or">Sua Marca.</span></h2>
+                <p class="sub a">O processo é rápido, direto e focado em colocar sua empresa no ar com a mensagem certa.</p>
+                <div class="tl a" style="margin-bottom:40px; margin-top:20px;">
                     <div class="tlr">
                         <div class="tlc">
                             <div class="tld">1</div>
                             <div class="tll"></div>
                         </div>
                         <div class="tlb">
-                            <h4>Contato</h4>
-                            <p>Você entra em contato e apresentamos as cotas disponíveis com valores</p>
+                            <h4>Proposta & Contato</h4>
+                            <p>Analisamos o fit da sua marca com nossa audiência e apresentamos as cotas e valores.</p>
                         </div>
                     </div>
                     <div class="tlr">
@@ -875,8 +498,8 @@
                             <div class="tll"></div>
                         </div>
                         <div class="tlb">
-                            <h4>Alinhamento</h4>
-                            <p>Definimos o formato, duração e objetivos da parceria</p>
+                            <h4>Estratégia do Pitch</h4>
+                            <p>Desenhamos juntos como sua marca será inserida de forma natural e persuasiva.</p>
                         </div>
                     </div>
                     <div class="tlr">
@@ -884,92 +507,86 @@
                             <div class="tld">3</div>
                         </div>
                         <div class="tlb">
-                            <h4>Ativação</h4>
-                            <p>Sua marca entra no ar no próximo episódio</p>
+                            <h4>Gravação e Play</h4>
+                            <p>Sua marca entra no ar e se posiciona perante os maiores donos de restaurante da região.</p>
                         </div>
                     </div>
                 </div>
-                <div class="a">
-                    <a href="mailto:contatoagenciadks@gmail.com" class="btn">QUERO SER PARCEIRO DO DKS PODCAST →</a>
-                    <p
-                        style="margin-top:14px;font-family:'Barlow Condensed',sans-serif;font-size:.65rem;font-weight:800;letter-spacing:.18em;color:#222;text-transform:uppercase">
-                        Atendimento: Seg–Sex, 9h às 18h &nbsp;·&nbsp; contatoagenciadks@gmail.com &nbsp;·&nbsp;
-                        Blumenau, SC</p>
-                </div>
             </div>
         </div>
 
-        <!-- S10 ENCERRAMENTO -->
-        <div class="slide" id="s10" style="text-align:center;overflow:hidden">
-            <canvas id="s10c"
-                style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
-            <div class="glow"
-                style="width:800px;height:800px;bottom:-380px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(255,107,0,.09),transparent 65%)">
-            </div>
-            <div class="w" style="position:relative;z-index:1">
+        <!-- S9 ENCERRAMENTO -->
+        <div class="slide" id="s9" style="text-align:center;">
+            <div class="w">
                 <div class="tag a" style="justify-content:center">A Decisão</div>
-                <div class="a" style="font-size:3rem;margin-bottom:12px">🎙️</div>
-                <h1 class="hero a" style="font-size:clamp(1.9rem,5vw,4rem)">O mercado gastronômico do Vale está
-                    crescendo.<br><span class="or">Sua marca vai estar<br>presente nessa conversa?</span></h1>
-                <p class="sub a" style="margin:0 auto 30px;max-width:580px;font-size:.96rem">Enquanto você lê isso,
-                    donos de restaurante da região estão buscando produtos, soluções e parceiros. O DKS Podcast é o
-                    lugar onde essa decisão começa a ser formada.</p>
+                <div class="a" style="font-size:4rem; margin-bottom:20px; filter:drop-shadow(0 0 20px rgba(212, 175, 55,0.4))">🎙️</div>
+                <h1 class="hero a" style="font-size:clamp(2.5rem, 6vw, 5rem); margin-bottom:32px;">
+                    Sua marca vai estar<br><span class="or">nessa conversa?</span>
+                </h1>
+                <p class="sub a" style="margin:0 auto 40px; max-width:650px;">
+                    O podcast já está sendo gravado. Os donos de restaurante já estão assistindo. Ocupe seu espaço antes que o mercado faça isso por você.
+                </p>
                 <div class="a">
-                    <a href="mailto:contatoagenciadks@gmail.com" class="btn big">FALAR COM A DKS AGORA →</a>
-                    <p
-                        style="margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-size:.65rem;font-weight:800;letter-spacing:.2em;color:#222;text-transform:uppercase">
-                        DKS Marketing &nbsp;·&nbsp; dksmarketing.com.br &nbsp;·&nbsp; Blumenau, SC</p>
+                    <a href="https://wa.me/5547999999999" class="btn">FALAR COM A EQUIPE DKS →</a>
+                    <p style="margin-top:24px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; font-weight:800; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase;">
+                        DKS Marketing &nbsp;·&nbsp; Blumenau, SC
+                    </p>
                 </div>
             </div>
         </div>
 
-    </div><!-- /deck -->
+    </div>
 
     <nav id="nav">
-        <span id="ctr">SLIDE 1 / 10</span>
+        <span id="ctr">SLIDE 1 / 9</span>
         <div class="dots" id="dots"></div>
-        <div class="arrs"><button class="arr" id="prev">&#8592;</button><button class="arr" id="next">&#8594;</button>
+        <div class="arrs">
+            <button class="arr" id="prev">&#8592;</button>
+            <button class="arr" id="next">&#8594;</button>
         </div>
     </nav>
 
     <script>
-        // particles
-        function initP(id, color) {
-            const c = document.getElementById(id); if (!c) return;
-            const ctx = c.getContext('2d'); let pts = [];
-            function rz() { c.width = c.offsetWidth; c.height = c.offsetHeight; init() }
-            function rn(a, b) { return a + Math.random() * (b - a) }
-            function init() { pts = []; const n = Math.floor(c.width * c.height / 18000); for (let i = 0; i < n; i++)pts.push({ x: rn(0, c.width), y: rn(0, c.height), r: rn(.4, 1.8), vy: rn(-.2, -.7), o: rn(.08, .45), do: rn(.002, .006), ph: rn(0, Math.PI * 2) }) }
-            rz(); window.addEventListener('resize', rz);
-            (function frame(t) { ctx.clearRect(0, 0, c.width, c.height); const now = t * .001; pts.forEach(p => { p.y += p.vy; p.x += Math.sin(now + p.ph) * .2; p.o += p.do; if (p.o > .5 || p.o < .04) p.do *= -1; if (p.y < -3) { p.y = c.height + 3; p.x = rn(0, c.width) } ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = color.replace('A', p.o.toFixed(2)); ctx.fill() }); requestAnimationFrame(frame) })(0);
-        }
-        initP('s1c', 'rgba(212,175,55,A)');
-        initP('s10c', 'rgba(212,175,55,A)');
-
-        // nav
-        const N = 10, slides = [...document.querySelectorAll('.slide')];
+        const N = 9, slides = [...document.querySelectorAll('.slide')];
         const dotsEl = document.getElementById('dots'), ctr = document.getElementById('ctr');
         let cur = 0;
-        for (let i = 0; i < N; i++) { const d = document.createElement('div'); d.className = 'dot' + (i === 0 ? ' on' : ''); d.onclick = () => go(i); dotsEl.appendChild(d) }
+        
+        for (let i = 0; i < N; i++) { 
+            const d = document.createElement('div'); 
+            d.className = 'dot' + (i === 0 ? ' on' : ''); 
+            d.onclick = () => go(i); 
+            dotsEl.appendChild(d);
+        }
+
         function go(n) {
             if (n < 0 || n >= N) return;
-            slides[cur].classList.remove('active'); slides[cur].classList.add('exit');
-            setTimeout(() => slides[cur].classList.remove('exit'), 360);
-            cur = n; slides[cur].classList.add('active');
+            slides[cur].classList.remove('active'); 
+            slides[cur].classList.add('exit');
+            setTimeout(() => slides[cur].classList.remove('exit'), 600);
+            cur = n; 
+            slides[cur].classList.add('active');
             ctr.textContent = `SLIDE ${cur + 1} / ${N}`;
             document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('on', i === cur));
         }
+
         document.getElementById('next').onclick = () => go(cur + 1);
         document.getElementById('prev').onclick = () => go(cur - 1);
+        
         document.addEventListener('keydown', e => {
-            if (e.code === 'Space' || e.code === 'ArrowRight') { e.preventDefault(); go(cur + 1) }
-            else if (e.code === 'ArrowLeft') { e.preventDefault(); go(cur - 1) }
+            if (e.code === 'Space' || e.code === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+            else if (e.code === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
         });
-        document.getElementById('deck').addEventListener('click', e => { if (!e.target.closest('a') && !e.target.closest('button')) go(cur + 1) });
+        
+        document.getElementById('deck').addEventListener('click', e => { 
+            if (!e.target.closest('a') && !e.target.closest('button')) go(cur + 1); 
+        });
+
         let sx = 0;
-        window.addEventListener('touchstart', e => { sx = e.touches[0].clientX }, { passive: true });
-        window.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) { dx < 0 ? go(cur + 1) : go(cur - 1) } });
+        window.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+        window.addEventListener('touchend', e => { 
+            const dx = e.changedTouches[0].clientX - sx; 
+            if (Math.abs(dx) > 40) { dx < 0 ? go(cur + 1) : go(cur - 1); } 
+        });
     </script>
 </body>
-
 </html>
