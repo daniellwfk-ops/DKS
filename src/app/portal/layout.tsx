@@ -10,6 +10,7 @@ const navItems = [
     { label: "Dashboard", href: "/portal", icon: "📊" },
     { label: "Meus Relatórios", href: "/portal/relatorios", icon: "📈" },
     { label: "Reuniões", href: "/portal/reunioes", icon: "📅" },
+    { label: "Lives Instagram", href: "/portal/lives", icon: "🎥" },
     { label: "Suporte", href: "/portal/suporte", icon: "💬" },
 ];
 
@@ -44,7 +45,7 @@ function PortalLayoutInner({ children }: { children: ReactNode }) {
                 {/* Nav */}
                 <nav className="flex-1 px-3 py-4 space-y-1">
                     {navItems.map((item) => {
-                        const active = pathname === item.href;
+                        const active = pathname === item.href || (item.href !== "/portal" && pathname.startsWith(item.href));
                         return (
                             <Link
                                 key={item.href}
