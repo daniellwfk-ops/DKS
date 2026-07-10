@@ -1,5 +1,5 @@
 // URL do backend Live Manager (servidor separado com FFmpeg)
-const LIVE_API = "https://wilson-boost-hardcover-that.trycloudflare.com";
+const LIVE_API = "https://negotiations-reviewing-gen-cycle.trycloudflare.com";
 
 export { LIVE_API };
 
