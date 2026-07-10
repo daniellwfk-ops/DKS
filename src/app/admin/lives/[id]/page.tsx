@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { io } from "socket.io-client";
 import {
@@ -105,7 +105,10 @@ function ContentCard({ item, clientId, index, onDelete, onDurationChange }: {
 export default function LiveClientPage() {
     const params = useParams();
     const router = useRouter();
+    const pathname = usePathname();
     const clientId = params.id as string;
+    
+    const basePath = pathname.startsWith("/portal") ? "/portal/lives" : "/admin/lives";
 
     const [client, setClient] = useState<LiveClient | null>(null);
     const [content, setContent] = useState<ContentItem[]>([]);
@@ -133,7 +136,7 @@ export default function LiveClientPage() {
             setLogs(lg.reverse());
             setEditForm({ name: c.name, instagram_handle: c.instagram_handle || "", rtmp_url: c.rtmp_url, stream_key: "" });
         } catch {
-            router.push("/admin/lives");
+            router.push(basePath);
         } finally {
             setLoading(false);
         }
@@ -237,7 +240,7 @@ export default function LiveClientPage() {
     return (
         <div className="max-w-3xl">
             {/* Back */}
-            <Link href="/admin/lives" className="inline-flex items-center gap-2 text-[#555] hover:text-[#888] text-sm mb-6 transition-colors">
+            <Link href={basePath} className="inline-flex items-center gap-2 text-[#555] hover:text-[#888] text-sm mb-6 transition-colors">
                 ← Voltar às Lives
             </Link>
 

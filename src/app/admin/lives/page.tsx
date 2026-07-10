@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { io } from "socket.io-client";
 import {
@@ -125,9 +126,10 @@ function AddClientModal({ onClose, onCreated }: { onClose: () => void; onCreated
 }
 
 // ─── Client Card ──────────────────────────────────────────────────────────────
-function ClientCard({ client, status, onToggle, onDelete }: {
+function ClientCard({ client, status, basePath, onToggle, onDelete }: {
     client: LiveClient;
     status: StreamStatus;
+    basePath: string;
     onToggle: () => void;
     onDelete: () => void;
 }) {
@@ -172,7 +174,7 @@ function ClientCard({ client, status, onToggle, onDelete }: {
                     {isLoading ? "Aguarde..." : isLive ? "⏹ Parar Live" : "▶ Iniciar Live"}
                 </button>
 
-                <Link href={`/admin/lives/${client.id}`}>
+                <Link href={`${basePath}/${client.id}`}>
                     <button className="bg-white/5 border border-white/10 text-[#888] hover:text-white px-3 py-2.5 rounded-xl transition-colors text-sm" title="Gerenciar">
                         ⚙️
                     </button>
@@ -197,6 +199,8 @@ export default function LivesPage() {
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [backendOnline, setBackendOnline] = useState<boolean | null>(null);
+    const pathname = usePathname();
+    const basePath = pathname.endsWith("/lives") ? pathname : "/admin/lives";
 
     const load = useCallback(async () => {
         try {
@@ -334,6 +338,7 @@ export default function LivesPage() {
                             key={client.id}
                             client={client}
                             status={statuses[client.id] || client.status}
+                            basePath={basePath}
                             onToggle={() => handleToggle(client)}
                             onDelete={() => handleDelete(client)}
                         />
