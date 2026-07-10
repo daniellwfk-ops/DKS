@@ -1,5 +1,5 @@
 // URL do backend Live Manager (servidor separado com FFmpeg)
-const LIVE_API = process.env.NEXT_PUBLIC_LIVE_MANAGER_URL || "https://mtv-defense-metropolitan-innovative.trycloudflare.com";
+const LIVE_API = "https://mtv-defense-metropolitan-innovative.trycloudflare.com";
 
 export { LIVE_API };
 
