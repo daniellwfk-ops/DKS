@@ -238,11 +238,14 @@ export default function LiveClientPage() {
         }`;
 
     return (
-        <div className="max-w-3xl">
-            {/* Back */}
-            <Link href={basePath} className="inline-flex items-center gap-2 text-[#555] hover:text-[#888] text-sm mb-6 transition-colors">
-                ← Voltar às Lives
-            </Link>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 items-start">
+            
+            {/* Esquerda: Controles */}
+            <div>
+                {/* Back */}
+                <Link href={basePath} className="inline-flex items-center gap-2 text-[#555] hover:text-[#888] text-sm mb-6 transition-colors">
+                    ← Voltar às Lives
+                </Link>
 
             {/* Header */}
             <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
@@ -373,6 +376,74 @@ export default function LiveClientPage() {
                     </button>
                 </form>
             )}
+            </div>
+
+            {/* Direita: Preview (Simulador Instagram) */}
+            <div className="hidden lg:block sticky top-8">
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-white font-black text-sm uppercase tracking-widest text-[#888]">Preview</h2>
+                    <span className="text-xs text-[#555]">Simulação do celular</span>
+                </div>
+                
+                <div className="w-[360px] h-[640px] bg-[#050505] rounded-[32px] border-[10px] border-[#1a1a1a] overflow-hidden relative shadow-2xl">
+                    {content.length > 0 ? (
+                        content[0].file_type === 'image' ? (
+                            <img src={getLiveContentUrl(clientId, content[0].filename)} alt="Preview" className="w-full h-full object-cover" />
+                        ) : (
+                            <video src={getLiveContentUrl(clientId, content[0].filename)} className="w-full h-full object-cover" autoPlay loop muted playsInline />
+                        )
+                    ) : (
+                        <div className="flex flex-col items-center justify-center w-full h-full text-[#333]">
+                            <div className="text-4xl mb-2">📱</div>
+                            <p className="text-xs font-bold uppercase tracking-widest">Sem vídeo</p>
+                        </div>
+                    )}
+
+                    {/* Overlay falso do Instagram */}
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/50 via-transparent to-black/60">
+                        {/* Top bar */}
+                        <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 to-fuchsia-600 p-[2px]">
+                                    <div className="w-full h-full bg-black rounded-full border border-white/20"></div>
+                                </div>
+                                <span className="text-white font-bold text-sm drop-shadow-md">
+                                    {client.instagram_handle || 'seu_instagram'}
+                                </span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <span className="bg-red-600 text-white text-[10px] font-black uppercase px-2 py-1 rounded drop-shadow-md">Ao Vivo</span>
+                                <span className="bg-black/40 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded flex items-center gap-1 drop-shadow-md">
+                                    👁️ 1.2k
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Bottom bar */}
+                        <div className="absolute bottom-4 left-4 right-4 space-y-3">
+                            <div className="space-y-2">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-6 h-6 rounded-full bg-white/20"></div>
+                                    <span className="text-white text-xs font-bold drop-shadow">joao.silva</span>
+                                    <span className="text-white/80 text-xs drop-shadow">Muito bom!! 👏</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-6 h-6 rounded-full bg-white/20"></div>
+                                    <span className="text-white text-xs font-bold drop-shadow">maria_eduarda</span>
+                                    <span className="text-white/80 text-xs drop-shadow">Como faço para comprar?</span>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="flex-1 border border-white/30 rounded-full px-4 py-2 text-white/50 text-xs backdrop-blur-sm bg-black/20">
+                                    Adicione um comentário...
+                                </div>
+                                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white text-sm backdrop-blur-sm">❤️</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     );
 }
