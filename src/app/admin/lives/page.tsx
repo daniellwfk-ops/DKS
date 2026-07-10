@@ -79,7 +79,7 @@ function AddClientModal({ onClose, onCreated }: { onClose: () => void; onCreated
                 </h2>
                 <p className="text-[#666] text-sm mb-6">Preencha com os dados do Instagram do cliente.</p>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4" autoComplete="off">
                     <div>
                         <label className="block text-xs font-bold uppercase tracking-widest text-[#888] mb-2">Nome do Cliente *</label>
                         <input className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-[#444] focus:outline-none focus:border-[#D4AF37]/60 transition-colors text-sm"
@@ -96,12 +96,14 @@ function AddClientModal({ onClose, onCreated }: { onClose: () => void; onCreated
                         <label className="block text-xs font-bold uppercase tracking-widest text-[#888] mb-2">URL do Stream (RTMP) *</label>
                         <input className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-[#444] focus:outline-none focus:border-[#D4AF37]/60 transition-colors text-sm"
                             placeholder="rtmps://edgetee-upload-for2-2.xx.fbcdn.net:443/rtmp"
+                            autoComplete="new-password"
                             value={form.rtmp_url} onChange={e => setForm(p => ({ ...p, rtmp_url: e.target.value }))} required />
                     </div>
                     <div>
                         <label className="block text-xs font-bold uppercase tracking-widest text-[#888] mb-2">Chave do Stream *</label>
                         <input className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-[#444] focus:outline-none focus:border-[#D4AF37]/60 transition-colors text-sm"
                             type="password" placeholder="18046334..." value={form.stream_key}
+                            autoComplete="new-password"
                             onChange={e => setForm(p => ({ ...p, stream_key: e.target.value }))} required />
                     </div>
 

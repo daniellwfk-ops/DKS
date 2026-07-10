@@ -350,12 +350,12 @@ export default function LiveClientPage() {
 
             {/* Tab: Settings */}
             {tab === "settings" && (
-                <form onSubmit={handleSaveSettings} className="space-y-4 max-w-lg">
+                <form onSubmit={handleSaveSettings} className="space-y-4 max-w-lg" autoComplete="off">
                     {[
                         { label: "Nome do Cliente", key: "name", type: "text", placeholder: "Nome do restaurante", required: true },
                         { label: "@ do Instagram", key: "instagram_handle", type: "text", placeholder: "handle.do.cliente", required: false },
-                        { label: "URL RTMP", key: "rtmp_url", type: "text", placeholder: "rtmps://...", required: true },
-                        { label: "Nova Chave de Stream", key: "stream_key", type: "password", placeholder: "Deixe em branco para manter a atual", required: false },
+                        { label: "URL RTMP", key: "rtmp_url", type: "text", placeholder: "rtmps://...", required: true, autoComplete: "new-password" },
+                        { label: "Nova Chave de Stream", key: "stream_key", type: "password", placeholder: "Deixe em branco para manter a atual", required: false, autoComplete: "new-password" },
                     ].map(field => (
                         <div key={field.key}>
                             <label className="block text-xs font-bold uppercase tracking-widest text-[#888] mb-2">{field.label}</label>
@@ -363,6 +363,7 @@ export default function LiveClientPage() {
                                 type={field.type}
                                 placeholder={field.placeholder}
                                 required={field.required}
+                                autoComplete={field.autoComplete || "off"}
                                 value={editForm[field.key as keyof typeof editForm]}
                                 onChange={e => setEditForm(p => ({ ...p, [field.key]: e.target.value }))}
                                 className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-[#333] focus:outline-none focus:border-[#D4AF37]/60 transition-colors text-sm"
