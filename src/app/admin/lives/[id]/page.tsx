@@ -379,7 +379,7 @@ export default function LiveClientPage() {
             </div>
 
             {/* Direita: Preview (Simulador Instagram) */}
-            <div className="hidden lg:block sticky top-8">
+            <div className="w-full max-w-[360px] mx-auto lg:sticky lg:top-8 mt-10 lg:mt-0">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-white font-black text-sm uppercase tracking-widest text-[#888]">Preview</h2>
                     <span className="text-xs text-[#555]">Simulação do celular</span>
