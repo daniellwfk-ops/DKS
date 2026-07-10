@@ -1,5 +1,5 @@
 // URL do backend Live Manager (servidor separado com FFmpeg)
-const LIVE_API = process.env.NEXT_PUBLIC_LIVE_MANAGER_URL || "http://localhost:3001";
+const LIVE_API = process.env.NEXT_PUBLIC_LIVE_MANAGER_URL || "http://127.0.0.1:3001";
 
 export { LIVE_API };
 
