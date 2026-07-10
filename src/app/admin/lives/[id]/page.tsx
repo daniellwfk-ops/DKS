@@ -229,7 +229,7 @@ export default function LiveClientPage() {
     if (!client) return null;
 
     const isLive = status === "online";
-    const isLoadingStatus = status === "starting" || status === "restarting";
+    const isLoadingStatus = status === "starting";
 
     const tabCls = (t: string) =>
         `px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-200 ${tab === t

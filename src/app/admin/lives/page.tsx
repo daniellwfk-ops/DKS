@@ -136,7 +136,7 @@ function ClientCard({ client, status, basePath, onToggle, onDelete }: {
     onDelete: () => void;
 }) {
     const isLive = status === "online";
-    const isLoading = status === "starting" || status === "restarting";
+    const isLoading = status === "starting";
 
     return (
         <div className={`bg-[#050505] border rounded-2xl p-6 transition-all duration-300 ${isLive ? "border-[#D4AF37]/30" : "border-white/5 hover:border-white/10"}`}
