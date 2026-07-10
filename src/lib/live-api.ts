@@ -1,5 +1,5 @@
 // URL do backend Live Manager (servidor separado com FFmpeg)
-const LIVE_API = "https://amino-vocational-geographic-sixth.trycloudflare.com";
+const LIVE_API = "https://readings-bids-chevy-behavioral.trycloudflare.com";
 
 export { LIVE_API };
 
