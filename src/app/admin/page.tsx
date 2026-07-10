@@ -44,6 +44,17 @@ export default async function AdminPage() {
                     <span className="inline-block mt-4 text-[#D4AF37] text-xs font-bold">Abrir ferramenta →</span>
                 </Link>
 
+                <Link
+                    href="/admin/lives"
+                    className="group bg-[#060500] border border-[#D4AF37]/20 rounded-2xl p-6 hover:border-[#D4AF37]/50 transition-all duration-300 hover:-translate-y-0.5"
+                >
+                    <div className="text-3xl mb-4">🎥</div>
+                    <h2 className="text-white font-black mb-1">Gerenciador de Lives</h2>
+                    <p className="text-[#888] text-sm">Gerencie e transmita lives do Instagram para múltiplos clientes simultaneamente.</p>
+                    <span className="inline-block mt-4 text-[#D4AF37] text-xs font-bold">Abrir ferramenta →</span>
+                </Link>
+
+
                 <div className="bg-[#050505] border border-white/5 rounded-2xl p-6">
                     <div className="text-3xl mb-4">👥</div>
                     <h2 className="text-white font-black mb-1">Total de Clientes</h2>
