@@ -1,5 +1,5 @@
-// URL do backend Live Manager (servidor separado com FFmpeg)
-const LIVE_API = "https://readings-bids-chevy-behavioral.trycloudflare.com";
+// URL do backend Live Manager (agora rodando estavelmente no VPS)
+const LIVE_API = "https://written-animal-treasurer-entering.trycloudflare.com";
 
 export { LIVE_API };
 
