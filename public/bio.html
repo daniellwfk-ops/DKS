@@ -223,7 +223,7 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
       margin-bottom: 32px;
     }
 
@@ -232,14 +232,17 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 22px;
-      border-radius: 20px;
-      font-size: 14px;
+      padding: 12px 20px;
+      border-radius: 24px; /* Mais moderno e arredondado */
+      font-size: 14.5px;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      
       /* Entrada animada */
       opacity: 0;
       animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -254,7 +257,6 @@
     .btn:nth-child(2) { animation-delay: 0.2s; }
     .btn:nth-child(3) { animation-delay: 0.3s; }
     .btn:nth-child(4) { animation-delay: 0.4s; }
-    .btn:nth-child(5) { animation-delay: 0.5s; }
 
     .btn-content {
       display: flex;
@@ -263,12 +265,24 @@
       z-index: 2;
     }
 
+    /* Container do ícone super moderno */
     .btn-icon {
-      font-size: 18px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover .btn-icon {
+      transform: scale(1.1);
     }
 
     .btn-arrow {
-      opacity: 0.4;
+      opacity: 0.3;
       transition: transform 0.3s ease, opacity 0.3s ease;
       z-index: 2;
       font-size: 16px;
@@ -279,36 +293,60 @@
       opacity: 1;
     }
 
-    /* Botão Principal (Ouro Sólido) */
+    /* ==================================
+       Botão Principal (Dourado Moderno)
+       ================================== */
     .btn-primary {
-      background: var(--gold);
-      color: #000;
-      border: 1px solid var(--gold-light);
-      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25);
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+      color: #111;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.7),
+        0 10px 24px rgba(212, 175, 55, 0.35);
+    }
+
+    .btn-primary .btn-icon {
+      background: rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      background: var(--gold-light);
-      box-shadow: 0 12px 32px rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.8),
+        0 14px 32px rgba(212, 175, 55, 0.45);
     }
 
     .btn-primary .btn-arrow {
       color: #000;
-      opacity: 0.7;
+      opacity: 0.6;
     }
 
-    /* Botões Secundários (Dark Glass) */
+    /* ==================================
+       Botões Secundários (Dark Glass/Neumorphic)
+       ================================== */
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.02);
+      background: linear-gradient(180deg, rgba(35, 35, 35, 0.85) 0%, rgba(15, 15, 15, 0.95) 100%);
       color: var(--text-main);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.05),
+        0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-secondary .btn-icon {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.02);
     }
 
     .btn-secondary:hover {
-      background: rgba(212, 175, 55, 0.05);
-      border-color: rgba(212, 175, 55, 0.3);
-      transform: translateY(-2px);
+      background: linear-gradient(180deg, rgba(45, 45, 45, 0.9) 0%, rgba(20, 20, 20, 0.95) 100%);
+      border-color: rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.1),
+        0 10px 24px rgba(212, 175, 55, 0.15);
     }
 
     .btn-secondary .btn-arrow {
