@@ -204,9 +204,9 @@
       display: flex;
       align-items: center;
       justify-content: center; 
-      padding: 18px 20px;
+      padding: 18px 10px; /* Reduzi padding lateral para o botão em si, controlamos no texto */
       border-radius: 100px; /* Formato Vettor28 (Pílula) */
-      font-size: 15px;
+      font-size: 13.5px; /* Fonte menor para caber em celulares pequenos */
       font-weight: 800; 
       letter-spacing: 0.5px;
       text-decoration: none;
@@ -238,7 +238,7 @@
     /* Ícone fixo na esquerda */
     .btn-icon {
       position: absolute;
-      left: 18px;
+      left: 20px;
       font-size: 18px;
       display: flex;
       align-items: center;
@@ -252,6 +252,9 @@
 
     .btn-text {
       text-align: center;
+      padding: 0 40px; /* Cria uma "área segura" nas bordas para o texto não sobrepor o ícone */
+      width: 100%;
+      line-height: 1.3;
     }
 
     /* Botão Principal - Gradiente Premium */
