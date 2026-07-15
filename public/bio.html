@@ -9,11 +9,11 @@
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================================
-       RESET & TOKENS (Baseado na referência Vettor28)
+       RESET & TOKENS (ULTRA PREMIUM DARK/GOLD)
     ============================================================ */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -23,15 +23,16 @@
     }
 
     :root {
-      /* Dourado DKS */
+      /* Dourado Luxo */
       --gold:         #d4af37;
-      --gold-dark:    #b59124;
-      --gold-hover:   #e8c142;
+      --gold-light:   #ebd285;
+      --gold-dark:    #9c7f21;
+      --gold-glow:    rgba(212, 175, 55, 0.15);
       
-      --bg-dark:      #050505;
+      --bg-dark:      #0a0a0a;
       
       --text-main:    #ffffff;
-      --text-muted:   #aaaaaa;
+      --text-muted:   #a0a0a0;
     }
 
     body {
@@ -45,31 +46,49 @@
       padding: 40px 20px;
       position: relative;
       overflow-x: hidden;
-      
-      /* Padrão de Fundo - Restaurantes e Marketing 
-         Criado com SVGs sutis dourados espalhados */
-      background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23d4af37' stroke-width='1.5' stroke-opacity='0.15' stroke-linecap='round' stroke-linejoin='round'%3E%3C!-- Gráfico Crescimento --%3E%3Cpath d='M30 40l10-10l10 10m-10-10v20m-10 10h20'/%3E%3C!-- Cifrão --%3E%3Cpath d='M110 30c-5 0-10 2-10 5s5 5 10 5s10 2 10 5s-5 5-10 5m0-22v26'/%3E%3C!-- Loja/Restaurante --%3E%3Cpath d='M30 110l5-10h10l5 10v15H30zM35 110h10'/%3E%3C!-- Foguete --%3E%3Cpath d='M110 110l5-5a5 5 0 017 7l-5 5m-7-7l-3 10l10-3'/%3E%3C!-- Prato c/ Tampa (Cloche) --%3E%3Cpath d='M70 75a10 10 0 0120 0H70zm10-5v-2'/%3E%3C/g%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 160px 160px;
+    }
+
+    /* ORBS NO FUNDO PARA O EFEITO GLASS FUNCIONAR DE VERDADE */
+    .bg-orb-1 {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(0,0,0,0) 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .bg-orb-2 {
+      position: fixed;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, rgba(0,0,0,0) 70%);
+      z-index: -1;
+      pointer-events: none;
     }
 
     /* ============================================================
-       CARD PRINCIPAL (Transparente e Focado)
+       CARD PRINCIPAL (Glassmorphism Limpo)
     ============================================================ */
     .card {
       width: 100%;
       max-width: 420px;
-      /* Fundo muito escuro e ligeiramente translúcido para o fundo aparecer bem sutil */
-      background: rgba(12, 12, 12, 0.85);
-      border-radius: 24px;
+      background: rgba(20, 20, 20, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 32px;
       padding: 48px 32px;
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
       display: flex;
       flex-direction: column;
       align-items: center;
-      
       animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
@@ -79,19 +98,19 @@
     }
 
     /* ============================================================
-       AVATAR
+       AVATAR PREMIUM + LOOPING GIRATÓRIO
     ============================================================ */
     .avatar-container {
       position: relative;
-      width: 100px;
-      height: 100px;
+      width: 110px;
+      height: 110px;
       margin-bottom: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* O Efeito Giratório */
+    /* Anel brilhante em looping */
     .avatar-ring {
       position: absolute;
       inset: -3px; 
@@ -104,12 +123,13 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Foto de Perfil (Sem bordas duras para ser mais clean) */
+    /* Avatar da Foto */
     .avatar {
       position: absolute;
       inset: 2px;
       border-radius: 50%;
       background: var(--bg-dark);
+      border: 2px solid #111;
       overflow: hidden;
       z-index: 2;
     }
@@ -121,12 +141,25 @@
       object-position: center 20%;
     }
 
+    /* Ponto Online Dourado */
+    .status-dot {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 14px;
+      height: 14px;
+      background-color: var(--gold);
+      border-radius: 50%;
+      border: 2px solid #111;
+      z-index: 3;
+    }
+
     /* ============================================================
        TEXTOS DA BIO
     ============================================================ */
     .name {
       font-size: 24px;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: -0.5px;
       margin-bottom: 4px;
       text-align: center;
@@ -142,6 +175,31 @@
       letter-spacing: 0.5px;
     }
 
+    /* Badge Método ROMA */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .badge-dot {
+      width: 5px;
+      height: 5px;
+      background-color: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--gold-glow);
+    }
+
     .tagline {
       font-size: 15px;
       font-weight: 400;
@@ -149,7 +207,7 @@
       color: var(--text-muted);
       text-align: center;
       margin-bottom: 32px;
-      max-width: 320px;
+      max-width: 300px;
     }
 
     .tagline strong {
@@ -158,7 +216,7 @@
     }
 
     /* ============================================================
-       BOTÕES (Estilo exato da referência Vettor28)
+       BOTÕES GLASSMORPHISM (CLEAN E MODERNOS)
     ============================================================ */
     .buttons-group {
       width: 100%;
@@ -173,18 +231,22 @@
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: center; /* Texto sempre centralizado */
-      padding: 20px 24px; /* Mais alto */
-      border-radius: 999px; /* Formato Pílula perfeito como na ref */
-      font-size: 15.5px;
-      font-weight: 600; /* Letras Brancas e encorpadas */
-      color: #ffffff;
+      justify-content: center;
+      padding: 16px 20px;
+      border-radius: 16px; /* Mais clean, menos "salsicha" */
+      font-size: 15px;
+      font-weight: 500; /* Letra branca e elegante */
+      color: #ffffff; /* Letras Brancas exigidas */
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      
+      /* Efeito Glassmorphism base */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       
       /* Entrada animada */
       opacity: 0;
-      animation: slide-up 0.4s ease-out forwards;
+      animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     @keyframes slide-up {
@@ -197,82 +259,109 @@
     .btn:nth-child(3) { animation-delay: 0.2s; }
     .btn:nth-child(4) { animation-delay: 0.25s; }
 
-    /* Ícone outline clean na esquerda */
+    /* Ícone fixo na esquerda de forma clean */
     .btn-icon {
       position: absolute;
-      left: 24px;
-      width: 22px;
-      height: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: currentColor;
+      left: 20px;
+      font-size: 18px;
+      transition: transform 0.3s ease;
     }
 
-    .btn-icon svg {
-      width: 100%;
-      height: 100%;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .btn:hover .btn-icon {
+      transform: scale(1.1);
     }
 
-    /* Botão Principal */
+    /* ==================================
+       Botão Principal (Destaque Dourado Suave)
+       ================================== */
     .btn-primary {
-      background: var(--gold-dark); /* Fundo sólido dourado escuro/marrom */
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08); 
+      border: 1px solid rgba(212, 175, 55, 0.4); /* Borda dourada chamativa */
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 4px 20px rgba(212, 175, 55, 0.15); /* Glow dourado ao redor */
     }
 
     .btn-primary:hover {
-      background: var(--gold); /* Brilha levemente no hover */
+      background: rgba(212, 175, 55, 0.15); /* Fica mais dourado no hover */
+      border-color: rgba(212, 175, 55, 0.6);
       transform: translateY(-2px);
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 8px 24px rgba(212, 175, 55, 0.25);
     }
 
-    /* Botões Secundários */
+    /* ==================================
+       Botões Secundários (Glass Puro e Clean)
+       ================================== */
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.05); /* Escuro translúcido */
-      border: 1px solid rgba(255, 255, 255, 0.15); /* Borda fina */
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
     }
 
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
       transform: translateY(-2px);
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
     /* ============================================================
-       RODAPÉ
+       REDES SOCIAIS E RODAPÉ
     ============================================================ */
-    .footer {
+    .social-links {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .social-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      font-size: 13px;
-      font-weight: 500;
       color: var(--text-muted);
+      transition: all 0.3s ease;
+    }
+
+    .social-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .footer {
+      font-size: 11px;
+      font-weight: 400;
+      color: #555;
     }
     
     .footer a {
-      color: var(--gold);
+      color: #777;
       text-decoration: none;
-      font-weight: 700;
       transition: color 0.2s;
     }
-
+    
     .footer a:hover {
-      color: var(--gold-hover);
-    }
-
-    .instagram-icon {
-      width: 16px;
-      height: 16px;
       color: var(--gold);
     }
   </style>
 </head>
 <body>
+
+  <!-- Background Orbs para o efeito Glassmorphism funcionar perfeitamente -->
+  <div class="bg-orb-1"></div>
+  <div class="bg-orb-2"></div>
 
   <div class="card">
     
@@ -282,78 +371,74 @@
       <div class="avatar">
         <img src="/daniel-soares.jpg" alt="Daniel Soares">
       </div>
+      <div class="status-dot"></div>
     </div>
 
     <!-- Identificação -->
     <h1 class="name">Daniel Soares</h1>
+    <h2 class="handle">@odanielssoares</h2>
 
-    <!-- Tagline (Incluindo a frase do Método Roma aqui para ficar mais clean) -->
+    <!-- Badge -->
+    <div class="badge">
+      <div class="badge-dot"></div>
+      MÉTODO ROMA
+    </div>
+
+    <!-- Tagline -->
     <p class="tagline">
-      Faço <strong>restaurantes e deliveries</strong> baterem recordes de faturamento. Conheça o Método ROMA.
+      Faço <strong>restaurantes e deliveries</strong><br>
+      baterem recordes de faturamento. 📈
     </p>
 
-    <!-- Botões Estilo Vettor28 -->
+    <!-- Botões Glass Clean -->
     <div class="buttons-group">
       <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20a%20DKS!" class="btn btn-primary" target="_blank">
-        <div class="btn-icon">
-          <!-- Ícone WhatsApp Outline -->
-          <svg viewBox="0 0 24 24">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-          </svg>
-        </div>
-        Reservar no WhatsApp
+        <span class="btn-icon">💬</span>
+        <span class="btn-text">Falar no WhatsApp</span>
       </a>
 
       <a href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7" class="btn btn-secondary" target="_blank">
-        <div class="btn-icon">
-          <!-- Ícone Foguete Outline -->
-          <svg viewBox="0 0 24 24">
-            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
-            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
-            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
-          </svg>
-        </div>
-        Quero contratar a DKS
+        <span class="btn-icon">🚀</span>
+        <span class="btn-text">Quero contratar a DKS</span>
       </a>
 
       <a href="https://dksmarketing.com.br/metodologia" class="btn btn-secondary" target="_blank">
-        <div class="btn-icon">
-          <!-- Ícone Alvo Outline -->
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="6"></circle>
-            <circle cx="12" cy="12" r="2"></circle>
-          </svg>
-        </div>
-        Conhecer o Método ROMA
+        <span class="btn-icon">🎯</span>
+        <span class="btn-text">Conhecer o Método ROMA</span>
       </a>
 
       <a href="https://dksmarketing.com.br" class="btn btn-secondary" target="_blank">
-        <div class="btn-icon">
-          <!-- Ícone Globo Outline -->
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="2" y1="12" x2="22" y2="12"></line>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-          </svg>
-        </div>
-        Nosso Site Oficial
+        <span class="btn-icon">🌐</span>
+        <span class="btn-text">Nosso Site Oficial</span>
       </a>
     </div>
 
-    <!-- Rodapé Estilo Vettor28 -->
-    <div class="footer">
-      <strong>DKS.</strong> Marketing para restaurantes 
-      <a href="https://www.instagram.com/dksmarketing/" target="_blank">
-        <svg class="instagram-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Redes Sociais -->
+    <div class="social-links">
+      <a href="https://www.instagram.com/odanielssoares/" class="social-btn" target="_blank" title="Instagram Pessoal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
           <circle cx="12" cy="12" r="4"/>
           <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
         </svg>
       </a>
+      <a href="https://www.instagram.com/dksmarketing/" class="social-btn" target="_blank" title="Instagram da Agência">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Rodapé -->
+    <div class="footer">
+      © <span id="ano"></span> Feito por <a href="https://dksmarketing.com.br">DKS Marketing</a>
     </div>
   </div>
 
+  <script>
+    document.getElementById('ano').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
