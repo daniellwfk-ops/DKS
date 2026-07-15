@@ -291,7 +291,7 @@
     .footer-banner {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center; /* Centraliza apenas o texto */
       width: 100%;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -312,38 +312,14 @@
       box-shadow: 0 8px 24px rgba(212, 175, 55, 0.15);
     }
 
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .footer-logo img {
-      height: 26px; /* Um pouco menor */
-      width: auto;
-      display: block;
-    }
-
     .footer-text {
       font-size: 9px; /* Ainda menor, conforme solicitado */
       font-weight: 500;
       color: #aaa;
-      flex-grow: 1;
       text-align: center;
       padding: 0 8px;
       letter-spacing: 0.4px;
       text-transform: uppercase; /* Dará mais legibilidade em tamanho pequeno */
-    }
-
-    .footer-ig {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px; 
-      height: 24px;
-      border-radius: 6px;
-      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-      color: #fff;
     }
   </style>
 </head>
@@ -400,17 +376,7 @@
 
     <!-- Rodapé Estilo Banner (Vettor28) -->
     <a href="https://www.instagram.com/dksmarketing/" class="footer-banner" target="_blank">
-      <div class="footer-logo">
-        <img src="/dks-logo-transparent.png" alt="DKS">
-      </div>
       <div class="footer-text">Desenvolvido por Agência DKS marketing para restaurantes</div>
-      <div class="footer-ig">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-        </svg>
-      </div>
     </a>
   </div>
 
