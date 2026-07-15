@@ -23,352 +23,302 @@
     }
 
     :root {
+      /* VERDE LIMÃO NEON - A cor principal da marca */
       --accent:       #ccff00;
-      --accent-dark:  #547000;
-      --accent-dim:   rgba(204,255,0,0.12);
-      --card-bg:      rgba(7, 7, 7, 0.96);
-      --surface:      #111111;
+      --accent-dark:  #99cc00;
+      --accent-glow:  rgba(204, 255, 0, 0.4);
+      --accent-dim:   rgba(204, 255, 0, 0.1);
+      
+      --bg-color:     #050505;
+      --card-bg:      rgba(15, 15, 15, 0.6);
+      --card-border:  rgba(255, 255, 255, 0.08);
+      
       --white:        #ffffff;
-      --muted:        #888888;
-      --radius-card:  28px;
-      --radius-btn:   18px;
+      --muted:        #a0a0a0;
+      
+      --radius-card:  32px;
+      --radius-btn:   16px;
     }
 
-    /* ============================================================
-       FUNDO: padrão SVG repetido com ícones de marketing/gastronomia
-       Ícones: 📢 Megafone, 📈 Gráfico, 🍕 Pizza, 🍔 Hambúrguer,
-               🎯 Alvo, 📱 Celular, ⭐ Estrela, 💰 Cifrão
-    ============================================================ */
     body {
       font-family: 'Poppins', sans-serif;
-
-      /* Fundo escuro base */
-      background-color: #050505;
-
-      /* Padrão SVG tile 300×300 com ícones sutis em verde-limão */
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cg fill='none' stroke='%23ccff00' stroke-opacity='0.045' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3C!-- Megafone (canto sup esq) --%3E%3Cpath d='M28 45 h7 l14 9 v-18 l-14 9 h-7 z'/%3E%3Cpath d='M28 48 v6'/%3E%3Cpath d='M49 36 q4-2 4 9 q0 11-4 9'/%3E%3Cpath d='M53 38 q5-1 5 11 q0 12-5 11'/%3E%3C!-- Gráfico de barras (canto sup dir) --%3E%3Crect x='240' y='52' width='5' height='14' rx='1'/%3E%3Crect x='250' y='44' width='5' height='22' rx='1'/%3E%3Crect x='260' y='34' width='5' height='32' rx='1'/%3E%3Cpath d='M238 68 h30'/%3E%3C!-- Seta de crescimento --%3E%3Cpath d='M240 30 l18-12 M255 18 h3 v3'/%3E%3C!-- Alvo (centro) --%3E%3Ccircle cx='150' cy='80' r='16'/%3E%3Ccircle cx='150' cy='80' r='9'/%3E%3Ccircle cx='150' cy='80' r='3'/%3E%3Cpath d='M150 64 v-6 M150 102 v-6 M134 80 h-6 M172 80 h-6'/%3E%3C!-- Pizza (canto inf esq) --%3E%3Ccircle cx='45' cy='220' r='22'/%3E%3Cpath d='M45 220 l0-22'/%3E%3Cpath d='M45 220 l19 11'/%3E%3Cpath d='M45 220 l-19 11'/%3E%3Ccircle cx='41' cy='210' r='2.5'/%3E%3Ccircle cx='52' cy='217' r='2'/%3E%3C!-- Hamburguer (canto inf dir) --%3E%3Crect x='230' y='208' width='40' height='5' rx='2.5'/%3E%3Crect x='230' y='218' width='40' height='5' rx='2.5'/%3E%3Crect x='230' y='228' width='40' height='5' rx='2.5'/%3E%3Cpath d='M228 213 q0-10 20-10 t20 10'/%3E%3Cpath d='M228 233 q0 8 20 8 t20-8'/%3E%3C!-- Estrela (centro baixo) --%3E%3Cpath d='M150 200 l4 9 h9 l-7 6 3 9 -9-6 -9 6 3-9 -7-6 h9 z'/%3E%3C!-- Celular (meio esq) --%3E%3Crect x='22' y='125' width='22' height='38' rx='4'/%3E%3Ccircle cx='33' cy='157' r='2'/%3E%3Cpath d='M28 131 h10'/%3E%3C!-- Cifrão (meio dir) --%3E%3Cpath d='M260 130 q0-6 8-6 t8 6 q0 6-8 8 q-8 2-8 8 q0 6 8 6 t8-6'/%3E%3Cpath d='M268 122 v4 M268 152 v4'/%3E%3C/g%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 300px 300px;
-
+      background-color: var(--bg-color);
       color: var(--white);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 32px 16px 40px;
+      padding: 40px 20px 60px;
+      position: relative;
+      overflow-x: hidden;
     }
 
     /* ============================================================
-       CARD CENTRAL
+       FUNDO PREMIUM: Grade sutil + Glows radiais
+    ============================================================ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      /* Padrão de grid ultra-moderno */
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: center center;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      /* Glow verde-limão sutil no topo e fundo */
+      background:
+        radial-gradient(circle at 50% 0%, var(--accent-dim) 0%, transparent 50%),
+        radial-gradient(circle at 50% 100%, var(--accent-dim) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       CARD PRINCIPAL - Glassmorphism Premium
     ============================================================ */
     .card {
       width: 100%;
-      max-width: 390px;
+      max-width: 420px;
       background: var(--card-bg);
-      border: 1.5px solid rgba(204,255,0,0.12);
+      border: 1px solid var(--card-border);
       border-radius: var(--radius-card);
-      padding: 36px 22px 32px;
+      padding: 40px 28px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 
+        0 24px 80px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.6),
-        0 30px 60px rgba(0,0,0,0.85),
-        0 0 80px rgba(204,255,0,0.03);
-
-      /* Animação de entrada do card */
-      animation: card-in 0.6s cubic-bezier(0.2,1.2,0.4,1) both;
+      
+      animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    @keyframes card-in {
-      from { opacity: 0; transform: translateY(24px) scale(0.97); }
-      to   { opacity: 1; transform: translateY(0)    scale(1); }
+    @keyframes fade-up {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     /* ============================================================
-       AVATAR / LOGO
+       AVATAR / LOGO TIPOGRÁFICO
     ============================================================ */
-    .avatar-wrap {
+    .avatar-container {
       position: relative;
-      width: 90px;
-      height: 90px;
-      margin-bottom: 14px;
+      margin-bottom: 24px;
     }
 
-    /* Anel giratório animado */
-    .avatar-ring {
-      position: absolute;
-      inset: -4px;
+    .avatar {
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
-      background: conic-gradient(
-        var(--accent) 0deg 120deg,
-        transparent 120deg 240deg,
-        var(--accent) 240deg 360deg
-      );
-      animation: spin-ring 6s linear infinite;
-    }
-
-    @keyframes spin-ring {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Máscara interna para deixar o anel visível */
-    .avatar-ring::after {
-      content: '';
-      position: absolute;
-      inset: 3px;
-      border-radius: 50%;
-      background: #0a0a0a;
-    }
-
-    .avatar-inner {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      overflow: hidden;
+      background: #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #111;
-      border: 2px solid #0a0a0a;
+      position: relative;
+      z-index: 2;
+      /* Borda dupla com neon */
+      box-shadow: 
+        0 0 0 4px #000,
+        0 0 0 6px var(--accent);
     }
 
-    /* Logo tipográfica DKS. como avatar */
+    /* Logo em Texto DKS. */
     .avatar-text {
-      font-size: 22px;
+      font-size: 32px;
       font-weight: 900;
-      letter-spacing: -1px;
+      letter-spacing: -2px;
       color: var(--white);
-      line-height: 1;
     }
-
     .avatar-text span {
       color: var(--accent);
     }
 
-    /* Ponto verde "online" */
-    .avatar-dot {
+    /* Ponto online neon */
+    .status-dot {
       position: absolute;
-      bottom: 3px;
-      right: 3px;
-      width: 14px;
-      height: 14px;
-      background: var(--accent);
+      bottom: 4px;
+      right: 4px;
+      width: 18px;
+      height: 18px;
+      background-color: var(--accent);
       border-radius: 50%;
-      border: 2.5px solid #0a0a0a;
-      animation: pulse-dot 2s ease-in-out infinite;
-      z-index: 10;
+      border: 4px solid #000;
+      z-index: 3;
+      box-shadow: 0 0 12px var(--accent-glow);
+      animation: pulse-neon 2s infinite;
     }
 
-    @keyframes pulse-dot {
-      0%,100% { box-shadow: 0 0 0 0 rgba(204,255,0,0.8); }
-      50%      { box-shadow: 0 0 0 5px rgba(204,255,0,0); }
+    @keyframes pulse-neon {
+      0% { box-shadow: 0 0 0 0 var(--accent-glow); }
+      70% { box-shadow: 0 0 0 10px rgba(204, 255, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(204, 255, 0, 0); }
     }
 
     /* ============================================================
-       NOME & BIO
+       TEXTOS DA BIO
     ============================================================ */
-    .profile-name {
-      font-size: 20px;
+    .name {
+      font-size: 24px;
       font-weight: 800;
       letter-spacing: -0.5px;
-      color: var(--white);
-      text-align: center;
       margin-bottom: 4px;
+      text-align: center;
     }
 
-    .profile-handle {
-      font-size: 11px;
-      font-weight: 500;
+    .handle {
+      font-size: 14px;
+      font-weight: 600;
       color: var(--accent);
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      text-align: center;
     }
 
-    /* Badge pill */
+    /* Badge Método ROMA */
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      background: var(--accent-dim);
-      border: 1px solid rgba(204,255,0,0.25);
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(204, 255, 0, 0.08);
+      border: 1px solid rgba(204, 255, 0, 0.2);
       border-radius: 100px;
-      padding: 5px 13px;
-      font-size: 9.5px;
-      font-weight: 800;
-      letter-spacing: 1.2px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
       color: var(--accent);
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 24px;
     }
 
     .badge-dot {
-      width: 5px;
-      height: 5px;
-      background: var(--accent);
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent);
       border-radius: 50%;
-      animation: pulse-dot 1.8s ease-in-out infinite;
-      flex-shrink: 0;
+      box-shadow: 0 0 8px var(--accent-glow);
     }
 
-    /* Tagline */
     .tagline {
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 1.55;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--muted);
       text-align: center;
-      max-width: 280px;
-      margin-bottom: 28px;
+      margin-bottom: 32px;
+      max-width: 300px;
     }
 
     .tagline strong {
       color: var(--white);
-      font-weight: 700;
+      font-weight: 600;
     }
 
     /* ============================================================
-       BOTÕES NEO-BRUTALISTAS
+       ESTATÍSTICAS (PROVA SOCIAL)
     ============================================================ */
-    .links {
+    .stats-container {
+      display: flex;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 16px 0;
+      margin-bottom: 32px;
+    }
+
+    .stat-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stat-divider {
+      width: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-number {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 2px;
+      letter-spacing: -0.5px;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ============================================================
+       BOTÕES MODERNOS
+    ============================================================ */
+    .buttons-group {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      margin-bottom: 28px;
+      gap: 14px;
+      margin-bottom: 32px;
     }
 
-    /* Wrapper para animação de entrada com bounce escalonada */
-    .btn-wrapper {
-      width: 100%;
-      opacity: 0;
-      animation: drop-in 0.55s cubic-bezier(0.2,1.4,0.4,1) forwards;
-    }
-
-    .btn-wrapper:nth-child(1) { animation-delay: 0.20s; }
-    .btn-wrapper:nth-child(2) { animation-delay: 0.32s; }
-    .btn-wrapper:nth-child(3) { animation-delay: 0.44s; }
-    .btn-wrapper:nth-child(4) { animation-delay: 0.56s; }
-    .btn-wrapper:nth-child(5) { animation-delay: 0.68s; }
-
-    @keyframes drop-in {
-      0%   { opacity: 0; transform: translateY(-30px) scale(0.92); }
-      100% { opacity: 1; transform: translateY(0)    scale(1); }
-    }
-
-    /* Flutuação suave em loop — pausa no hover do container */
-    .btn-float {
-      width: 100%;
-      animation: float 3s ease-in-out infinite alternate;
-    }
-    .btn-wrapper:nth-child(1) .btn-float { animation-delay: 0.0s; }
-    .btn-wrapper:nth-child(2) .btn-float { animation-delay: 0.4s; }
-    .btn-wrapper:nth-child(3) .btn-float { animation-delay: 0.8s; }
-    .btn-wrapper:nth-child(4) .btn-float { animation-delay: 1.2s; }
-    .btn-wrapper:nth-child(5) .btn-float { animation-delay: 1.6s; }
-
-    @keyframes float {
-      0%   { transform: translateY(0px); }
-      100% { transform: translateY(-5px); }
-    }
-
-    .links:hover .btn-float {
-      animation-play-state: paused;
-    }
-
-    /* Botão base */
     .btn {
+      width: 100%;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 15px 20px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      font-weight: 800;
-      text-decoration: none;
+      justify-content: space-between;
+      padding: 18px 24px;
       border-radius: var(--radius-btn);
-      border: 2px solid var(--accent);
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
-      cursor: pointer;
-      transition:
-        transform 0.18s cubic-bezier(.2,1.4,.4,1),
-        box-shadow 0.18s ease,
-        filter 0.18s ease;
+      /* Entrada animada */
+      opacity: 0;
+      animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* Ícone do botão */
+    @keyframes slide-up {
+      0% { opacity: 0; transform: translateY(15px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .btn:nth-child(1) { animation-delay: 0.1s; }
+    .btn:nth-child(2) { animation-delay: 0.2s; }
+    .btn:nth-child(3) { animation-delay: 0.3s; }
+    .btn:nth-child(4) { animation-delay: 0.4s; }
+    .btn:nth-child(5) { animation-delay: 0.5s; }
+
+    .btn-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 2;
+    }
+
     .btn-icon {
-      font-size: 18px;
-      line-height: 1;
-      flex-shrink: 0;
+      font-size: 20px;
     }
 
-    /* Seta à direita */
     .btn-arrow {
-      margin-left: auto;
-      font-size: 14px;
       opacity: 0.5;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    /* CTA Principal */
-    .btn-primary {
-      background: var(--accent);
-      color: #000;
-      box-shadow: 5px 5px 0 var(--accent-dark);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 9px 9px 0 var(--accent-dark);
-      filter: brightness(1.1);
-    }
-
-    .btn-primary:active {
-      transform: translateY(2px) scale(0.98);
-      box-shadow: 2px 2px 0 var(--accent-dark);
-    }
-
-    /* Brilho sweep no CTA */
-    .btn-primary::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -140%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-      transform: skewX(-20deg);
-      animation: sweep 4.5s ease-in-out infinite;
-    }
-
-    @keyframes sweep {
-      0%   { left: -140%; }
-      18%  { left: 140%; }
-      100% { left: 140%; }
-    }
-
-    /* Botões Secundários */
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--white);
-      box-shadow: 5px 5px 0 var(--accent);
-    }
-
-    .btn-secondary:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 9px 9px 0 var(--accent);
-      filter: brightness(1.12);
-    }
-
-    .btn-secondary:active {
-      transform: translateY(2px) scale(0.98);
-      box-shadow: 2px 2px 0 var(--accent);
+      transition: transform 0.3s ease;
+      z-index: 2;
     }
 
     .btn:hover .btn-arrow {
@@ -376,199 +326,182 @@
       opacity: 1;
     }
 
-    /* ============================================================
-       REDES SOCIAIS (rodapé do card)
-    ============================================================ */
-    .socials {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
+    /* Botão Primário (Destaque) */
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      border: 1px solid var(--accent);
+      box-shadow: 0 8px 24px rgba(204, 255, 0, 0.25);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(204, 255, 0, 0.4);
+      background: #dfff33;
     }
 
-    .social-link {
+    /* Botão Secundário (Dark) */
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       RODAPÉ E SOCIAIS
+    ============================================================ */
+    .social-links {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .social-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: #111;
-      border: 1.5px solid rgba(204,255,0,0.15);
       color: var(--muted);
-      text-decoration: none;
-      font-size: 16px;
-      transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+      transition: all 0.3s ease;
     }
 
-    .social-link:hover {
-      background: var(--accent-dim);
+    .social-btn:hover {
+      background: var(--accent);
+      color: #000;
       border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-3px);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(204, 255, 0, 0.3);
     }
 
-    /* ============================================================
-       RODAPÉ
-    ============================================================ */
-    .footer-text {
-      font-size: 10px;
-      color: #444;
-      letter-spacing: 0.3px;
-      text-align: center;
+    .footer {
+      font-size: 11px;
+      font-weight: 500;
+      color: #666;
     }
-
-    .footer-text a {
-      color: #555;
+    
+    .footer a {
+      color: #888;
       text-decoration: none;
+      transition: color 0.2s;
     }
-
-    .footer-text a:hover {
+    
+    .footer a:hover {
       color: var(--accent);
-    }
-
-    /* ============================================================
-       DIVIDER
-    ============================================================ */
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(204,255,0,0.1), transparent);
-      margin: 20px 0;
-    }
-
-    /* ============================================================
-       ACESSIBILIDADE: respeita prefers-reduced-motion
-    ============================================================ */
-    @media (prefers-reduced-motion: reduce) {
-      .avatar-ring          { animation: none; }
-      .avatar-dot           { animation: none; }
-      .badge-dot            { animation: none; }
-      .card                 { animation: none; opacity: 1; transform: none; }
-      .btn-wrapper          { animation: none; opacity: 1; }
-      .btn-float            { animation: none; transform: none; }
-      .btn-primary::after   { animation: none; display: none; }
-      .btn                  { transition: none; }
-      .btn:hover, .btn:active { transform: none; }
-      .btn-primary          { box-shadow: 5px 5px 0 var(--accent-dark) !important; }
-      .btn-secondary        { box-shadow: 5px 5px 0 var(--accent) !important; }
-    }
-
-    /* ============================================================
-       RESPONSIVIDADE
-    ============================================================ */
-    @media (max-width: 400px) {
-      .card { border-radius: 20px; padding: 28px 16px 28px; }
-      .btn  { font-size: 13px; padding: 13px 16px; }
     }
   </style>
 </head>
 <body>
 
   <div class="card">
-
-    <!-- ── AVATAR ── -->
-    <div class="avatar-wrap">
-      <div class="avatar-ring"></div>
-      <div class="avatar-inner">
-        <!-- Se quiser usar uma foto real, substitua por: <img src="URL_DA_FOTO" alt="Daniel Soares" style="width:100%;height:100%;object-fit:cover;border-radius:50%"> -->
+    
+    <!-- Avatar / Logo -->
+    <div class="avatar-container">
+      <div class="avatar">
         <div class="avatar-text">DKS<span>.</span></div>
       </div>
-      <div class="avatar-dot"></div>
+      <div class="status-dot"></div>
     </div>
 
-    <!-- ── NOME ── -->
-    <p class="profile-name">Daniel Soares</p>
-    <p class="profile-handle">@odanielssoares</p>
+    <!-- Identificação -->
+    <h1 class="name">Daniel Soares</h1>
+    <h2 class="handle">@odanielssoares</h2>
 
-    <!-- ── BADGE ── -->
+    <!-- Badge -->
     <div class="badge">
-      <span class="badge-dot"></span>
-      Método ROMA
+      <div class="badge-dot"></div>
+      MÉTODO ROMA
     </div>
 
-    <!-- ── TAGLINE ── -->
+    <!-- Tagline -->
     <p class="tagline">
       Faço <strong>restaurantes e deliveries</strong><br>
       baterem recordes de faturamento. 📈
     </p>
 
-    <!-- ── BOTÕES ── -->
-    <div class="links">
-
-      <!-- 1. CTA Principal — WhatsApp -->
-      <div class="btn-wrapper">
-        <div class="btn-float">
-          <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20a%20DKS!" target="_blank" rel="noopener" class="btn btn-primary">
-            <span class="btn-icon">💬</span>
-            Falar no WhatsApp
-            <span class="btn-arrow">→</span>
-          </a>
-        </div>
+    <!-- Estatísticas / Prova Social -->
+    <div class="stats-container">
+      <div class="stat-item">
+        <span class="stat-number">+150</span>
+        <span class="stat-label">Restaurantes</span>
       </div>
-
-      <!-- 2. Contratar -->
-      <div class="btn-wrapper">
-        <div class="btn-float">
-          <a href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7" target="_blank" rel="noopener" class="btn btn-secondary">
-            <span class="btn-icon">🚀</span>
-            Quero contratar a DKS
-            <span class="btn-arrow">→</span>
-          </a>
-        </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">+7</span>
+        <span class="stat-label">Anos</span>
       </div>
-
-      <!-- 3. Método ROMA -->
-      <div class="btn-wrapper">
-        <div class="btn-float">
-          <a href="https://dksmarketing.com.br/metodologia" target="_blank" rel="noopener" class="btn btn-secondary">
-            <span class="btn-icon">🎯</span>
-            Conhecer o Método ROMA
-            <span class="btn-arrow">→</span>
-          </a>
-        </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">R$50mi</span>
+        <span class="stat-label">Gerados</span>
       </div>
-
-      <!-- 4. Podcast -->
-      <div class="btn-wrapper">
-        <div class="btn-float">
-          <a href="https://dksmarketing.com.br/podcast" target="_blank" rel="noopener" class="btn btn-secondary">
-            <span class="btn-icon">🎙️</span>
-            Podcast Foodmétricas
-            <span class="btn-arrow">→</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- 5. Site -->
-      <div class="btn-wrapper">
-        <div class="btn-float">
-          <a href="https://dksmarketing.com.br" target="_blank" rel="noopener" class="btn btn-secondary">
-            <span class="btn-icon">🌐</span>
-            Nosso Site Oficial
-            <span class="btn-arrow">→</span>
-          </a>
-        </div>
-      </div>
-
     </div>
 
-    <!-- ── DIVIDER ── -->
-    <div class="divider"></div>
+    <!-- Botões de Link -->
+    <div class="buttons-group">
+      <!-- Primário -->
+      <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20a%20DKS!" class="btn btn-primary" target="_blank">
+        <div class="btn-content">
+          <span class="btn-icon">💬</span>
+          <span>Falar no WhatsApp</span>
+        </div>
+        <span class="btn-arrow">→</span>
+      </a>
 
-    <!-- ── REDES SOCIAIS ── -->
-    <div class="socials">
-      <a href="https://www.instagram.com/odanielssoares/" target="_blank" rel="noopener" class="social-link" title="Instagram Pessoal">
-        <!-- Instagram SVG -->
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Secundários -->
+      <a href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7" class="btn btn-secondary" target="_blank">
+        <div class="btn-content">
+          <span class="btn-icon">🚀</span>
+          <span>Quero contratar a DKS</span>
+        </div>
+        <span class="btn-arrow">→</span>
+      </a>
+
+      <a href="https://dksmarketing.com.br/metodologia" class="btn btn-secondary" target="_blank">
+        <div class="btn-content">
+          <span class="btn-icon">🎯</span>
+          <span>Conhecer o Método ROMA</span>
+        </div>
+        <span class="btn-arrow">→</span>
+      </a>
+
+      <a href="https://dksmarketing.com.br/podcast" class="btn btn-secondary" target="_blank">
+        <div class="btn-content">
+          <span class="btn-icon">🎙️</span>
+          <span>Podcast Foodmétricas</span>
+        </div>
+        <span class="btn-arrow">→</span>
+      </a>
+
+      <a href="https://dksmarketing.com.br" class="btn btn-secondary" target="_blank">
+        <div class="btn-content">
+          <span class="btn-icon">🌐</span>
+          <span>Nosso Site Oficial</span>
+        </div>
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Redes Sociais -->
+    <div class="social-links">
+      <a href="https://www.instagram.com/odanielssoares/" class="social-btn" target="_blank" title="Instagram Pessoal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
           <circle cx="12" cy="12" r="4"/>
           <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
         </svg>
       </a>
-      <a href="https://www.instagram.com/dksmarketing/" target="_blank" rel="noopener" class="social-link" title="Instagram DKS">
-        <!-- DKS Badge -->
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <a href="https://www.instagram.com/dksmarketing/" class="social-btn" target="_blank" title="Instagram da Agência">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 2L2 7l10 5 10-5-10-5z"/>
           <path d="M2 17l10 5 10-5"/>
           <path d="M2 12l10 5 10-5"/>
@@ -576,11 +509,10 @@
       </a>
     </div>
 
-    <!-- ── RODAPÉ ── -->
-    <p class="footer-text">
+    <!-- Rodapé -->
+    <div class="footer">
       © <span id="ano"></span> DKS Marketing · <a href="https://dksmarketing.com.br">dksmarketing.com.br</a>
-    </p>
-
+    </div>
   </div>
 
   <script>
