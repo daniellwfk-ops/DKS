@@ -50,29 +50,15 @@
       position: relative;
     }
 
-    /* Fundo Temático (Logo DKS) */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      /* Padrão com a logo da DKS */
-      background-image: url("/dks-logo-transparent.png");
-      background-repeat: repeat;
-      background-size: 100px;
-      opacity: 0.12; /* Bem sutil para dar textura */
-      pointer-events: none;
-    }
-
     /* ============================================================
-       AMBIENT ORBS (FUNDO ANIMADO VIVO)
+       AMBIENT ORBS (FUNDO ANIMADO PREMIUM E SUTIL)
     ============================================================ */
     .ambient-orb {
       position: fixed;
       border-radius: 50%;
-      filter: blur(90px);
+      filter: blur(120px); /* Mais blur para ficar super difuso */
       z-index: 0;
-      opacity: 0.7; /* Mais vivo */
+      opacity: 0.25; /* Bem mais sutil e elegante */
       pointer-events: none;
       animation: float-orb 15s infinite alternate ease-in-out;
     }
@@ -80,7 +66,7 @@
     .orb-1 {
       width: 55vw;
       height: 55vw;
-      background: #ff5e00; /* Laranja vibrante */
+      background: #c1561f; /* Cobre/Mostarda */
       top: -10%;
       left: -10%;
       animation-delay: 0s;
@@ -89,7 +75,7 @@
     .orb-2 {
       width: 65vw;
       height: 65vw;
-      background: #ffbb00; /* Amarelo ouro vivo */
+      background: #d4af37; /* Dourado escuro */
       bottom: -20%;
       right: -10%;
       animation-delay: -5s;
@@ -99,7 +85,7 @@
     .orb-3 {
       width: 45vw;
       height: 45vw;
-      background: #e62e00; /* Vermelho/Laranja profundo */
+      background: #8a6c1c; /* Dourado bem profundo */
       top: 25%;
       left: 40%;
       animation-delay: -10s;
