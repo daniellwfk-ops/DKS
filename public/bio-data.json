@@ -1,0 +1,24 @@
+{
+  "brandName": "DKS Marketing",
+  "logoUrl": "",
+  "badgeText": "MÉTODO EXCLUSIVO ROMA",
+  "tagline": "Assessoria que faz restaurantes e deliveries\nbaterem recordes de faturamento.",
+  "cta": {
+    "label": "Falar com Especialista",
+    "url": "https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7"
+  },
+  "links": [
+    {
+      "label": "Conhecer Metodologia ROMA",
+      "url": "/metodologia"
+    },
+    {
+      "label": "Nosso Site",
+      "url": "/"
+    },
+    {
+      "label": "Instagram Oficial",
+      "url": "https://www.instagram.com/dksmarketing/"
+    }
+  ]
+}

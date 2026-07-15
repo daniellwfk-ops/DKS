@@ -11,6 +11,7 @@ const navItems = [
     { label: "Clientes", href: "/admin/clientes", icon: "👥" },
     { label: "Criador de Propostas", href: "/admin/propostas", icon: "📋" },
     { label: "Gerenciador de Lives", href: "/admin/lives", icon: "🎥" },
+    { label: "Link na Bio", href: "/admin/bio", icon: "🔗" },
 ];
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
