@@ -39,14 +39,27 @@
 
     body {
       font-family: 'Helvetica', 'Arial', sans-serif;
-      background-color: #050505; /* Preto super profundo */
+      background-color: #050505;
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 32px 20px;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fundo Temático (Ícones DKS) */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23d4af37' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.25'%3E%3Cpath d='M22 18c3-3 9-3 9-3s0 6-3 9l-9 9l-6-6l9-9z M16 24l-6 3l3-6 M25 33l3 6l-6-3 M13 36l-4 4' /%3E%3Cpath d='M65 35c0-10 6-16 12-16s12 6 12 16H65z M77 19v-4 M62 35h30' /%3E%3Cpath d='M15 85v-10M22 85v-18M29 85v-24M10 85h25 M12 75l6-6l6 5l8-10' /%3E%3Cpath d='M65 72l10-5v20l-10-5v-10z M75 67c4 0 6 4 6 10s-2 10-6 10 M65 82l-2 5h-5l2-5' /%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 120px 120px;
+      pointer-events: none;
     }
 
     /* ============================================================
@@ -65,7 +78,7 @@
     .orb-1 {
       width: 50vw;
       height: 50vw;
-      background: #c1561f; /* Mostarda avermelhado */
+      background: #c1561f;
       top: -10%;
       left: -10%;
       animation-delay: 0s;
@@ -74,7 +87,7 @@
     .orb-2 {
       width: 60vw;
       height: 60vw;
-      background: #d4af37; /* Dourado luxo */
+      background: #d4af37;
       bottom: -20%;
       right: -10%;
       animation-delay: -5s;
@@ -84,7 +97,7 @@
     .orb-3 {
       width: 40vw;
       height: 40vw;
-      background: #e8c340; /* Amarelo vivo */
+      background: #e8c340;
       top: 30%;
       left: 50%;
       animation-delay: -10s;
@@ -99,15 +112,15 @@
     }
 
     /* ============================================================
-       CARD PRINCIPAL (Glassmorphism de Alto Padrão)
+       CARD PRINCIPAL (Glassmorphism de Alto Padrão - Mais Compacto)
     ============================================================ */
     .card {
       width: 100%;
-      max-width: 420px;
-      background: rgba(12, 12, 12, 0.7);
+      max-width: 380px;
+      background: rgba(12, 12, 12, 0.75);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 32px;
-      padding: 48px 32px;
+      padding: 32px 24px;
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       box-shadow: 
@@ -116,6 +129,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+      z-index: 10;
       
       animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
@@ -126,19 +141,18 @@
     }
 
     /* ============================================================
-       AVATAR PREMIUM + LOOPING GIRATÓRIO
+       AVATAR PREMIUM + LOOPING GIRATÓRIO (Menor)
     ============================================================ */
     .avatar-container {
       position: relative;
-      width: 120px;
-      height: 120px;
-      margin-bottom: 24px;
+      width: 90px;
+      height: 90px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* Anel brilhante em looping */
     .avatar-ring {
       position: absolute;
       inset: -2px; 
@@ -152,7 +166,6 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Avatar da Foto */
     .avatar {
       position: absolute;
       inset: 2px;
@@ -171,10 +184,10 @@
     }
 
     /* ============================================================
-       TEXTOS DA BIO
+       TEXTOS DA BIO (Menores)
     ============================================================ */
-    .name {
-      font-size: 26px;
+    .name-title {
+      font-size: 22px;
       font-weight: 700;
       letter-spacing: -0.5px;
       margin-bottom: 2px;
@@ -182,65 +195,64 @@
       color: var(--text-main);
     }
 
-    .handle {
-      font-size: 14px;
+    .username {
+      font-size: 13px;
       font-weight: 700;
       color: var(--gold);
-      margin-bottom: 18px;
+      margin-bottom: 14px;
       text-align: center;
       letter-spacing: 0.5px;
     }
 
-    /* Badge Método ROMA */
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
+      gap: 6px;
+      padding: 5px 14px;
       background: rgba(212, 175, 55, 0.12);
       border: 1px solid rgba(212, 175, 55, 0.25);
       border-radius: 100px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
       color: var(--gold);
       text-transform: uppercase;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .badge-dot {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       background-color: var(--gold);
       border-radius: 50%;
       box-shadow: 0 0 8px var(--gold-glow);
     }
 
-    .tagline {
-      font-size: 15px;
+    .description {
+      font-size: 13.5px;
       font-weight: 400;
-      line-height: 1.6;
+      line-height: 1.5;
       color: var(--text-muted);
       text-align: center;
-      margin-bottom: 32px;
-      max-width: 300px;
+      margin-bottom: 28px;
+      max-width: 280px;
     }
 
-    .tagline strong {
+    .description strong {
       color: var(--text-main);
       font-weight: 800;
-      font-size: 15.5px;
+      font-size: 14px;
     }
 
     /* ============================================================
-       BOTÕES GLASSMORPHISM CENTRALIZADOS
+       BOTÕES GLASSMORPHISM CENTRALIZADOS (Mais compactos verticalmente)
     ============================================================ */
     .buttons-group {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      margin-bottom: 16px; /* Mais perto do rodapé */
+      gap: 14px;
+      margin-bottom: 16px;
     }
 
     .btn {
@@ -249,9 +261,9 @@
       display: flex;
       align-items: center;
       justify-content: center; 
-      padding: 18px 10px; /* Reduzi padding lateral para o botão em si, controlamos no texto */
-      border-radius: 100px; /* Formato Vettor28 (Pílula) */
-      font-size: 13.5px; /* Fonte menor para caber em celulares pequenos */
+      padding: 15px 10px;
+      border-radius: 100px;
+      font-size: 13px;
       font-weight: 800; 
       letter-spacing: 0.5px;
       text-decoration: none;
@@ -280,11 +292,10 @@
     .btn:nth-child(3) { animation-delay: 0.3s, 2s; }
     .btn:nth-child(4) { animation-delay: 0.4s, 3s; }
 
-    /* Ícone fixo na esquerda */
     .btn-icon {
       position: absolute;
-      left: 20px;
-      font-size: 18px;
+      left: 18px;
+      font-size: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -297,14 +308,12 @@
 
     .btn-text {
       text-align: center;
-      padding: 0 40px; /* Cria uma "área segura" nas bordas para o texto não sobrepor o ícone */
+      padding: 0 40px;
       width: 100%;
       line-height: 1.3;
     }
 
-    /* Botão Principal - Gradiente Premium */
     .btn-primary {
-      /* Amarelo para mostarda avermelhado */
       background: linear-gradient(135deg, #e8c340 0%, #c1561f 100%); 
       color: #fff;
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -318,7 +327,6 @@
       border-color: rgba(255,255,255,0.4);
     }
 
-    /* Botões Secundários - Vidro Premium */
     .btn-secondary {
       background: rgba(255, 255, 255, 0.05);
       color: #fff;
@@ -341,13 +349,13 @@
     .footer-banner {
       display: flex;
       align-items: center;
-      justify-content: center; /* Centraliza apenas o texto */
+      justify-content: center;
       width: 100%;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 100px;
-      padding: 6px 14px; /* Mais fino para combinar com a letra menor */
-      margin-top: 4px; /* Mais perto do ultimo botao */
+      padding: 6px 14px;
+      margin-top: 4px;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       text-decoration: none;
@@ -363,13 +371,13 @@
     }
 
     .footer-text {
-      font-size: 7.5px; /* Super minúsculo e luxuoso */
+      font-size: 7px;
       font-weight: 500;
       color: #aaa;
       text-align: center;
       padding: 0 8px;
       letter-spacing: 0.5px;
-      text-transform: uppercase; /* Dará mais legibilidade em tamanho pequeno */
+      text-transform: uppercase;
     }
   </style>
 </head>
@@ -390,20 +398,20 @@
       </div>
     </div>
 
-    <!-- Identificação -->
-    <h1 class="name">Daniel Soares</h1>
-    <h2 class="handle">@odanielssoares</h2>
-
+    <!-- Identidade -->
+    <div class="name-title">Daniel Soares</div>
+    <div class="username">@odanielssoares</div>
+    
     <!-- Badge -->
     <div class="badge">
       <div class="badge-dot"></div>
       Método exclusivo
     </div>
 
-    <!-- Tagline -->
-    <p class="tagline">
+    <!-- Mini-Bio -->
+    <p class="description">
       Faço <strong>restaurantes e deliveries</strong><br>
-      baterem recordes de faturamento. 📈
+      baterem recordes de faturamento.
     </p>
 
     <!-- Botões Glass Centralizados -->
