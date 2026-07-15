@@ -6,10 +6,10 @@
   <title>Daniel Soares | DKS Marketing</title>
   <meta name="description" content="Eu faço restaurantes baterem recordes de faturamento. Conheça o Método ROMA.">
 
-  <!-- Google Fonts: Poppins -->
+  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================================
@@ -38,7 +38,7 @@
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: var(--bg-dark);
       color: var(--text-main);
       min-height: 100vh;
@@ -215,9 +215,8 @@
       font-size: 15.5px;
     }
 
-
     /* ============================================================
-       BOTÕES ELEGANTES
+       BOTÕES GLASSMORPHISM CENTRALIZADOS
     ============================================================ */
     .buttons-group {
       width: 100%;
@@ -229,19 +228,21 @@
 
     .btn {
       width: 100%;
+      position: relative;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 12px 20px;
-      border-radius: 24px; /* Mais moderno e arredondado */
-      font-size: 14.5px;
+      justify-content: center; /* Centraliza perfeitamente o texto */
+      padding: 18px 20px;
+      border-radius: 20px;
+      font-size: 15px;
       font-weight: 600;
+      letter-spacing: 0.2px;
       text-decoration: none;
       transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      
+      /* Efeito Glassmorphism base */
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       
       /* Entrada animada */
       opacity: 0;
@@ -258,99 +259,67 @@
     .btn:nth-child(3) { animation-delay: 0.3s; }
     .btn:nth-child(4) { animation-delay: 0.4s; }
 
-    .btn-content {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      z-index: 2;
-    }
-
-    /* Container do ícone super moderno */
+    /* Ícone fixo na esquerda */
     .btn-icon {
-      font-size: 16px;
+      position: absolute;
+      left: 18px;
+      font-size: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
       transition: transform 0.3s ease;
     }
 
     .btn:hover .btn-icon {
-      transform: scale(1.1);
+      transform: scale(1.1) rotate(-5deg);
     }
 
-    .btn-arrow {
-      opacity: 0.3;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      z-index: 2;
-      font-size: 16px;
-    }
-
-    .btn:hover .btn-arrow {
-      transform: translateX(4px);
-      opacity: 1;
+    /* Texto do botão centralizado */
+    .btn-text {
+      text-align: center;
     }
 
     /* ==================================
-       Botão Principal (Dourado Moderno)
+       Botão Principal (Dourado Glass)
        ================================== */
     .btn-primary {
-      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
-      color: #111;
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      /* Fundo semi-transparente para dar efeito vidro dourado */
+      background: rgba(212, 175, 55, 0.85); 
+      color: #000;
+      border: 1px solid rgba(255, 255, 255, 0.3);
       box-shadow: 
-        inset 0 1px 1px rgba(255, 255, 255, 0.7),
-        0 10px 24px rgba(212, 175, 55, 0.35);
-    }
-
-    .btn-primary .btn-icon {
-      background: rgba(0, 0, 0, 0.1);
-      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        inset 0 1px 1px rgba(255, 255, 255, 0.5),
+        0 8px 32px rgba(212, 175, 55, 0.3);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px) scale(1.01);
+      background: rgba(212, 175, 55, 0.95);
+      transform: translateY(-2px);
       box-shadow: 
-        inset 0 1px 1px rgba(255, 255, 255, 0.8),
-        0 14px 32px rgba(212, 175, 55, 0.45);
-    }
-
-    .btn-primary .btn-arrow {
-      color: #000;
-      opacity: 0.6;
+        inset 0 1px 1px rgba(255, 255, 255, 0.7),
+        0 12px 36px rgba(212, 175, 55, 0.4);
     }
 
     /* ==================================
-       Botões Secundários (Dark Glass/Neumorphic)
+       Botões Secundários (Dark Glass Puro)
        ================================== */
     .btn-secondary {
-      background: linear-gradient(180deg, rgba(35, 35, 35, 0.85) 0%, rgba(15, 15, 15, 0.95) 100%);
+      /* Fundo quase transparente para puxar o dark/glass do fundo */
+      background: rgba(255, 255, 255, 0.05);
       color: var(--text-main);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 
-        inset 0 1px 1px rgba(255, 255, 255, 0.05),
-        0 6px 16px rgba(0, 0, 0, 0.4);
-    }
-
-    .btn-secondary .btn-icon {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.02);
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 4px 16px rgba(0, 0, 0, 0.2);
     }
 
     .btn-secondary:hover {
-      background: linear-gradient(180deg, rgba(45, 45, 45, 0.9) 0%, rgba(20, 20, 20, 0.95) 100%);
-      border-color: rgba(212, 175, 55, 0.4);
-      transform: translateY(-2px) scale(1.01);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(212, 175, 55, 0.3); /* Borda fica dourada suave no hover */
+      transform: translateY(-2px);
       box-shadow: 
-        inset 0 1px 1px rgba(255, 255, 255, 0.1),
-        0 10px 24px rgba(212, 175, 55, 0.15);
-    }
-
-    .btn-secondary .btn-arrow {
-      color: var(--gold);
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 8px 24px rgba(212, 175, 55, 0.15);
     }
 
     /* ============================================================
@@ -366,8 +335,10 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -385,7 +356,7 @@
 
     .footer {
       font-size: 11px;
-      font-weight: 400;
+      font-weight: 500;
       color: #555;
     }
     
@@ -429,40 +400,26 @@
       baterem recordes de faturamento. 📈
     </p>
 
-    <!-- Botões -->
+    <!-- Botões Glass Centralizados -->
     <div class="buttons-group">
       <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20a%20DKS!" class="btn btn-primary" target="_blank">
-        <div class="btn-content">
-          <span class="btn-icon">💬</span>
-          <span>Falar no WhatsApp</span>
-        </div>
-        <span class="btn-arrow">→</span>
+        <span class="btn-icon">💬</span>
+        <span class="btn-text">Falar no WhatsApp</span>
       </a>
 
       <a href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7" class="btn btn-secondary" target="_blank">
-        <div class="btn-content">
-          <span class="btn-icon">🚀</span>
-          <span>Quero contratar a DKS</span>
-        </div>
-        <span class="btn-arrow">→</span>
+        <span class="btn-icon">🚀</span>
+        <span class="btn-text">Quero contratar a DKS</span>
       </a>
 
       <a href="https://dksmarketing.com.br/metodologia" class="btn btn-secondary" target="_blank">
-        <div class="btn-content">
-          <span class="btn-icon">🎯</span>
-          <span>Conhecer o Método ROMA</span>
-        </div>
-        <span class="btn-arrow">→</span>
+        <span class="btn-icon">🎯</span>
+        <span class="btn-text">Conhecer o Método ROMA</span>
       </a>
 
-
-
       <a href="https://dksmarketing.com.br" class="btn btn-secondary" target="_blank">
-        <div class="btn-content">
-          <span class="btn-icon">🌐</span>
-          <span>Nosso Site Oficial</span>
-        </div>
-        <span class="btn-arrow">→</span>
+        <span class="btn-icon">🌐</span>
+        <span class="btn-text">Nosso Site Oficial</span>
       </a>
     </div>
 
