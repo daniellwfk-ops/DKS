@@ -314,7 +314,7 @@
     }
 
     /* ============================================================
-       RODAPÉ BANNER (MUITO MENOR)
+       RODAPÉ BANNER
     ============================================================ */
     .footer-banner {
       display: flex;
@@ -324,7 +324,7 @@
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 100px;
-      padding: 6px 12px; /* Muito mais fino */
+      padding: 10px 16px; /* Aumentado para acomodar a logo maior */
       margin-top: 8px;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -347,28 +347,27 @@
     }
 
     .footer-logo img {
-      height: 16px; /* Tamanho delicado */
+      height: 32px; /* Logo maior como solicitado */
       width: auto;
-      mix-blend-mode: screen; /* Faz o fundo preto da logo sumir! */
-      filter: contrast(1.2); /* Destaque no dourado */
+      display: block;
     }
 
     .footer-text {
-      font-size: 10px; /* Bem pequeno e delicado */
+      font-size: 11px; /* Levemente maior */
       font-weight: 500;
-      color: #999;
+      color: #aaa;
       flex-grow: 1;
       text-align: center;
-      padding: 0 6px;
-      letter-spacing: 0.1px;
+      padding: 0 8px;
+      letter-spacing: 0.2px;
     }
 
     .footer-ig {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 20px; /* Pequenininho */
-      height: 20px;
+      width: 24px; /* Proporcional ao banner maior */
+      height: 24px;
       border-radius: 6px;
       background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
       color: #fff;
@@ -430,11 +429,11 @@
     <!-- Rodapé Estilo Banner (Vettor28) -->
     <a href="https://www.instagram.com/dksmarketing/" class="footer-banner" target="_blank">
       <div class="footer-logo">
-        <img src="/dks-logo.jpg" alt="DKS">
+        <img src="/dks-logo.png" alt="DKS">
       </div>
       <div class="footer-text">Marketing para restaurantes</div>
       <div class="footer-ig">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
