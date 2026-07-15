@@ -38,19 +38,64 @@
     }
 
     body {
-      font-family: 'Helvetica', 'Arial', sans-serif; /* Fonte Elvetica */
-      background-color: var(--bg-dark);
+      font-family: 'Helvetica', 'Arial', sans-serif;
+      background-color: #050505; /* Preto super profundo */
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
+      align-items: center;
       justify-content: center;
-      align-items: center; 
-      padding: 40px 20px;
-      position: relative;
+      padding: 20px;
       overflow-x: hidden;
-      /* Padrão de Fundo - Ladrilhos Estilo DKS */
-      background-image: url("data:image/svg+xml,%3Csvg width='90' height='90' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='40' height='40' fill='%23090909' /%3E%3Crect x='40' y='0' width='40' height='40' fill='%23120f04' /%3E%3Crect x='0' y='40' width='40' height='40' fill='%23120f04' /%3E%3Crect x='40' y='40' width='40' height='40' fill='%23090909' /%3E%3Cg fill='none' stroke='%23d4af37' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.35'%3E%3C!-- Foguete --%3E%3Cpath d='M22 12c2-2 6-2 6-2s0 4-2 6l-6 6l-4-4l6-6z M18 16l-4 2l2-4 M24 22l2 4l-4-2 M16 24l-3 3' /%3E%3C!-- Grafico --%3E%3Cpath d='M50 28v-8M56 28v-14M62 28v-18M46 28h22 M48 20l5-5l5 4l6-8' /%3E%3C!-- Cloche (Restaurante) --%3E%3Cpath d='M10 65c0-8 5-13 10-13s10 5 10 13H10z M20 52v-3 M8 65h24' /%3E%3C!-- Megafone (Marketing) --%3E%3Cpath d='M52 56l8-4v16l-8-4v-8z M60 52c3 0 5 3 5 8s-2 8-5 8 M52 64l-2 4h-4l2-4' /%3E%3C/g%3E%3C/svg%3E");
-      background-repeat: repeat;
+    }
+
+    /* ============================================================
+       AMBIENT ORBS (FUNDO ANIMADO PREMIUM)
+    ============================================================ */
+    .ambient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: 0;
+      opacity: 0.35;
+      pointer-events: none;
+      animation: float-orb 15s infinite alternate ease-in-out;
+    }
+
+    .orb-1 {
+      width: 50vw;
+      height: 50vw;
+      background: #c1561f; /* Mostarda avermelhado */
+      top: -10%;
+      left: -10%;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 60vw;
+      height: 60vw;
+      background: #d4af37; /* Dourado luxo */
+      bottom: -20%;
+      right: -10%;
+      animation-delay: -5s;
+      animation-duration: 22s;
+    }
+
+    .orb-3 {
+      width: 40vw;
+      height: 40vw;
+      background: #e8c340; /* Amarelo vivo */
+      top: 30%;
+      left: 50%;
+      animation-delay: -10s;
+      animation-duration: 26s;
+    }
+
+    @keyframes float-orb {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(5vw, -5vh) scale(1.1); }
+      66% { transform: translate(-3vw, 3vh) scale(0.9); }
+      100% { transform: translate(0, 0) scale(1); }
     }
 
     /* ============================================================
@@ -329,7 +374,12 @@
   </style>
 </head>
 <body>
+  <!-- Efeito Aurora / Orbs -->
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
 
+  <!-- Centralizador Principal -->
   <div class="card">
     
     <!-- Avatar / Efeito Giratório -->
