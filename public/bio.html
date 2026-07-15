@@ -13,7 +13,7 @@
 
   <style>
     /* ============================================================
-       RESET & TOKENS
+       RESET & TOKENS (ESTILO NEO-BRUTALISTA / BUCHADINHA)
     ============================================================ */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -23,28 +23,20 @@
     }
 
     :root {
-      /* DOURADO / OURO PREMIUM */
-      --accent:       #d4af37;
-      --accent-dark:  #b8942b;
-      --accent-light: #e6c86a;
-      --accent-glow:  rgba(212, 175, 55, 0.4);
-      --accent-dim:   rgba(212, 175, 55, 0.1);
-      
-      --bg-color:     #050505;
-      --card-bg:      rgba(15, 15, 15, 0.65);
-      --card-border:  rgba(212, 175, 55, 0.15);
-      
-      --white:        #ffffff;
-      --muted:        #a0a0a0;
-      
-      --radius-card:  32px;
-      --radius-btn:   16px;
+      /* Cores Premium DKS */
+      --accent:       #d4af37; /* Dourado */
+      --accent-dark:  #8a6d1e;
+      --bg-color:     #1a1a1a;
+      --card-bg:      #262626; /* Fundo do cartão central */
+      --text-main:    #ffffff;
+      --text-muted:   #cccccc;
+      --border-dark:  #0a0a0a; /* Bordas grossas */
     }
 
     body {
       font-family: 'Poppins', sans-serif;
       background-color: var(--bg-color);
-      color: var(--white);
+      color: var(--text-main);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -55,130 +47,108 @@
     }
 
     /* ============================================================
-       FUNDO PREMIUM: Grade sutil + Glows radiais dourados
+       FUNDO: Padrão Repetido (Estilo Buchadinha)
     ============================================================ */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       z-index: -2;
-      background-image: 
-        linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      background-position: center center;
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background:
-        radial-gradient(circle at 50% 0%, var(--accent-dim) 0%, transparent 50%),
-        radial-gradient(circle at 50% 100%, var(--accent-dim) 0%, transparent 60%);
-      pointer-events: none;
+      /* Padrão SVG de marketing/gastronomia sutil no fundo */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg fill='none' stroke='%23d4af37' stroke-opacity='0.08' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='30' cy='30' r='12'/%3E%3Cpath d='M30 18v-4M30 46v-4M18 30h-4M46 30h-4'/%3E%3Crect x='90' y='20' width='20' height='20' rx='4'/%3E%3Cpath d='M20 90h20v20H20z'/%3E%3Cpath d='M100 90l10 20-20 0z'/%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 150px 150px;
+      opacity: 0.8;
     }
 
     /* ============================================================
-       CARD PRINCIPAL - Glassmorphism
+       CARD CENTRAL (Neo-brutalista)
     ============================================================ */
     .card {
       width: 100%;
-      max-width: 420px;
+      max-width: 400px;
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-card);
-      padding: 40px 28px;
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      box-shadow: 
-        0 24px 80px rgba(0, 0, 0, 0.8),
-        inset 0 1px 0 rgba(212, 175, 55, 0.1);
+      /* Borda grossa e sombra sólida como na referência */
+      border: 3px solid var(--border-dark);
+      border-radius: 24px;
+      padding: 40px 24px;
+      box-shadow: 8px 8px 0px var(--border-dark);
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
       
-      animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      /* Efeito de entrada (bouncy) */
+      animation: pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
 
-    @keyframes fade-up {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes pop-in {
+      0% { opacity: 0; transform: translateY(40px) scale(0.9); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     /* ============================================================
-       AVATAR / EFEITO GIRATÓRIO (LOOPING)
+       AVATAR COM LOOPING (O que você pediu)
     ============================================================ */
     .avatar-container {
       position: relative;
       margin-bottom: 24px;
-      width: 124px;
-      height: 124px;
+      width: 120px;
+      height: 120px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* Anel com gradiente que gira */
+    /* O anel em looping circulando o avatar */
     .avatar-ring {
       position: absolute;
-      inset: 0;
+      inset: -4px;
       border-radius: 50%;
-      /* Gradiente cônico para dar o efeito de uma "cauda" girando */
-      background: conic-gradient(from 0deg, transparent 0%, transparent 50%, var(--accent-light) 100%);
-      animation: spin-ring 2s linear infinite;
-      box-shadow: 0 0 20px var(--accent-dim);
-    }
-
-    /* Centro escuro para cobrir o meio do gradiente cônico */
-    .avatar-ring::after {
-      content: '';
-      position: absolute;
-      inset: 3px;
-      background-color: var(--bg-color);
-      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 0%, transparent 40%, var(--accent) 100%);
+      animation: spin-ring 1.5s linear infinite;
     }
 
     @keyframes spin-ring {
+      0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
 
+    /* Fundo escuro atrás da logo para esconder o meio do anel */
     .avatar {
-      width: 110px;
-      height: 110px;
+      position: absolute;
+      inset: 2px;
       border-radius: 50%;
-      background: #0a0a0a;
+      background: var(--border-dark);
+      border: 3px solid var(--border-dark);
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
       z-index: 2;
     }
 
     .avatar-text {
-      font-size: 34px;
+      font-size: 32px;
       font-weight: 900;
-      letter-spacing: -2px;
-      color: var(--white);
+      letter-spacing: -1.5px;
+      color: var(--text-main);
     }
     
     .avatar-text span {
       color: var(--accent);
     }
 
-    /* Ponto dourado na borda */
+    /* Ponto sólido de status (referência buchadinha) */
     .status-dot {
       position: absolute;
-      bottom: 8px;
-      right: 8px;
-      width: 16px;
-      height: 16px;
+      bottom: 4px;
+      right: 4px;
+      width: 18px;
+      height: 18px;
       background-color: var(--accent);
       border-radius: 50%;
-      border: 3px solid #000;
+      border: 3px solid var(--border-dark);
       z-index: 3;
-      box-shadow: 0 0 12px var(--accent-glow);
     }
 
     /* ============================================================
@@ -188,30 +158,30 @@
       font-size: 24px;
       font-weight: 800;
       letter-spacing: -0.5px;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       text-align: center;
-      color: var(--white);
+      color: var(--text-main);
     }
 
     .handle {
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--accent);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       text-align: center;
     }
 
-    /* Badge Método ROMA */
+    /* Badge Método ROMA - Neo-brutalista */
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 6px 16px;
-      background: rgba(212, 175, 55, 0.08);
-      border: 1px solid rgba(212, 175, 55, 0.25);
+      background: var(--border-dark);
+      border: 2px solid var(--accent);
       border-radius: 100px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 1px;
       color: var(--accent);
       text-transform: uppercase;
@@ -223,74 +193,31 @@
       height: 6px;
       background-color: var(--accent);
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-glow);
     }
 
     .tagline {
-      font-size: 15px;
-      font-weight: 400;
+      font-size: 14px;
+      font-weight: 500;
       line-height: 1.5;
-      color: var(--muted);
+      color: var(--text-muted);
       text-align: center;
       margin-bottom: 32px;
       max-width: 300px;
     }
 
     .tagline strong {
-      color: var(--white);
-      font-weight: 600;
+      color: var(--text-main);
+      font-weight: 700;
     }
 
     /* ============================================================
-       ESTATÍSTICAS (PROVA SOCIAL)
-    ============================================================ */
-    .stats-container {
-      display: flex;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(212, 175, 55, 0.1);
-      border-radius: 20px;
-      padding: 16px 0;
-      margin-bottom: 32px;
-    }
-
-    .stat-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .stat-divider {
-      width: 1px;
-      background: rgba(212, 175, 55, 0.15);
-    }
-
-    .stat-number {
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--accent);
-      margin-bottom: 2px;
-      letter-spacing: -0.5px;
-    }
-
-    .stat-label {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* ============================================================
-       BOTÕES MODERNOS
+       BOTÕES ESTILO BUCHADINHA (Neo-Brutalismo / Rotação Orgânica)
     ============================================================ */
     .buttons-group {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
       margin-bottom: 32px;
     }
 
@@ -298,81 +225,73 @@
       width: 100%;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 18px 24px;
-      border-radius: var(--radius-btn);
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 20px;
+      border-radius: 16px;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 800;
       text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--text-main);
+      
+      /* Borda grossa e sombra sólida deslocada */
+      border: 3px solid var(--border-dark);
+      box-shadow: 4px 4px 0px var(--border-dark);
+      
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       overflow: hidden;
-      /* Entrada animada */
+      
+      /* Entrada animada em cascata */
       opacity: 0;
-      animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: drop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
 
-    @keyframes slide-up {
-      0% { opacity: 0; transform: translateY(15px); }
-      100% { opacity: 1; transform: translateY(0); }
+    /* Rotações orgânicas alternadas estilo Buchadinha */
+    .btn:nth-child(odd) { transform: rotate(-1deg); }
+    .btn:nth-child(even) { transform: rotate(1.5deg); }
+
+    @keyframes drop-in {
+      0% { opacity: 0; transform: translateY(-20px) scale(0.9) rotate(0deg); }
+      100% { opacity: 1; }
     }
+    
+    /* Mantendo as rotações após a animação de entrada */
     .btn:nth-child(1) { animation-delay: 0.1s; }
     .btn:nth-child(2) { animation-delay: 0.2s; }
     .btn:nth-child(3) { animation-delay: 0.3s; }
     .btn:nth-child(4) { animation-delay: 0.4s; }
     .btn:nth-child(5) { animation-delay: 0.5s; }
 
-    .btn-content {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      z-index: 2;
+    /* Efeito de Hover e Clique (Aperto no botão) */
+    .btn:hover {
+      transform: translate(-2px, -2px) rotate(0deg);
+      box-shadow: 6px 6px 0px var(--border-dark);
+      filter: brightness(1.1);
+    }
+
+    .btn:active {
+      transform: translate(2px, 2px) rotate(0deg);
+      box-shadow: 2px 2px 0px var(--border-dark);
     }
 
     .btn-icon {
-      font-size: 20px;
+      font-size: 18px;
+      line-height: 1;
     }
 
-    .btn-arrow {
-      opacity: 0.5;
-      transition: transform 0.3s ease;
-      z-index: 2;
-    }
-
-    .btn:hover .btn-arrow {
-      transform: translateX(4px);
-      opacity: 1;
-    }
-
-    /* Botão Primário (Destaque) */
+    /* Cores dos botões */
     .btn-primary {
       background: var(--accent);
-      color: #050505;
-      border: 1px solid var(--accent-light);
-      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
+      color: var(--border-dark);
     }
     
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(212, 175, 55, 0.35);
-      background: var(--accent-light);
-    }
-
-    /* Botão Secundário (Dark) */
     .btn-secondary {
-      background: rgba(212, 175, 55, 0.03);
-      color: var(--white);
-      border: 1px solid rgba(212, 175, 55, 0.15);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(212, 175, 55, 0.08);
-      border-color: var(--accent);
-      transform: translateY(-2px);
+      background: #333333;
     }
 
     /* ============================================================
-       RODAPÉ E SOCIAIS
+       RODAPÉ
     ============================================================ */
     .social-links {
       display: flex;
@@ -381,40 +300,40 @@
     }
 
     .social-btn {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(212, 175, 55, 0.05);
-      border: 1px solid rgba(212, 175, 55, 0.15);
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--card-bg);
+      border: 3px solid var(--border-dark);
+      box-shadow: 3px 3px 0px var(--border-dark);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--muted);
-      transition: all 0.3s ease;
+      color: var(--text-main);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .social-btn:hover {
       background: var(--accent);
-      color: #050505;
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
+      color: var(--border-dark);
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0px var(--border-dark);
+    }
+
+    .social-btn:active {
+      transform: translate(1px, 1px);
+      box-shadow: 2px 2px 0px var(--border-dark);
     }
 
     .footer {
       font-size: 11px;
-      font-weight: 500;
-      color: #666;
+      font-weight: 600;
+      color: var(--text-muted);
     }
     
     .footer a {
-      color: #888;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    
-    .footer a:hover {
       color: var(--accent);
+      text-decoration: none;
     }
   </style>
 </head>
@@ -447,64 +366,31 @@
       baterem recordes de faturamento. 📈
     </p>
 
-    <!-- Estatísticas / Prova Social -->
-    <div class="stats-container">
-      <div class="stat-item">
-        <span class="stat-number">+150</span>
-        <span class="stat-label">Restaurantes</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <span class="stat-number">+7</span>
-        <span class="stat-label">Anos</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <span class="stat-number">R$50mi</span>
-        <span class="stat-label">Gerados</span>
-      </div>
-    </div>
-
-    <!-- Botões de Link -->
+    <!-- Botões Estilo Buchadinha -->
     <div class="buttons-group">
       <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20a%20DKS!" class="btn btn-primary" target="_blank">
-        <div class="btn-content">
-          <span class="btn-icon">💬</span>
-          <span>Falar no WhatsApp</span>
-        </div>
-        <span class="btn-arrow">→</span>
+        <span class="btn-icon">💬</span>
+        Falar no WhatsApp
       </a>
 
       <a href="https://app.leadster.com.br/capture/GgOLgXHkEDtqvhx7" class="btn btn-secondary" target="_blank">
-        <div class="btn-content">
-          <span class="btn-icon">🚀</span>
-          <span>Quero contratar a DKS</span>
-        </div>
-        <span class="btn-arrow">→</span>
+        <span class="btn-icon">🚀</span>
+        Quero contratar a DKS
       </a>
 
       <a href="https://dksmarketing.com.br/metodologia" class="btn btn-secondary" target="_blank">
-        <div class="btn-content">
-          <span class="btn-icon">🎯</span>
-          <span>Conhecer o Método ROMA</span>
-        </div>
-        <span class="btn-arrow">→</span>
+        <span class="btn-icon">🎯</span>
+        Conhecer o Método ROMA
       </a>
 
       <a href="https://dksmarketing.com.br/podcast" class="btn btn-secondary" target="_blank">
-        <div class="btn-content">
-          <span class="btn-icon">🎙️</span>
-          <span>Podcast Foodmétricas</span>
-        </div>
-        <span class="btn-arrow">→</span>
+        <span class="btn-icon">🎙️</span>
+        Podcast Foodmétricas
       </a>
 
       <a href="https://dksmarketing.com.br" class="btn btn-secondary" target="_blank">
-        <div class="btn-content">
-          <span class="btn-icon">🌐</span>
-          <span>Nosso Site Oficial</span>
-        </div>
-        <span class="btn-arrow">→</span>
+        <span class="btn-icon">🌐</span>
+        Nosso Site Oficial
       </a>
     </div>
 
@@ -528,7 +414,7 @@
 
     <!-- Rodapé -->
     <div class="footer">
-      © <span id="ano"></span> DKS Marketing · <a href="https://dksmarketing.com.br">dksmarketing.com.br</a>
+      © <span id="ano"></span> Feito por <a href="https://dksmarketing.com.br">DKS Marketing</a>
     </div>
   </div>
 
