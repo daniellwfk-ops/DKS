@@ -205,13 +205,13 @@
       align-items: center;
       justify-content: center; 
       padding: 18px 20px;
-      border-radius: 0; /* Brutalismo: zero arredondamento */
+      border-radius: 16px; /* Mais elegante e suave */
       font-size: 15px;
-      font-weight: 800; /* Mais pesado para brutalismo */
+      font-weight: 800; 
       letter-spacing: 0.5px;
       text-decoration: none;
       text-transform: uppercase;
-      transition: all 0.15s ease; /* Transição mais rápida e dura */
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); 
       
       opacity: 0;
       animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -235,46 +235,48 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.2s ease;
+      transition: transform 0.3s ease;
     }
 
     .btn:hover .btn-icon {
-      transform: scale(1.1);
+      transform: scale(1.1) rotate(-5deg);
     }
 
     .btn-text {
       text-align: center;
     }
 
-    /* Botão Principal Brutalista */
+    /* Botão Principal - Gradiente Premium */
     .btn-primary {
-      background: var(--gold); 
-      color: #000;
-      border: 3px solid var(--gold);
-      box-shadow: 6px 6px 0 #fff; /* Sombra dura branca */
+      /* Amarelo para mostarda avermelhado */
+      background: linear-gradient(135deg, #e8c340 0%, #c1561f 100%); 
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 24px rgba(193, 86, 31, 0.4);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     }
 
     .btn-primary:hover {
-      background: #fff;
-      border-color: #fff;
-      transform: translate(6px, 6px); /* Efeito de clique físico */
-      box-shadow: 0 0 0 #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(193, 86, 31, 0.6);
+      border-color: rgba(255,255,255,0.4);
     }
 
-    /* Botões Secundários Brutalistas */
+    /* Botões Secundários - Vidro Premium */
     .btn-secondary {
-      background: transparent;
+      background: rgba(255, 255, 255, 0.05);
       color: #fff;
-      border: 3px solid #fff;
-      box-shadow: 6px 6px 0 var(--gold); /* Sombra dura dourada */
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .btn-secondary:hover {
-      background: var(--gold);
-      color: #000;
-      border-color: var(--gold);
-      transform: translate(6px, 6px);
-      box-shadow: 0 0 0 var(--gold);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(232, 195, 64, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     }
 
     /* ============================================================
