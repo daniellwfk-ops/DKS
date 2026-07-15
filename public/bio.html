@@ -44,7 +44,7 @@
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: center; /* Centralizado verticalmente */
+      align-items: center; 
       padding: 40px 20px;
       position: relative;
       overflow-x: hidden;
@@ -110,7 +110,7 @@
     /* Anel brilhante em looping */
     .avatar-ring {
       position: absolute;
-      inset: -2px; /* Espessura do anel */
+      inset: -2px; 
       border-radius: 50%;
       background: conic-gradient(from 0deg, transparent 0%, transparent 50%, var(--gold) 100%);
       animation: spin 2.5s linear infinite;
@@ -231,7 +231,7 @@
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: center; /* Centraliza perfeitamente o texto */
+      justify-content: center; 
       padding: 18px 20px;
       border-radius: 20px;
       font-size: 15px;
@@ -240,11 +240,9 @@
       text-decoration: none;
       transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
       
-      /* Efeito Glassmorphism base */
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       
-      /* Entrada animada */
       opacity: 0;
       animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
@@ -274,16 +272,12 @@
       transform: scale(1.1) rotate(-5deg);
     }
 
-    /* Texto do botão centralizado */
     .btn-text {
       text-align: center;
     }
 
-    /* ==================================
-       Botão Principal (Dourado Glass)
-       ================================== */
+    /* Botão Principal */
     .btn-primary {
-      /* Fundo semi-transparente para dar efeito vidro dourado */
       background: rgba(212, 175, 55, 0.85); 
       color: #000;
       border: 1px solid rgba(255, 255, 255, 0.3);
@@ -300,11 +294,8 @@
         0 12px 36px rgba(212, 175, 55, 0.4);
     }
 
-    /* ==================================
-       Botões Secundários (Dark Glass Puro)
-       ================================== */
+    /* Botões Secundários */
     .btn-secondary {
-      /* Fundo quase transparente para puxar o dark/glass do fundo */
       background: rgba(255, 255, 255, 0.05);
       color: var(--text-main);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -315,7 +306,7 @@
 
     .btn-secondary:hover {
       background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(212, 175, 55, 0.3); /* Borda fica dourada suave no hover */
+      border-color: rgba(212, 175, 55, 0.3);
       transform: translateY(-2px);
       box-shadow: 
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
@@ -323,7 +314,7 @@
     }
 
     /* ============================================================
-       RODAPÉ BANNER (ESTILO VETTOR28)
+       RODAPÉ BANNER (MUITO MENOR)
     ============================================================ */
     .footer-banner {
       display: flex;
@@ -333,7 +324,7 @@
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 100px;
-      padding: 12px 20px;
+      padding: 6px 12px; /* Muito mais fino */
       margin-top: 8px;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -350,34 +341,35 @@
     }
 
     .footer-logo {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -1.5px;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .footer-logo span {
-      color: var(--gold);
+    .footer-logo img {
+      height: 16px; /* Tamanho delicado */
+      width: auto;
+      mix-blend-mode: screen; /* Faz o fundo preto da logo sumir! */
+      filter: contrast(1.2); /* Destaque no dourado */
     }
 
     .footer-text {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: #aaa;
+      font-size: 10px; /* Bem pequeno e delicado */
+      font-weight: 500;
+      color: #999;
       flex-grow: 1;
       text-align: center;
-      padding: 0 10px;
-      letter-spacing: 0.2px;
+      padding: 0 6px;
+      letter-spacing: 0.1px;
     }
 
     .footer-ig {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
+      width: 20px; /* Pequenininho */
+      height: 20px;
+      border-radius: 6px;
       background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
       color: #fff;
     }
@@ -437,10 +429,12 @@
 
     <!-- Rodapé Estilo Banner (Vettor28) -->
     <a href="https://www.instagram.com/dksmarketing/" class="footer-banner" target="_blank">
-      <div class="footer-logo">DKS<span>.</span></div>
+      <div class="footer-logo">
+        <img src="/dks-logo.jpg" alt="DKS">
+      </div>
       <div class="footer-text">Marketing para restaurantes</div>
       <div class="footer-ig">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
