@@ -6,7 +6,7 @@ import Header from "@/components/ui/Header";
 import Footer from "@/components/ui/Footer";
 
 // Pages that should NOT have the full layout (header, footer, banner, leadster)
-const CLEAN_LAYOUT_ROUTES = ["/apresentacao", "/podcast", "/apresentacao2", "/apresentacao3", "/prospect", "/daianipauli", "/bublitz", "/bublitz-explicativa", "/decopizzas", "/v2", "/apresentacaotiodorp", "/login", "/cadastro", "/admin", "/portal"];
+const CLEAN_LAYOUT_ROUTES = ["/apresentacao", "/podcast", "/apresentacao2", "/apresentacao3", "/prospect", "/daianipauli", "/bublitz", "/bublitz-explicativa", "/decopizzas", "/v2", "/apresentacaotiodorp", "/login", "/cadastro", "/admin", "/portal", "/bio"];
 
 export default function ClientLayoutWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
