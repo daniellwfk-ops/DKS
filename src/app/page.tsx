@@ -144,6 +144,7 @@ export default function Home() {
                   { name: "Chiquinho Sorvetes", image: "/images/Choquinho sorvetes logo 2.webp" },
                   { name: "Padaria Bublitz", image: "/images/Bublitz logo.webp" },
                   { name: "Tio Dorp", image: "/images/logo tio dorp.jpg" },
+                  { name: "Convicta", image: "/images/convicta.jpeg" },
                 ].map((client, idx) => (
                   <ClientLogoCard key={`unified-${i}-${idx}`} name={client.name} image={client.image} colorful={!!client.image} />
                 ))}
