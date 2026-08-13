@@ -15,8 +15,8 @@ export default auth((req) => {
         }
     }
 
-    // Protect /admin/* — requires ADMIN role
-    if (pathname.startsWith("/admin")) {
+    // Protect /admin/* e /prospect/* — requires ADMIN role
+    if (pathname.startsWith("/admin") || pathname.startsWith("/prospect")) {
         if (!isLoggedIn) {
             return NextResponse.redirect(new URL("/login", nextUrl));
         }
@@ -29,5 +29,5 @@ export default auth((req) => {
 });
 
 export const config = {
-    matcher: ["/portal/:path*", "/admin/:path*"],
+    matcher: ["/portal/:path*", "/admin/:path*", "/prospect/:path*"],
 };

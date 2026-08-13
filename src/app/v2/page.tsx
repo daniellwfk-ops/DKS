@@ -10,7 +10,7 @@ import { FRAMES_PATH, FRAME_COUNT, FRAME_EXT } from '@/lib/constants';
 // --- DATA ---
 const BRAND_NAME = "DKS";
 const BRAND_TAGLINE = "Assessoria para Restaurantes";
-const PARTNERS = ["Fratelli's", "Steak Grill", "Dan Sushi", "Tempero Brasileiro", "Chiquinho", "Deco Pizzas", "Padaria Bublitz"];
+const PARTNERS = ["Fratelli's", "Steak Grill", "Dan Sushi", "Tempero Brasileiro", "Chiquinho", "Deco Pizzas", "Padaria Bublitz", "Tio Dorp"];
 
 const services = [
   { icon: TrendingUp, title: "Tráfego Pago", body: "Campanhas de alta conversão no Meta e Google. Análise de dados e métricas semanais com metas reais de faturamento." },

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Diagnóstico — Princeso Restaurante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+    --bg:#0c0a14;
+    --bg2:#12101d;
+    --card:#1a1730;
+    --card2:#221f38;
+    --border:rgba(255,255,255,0.06);
+    --orange:#F59E0B;
+    --orange-dim:rgba(245,158,11,0.15);
+    --red:#EF4444;
+    --red-dim:rgba(239,68,68,0.12);
+    --green:#10B981;
+    --green-dim:rgba(16,185,129,0.12);
+    --yellow:#FBBF24;
+    --yellow-dim:rgba(251,191,36,0.12);
+    --gold:#D4AF37;
+    --text:#f2f2ed;
+    --dim:#9CA3AF;
+    --dim2:#6B7280;
+    --font:'Inter',system-ui,sans-serif;
+    --font-h:'Outfit',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+
+/* SLIDE DECK */
+#deck{position:relative;width:100%;min-height:100vh;overflow:hidden}
+.slide{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;
+    transition:opacity 0.5s ease,transform 0.5s ease;
+    transform:translateY(30px);
+    overflow-y:auto;
+    padding:60px 24px 120px;
+}
+.slide.active{opacity:1;pointer-events:auto;transform:translateY(0)}
+.slide .w{max-width:900px;width:100%;margin:0 auto}
+
+/* NAV */
+#nav{
+    position:fixed;bottom:0;left:0;right:0;z-index:100;
+    padding:16px 24px;
+    background:linear-gradient(transparent,rgba(12,10,20,0.95) 30%);
+}
+.nav-wrap{display:flex;align-items:center;justify-content:center;gap:16px}
+.nav-btn{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--card);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;color:var(--text);font-size:1.1rem;
+    transition:all 0.3s;user-select:none;
+}
+.nav-btn:hover{background:var(--card2);border-color:var(--orange)}
+#counter{font-size:0.8rem;color:var(--dim);font-weight:600;min-width:60px;text-align:center}
+#prog-bg{position:fixed;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.05);z-index:101}
+#prog-fill{height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--gold));transition:width 0.4s ease;border-radius:0 2px 2px 0}
+
+/* TAG */
+.tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:0.7rem;font-weight:700;letter-spacing:0.15em;
+    text-transform:uppercase;color:var(--orange);margin-bottom:16px;
+}
+.tag::before{content:'';width:24px;height:2px;background:var(--orange)}
+
+/* TITLES */
+h1{font-family:var(--font-h);font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em}
+h2{font-family:var(--font-h);font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;line-height:1.15;letter-spacing:-0.02em;margin-bottom:16px}
+h3{font-family:var(--font-h);font-size:1.1rem;font-weight:700;margin-bottom:8px}
+.sub{font-size:0.95rem;color:var(--dim);line-height:1.7;margin-bottom:24px}
+
+/* CARDS */
+.glass{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+
+/* COVER CARD & AGENDA */
+.cover-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 32px;box-shadow:0 10px 40px rgba(0,0,0,0.5)}
+.cover-logo{height:44px;width:auto;object-fit:contain}
+.logo-text{font-family:var(--font-h);font-size:2.2rem;font-weight:900;color:var(--gold);letter-spacing:0.05em;line-height:1}
+.logo-sub{font-size:0.65rem;font-weight:600;letter-spacing:0.35em;color:var(--dim2);text-transform:uppercase;margin-top:2px}
+.agenda-box{margin-top:28px}
+.agenda-title{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;color:var(--dim2);text-transform:uppercase;margin-bottom:14px}
+.agenda-list{display:flex;flex-direction:column;gap:12px}
+.agenda-item{display:flex;align-items:center;gap:12px;font-size:0.9rem;font-weight:700;color:var(--text)}
+.agenda-num{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#D97706);color:#fff;font-size:0.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* INFO GRID (cover) */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:24px}
+.info-cell{padding:16px 20px;border:1px solid var(--border)}
+.info-cell:nth-child(1){border-radius:12px 0 0 0}
+.info-cell:nth-child(2){border-radius:0 12px 0 0}
+.info-cell:nth-child(3){border-radius:0 0 0 12px}
+.info-cell:nth-child(4){border-radius:0 0 12px 0}
+.info-label{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--dim2);margin-bottom:4px}
+.info-val{font-size:0.95rem;font-weight:700}
+
+/* SCORE RING */
+.score-wrap{display:flex;align-items:center;gap:32px;padding:28px;background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:16px;margin:24px 0}
+.score-ring{position:relative;width:120px;height:120px;flex-shrink:0}
+.score-ring svg{transform:rotate(-90deg);width:120px;height:120px}
+.score-ring circle{fill:none;stroke-width:8}
+.score-ring .bg{stroke:rgba(255,255,255,0.06)}
+.score-ring .fill{stroke:var(--orange);stroke-linecap:round;stroke-dasharray:339.292;stroke-dashoffset:339.292;transition:stroke-dashoffset 2s cubic-bezier(0.4,0,0.2,1)}
+.score-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.score-num .big{font-family:var(--font-h);font-size:2.8rem;font-weight:900;line-height:1;color:var(--orange)}
+.score-num .sm{font-size:0.7rem;color:var(--dim2)}
+.score-badge{display:inline-block;padding:4px 14px;border-radius:100px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em}
+.badge-weak{background:var(--orange-dim);color:var(--orange)}
+.score-desc{font-size:1.1rem;font-weight:700;line-height:1.5}
+
+/* PLACAR POR PILAR */
+.pillar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:24px;margin-bottom:36px}
+.pillar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 12px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.pillar-ring{position:relative;width:80px;height:80px;margin-bottom:16px}
+.pillar-ring svg{width:80px;height:80px;transform:rotate(-90deg)}
+.pillar-ring circle{fill:none;stroke-width:7}
+.pillar-ring .bg{stroke:rgba(255,255,255,0.06)}
+.pillar-ring .fill{stroke-linecap:round;transition:stroke-dashoffset 1.5s ease}
+.pillar-val{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-h);font-size:1.5rem;font-weight:900}
+.pillar-name{font-size:0.95rem;font-weight:700;color:var(--text)}
+
+/* EXECUTIVE SUMMARY */
+.exec-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:12px}
+.exec-num{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;flex-shrink:0;color:#fff}
+.exec-text{font-size:0.9rem;color:var(--dim);line-height:1.6}
+
+/* MAP GRID */
+.map-container{background:#e8f5e9;border-radius:12px;padding:16px;margin:20px 0;position:relative;overflow:hidden}
+.map-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.map-dot{
+    width:100%;aspect-ratio:1;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:0.65rem;font-weight:800;color:#fff;
+    transition:transform 0.3s;cursor:default;
+}
+.map-dot:hover{transform:scale(1.15)}
+.dot-red{background:var(--red)}
+.dot-yellow{background:#F59E0B}
+.dot-green{background:var(--green)}
+.map-legend{display:flex;gap:20px;margin-bottom:16px;flex-wrap:wrap}
+.map-legend span{display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--dim)}
+.map-legend .leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.map-stat{text-align:center;margin-top:20px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:12px}
+.map-stat-val{font-family:var(--font-h);font-size:2.5rem;font-weight:900;color:var(--red)}
+.map-stat-label{font-size:0.85rem;color:var(--dim);margin-top:4px}
+.map-note{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:0.8rem;color:var(--dim)}
+.map-note .leg-dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0}
+
+/* RANKING */
+.rank-item{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
+.rank-pos{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:800;flex-shrink:0;color:#fff}
+.rank-1{background:linear-gradient(135deg,#F59E0B,#D97706)}
+.rank-2{background:linear-gradient(135deg,#9CA3AF,#6B7280)}
+.rank-3{background:linear-gradient(135deg,#CD7F32,#A0522D)}
+.rank-4,.rank-5{background:#374151}
+.rank-you{background:linear-gradient(135deg,var(--orange),var(--gold));font-size:0.6rem}
+.rank-info h4{font-size:0.95rem;font-weight:700}
+.rank-info .addr{font-size:0.75rem;color:var(--dim2);margin-top:2px}
+.rank-info .stars{font-size:0.8rem;margin-top:4px;display:flex;align-items:center;gap:6px}
+.rank-info .stars .val{font-weight:700}
+.rank-info .stars .count{color:var(--dim2)}
+.rank-you-card{background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(212,175,55,0.05));border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:16px;margin-top:12px}
+.rank-you-card .you-badge{display:inline-block;background:var(--orange);color:#000;font-size:0.6rem;font-weight:800;padding:2px 8px;border-radius:4px;text-transform:uppercase;margin-left:8px}
+.rank-you-card .you-msg{font-size:0.8rem;color:var(--orange);margin-top:6px}
+
+/* PLAN */
+.plan-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px}
+.plan-header{display:flex;align-items:flex-start;gap:14px}
+.plan-num{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:800;flex-shrink:0;color:#fff}
+.plan-title{font-size:0.95rem;font-weight:700;line-height:1.4}
+.plan-tags{display:flex;gap:8px;margin:10px 0 8px;flex-wrap:wrap}
+.plan-tag{padding:3px 10px;border-radius:4px;font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em}
+.tag-high-impact{background:var(--orange-dim);color:var(--orange)}
+.tag-low-effort{background:var(--green-dim);color:var(--green)}
+.tag-med-effort{background:var(--yellow-dim);color:var(--yellow)}
+.tag-med-impact{background:rgba(96,165,250,0.12);color:#60A5FA}
+.plan-desc{font-size:0.8rem;color:var(--dim);line-height:1.6;margin-top:6px}
+
+/* CTA */
+.cta-box{background:linear-gradient(135deg,rgba(212,175,55,0.08),rgba(245,158,11,0.05));border:1px solid rgba(212,175,55,0.25);border-radius:20px;padding:48px 40px;text-align:center;margin-top:32px}
+.btn-wpp{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;
+    font-family:var(--font-h);font-size:1rem;font-weight:700;
+    letter-spacing:0.05em;text-transform:uppercase;
+    padding:18px 48px;border-radius:12px;border:none;cursor:pointer;
+    transition:all 0.3s;animation:wppPulse 2s infinite;
+}
+.btn-wpp:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(37,211,102,0.4)}
+@keyframes wppPulse{
+    0%{box-shadow:0 0 0 0 rgba(37,211,102,0.4)}
+    70%{box-shadow:0 0 0 15px rgba(37,211,102,0)}
+    100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+}
+.footer-note{text-align:center;font-size:0.75rem;color:var(--dim2);margin-top:20px;font-style:italic}
+
+/* STAR ICONS */
+.star{color:var(--orange)}
+
+/* ANIMATIONS */
+.a{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease}
+.slide.active .a{opacity:1;transform:translateY(0)}
+.slide.active .a:nth-child(2){transition-delay:0.1s}
+.slide.active .a:nth-child(3){transition-delay:0.2s}
+.slide.active .a:nth-child(4){transition-delay:0.3s}
+
+@media(max-width:640px){
+    .info-grid{grid-template-columns:1fr}
+    .info-cell{border-radius:0!important}
+    .info-cell:first-child{border-radius:12px 12px 0 0!important}
+    .info-cell:last-child{border-radius:0 0 12px 12px!important}
+    .score-wrap{flex-direction:column;text-align:center}
+    .map-grid{grid-template-columns:repeat(5,1fr);gap:6px}
+    .map-legend{flex-direction:column;gap:8px}
+    .cta-box{padding:32px 20px}
+    .btn-wpp{padding:16px 28px;font-size:0.85rem}
+}
+</style>
+</head>
+<body>
+<div id="deck">
+
+    <!-- ═══ S1: CAPA ═══ -->
+    <div class="slide active" id="s1">
+        <div class="w">
+            <div class="cover-card a">
+                <div style="margin-bottom:28px">
+                    <img src="/dks-logo-transparent.png" alt="DKS Agência" class="cover-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <div style="display:none">
+                        <div class="logo-text">DKS</div>
+                        <div class="logo-sub">AGÊNCIA</div>
+                    </div>
+                </div>
+                <div class="tag" style="margin-bottom:12px">Diagnóstico de Presença Digital</div>
+                <h1 style="margin-bottom:20px;font-size:clamp(1.8rem, 4vw, 2.8rem)">PRINCESO RESTAURANTE LTDA</h1>
+                <div class="info-grid">
+                    <div class="info-cell">
+                        <div class="info-label">Empresa Analisada</div>
+                        <div class="info-val">PRINCESO RESTAURANTE LTDA</div>
+                    </div>
+                    <div class="info-cell">
+                        <div class="info-label">Cidade</div>
+                        <div class="info-val">LINHARES, ES</div>
+                    </div>
+                    <div class="info-cell">
+                        <div class="info-label">Busca Analisada</div>
+                        <div class="info-val">"Restaurante"</div>
+                    </div>
+                    <div class="info-cell">
+                        <div class="info-label">Data</div>
+                        <div class="info-val">26 de julho de 2026</div>
+                    </div>
+                </div>
+
+                <div class="agenda-box">
+                    <div class="agenda-title">O QUE VOCÊ VAI VER NESTE RELATÓRIO</div>
+                    <div class="agenda-list">
+                        <div class="agenda-item">
+                            <div class="agenda-num">1</div>
+                            <span>Nota geral e resumo executivo</span>
+                        </div>
+                        <div class="agenda-item">
+                            <div class="agenda-num">2</div>
+                            <span>Mapa de visibilidade no Google</span>
+                        </div>
+                        <div class="agenda-item">
+                            <div class="agenda-num">3</div>
+                            <span>Ranking e comparação com concorrentes</span>
+                        </div>
+                        <div class="agenda-item">
+                            <div class="agenda-num">4</div>
+                            <span>Instagram, site e anúncios</span>
+                        </div>
+                        <div class="agenda-item">
+                            <div class="agenda-num">5</div>
+                            <span>Dinheiro na mesa e plano de 30 dias</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="font-size:0.8rem;color:var(--dim2);margin-top:28px;font-style:italic">Relatório preparado por Agência DKS – Marketing para Restaurantes</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ S2: NOTA GERAL ═══ -->
+    <div class="slide" id="s2">
+        <div class="w">
+            <h2 class="a">Nota geral</h2>
+            <p class="sub a">Como ler: média ponderada de todas as áreas analisadas, de 0 a 100. Abaixo de 30 é crítico; acima de 85, excelente.</p>
+            <div class="score-wrap a">
+                <div class="score-ring" id="score-ring">
+                    <svg viewBox="0 0 120 120">
+                        <circle class="bg" cx="60" cy="60" r="54"/>
+                        <circle class="fill" id="score-fill" cx="60" cy="60" r="54"/>
+                    </svg>
+                    <div class="score-num">
+                        <div class="big" id="score-val">0</div>
+                        <div class="sm">de 100</div>
+                    </div>
+                </div>
+                <div>
+                    <span class="score-badge badge-weak" style="margin-bottom:12px">Fraco</span>
+                    <p class="score-desc">Sua presença digital existe, mas perde a maior parte das buscas para os concorrentes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ S3: PLACAR POR PILAR & RESUMO EXECUTIVO ═══ -->
+    <div class="slide" id="s3">
+        <div class="w">
+            <h2 class="a">Placar por pilar</h2>
+            <p class="sub a">Como ler: cada área recebe nota de 0 a 100. Quanto mais perto de 100, melhor a sua presença naquela frente.</p>
+
+            <div class="pillar-grid a">
+                <div class="pillar-card">
+                    <div class="pillar-ring">
+                        <svg viewBox="0 0 80 80">
+                            <circle class="bg" cx="40" cy="40" r="34"/>
+                            <circle class="fill" cx="40" cy="40" r="34" stroke="#EF4444" stroke-dasharray="213.62" stroke-dashoffset="183.71"/>
+                        </svg>
+                        <div class="pillar-val" style="color:#EF4444">14</div>
+                    </div>
+                    <div class="pillar-name">Google</div>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-ring">
+                        <svg viewBox="0 0 80 80">
+                            <circle class="bg" cx="40" cy="40" r="34"/>
+                            <circle class="fill" cx="40" cy="40" r="34" stroke="#84CC16" stroke-dasharray="213.62" stroke-dashoffset="51.27"/>
+                        </svg>
+                        <div class="pillar-val" style="color:#84CC16">76</div>
+                    </div>
+                    <div class="pillar-name">Reputação</div>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-ring">
+                        <svg viewBox="0 0 80 80">
+                            <circle class="bg" cx="40" cy="40" r="34"/>
+                            <circle class="fill" cx="40" cy="40" r="34" stroke="#84CC16" stroke-dasharray="213.62" stroke-dashoffset="64.08"/>
+                        </svg>
+                        <div class="pillar-val" style="color:#84CC16">70</div>
+                    </div>
+                    <div class="pillar-name">Instagram</div>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-ring">
+                        <svg viewBox="0 0 80 80">
+                            <circle class="bg" cx="40" cy="40" r="34"/>
+                            <circle class="fill" cx="40" cy="40" r="34" stroke="#EF4444" stroke-dasharray="213.62" stroke-dashoffset="168.76"/>
+                        </svg>
+                        <div class="pillar-val" style="color:#EF4444">21</div>
+                    </div>
+                    <div class="pillar-name">Site</div>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-ring">
+                        <svg viewBox="0 0 80 80">
+                            <circle class="bg" cx="40" cy="40" r="34"/>
+                            <circle class="fill" cx="40" cy="40" r="34" stroke="#10B981" stroke-dasharray="213.62" stroke-dashoffset="0"/>
+                        </svg>
+                        <div class="pillar-val" style="color:#10B981">100</div>
+                    </div>
+                    <div class="pillar-name">Ads</div>
+                </div>
+            </div>
+
+            <h2 class="a" style="margin-top:28px">Resumo executivo</h2>
+            <p class="sub a">As três conclusões mais importantes do diagnóstico, em linguagem direta.</p>
+            <div class="exec-item a">
+                <div class="exec-num">1</div>
+                <p class="exec-text">Quando alguém busca restaurante perto da sua loja, o Google mostra a <strong style="color:var(--text)">Marilda Brasil Restaurante</strong> em 25 de 25 pontos; você apareceu entre os 3 primeiros em <strong style="color:var(--red)">0 de 25 pontos</strong>.</p>
+            </div>
+            <div class="exec-item a">
+                <div class="exec-num">2</div>
+                <p class="exec-text">A nota técnica do site no teste do Google é <strong style="color:var(--red)">0 de 100</strong> e a página demora <strong style="color:var(--red)">13 segundos</strong> para abrir de verdade, o que afasta clientes antes que vejam o cardápio.</p>
+            </div>
+            <div class="exec-item a">
+                <div class="exec-num">3</div>
+                <p class="exec-text">Você já anuncia no Google e no Meta, mas sua posição média no mapa é <strong style="color:var(--orange)">19,5</strong> e três concorrentes também anunciam no Google, então os anúncios sozinhos não estão cobrindo a falta de presença no mapa.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ S4: MAPA DE POSIÇÕES ═══ -->
+    <div class="slide" id="s4">
+        <div class="w">
+            <h2 class="a">Onde o Google mostra a sua empresa (e onde não mostra)</h2>
+            <p class="sub a">Como ler: simulamos buscas reais em 25 pontos ao redor do seu endereço. Verde: top 3. Amarelo: 4ª a 10ª. Vermelho: 11ª ou pior.</p>
+            <div class="a">
+                <div class="map-legend">
+                    <span><span class="leg-dot" style="background:var(--green)"></span>Top 3 (1ª a 3ª posição)</span>
+                    <span><span class="leg-dot" style="background:#F59E0B"></span>Aparece, mas longe (4ª a 10ª)</span>
+                    <span><span class="leg-dot" style="background:var(--red)"></span>11ª posição ou pior</span>
+                </div>
+                <div class="map-container">
+                    <div class="map-grid">
+                        <div class="map-dot dot-red">20+</div><div class="map-dot dot-red">20</div><div class="map-dot dot-red">20+</div><div class="map-dot dot-red">20</div><div class="map-dot dot-red">19</div>
+                        <div class="map-dot dot-red">20+</div><div class="map-dot dot-red">20+</div><div class="map-dot dot-red">20</div><div class="map-dot dot-red">20+</div><div class="map-dot dot-red">20+</div>
+                        <div class="map-dot dot-red">20</div><div class="map-dot dot-red">20</div><div class="map-dot dot-red">20+</div><div class="map-dot dot-red">20</div><div class="map-dot dot-red">20</div>
+                        <div class="map-dot dot-red">20+</div><div class="map-dot dot-red">20</div><div class="map-dot dot-red">20</div><div class="map-dot dot-red">19</div><div class="map-dot dot-red">18</div>
+                        <div class="map-dot dot-red">20+</div><div class="map-dot dot-red">20</div><div class="map-dot dot-red">19</div><div class="map-dot dot-red">19</div><div class="map-dot dot-red">18</div>
+                    </div>
+                </div>
+            </div>
+            <div class="map-stat a">
+                <div class="map-stat-val" id="map-pct">0%</div>
+                <div class="map-stat-label">dos pontos da sua região: você não aparece nem entre os 20 primeiros resultados</div>
+            </div>
+            <div class="map-note a">
+                <span class="leg-dot"></span>
+                <span>Nos pontos vermelhos do mapa, quem aparece no seu lugar é <strong style="color:var(--text)">Marilda Brasil Restaurante</strong>.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ S5: RANKING DE CONCORRENTES ═══ -->
+    <div class="slide" id="s5">
+        <div class="w">
+            <h2 class="a">Quem aparece na frente de você</h2>
+            <p class="sub a">Esta é a lista que o cliente vê no Google ao buscar na sua região. Quem está no topo leva o clique e o pedido.</p>
+            <div class="glass a" style="padding:0;overflow:hidden">
+                <div style="padding:20px 24px;border-bottom:1px solid var(--border);text-align:center">
+                    <p style="font-size:0.85rem;font-weight:700">Veja a posição no Google da sua empresa e dos seus concorrentes</p>
+                </div>
+                <div style="padding:4px 24px 12px">
+                    <div class="rank-item">
+                        <div class="rank-pos rank-1">1</div>
+                        <div class="rank-info">
+                            <h4>Marilda Brasil Restaurante</h4>
+                            <p class="addr">Av. Hans Schmoger, 897 – Nossa Sra. da Conceição, Linhares - ES, 29900-495</p>
+                            <div class="stars"><span class="val">4,6</span> <span class="star">★★★★★</span> <span class="count">(228)</span></div>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <div class="rank-pos rank-2">2</div>
+                        <div class="rank-info">
+                            <h4>La Rústico Gastrobar</h4>
+                            <p class="addr">Av. Roberto Marinho, 278 – Palmital, Linhares - ES, 29906-725</p>
+                            <div class="stars"><span class="val">4,6</span> <span class="star">★★★★★</span> <span class="count">(443)</span></div>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <div class="rank-pos rank-3">3</div>
+                        <div class="rank-info">
+                            <h4>Restaurante João de Barro</h4>
+                            <p class="addr">R. Álvaro Garcia Durão, 22 – Três Barras, Linhares - ES, 29907-160</p>
+                            <div class="stars"><span class="val">4,6</span> <span class="star">★★★★★</span> <span class="count">(861)</span></div>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <div class="rank-pos rank-4">4</div>
+                        <div class="rank-info">
+                            <h4>La Brasa</h4>
+                            <p class="addr">R. Nair Durão Guimarães, 1 – Três Barras, Linhares - ES, 29907-040</p>
+                            <div class="stars"><span class="val">4,6</span> <span class="star">★★★★★</span> <span class="count">(123)</span></div>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <div class="rank-pos rank-5">5</div>
+                        <div class="rank-info">
+                            <h4>BellaVista Bistrô</h4>
+                            <p class="addr">Av. Rio Doce, 1672 – Aviso, Linhares - ES, 29901-190</p>
+                            <div class="stars"><span class="val">4,5</span> <span class="star">★★★★★</span> <span class="count">(106)</span></div>
+                        </div>
+                    </div>
+                    <div style="text-align:center;padding:8px 0;color:var(--dim2);font-size:1.2rem">...</div>
+                    <div class="rank-you-card">
+                        <div style="display:flex;align-items:center;gap:12px">
+                            <div class="rank-pos rank-you">22</div>
+                            <div class="rank-info">
+                                <h4>Princeso Restaurante <span class="you-badge">VOCÊ</span></h4>
+                                <p class="addr">Av. Hans Schmoger, 1305 – Conceição, Linhares, 29900-495</p>
+                                <div class="stars"><span class="val">4,8</span> <span class="star">★★★★★</span> <span class="count">(292)</span></div>
+                            </div>
+                        </div>
+                        <p class="you-msg">Sua empresa está aparecendo na 22ª posição no Google na sua região.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ S6: PLANO DE 30 DIAS ═══ -->
+    <div class="slide" id="s6">
+        <div class="w">
+            <h2 class="a">Plano de 30 dias</h2>
+            <p class="sub a">As cinco ações em ordem de prioridade. As primeiras não custam mídia, só processo.</p>
+
+            <div class="plan-item a">
+                <div class="plan-header">
+                    <div class="plan-num">1</div>
+                    <div class="plan-title">Completar e otimizar o perfil do Google (horário, fotos, menu, telefone e serviços)</div>
+                </div>
+                <div class="plan-tags">
+                    <span class="plan-tag tag-high-impact">Impacto Alto</span>
+                    <span class="plan-tag tag-low-effort">Esforço Baixo</span>
+                </div>
+                <p class="plan-desc">Você foi encontrado em 16 de 25 pontos e aparece entre os 3 primeiros em 0 de 25 pontos, então isso aumenta muito sua chance de aparecer mais vezes.</p>
+            </div>
+
+            <div class="plan-item a">
+                <div class="plan-header">
+                    <div class="plan-num">2</div>
+                    <div class="plan-title">Responder todas as avaliações recentes e pedir avaliação a clientes do almoço e do delivery</div>
+                </div>
+                <div class="plan-tags">
+                    <span class="plan-tag tag-high-impact">Impacto Alto</span>
+                    <span class="plan-tag tag-low-effort">Esforço Baixo</span>
+                </div>
+                <p class="plan-desc">Você tem nota 4.8 com 294 avaliações, enquanto a mediana dos 3 primeiros é 511 avaliações; mais respostas e avaliações ajudam a subir na preferência do cliente.</p>
+            </div>
+
+            <div class="plan-item a">
+                <div class="plan-header">
+                    <div class="plan-num">3</div>
+                    <div class="plan-title">Publicar uma versão enxuta do site com menu otimizado e imagens comprimidas</div>
+                </div>
+                <div class="plan-tags">
+                    <span class="plan-tag tag-high-impact">Impacto Alto</span>
+                    <span class="plan-tag tag-med-effort">Esforço Médio</span>
+                </div>
+                <p class="plan-desc">A página demora 13s para abrir de verdade e a nota técnica é 0 de 100, o que faz visitantes saírem antes de ver o cardápio.</p>
+            </div>
+
+            <div class="plan-item a">
+                <div class="plan-header">
+                    <div class="plan-num">4</div>
+                    <div class="plan-title">Ajustar campanhas de anúncio para cobrir as áreas onde você não aparece e mandar tráfego para o menu enxuto</div>
+                </div>
+                <div class="plan-tags">
+                    <span class="plan-tag tag-med-impact">Impacto Médio</span>
+                    <span class="plan-tag tag-med-effort">Esforço Médio</span>
+                </div>
+                <p class="plan-desc">Três concorrentes anunciam no Google e sua posição média é 19,5, então otimizar anúncios aumenta pedidos imediatos enquanto melhoramos a presença orgânica.</p>
+            </div>
+
+            <div class="plan-item a">
+                <div class="plan-header">
+                    <div class="plan-num">5</div>
+                    <div class="plan-title">Criar calendário de publicações no Instagram focado em vídeo curto e promoções semanais</div>
+                </div>
+                <div class="plan-tags">
+                    <span class="plan-tag tag-med-impact">Impacto Médio</span>
+                    <span class="plan-tag tag-med-effort">Esforço Médio</span>
+                </div>
+                <p class="plan-desc">Você tem 13.116 seguidores e 9 publicações nos últimos 30 dias; mais conteúdo relevante converte seguidores em pedidos.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ S7: CTA / PRÓXIMO PASSO ═══ -->
+    <div class="slide" id="s7">
+        <div class="w">
+            <div class="cta-box a">
+                <h2 style="margin-bottom:16px">Próximo passo</h2>
+                <p class="sub" style="max-width:600px;margin:0 auto 32px;text-align:center">Este relatório mostra o tamanho da oportunidade e o caminho para aproveitar. Fale com a Agência DKS – Marketing para Restaurantes para colocar o plano de 30 dias em prática.</p>
+                <a href="https://api.whatsapp.com/send?phone=5547991620354&text=Olá!%20Acabei%20de%20ver%20o%20diagnóstico%20do%20Princeso%20Restaurante%20e%20quero%20colocar%20o%20plano%20em%20prática." target="_blank" class="btn-wpp">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    Falar com Especialista
+                </a>
+            </div>
+            <p class="footer-note a">Relatório preparado por Agência DKS – Marketing para Restaurantes · 26 de julho de 2026</p>
+        </div>
+    </div>
+
+</div><!-- /deck -->
+
+<!-- NAV -->
+<nav id="nav">
+    <div class="nav-wrap">
+        <div class="nav-btn" id="prev">←</div>
+        <div class="nav-btn" id="next">→</div>
+        <div id="counter">01 / 07</div>
+    </div>
+    <div id="prog-bg"><div id="prog-fill"></div></div>
+</nav>
+
+<script>
+// Navigation
+const N=7,slides=[...document.querySelectorAll('.slide')],counterEl=document.getElementById('counter'),fillEl=document.getElementById('prog-fill');
+let cur=0;
+function go(n){
+    if(n<0||n>=N)return;
+    slides[cur].classList.remove('active');
+    cur=n;
+    slides[cur].classList.add('active');
+    counterEl.textContent=`0${cur+1}`.slice(-2)+' / 0'+N;
+    fillEl.style.width=((cur+1)/N)*100+'%';
+    handleSlide(cur);
+}
+document.getElementById('next').onclick=()=>go(cur+1);
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.addEventListener('keydown',e=>{
+    if(e.code==='Space'||e.code==='ArrowRight'){e.preventDefault();go(cur+1)}
+    else if(e.code==='ArrowLeft'){e.preventDefault();go(cur-1)}
+});
+let sx=0;
+window.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+window.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-sx;
+    if(Math.abs(dx)>40){dx<0?go(cur+1):go(cur-1)}
+});
+
+// Score ring animation
+function animateScore(){
+    const circ=339.292;
+    const pct=49/100;
+    const fill=document.getElementById('score-fill');
+    const val=document.getElementById('score-val');
+    fill.style.strokeDashoffset=circ-(circ*pct);
+    let c=0;
+    const timer=setInterval(()=>{c++;val.textContent=c;if(c>=49)clearInterval(timer)},30);
+}
+
+// Map percentage
+function animateMapPct(){
+    const el=document.getElementById('map-pct');
+    let c=0;
+    const timer=setInterval(()=>{c++;el.textContent=c+'%';if(c>=36)clearInterval(timer)},40);
+}
+
+// Slide-specific triggers
+function handleSlide(idx){
+    if(idx===1)animateScore();
+    if(idx===3)animateMapPct();
+}
+
+// Init
+fillEl.style.width=(1/N)*100+'%';
+</script>
+</body>
+</html>

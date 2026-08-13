@@ -10,6 +10,7 @@ const navItems = [
     { label: "Dashboard", href: "/admin", icon: "🏠" },
     { label: "Clientes", href: "/admin/clientes", icon: "👥" },
     { label: "Criador de Propostas", href: "/admin/propostas", icon: "📋" },
+    { label: "Playbook Comercial", href: "/admin/playbook", icon: "📚" },
     { label: "Gerenciador de Lives", href: "/admin/lives", icon: "🎥" },
     { label: "Link na Bio", href: "/admin/bio", icon: "🔗" },
 ];

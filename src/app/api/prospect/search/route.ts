@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { Lead, LeadStatus } from '@/app/prospect/types';
+import { requireAdmin } from '@/lib/require-admin';
 
 const SearchSchema = z.object({
   nicho: z.string().min(2).max(100),
@@ -77,6 +78,9 @@ function mapToLead(item: ApifyItem, index: number): Lead {
 // ─── Route handler ────────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
+  const denied = await requireAdmin();
+  if (denied) return denied;
+
   const body = await req.json().catch(() => null);
 
   if (!body) {
